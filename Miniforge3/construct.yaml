@@ -1,0 +1,17 @@
+name: Miniforge3
+# This version string gets overwritten by the builder
+version: 0.0.0
+
+channels:
+  - https://conda.anaconda.org/conda-forge
+  - https://conda.anaconda.org/anaconda
+  # There still seems to be a dependency needed from c4aarch64
+  - https://conda.anaconda.org/c4aarch64
+
+write_condarc: True
+license_file: ../LICENSE
+
+specs:
+  - python >=3,<3.8
+  - conda
+  - pip
