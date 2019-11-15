@@ -1,17 +1,18 @@
 language: generic
 
 matrix:
-  - os: linux
-    env:
-      - ARCH=ppc64le
+  include:
+    - os: linux
+      env:
+        - ARCH=ppc64le
 
-  - os: linux
-    env:
-      - ARCH=aarch64
+    - os: linux
+      env:
+        - ARCH=aarch64
 
-  - os: linux
-    env:
-      - ARCH=64
+    - os: linux
+      env:
+        - ARCH=64
 
 before_install:
   # Enable experimental features (needed for squash)
