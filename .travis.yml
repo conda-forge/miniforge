@@ -5,12 +5,15 @@ matrix:
     - os: linux
       env:
         - DOCKERIMAGE=condaforge/linux-anvil-aarch64
+        - DOCKERIMAGE_TEST=arm64v8/centos:7
     # - os: linux
     #   env:
     #     - DOCKERIMAGE=condaforge/linux-anvil-ppc64le
+    #     - DOCKERIMAGE_TEST=ppc64le/centos:7
     # - os: linux
     #   env:
     #     - DOCKERIMAGE=condaforge/linux-anvil-comp7
+    #     - DOCKERIMAGE_TEST=centos:6
 
 before_install:
   # Enable experimental features (needed for squash)
@@ -26,7 +29,7 @@ script:
   - echo "* Build Miniforge installer"
   - docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct ${DOCKERIMAGE} /construct/build.sh
   - echo "* Test Miniforge installer"
-  - docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct ${DOCKERIMAGE} /construct/test.sh
+  - docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct ${DOCKERIMAGE_TEST} /construct/test.sh
 
 deploy:
   provider: releases

@@ -21,6 +21,5 @@ echo "version: $(git describe)" >> $TEMP_DIR/Miniforge3/construct.yaml
 # Build the installer
 constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR
 
-# Fix permissions
+# Move installer to build/
 mv $TEMP_DIR/Miniforge*.sh build/
-chown 777 build/Miniforge*.sh

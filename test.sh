@@ -2,13 +2,20 @@
 
 set -ex
 
+# Install dependencies
+yum install -y bzip2
+
 cd /construct
 
+# Get the first installer we find.
+# TODO: be smarter here maybe?
 INSTALLER_PATH=$(find build/ -name 'Miniforge*.sh' | head -n 1)
 
+# Run the installer
 chmod +x $INSTALLER_PATH
 bash $INSTALLER_PATH -b -p ${HOME}/miniforge
 
+# Enable conda
 __conda_setup="$($HOME'/miniforge/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
@@ -20,6 +27,8 @@ else
     fi
 fi
 unset __conda_setup
+
+# Run some tests to check everything is fine.
 
 conda info
 
