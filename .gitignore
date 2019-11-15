@@ -1,1 +1,3 @@
 build/*.sh
+build/LICENSE
+build/Miniforge*
