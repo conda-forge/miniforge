@@ -23,14 +23,14 @@ before_install:
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
 
 install:
-  - docker build -t docker_constructor -f Dockerfile.${ARCH} .
+  - docker build -t forge_constructor -f Dockerfile.${ARCH} .
 
 script:
   - echo "* Fix permissions"
   - chmod 777 build/
   - chmod 666 Miniforge3/construct.yaml
   - echo "* Build Miniforge installer"
-  - docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct docker_constructor
+  - docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct forge_constructor
   - echo "* Test Miniforge installer"
   - docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct forge_constructor /construct/test.sh
 
