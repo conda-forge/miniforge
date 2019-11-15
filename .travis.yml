@@ -23,7 +23,6 @@ before_install:
 script:
   - echo "* Fix permissions"
   - chmod 777 build/
-  - chmod 666 Miniforge3/construct.yaml
   - echo "* Build Miniforge installer"
   - docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct ${DOCKERIMAGE} /construct/build.sh
   - echo "* Test Miniforge installer"
