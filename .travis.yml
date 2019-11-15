@@ -31,7 +31,7 @@ script:
   - docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct docker_constructor
 
 test:
-  - 
+  - docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct forge_constructor /construct/test.sh
 
 deploy:
   provider: releases
