@@ -11,8 +11,8 @@ TEMP_DIR=$(mktemp)
 
 cd /construct
 
-# Copy constructor spec to build/
-cp -R Miniforge3 build/Miniforge3/
+# Copy constructor spec to $TEMP_DIR
+cp -R Miniforge3 $TEMP_DIR/Miniforge3/
 cp LICENSE $TEMP_DIR
 
 # Set the version of the installer from git
