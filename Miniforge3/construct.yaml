@@ -12,6 +12,5 @@ license_file: ../LICENSE
 
 specs:
   - python >=3,<3.8
-  - conda-package-handling
   - conda
   - pip
