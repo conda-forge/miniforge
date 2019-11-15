@@ -4,5 +4,8 @@ set -ex
 
 cd /construct
 
-echo "version: $(git describe)" >> Miniforge3/construct.yaml
-constructor Miniforge3/ --output-dir build/
+cp -R Miniforge3 build/Miniforge3/
+
+echo "version: $(git describe)" >> build/Miniforge3/construct.yaml
+constructor build/Miniforge3/ --output-dir build/
+rmm -fr build/Miniforge3/

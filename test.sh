@@ -23,6 +23,9 @@ unset __conda_setup
 
 conda info
 
+# Check if conda update/install works.
+conda update --all -y
+
 which python
 python -c "print('Hello Miniforge !')"
 python -c "import platform; print(platform.architecture())"
