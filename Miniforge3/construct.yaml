@@ -12,6 +12,6 @@ license_file: ../LICENSE
 
 specs:
   - python >=3,<3.8
-  - tqdm
+  - conda-package-handling
   - conda
   - pip
