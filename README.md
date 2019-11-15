@@ -39,10 +39,10 @@ chmod 777 build/
 docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
 
 # Construct the installer
-docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct condaforge/linux-anvil-aarch64 /construct/build.sh
+docker run --rm -ti -v $(pwd):/construct condaforge/linux-anvil-aarch64 /construct/build.sh
 
 # Test the installer
-docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct arm64v8/centos:7 /construct/test.sh
+docker run --rm -ti -v $(pwd):/construct arm64v8/centos:7 /construct/test.sh
 ```
 
 ## License

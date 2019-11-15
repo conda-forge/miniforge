@@ -27,9 +27,9 @@ script:
   - echo "* Fix permissions"
   - chmod 777 build/
   - echo "* Build Miniforge installer"
-  - docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct ${DOCKERIMAGE} /construct/build.sh
+  - docker run --rm -ti -v $(pwd):/construct ${DOCKERIMAGE} /construct/build.sh
   - echo "* Test Miniforge installer"
-  - docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct ${DOCKERIMAGE_TEST} /construct/test.sh
+  - docker run --rm -ti -v $(pwd):/construct ${DOCKERIMAGE_TEST} /construct/test.sh
 
 deploy:
   provider: releases
