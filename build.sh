@@ -8,6 +8,7 @@ conda install -y constructor>=3.0.1
 conda list
 
 cd /construct
+mkdir -p build/
 
 # Copy constructor spec to build/
 cp -R Miniforge3 build/Miniforge3/
@@ -22,3 +23,7 @@ constructor build/Miniforge3/ --output-dir build/
 # Files cleaning
 rm -fr build/Miniforge3/
 rm -f build/LICENSE
+
+# Fix permissions
+chown 777 build/
+chown 777 Miniforge*.sh

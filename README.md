@@ -32,10 +32,6 @@ Miniforge installers are available here: https://github.com/conda-forge/miniforg
 Installers are built and uploaded via Travis but if you want to construct your own Miniforge installer, here is how:
 
 ```bash
-## Permission for Docker
-chmod 777 build/
-chmod 666 Miniforge3/construct.yaml
-
 # Enable QEMU in Docker
 docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
 
