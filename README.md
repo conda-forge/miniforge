@@ -10,6 +10,14 @@ Relevant conversations:
 - https://github.com/conda-forge/conda-forge.github.io/issues/871#issue-496677528
 - https://github.com/conda-forge/conda-forge.github.io/pull/922
 
+## Download
+
+Miniforge installers are available here: https://github.com/conda-forge/miniforge/releases.
+
+## Supported architectures
+
+- `aarch64` (also called `arm64`)
+
 ## Features
 
 - [X] Automatic build of constructor.
