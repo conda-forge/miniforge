@@ -43,3 +43,7 @@ docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct forge_co
 # Test the installer
 docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct forge_constructor /construct/test.sh
 ```
+
+## License
+
+[BDS 3-clause](./LICENSE)
