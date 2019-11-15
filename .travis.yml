@@ -4,15 +4,15 @@ matrix:
   include:
     - os: linux
       env:
-        - ARCH=ppc64le
-
-    - os: linux
-      env:
         - ARCH=aarch64
 
-    - os: linux
-      env:
-        - ARCH=amd64
+    # - os: linux
+    #   env:
+    #     - ARCH=ppc64le
+
+    # - os: linux
+    #   env:
+    #     - ARCH=amd64
 
 before_install:
   # Enable experimental features (needed for squash)
