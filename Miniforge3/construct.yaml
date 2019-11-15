@@ -14,3 +14,5 @@ specs:
   - python >=3,<3.8
   - conda
   - pip
+  - tqdm
+version: 0.0.0-19-g8a24ce6
