@@ -26,11 +26,12 @@ install:
   - docker build -t docker_constructor -f Dockerfile.${ARCH} .
 
 script:
+  - echo "* Fix permissions"
   - chmod 777 build/
   - chmod 666 Miniforge3/construct.yaml
+  - echo "* Build Miniforge installer"
   - docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct docker_constructor
-
-test:
+  - echo "* Test Miniforge installer"
   - docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct forge_constructor /construct/test.sh
 
 deploy:
