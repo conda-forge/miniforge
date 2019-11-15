@@ -1,11 +1,59 @@
-language: minimal
+language: generic
+
+matrix:
+  - os: linux
+    env:
+      - ARCH=ppc64le
+
+  - os: linux
+    env:
+      - ARCH=aarch64
+
+  - os: linux
+    env:
+      - ARCH=64
+
+before_install:
+  # Enable experimental features (needed for squash)
+  - sudo cp docker_daemon_config.json /etc/docker/daemon.json
+  - sudo service docker restart
+
+  - docker info
+  - |
+    if [ "$(uname -m)" = "x86_64" ]; then
+        docker run --rm --privileged multiarch/qemu-user-static:register --reset
+    fi
+    export QEMU_STATIC_VERSION=v3.1.0-3
+    qemu_ppc64le_sha256=d018b96e20f7aefbc50e6ba93b6cabfd53490cdf1c88b02e7d66716fa09a7a17
+    qemu_aarch64_sha256=a64b39b8ce16e2285cb130bcba7143e6ad2fe19935401f01c38325febe64104b
+    qemu_arm_sha256=f4184c927f78d23d199056c5b0b6d75855e298410571d65582face3159117901
+
+    wget https://github.com/multiarch/qemu-user-static/releases/download/${QEMU_STATIC_VERSION}/qemu-ppc64le-static
+    wget https://github.com/multiarch/qemu-user-static/releases/download/${QEMU_STATIC_VERSION}/qemu-aarch64-static
+    wget https://github.com/multiarch/qemu-user-static/releases/download/${QEMU_STATIC_VERSION}/qemu-arm-static
+
+    sha256sum qemu-ppc64le-static | grep -F "${qemu_ppc64le_sha256}"
+    sha256sum qemu-aarch64-static | grep -F "${qemu_aarch64_sha256}"
+    sha256sum qemu-arm-static | grep -F "${qemu_aarch64_sha256}"
+    
+    chmod +x qemu-ppc64le-static
+    chmod +x qemu-aarch64-static
+    chmod +x qemu-arm-static
 
 install:
-  - ./build.sh
+  - docker build -t docker_constructor -f Dockerfile.${ARCH} .
+
+script:
+  - chmod 777 build/
+  - chmod 666 Miniforge3/construct.yaml
+  - docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct docker_constructor
+
+test:
+  - 
 
 deploy:
   provider: releases
-  file: Miniconda3-*.sh
+  file: build/Miniforge-*.sh
   skip_cleanup: true
   api_key:
     secure: APK2p2eTV4YxOrQzwm+GnJs32V1MplI4VG8Lslr/y7qky8Cpl91o7pUAYOEs5dL2RZlPrDNiWNsPP5JYRiO7YjTv5lPXjSyoAavf/JcLIC1OgjNqn029wdITrOLXAPGtL3OM+K70CYdzbLc/X0VlC0mWSOUlxox7hoKKUhXY/EF29lneRjNhUM+Wb4utn61K70YzXvSGMnmHyti0KhOG7ACfZlJY99wwgQVBaAfKCCgFj+J1aeorifu6FgOu13cPfvnfnC9qJnd7mL9tTQl9ZjLTG8k8fvlyyqkEoExhSXpPzgp1a7q11uxT/ys8rR/2ivOMpYyGUgA848Eswiy9+w581An2TRMbm0zYdqzFG0kYTCcG22TGdZukKq1rXO6TDLCYT3V44L7s72VxfI4tNDCVDcfeQVOEUwlUmyC/O9CslKyZewf9gB5OT5IQ8eSDsrwoiGvQC7r2oxsm7zL4oOkC4mDpdRqOFeQOw3AkoRcrTSkw+eQALfhGEtGkJAOqEEHlsStSCBBkfokmRRksD+l6mSJKR426kDKDr3/69Taq5WiEzbTSGZyRk+5l7+GlNnolKXMrceA9sUHlMLSKvePmiPRdqq1jJLZHtlxEGRZyc7QolgRMpQGdQYxucearmM0BBPGahVsx+V4Mq5Jufom//P0isH9MJzk4p9npSIk=

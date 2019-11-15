@@ -1,0 +1,5 @@
+FROM condaforge/linux-anvil-cos7-x86_64
+
+RUN /opt/conda/bin/conda install -y constructor
+
+CMD "/construct/build.sh"
