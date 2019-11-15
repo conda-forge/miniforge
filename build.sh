@@ -7,12 +7,12 @@ set -exo pipefail
 conda install -y constructor>=3.0.1
 conda list
 
-TEMP_DIR=$(mktemp)
+TEMP_DIR=$(mktemp -d)
 
 cd /construct
 
 # Copy constructor spec to $TEMP_DIR
-cp -R Miniforge3 $TEMP_DIR/Miniforge3/
+cp -R Miniforge3/ $TEMP_DIR/
 cp LICENSE $TEMP_DIR
 
 # Set the version of the installer from git
