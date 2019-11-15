@@ -1,4 +1,4 @@
-FROM condaforge/linux-anvil-cos7-x86_64
+FROM condaforge/linux-anvil-comp7
 
 RUN /opt/conda/bin/conda install -y constructor
 
