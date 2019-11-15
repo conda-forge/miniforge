@@ -12,7 +12,7 @@ matrix:
 
     - os: linux
       env:
-        - ARCH=64
+        - ARCH=amd64
 
 before_install:
   # Enable experimental features (needed for squash)
