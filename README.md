@@ -11,9 +11,10 @@ Relevant conversations
 
 Features of this repository to implement:
 - [ ] Automatic build of constructor
-    - [ ] aarch64
+    - [ ] aarch64 -- https://github.com/conda-forge/miniforge/pull/1
     - [ ] Other architectures???
 - [ ] Automatic upload of constructor results
+    - [ ] Test: https://github.com/conda-forge/miniforge/pull/1
 - [ ] Automatic testing of constructor on Ubuntu 18.04 docker image
 - [ ] Integration with conda-forge's developer documentation
 - [ ] Integration with conda-forge's official site
