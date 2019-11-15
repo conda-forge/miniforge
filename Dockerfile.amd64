@@ -1,5 +1,0 @@
-FROM condaforge/linux-anvil-comp7
-
-RUN /opt/conda/bin/conda install -y constructor
-
-CMD "/construct/build.sh"

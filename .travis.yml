@@ -4,15 +4,13 @@ matrix:
   include:
     - os: linux
       env:
-        - ARCH=aarch64
-
+        - DOCKERIMAGE=condaforge/linux-anvil-aarch64
     # - os: linux
     #   env:
-    #     - ARCH=ppc64le
-
+    #     - DOCKERIMAGE=condaforge/linux-anvil-ppc64le
     # - os: linux
     #   env:
-    #     - ARCH=amd64
+    #     - DOCKERIMAGE=condaforge/linux-anvil-comp7
 
 before_install:
   # Enable experimental features (needed for squash)
@@ -22,17 +20,14 @@ before_install:
   - docker info
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
 
-install:
-  - docker build -t forge_constructor -f Dockerfile.${ARCH} .
-
 script:
   - echo "* Fix permissions"
   - chmod 777 build/
   - chmod 666 Miniforge3/construct.yaml
   - echo "* Build Miniforge installer"
-  - docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct forge_constructor
+  - docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct ${DOCKERIMAGE} /construct/build.sh
   - echo "* Test Miniforge installer"
-  - docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct forge_constructor /construct/test.sh
+  - docker run --rm -ti --mount type=bind,source="$(pwd)",target=/construct ${DOCKERIMAGE} /construct/test.sh
 
 deploy:
   provider: releases
