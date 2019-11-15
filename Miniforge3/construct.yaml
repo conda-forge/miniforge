@@ -5,8 +5,9 @@ version: 0.0.0
 channels:
   - https://conda.anaconda.org/conda-forge
   - https://conda.anaconda.org/anaconda
-  # There still seems to be a dependency needed from c4aarch64
-  - https://conda.anaconda.org/c4aarch64
+  # This will continue to be a dependency until the compilers are
+  # moved to conda-forge or to anaconda
+  - https://conda.anaconda.org/c4aarch64   [linux-aarch64]
 
 write_condarc: True
 license_file: ../LICENSE
