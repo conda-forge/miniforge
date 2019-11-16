@@ -4,7 +4,7 @@ set -e
 
 export CONDA_PATH="$HOME/miniforge"
 
-echo "* Install dependencies"
+echo "***** Install dependencies *****"
 if [ -f /etc/redhat-release ]; then
   yum install -y bzip2
 fi
@@ -15,26 +15,26 @@ fi
 
 cd /construct
 
-echo "* Get the installer"
+echo "***** Get the installer *****"
 INSTALLER_PATH=$(find build/ -name "Miniforge*$ARCH.sh" | head -n 1)
 
-echo "* Run the installer"
+echo "***** Run the installer *****"
 chmod +x $INSTALLER_PATH
 bash $INSTALLER_PATH -b -p $CONDA_PATH
 
-echo "* Setup conda"
-$CONDA_PATH/bin/conda 'shell.bash' 'hook' 2> /dev/null
+echo "***** Setup conda *****"
+source $CONDA_PATH/bin/activate
 
-echo "* Print conda info"
+echo "***** Print conda info *****"
 conda info
 
-echo "* Run conda update"
+echo "***** Run conda update *****"
 conda update --all -y
 
-echo "* Python path"
+echo "***** Python path *****"
 which python
 
-echo "* Print system informations from Python"
+echo "***** Print system informations from Python *****"
 python -c "print('Hello Miniforge !')"
 python -c "import platform; print(platform.architecture())"
 python -c "import platform; print(platform.system())"

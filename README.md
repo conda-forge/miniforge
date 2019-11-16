@@ -1,7 +1,7 @@
 # miniforge
 [![Build Status](https://travis-ci.org/conda-forge/miniforge.svg?branch=master)](https://travis-ci.org/conda-forge/miniforge)
 
-This repository holds a minimal installer for conda on platforms that conda-forge supports but that aren't supported by Miniconda.
+This repository holds a minimal installer for conda on platforms that conda-forge supports but that aren't supported by [Miniconda]((https://docs.conda.io/en/latest/miniconda.html)).
 
 **Important: This work is still very experimental.**
 
@@ -63,10 +63,10 @@ do
   TEST_IMAGE_SUFFIX=$(echo $DOCKERFILE_PATH  | cut -d'.' -f2-)
   TEST_IMAGE_NAME="miniforge_test_image.$TEST_IMAGE_SUFFIX"
 
-  echo "* Building $TEST_IMAGE_NAME"
+  echo "============= Building $TEST_IMAGE_NAME ============="
   docker build -t $TEST_IMAGE_NAME -f $DOCKERFILE_PATH .
 
-  echo "* Test installer on $TEST_IMAGE_NAME"
+  echo "============= Test installer on $TEST_IMAGE_NAME ============="
   docker run --rm -ti -v $(pwd):/construct $TEST_IMAGE_NAME /construct/test.sh
 done
 ```

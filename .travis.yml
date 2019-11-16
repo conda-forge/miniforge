@@ -28,10 +28,10 @@ script:
       TEST_IMAGE_SUFFIX=$(echo $DOCKERFILE_PATH  | cut -d'.' -f2-)
       TEST_IMAGE_NAME="miniforge_test_image.$TEST_IMAGE_SUFFIX"
 
-      echo "* Building $TEST_IMAGE_NAME"
+      echo "============= Building $TEST_IMAGE_NAME ============="
       docker build -t $TEST_IMAGE_NAME -f $DOCKERFILE_PATH .
 
-      echo "* Test installer on $TEST_IMAGE_NAME"
+      echo "============= Test installer on $TEST_IMAGE_NAME ============="
       docker run --rm -ti -v $(pwd):/construct $TEST_IMAGE_NAME /construct/test.sh
     done
 
