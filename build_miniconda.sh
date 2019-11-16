@@ -7,8 +7,6 @@ ARCH=${ARCH:-aarch64}
 DOCKERIMAGE=${DOCKERIMAGE:-condaforge/linux-anvil-aarch64}
 QEMU_BINARY=${QEMU_BINARY:-qemu-aarch64-static}
 
-
-
 echo "============= Create build directory ============="
 mkdir -p build/
 chmod 777 build/
