@@ -27,6 +27,15 @@ Miniforge installers are available here: https://github.com/conda-forge/miniforg
 - [ ] Integration with conda-forge's official site.
 - [ ] Upstream to Anaconda ?
 
+## Testing
+
+After construction on Travis, the installer is tested against a range of distribution that match the installer architecture (`$ARCH`). For example when architecture is `aarch64`, the constructed installer is tested against:
+
+- Centos 7
+- Ubuntu 16.04
+- Ubuntu 18.04
+- Ubuntu 19.10
+
 ## Usage
 
 Installers are built and uploaded via Travis but if you want to construct your own Miniforge installer, here is how:
