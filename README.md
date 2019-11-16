@@ -1,7 +1,7 @@
 # miniforge
 [![Build Status](https://travis-ci.org/conda-forge/miniforge.svg?branch=master)](https://travis-ci.org/conda-forge/miniforge)
 
-This repository holds a minimal installer for conda on platforms that conda-forge supports but that aren't supported by [Miniconda]((https://docs.conda.io/en/latest/miniconda.html)).
+This repository holds a minimal installer for conda on platforms that conda-forge supports but that aren't supported by [Miniconda]((https://docs.conda.io/en/latest/miniconda.html).
 
 **Important: This work is still very experimental.**
 
