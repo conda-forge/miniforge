@@ -46,29 +46,7 @@ export ARCH=aarch64
 export DOCKERIMAGE=condaforge/linux-anvil-aarch64
 export QEMU_BINARY=qemu-aarch64-static
 
-# Permission for Docker
-chmod 777 build/
-
-# Enable QEMU in Docker
-docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
-
-# Construct the installer
-docker run --rm -ti -v $(pwd):/construct $DOCKERIMAGE /construct/build.sh
-
-# Test the installer
-bash get_qemu.sh
-
-for DOCKERFILE_PATH in $(find test_images/ -name "*.$ARCH")
-do
-  TEST_IMAGE_SUFFIX=$(echo $DOCKERFILE_PATH  | cut -d'.' -f2-)
-  TEST_IMAGE_NAME="miniforge_test_image.$TEST_IMAGE_SUFFIX"
-
-  echo "============= Building $TEST_IMAGE_NAME ============="
-  docker build -t $TEST_IMAGE_NAME -f $DOCKERFILE_PATH .
-
-  echo "============= Test installer on $TEST_IMAGE_NAME ============="
-  docker run --rm -ti -v $(pwd):/construct $TEST_IMAGE_NAME /construct/test.sh
-done
+bash build_miniconda.sh
 ```
 
 ## License

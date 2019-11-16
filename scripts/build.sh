@@ -24,4 +24,4 @@ echo "***** Construct the installer *****"
 constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR
 
 echo "***** Move installer to build/ *****"
-mv $TEMP_DIR/Miniforge*.sh build/
+mv $TEMP_DIR/Miniforge*.sh /construct/build/

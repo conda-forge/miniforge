@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-export QEMU_STATIC_VERSION=v3.1.0-3
-export QEMU_DIR="./qemu/"
+CURRENT_DIR=$(pwd)
+QEMU_STATIC_VERSION=v3.1.0-3
+QEMU_DIR="./build/qemu/"
 
 qemu_ppc64le_sha256=d018b96e20f7aefbc50e6ba93b6cabfd53490cdf1c88b02e7d66716fa09a7a17
 qemu_aarch64_sha256=a64b39b8ce16e2285cb130bcba7143e6ad2fe19935401f01c38325febe64104b
@@ -21,3 +22,5 @@ sha256sum qemu-arm-static | grep -F "${qemu_aarch64_sha256}"
 chmod +x qemu-ppc64le-static
 chmod +x qemu-aarch64-static
 chmod +x qemu-arm-static
+
+cd $CURRENT_DIR

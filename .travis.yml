@@ -13,27 +13,9 @@ before_install:
   - sudo cp docker_daemon_config.json /etc/docker/daemon.json
   - sudo service docker restart
   - docker info
-  - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-  - bash get_qemu.sh
 
 script:
-  # Fix permissions
-  - chmod 777 build/
-  # Construct Miniforge installer
-  - docker run --rm -ti -v $(pwd):/construct ${DOCKERIMAGE} /construct/build.sh
-  # Test Miniforge installer
-  - |
-    for DOCKERFILE_PATH in $(find test_images/ -name "*.$ARCH")
-    do
-      TEST_IMAGE_SUFFIX=$(echo $DOCKERFILE_PATH  | cut -d'.' -f2-)
-      TEST_IMAGE_NAME="miniforge_test_image.$TEST_IMAGE_SUFFIX"
-
-      echo "============= Building $TEST_IMAGE_NAME ============="
-      docker build -t $TEST_IMAGE_NAME -f $DOCKERFILE_PATH .
-
-      echo "============= Test installer on $TEST_IMAGE_NAME ============="
-      docker run --rm -ti -v $(pwd):/construct $TEST_IMAGE_NAME /construct/test.sh
-    done
+  - bash build_miniconda.sh
 
 deploy:
   provider: releases
