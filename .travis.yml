@@ -4,32 +4,36 @@ matrix:
   include:
     - os: linux
       env:
+        - ARCH=aarch64
         - DOCKERIMAGE=condaforge/linux-anvil-aarch64
-        - DOCKERIMAGE_TEST=arm64v8/centos:7
-    # - os: linux
-    #   env:
-    #     - DOCKERIMAGE=condaforge/linux-anvil-ppc64le
-    #     - DOCKERIMAGE_TEST=ppc64le/centos:7
-    # - os: linux
-    #   env:
-    #     - DOCKERIMAGE=condaforge/linux-anvil-comp7
-    #     - DOCKERIMAGE_TEST=centos:6
+        - QEMU_BINARY=qemu-aarch64-static
 
 before_install:
   # Enable experimental features (needed for squash)
   - sudo cp docker_daemon_config.json /etc/docker/daemon.json
   - sudo service docker restart
-
   - docker info
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+  - bash get_qemu.sh
 
 script:
-  - echo "* Fix permissions"
+  # Fix permissions
   - chmod 777 build/
-  - echo "* Build Miniforge installer"
+  # Construct Miniforge installer
   - docker run --rm -ti -v $(pwd):/construct ${DOCKERIMAGE} /construct/build.sh
-  - echo "* Test Miniforge installer"
-  - docker run --rm -ti -v $(pwd):/construct ${DOCKERIMAGE_TEST} /construct/test.sh
+  # Test Miniforge installer
+  - |
+    for DOCKERFILE_PATH in $(find test_images/ -name "*.$ARCH")
+    do
+      TEST_IMAGE_SUFFIX=$(echo $DOCKERFILE_PATH  | cut -d'.' -f2-)
+      TEST_IMAGE_NAME="miniforge_test_image.$TEST_IMAGE_SUFFIX"
+
+      echo "* Building $TEST_IMAGE_NAME"
+      docker build -t $TEST_IMAGE_NAME -f $DOCKERFILE_PATH .
+
+      echo "* Test installer on $TEST_IMAGE_NAME"
+      docker run --rm -ti -v $(pwd):/construct $TEST_IMAGE_NAME /construct/test.sh
+    done
 
 deploy:
   provider: releases

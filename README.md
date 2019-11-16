@@ -32,17 +32,34 @@ Miniforge installers are available here: https://github.com/conda-forge/miniforg
 Installers are built and uploaded via Travis but if you want to construct your own Miniforge installer, here is how:
 
 ```bash
-## Permission for Docker
+# Configuration
+export ARCH=aarch64
+export DOCKERIMAGE=condaforge/linux-anvil-aarch64
+export QEMU_BINARY=qemu-aarch64-static
+
+# Permission for Docker
 chmod 777 build/
 
 # Enable QEMU in Docker
 docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
 
 # Construct the installer
-docker run --rm -ti -v $(pwd):/construct condaforge/linux-anvil-aarch64 /construct/build.sh
+docker run --rm -ti -v $(pwd):/construct $DOCKERIMAGE /construct/build.sh
 
 # Test the installer
-docker run --rm -ti -v $(pwd):/construct arm64v8/centos:7 /construct/test.sh
+bash get_qemu.sh
+
+for DOCKERFILE_PATH in $(find test_images/ -name "*.$ARCH")
+do
+  TEST_IMAGE_SUFFIX=$(echo $DOCKERFILE_PATH  | cut -d'.' -f2-)
+  TEST_IMAGE_NAME="miniforge_test_image.$TEST_IMAGE_SUFFIX"
+
+  echo "* Building $TEST_IMAGE_NAME"
+  docker build -t $TEST_IMAGE_NAME -f $DOCKERFILE_PATH .
+
+  echo "* Test installer on $TEST_IMAGE_NAME"
+  docker run --rm -ti -v $(pwd):/construct $TEST_IMAGE_NAME /construct/test.sh
+done
 ```
 
 ## License

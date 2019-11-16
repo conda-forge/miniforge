@@ -3,13 +3,19 @@
 set -ex
 
 # Install dependencies
-yum install -y bzip2
+if [ -f /etc/redhat-release ]; then
+  yum install -y bzip2
+fi
+
+if [ -f /etc/lsb-release ]; then
+  apt install -y bzip2
+fi
 
 cd /construct
 
 # Get the first installer we find.
 # TODO: be smarter here maybe?
-INSTALLER_PATH=$(find build/ -name 'Miniforge*.sh' | head -n 1)
+INSTALLER_PATH=$(find build/ -name "Miniforge*$ARCH.sh" | head -n 1)
 
 # Run the installer
 chmod +x $INSTALLER_PATH
