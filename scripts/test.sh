@@ -9,7 +9,8 @@ if [ -f /etc/redhat-release ]; then
   yum install -y bzip2
 fi
 
-if [ -f /etc/lsb-release ]; then
+if [ -f /etc/debian_version ]; then
+  apt update -y
   apt install -y bzip2
 fi
 

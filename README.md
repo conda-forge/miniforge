@@ -32,7 +32,8 @@ Miniforge installers are available here: https://github.com/conda-forge/miniforg
 After construction on Travis, the installer is tested against a range of distribution that match the installer architecture (`$ARCH`). For example when architecture is `aarch64`, the constructed installer is tested against:
 
 - Centos 7
-- ~~Ubuntu 16.04~~
+- Debian Buster (10)
+- Ubuntu 16.04
 - Ubuntu 18.04
 - Ubuntu 19.10
 
