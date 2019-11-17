@@ -1,6 +1,7 @@
 name: Miniforge3
 
 channels:
+  - https://conda.anaconda.org/mark.harfouche   [linux-aarch64]
   - https://conda.anaconda.org/conda-forge
   # This will continue to be a dependency until the compilers are
   # moved to conda-forge.

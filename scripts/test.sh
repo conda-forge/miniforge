@@ -32,7 +32,8 @@ echo "***** Run conda update *****"
 conda update --all -y
 
 echo "***** Python path *****"
-which python
+python -c "import sys; print(sys.executable)"
+python -c "import sys; assert 'miniforge' in sys.executable"
 
 echo "***** Print system informations from Python *****"
 python -c "print('Hello Miniforge !')"
