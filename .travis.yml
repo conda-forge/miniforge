@@ -8,12 +8,6 @@ matrix:
         - DOCKERIMAGE=condaforge/linux-anvil-aarch64
         - QEMU_BINARY=qemu-aarch64-static
 
-before_install:
-  # Enable experimental features (needed for squash)
-  - sudo cp docker_daemon_config.json /etc/docker/daemon.json
-  - sudo service docker restart
-  - docker info
-
 script:
   - bash build_miniconda.sh
 
