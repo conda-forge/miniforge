@@ -2,6 +2,8 @@
 
 set -e
 
+cd /construct
+
 CONDA_VERSION=$(git tag --points-at HEAD)
 CONDA_VERSION="4.7.11-0"
 if [ -z "$CONDA_VERSION" ]
@@ -22,8 +24,6 @@ conda list
 
 echo "***** Make temp directory *****"
 TEMP_DIR=$(mktemp -d)
-
-cd /construct
 
 echo "***** Copy file for installer construction *****"
 cp -R Miniforge/ $TEMP_DIR/
