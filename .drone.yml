@@ -23,6 +23,8 @@ steps:
     #- apt-get install docker-ce --yes
     - curl -sSL https://get.docker.com/ 69 | sh
     #- systemctl start docker
+    - dockerd
+    - docker run hello-world
     - bash build_miniconda.sh
     #- export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
     #- sed -i '$ichown -R conda:conda "$FEEDSTOCK_ROOT"' /opt/docker/bin/entrypoint
