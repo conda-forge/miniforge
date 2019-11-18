@@ -5,7 +5,7 @@ set -e
 # Constructor should be >= 3.0.1 for aarch64.
 # See https://github.com/conda-forge/miniforge/pull/2#issuecomment-554394343
 echo "***** Install constructor *****"
-conda install -y constructor>=3.0.1
+conda install -y "constructor>=3.0.1"
 conda list
 
 echo "***** Make temp directory *****"
