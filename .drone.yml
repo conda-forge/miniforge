@@ -16,7 +16,7 @@ steps:
 
   commands:
     - apt-get update
-    - apt-get install software-properties-common ca-certificates curl apt-transport-https --yes
+    - apt-get install apt-utils software-properties-common ca-certificates curl apt-transport-https --yes
     - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
     - add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ubuntu bionic stable" --yes
     - apt-get update
