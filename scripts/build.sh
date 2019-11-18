@@ -26,4 +26,6 @@ echo "***** Construct the installer *****"
 constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR
 
 echo "***** Move installer to build/ *****"
+mkdir -p $FEEDSTOCK_ROOT/build/
+chmod 777 $FEEDSTOCK_ROOT/build/
 mv $TEMP_DIR/Miniforge*.sh $FEEDSTOCK_ROOT/build/
