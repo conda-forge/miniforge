@@ -9,4 +9,4 @@ steps:
 - name: Build and test
   image: condaforge/linux-anvil-aarch64
   commands:
-    - /opt/docker/bin/entrypoint ${DRONE_WORKSPACE}/scripts/build.sh
+    - /opt/docker/bin/entrypoint $DRONE_WORKSPACE/scripts/build.sh
