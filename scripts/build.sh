@@ -14,11 +14,11 @@ echo "***** Make temp directory *****"
 TEMP_DIR=$(mktemp -d)
 
 echo "***** Copy file for installer construction *****"
-cp -R Miniforge/ $TEMP_DIR/
+cp -R Miniforge3/ $TEMP_DIR/
 cp LICENSE $TEMP_DIR
 
 echo "***** Construct the installer *****"
-constructor $TEMP_DIR/Miniforge/ --output-dir $TEMP_DIR
+constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR
 
 echo "***** Move installer to build/ *****"
 mv $TEMP_DIR/Miniforge*.sh /construct/build/
