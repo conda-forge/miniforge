@@ -11,14 +11,13 @@ conda list
 echo "***** Make temp directory *****"
 TEMP_DIR=$(mktemp -d)
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-cd ${DIR}/..
+# Maybe this shoudl be exported in the same way we have feestock_root???
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+FEEDSTOCK_ROOT=${SCRIPT_DIR}/..
 
 echo "***** Copy file for installer construction *****"
-pwd
-ls -lah
-cp -R Miniforge3/ $TEMP_DIR/
-cp LICENSE $TEMP_DIR
+cp -R $FEEDSTOCK_ROOT/Miniforge3/ $TEMP_DIR/
+cp $FEEDSTOCK_ROOT/LICENSE $TEMP_DIR
 
 echo "***** Set installer version *****"
 echo "version: $(git describe)" >> $TEMP_DIR/Miniforge3/construct.yaml
@@ -27,4 +26,4 @@ echo "***** Construct the installer *****"
 constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR
 
 echo "***** Move installer to build/ *****"
-mv $TEMP_DIR/Miniforge*.sh /construct/build/
+mv $TEMP_DIR/Miniforge*.sh $FEEDSTOCK_ROOT/build/
