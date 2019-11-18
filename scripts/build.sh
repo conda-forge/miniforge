@@ -4,12 +4,6 @@ set -e
 
 cd /construct
 
-MINIFORGE_VERSION=$(cat Miniforge/construct.yaml | grep version | cut -d ":" -f 2)
-CONDA_VERSION=$(echo $MINIFORGE_VERSION | cut -d "-" -f 1)
-
-echo "***** Install conda version: $CONDA_VERSION *****"
-conda install -y "conda=$CONDA_VERSION"
-
 # Constructor should be >= 3.0.1 for aarch64.
 # See https://github.com/conda-forge/miniforge/pull/2#issuecomment-554394343
 echo "***** Install constructor *****"
