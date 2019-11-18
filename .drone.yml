@@ -12,8 +12,9 @@ steps:
   commands:
     - apt-get update
     - apt-get install software-properties-common --yes
+    - apt-key fingerprint 0EBFCD88
     - add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ubuntu bionic stable" --yes
-    - apt-get update --allow-unauthenticated
+    - apt-get update
     - apt-get install docker-ce --yes
     - bash build_miniforge.sh
     #- export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
