@@ -13,4 +13,6 @@ steps:
     DOCKERIMAGE: condaforge/linux-anvil-aarch64
     QEMU_BINARY: qemu-aarch64-static
   commands:
-    - bash build_miniconda.sh
+    - sed -i '$ichown -R conda:conda "$DRONE_WORKSPACE"' /opt/docker/bin/entrypoint
+    - /opt/docker/bin/entrypoint $DRONE_WORKSPACE/build_miniconda.sh
+    - echo "Done building"
