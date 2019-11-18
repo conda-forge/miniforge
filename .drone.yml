@@ -8,9 +8,5 @@ platform:
 steps:
 - name: Build and test
   image: condaforge/linux-anvil-aarch64
-  environment:
-    ARCH: aarch64
-    DOCKERIMAGE: condaforge/linux-anvil-aarch64
-    QEMU_BINARY: qemu-aarch64-static
   commands:
     - bash ./scripts/build.sh
