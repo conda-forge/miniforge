@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -ex
 
 # Constructor should be >= 3.0.1 for aarch64.
 # See https://github.com/conda-forge/miniforge/pull/2#issuecomment-554394343
@@ -11,9 +11,12 @@ conda list
 echo "***** Make temp directory *****"
 TEMP_DIR=$(mktemp -d)
 
-cd /construct
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd ${DIR}/..
 
 echo "***** Copy file for installer construction *****"
+pwd
+ls -lah
 cp -R Miniforge3/ $TEMP_DIR/
 cp LICENSE $TEMP_DIR
 
