@@ -1,4 +1,4 @@
-name: Miniforge3
+name: Miniforge
 
 channels:
   - https://conda.anaconda.org/conda-forge

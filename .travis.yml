@@ -9,7 +9,7 @@ matrix:
         - QEMU_BINARY=qemu-aarch64-static
 
 script:
-  - bash build_miniconda.sh
+  - bash build_miniforge.sh
 
 deploy:
   provider: releases

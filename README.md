@@ -47,7 +47,7 @@ export ARCH=aarch64
 export DOCKERIMAGE=condaforge/linux-anvil-aarch64
 export QEMU_BINARY=qemu-aarch64-static
 
-bash build_miniconda.sh
+bash build_miniforge.sh
 ```
 
 ## License

@@ -14,14 +14,14 @@ TEMP_DIR=$(mktemp -d)
 cd /construct
 
 echo "***** Copy file for installer construction *****"
-cp -R Miniforge3/ $TEMP_DIR/
+cp -R Miniforge/ $TEMP_DIR/
 cp LICENSE $TEMP_DIR
 
 echo "***** Set installer version *****"
-echo "version: $(git describe)" >> $TEMP_DIR/Miniforge3/construct.yaml
+echo "version: $(git describe)" >> $TEMP_DIR/Miniforge/construct.yaml
 
 echo "***** Construct the installer *****"
-constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR
+constructor $TEMP_DIR/Miniforge/ --output-dir $TEMP_DIR
 
 echo "***** Move installer to build/ *****"
 mv $TEMP_DIR/Miniforge*.sh /construct/build/
