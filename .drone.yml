@@ -16,7 +16,7 @@ steps:
     - add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ubuntu bionic stable" --yes
     - apt-get update
     - apt-get install docker-ce --yes
-    - bash build_miniforge.sh
+    - bash build_miniconda.sh
     #- export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
     #- sed -i '$ichown -R conda:conda "$FEEDSTOCK_ROOT"' /opt/docker/bin/entrypoint
     #- /opt/docker/bin/entrypoint $DRONE_WORKSPACE/scripts/build.sh
