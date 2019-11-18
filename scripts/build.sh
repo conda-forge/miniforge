@@ -11,10 +11,6 @@ conda list
 echo "***** Make temp directory *****"
 TEMP_DIR=$(mktemp -d)
 
-# Maybe this shoudl be exported in the same way we have feestock_root???
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-FEEDSTOCK_ROOT=${SCRIPT_DIR}/..
-
 echo "***** Copy file for installer construction *****"
 cp -R $FEEDSTOCK_ROOT/Miniforge3/ $TEMP_DIR/
 cp $FEEDSTOCK_ROOT/LICENSE $TEMP_DIR

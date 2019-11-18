@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
-set -e
+set -ex
+THIS_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Check parameters
 ARCH=${ARCH:-aarch64}
 DOCKERIMAGE=${DOCKERIMAGE:-condaforge/linux-anvil-aarch64}
 QEMU_BINARY=${QEMU_BINARY:-qemu-aarch64-static}
+FEEDSTOCK_ROOT=${FEEDSTOCK_ROOT:-$THIS_SCRIPT_DIR}
 
 echo "============= Create build directory ============="
 mkdir -p build/
@@ -15,7 +17,10 @@ echo "============= Enable QEMU ============="
 docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
 
 echo "============= Build the installer ============="
-docker run --rm -ti -v $(pwd):/construct $DOCKERIMAGE /construct/scripts/build.sh
+docker run --rm \
+    -e FEEDSTOCK_ROOT
+    -ti -v $(pwd):/construct \
+    $DOCKERIMAGE /construct/scripts/build.sh
 
 echo "============= Download QEMU static binaries ============="
 bash scripts/get_qemu.sh

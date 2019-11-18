@@ -9,4 +9,5 @@ steps:
 - name: Build and test
   image: condaforge/linux-anvil-aarch64
   commands:
+    - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
     - /opt/docker/bin/entrypoint $DRONE_WORKSPACE/scripts/build.sh
