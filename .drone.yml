@@ -10,4 +10,5 @@ steps:
   image: condaforge/linux-anvil-aarch64
   commands:
     - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
+    - sed -i '$ichown -R conda:conda "$FEEDSTOCK_ROOT"' /opt/docker/bin/entrypoint
     - /opt/docker/bin/entrypoint $DRONE_WORKSPACE/scripts/build.sh
