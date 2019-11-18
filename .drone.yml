@@ -10,6 +10,7 @@ steps:
   #image: condaforge/linux-anvil-aarch64
   image: arm64v8/ubuntu:18.04
   commands:
+    - apt-get update
     - apt-get install software-properties-common --yes
     - add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ubuntu bionic stable"
     - apt-get update
