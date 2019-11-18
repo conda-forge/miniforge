@@ -7,8 +7,16 @@ platform:
 
 steps:
 - name: Build and test
-  image: condaforge/linux-anvil-aarch64
+  #image: condaforge/linux-anvil-aarch64
+  image: arm64v8/ubuntu:18.04
   commands:
-    - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
-    - sed -i '$ichown -R conda:conda "$FEEDSTOCK_ROOT"' /opt/docker/bin/entrypoint
-    - /opt/docker/bin/entrypoint $DRONE_WORKSPACE/scripts/build.sh
+    - add-apt-repository \
+        "deb [arch=armhf] https://download.docker.com/linux/ubuntu \
+        $(lsb_release -cs) \
+        stable"
+    - apt-get update
+    - apt-get install docker-ce
+    - bash build_miniforge.sh
+    #- export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
+    #- sed -i '$ichown -R conda:conda "$FEEDSTOCK_ROOT"' /opt/docker/bin/entrypoint
+    #- /opt/docker/bin/entrypoint $DRONE_WORKSPACE/scripts/build.sh
