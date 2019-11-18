@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
 set -ex
-THIS_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Check parameters
 ARCH=${ARCH:-aarch64}
 DOCKERIMAGE=${DOCKERIMAGE:-condaforge/linux-anvil-aarch64}
 QEMU_BINARY=${QEMU_BINARY:-qemu-aarch64-static}
-FEEDSTOCK_ROOT=${FEEDSTOCK_ROOT:-$THIS_SCRIPT_DIR}
+FEEDSTOCK_ROOT=${FEEDSTOCK_ROOT:-/construct}
 
 echo "============= Create build directory ============="
 mkdir -p build/
