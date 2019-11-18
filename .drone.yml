@@ -10,9 +10,10 @@ steps:
   #image: condaforge/linux-anvil-aarch64
   image: arm64v8/ubuntu:18.04
   commands:
+    - apt-get install software-properties-common --yes
     - add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ubuntu bionic stable"
     - apt-get update
-    - apt-get install docker-ce
+    - apt-get install docker-ce --yes
     - bash build_miniforge.sh
     #- export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
     #- sed -i '$ichown -R conda:conda "$FEEDSTOCK_ROOT"' /opt/docker/bin/entrypoint
