@@ -20,7 +20,8 @@ steps:
     - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
     - add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ubuntu bionic stable" --yes
     - apt-get update
-    - apt-get install docker-ce --yes
+    #- apt-get install docker-ce --yes
+    - curl -sSL https://get.docker.com/ 69 | sh
     - systemctl start docker
     - bash build_miniconda.sh
     #- export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
