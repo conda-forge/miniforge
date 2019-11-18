@@ -11,7 +11,8 @@ steps:
   image: arm64v8/ubuntu:18.04
   commands:
     - apt-get update
-    - apt-get install software-properties-common ca-certificates --yes
+    - apt-get install software-properties-common ca-certificates curl apt-transport-https --yes
+    - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
     - add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ubuntu bionic stable" --yes
     - apt-get update
     - apt-get install docker-ce --yes
