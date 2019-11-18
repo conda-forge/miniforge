@@ -12,8 +12,7 @@ steps:
   commands:
     - add-apt-repository \
         "deb [arch=armhf] https://download.docker.com/linux/ubuntu \
-        $(lsb_release -cs) \
-        stable"
+        bionic stable"
     - apt-get update
     - apt-get install docker-ce
     - bash build_miniforge.sh
