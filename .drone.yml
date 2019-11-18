@@ -7,7 +7,7 @@ platform:
 
 steps:
 - name: Build and test
-  image: arm64v8/ubuntu:18.04
+  image: arm64v8/docker:18.04
   environment:
     ARCH: aarch64
     DOCKERIMAGE: condaforge/linux-anvil-aarch64
@@ -15,15 +15,18 @@ steps:
     QEMU_BINARY: qemu-aarch64-static
 
   commands:
-    - apt-get update
-    - apt-get install apt-utils software-properties-common ca-certificates curl apt-transport-https --yes
-    - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-    - add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ubuntu bionic stable" --yes
-    - apt-get update
+    #- apt-get update
+    #- apt-get install \
+        #systemd redist-server \
+        #apt-utils software-properties-common ca-certificates curl apt-transport-https --yes
+    #- service redis-server start
+    #- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+    #- add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ubuntu bionic stable" --yes
+    #- apt-get update
     #- apt-get install docker-ce --yes
-    - curl -sSL https://get.docker.com/ 69 | sh
+    #- curl -sSL https://get.docker.com/ 69 | sh
     #- systemctl start docker
-    - dockerd
+    #- dockerd
     - docker run hello-world
     - bash build_miniconda.sh
     #- export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
