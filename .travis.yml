@@ -13,7 +13,9 @@ script:
 
 deploy:
   provider: releases
-  file: build/Miniforge*.sh
+  file:
+    - "build/Miniforge*.sh"
+    - "build/Miniforge*.sha256"
   skip_cleanup: true
   api_key:
     secure: APK2p2eTV4YxOrQzwm+GnJs32V1MplI4VG8Lslr/y7qky8Cpl91o7pUAYOEs5dL2RZlPrDNiWNsPP5JYRiO7YjTv5lPXjSyoAavf/JcLIC1OgjNqn029wdITrOLXAPGtL3OM+K70CYdzbLc/X0VlC0mWSOUlxox7hoKKUhXY/EF29lneRjNhUM+Wb4utn61K70YzXvSGMnmHyti0KhOG7ACfZlJY99wwgQVBaAfKCCgFj+J1aeorifu6FgOu13cPfvnfnC9qJnd7mL9tTQl9ZjLTG8k8fvlyyqkEoExhSXpPzgp1a7q11uxT/ys8rR/2ivOMpYyGUgA848Eswiy9+w581An2TRMbm0zYdqzFG0kYTCcG22TGdZukKq1rXO6TDLCYT3V44L7s72VxfI4tNDCVDcfeQVOEUwlUmyC/O9CslKyZewf9gB5OT5IQ8eSDsrwoiGvQC7r2oxsm7zL4oOkC4mDpdRqOFeQOw3AkoRcrTSkw+eQALfhGEtGkJAOqEEHlsStSCBBkfokmRRksD+l6mSJKR426kDKDr3/69Taq5WiEzbTSGZyRk+5l7+GlNnolKXMrceA9sUHlMLSKvePmiPRdqq1jJLZHtlxEGRZyc7QolgRMpQGdQYxucearmM0BBPGahVsx+V4Mq5Jufom//P0isH9MJzk4p9npSIk=

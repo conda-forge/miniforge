@@ -2,6 +2,8 @@
 
 set -e
 
+echo "***** Start: Testing Miniforge installer *****"
+
 export CONDA_PATH="$HOME/miniforge"
 
 echo "***** Install dependencies *****"
@@ -42,3 +44,5 @@ python -c "import platform; print(platform.architecture())"
 python -c "import platform; print(platform.system())"
 python -c "import platform; print(platform.machine())"
 python -c "import platform; print(platform.release())"
+
+echo "***** Done: Building Testing installer *****"

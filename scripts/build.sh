@@ -2,6 +2,8 @@
 
 set -e
 
+echo "***** Start: Building Miniforge installer *****"
+
 CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-/construct}"
 
 cd $CONSTRUCT_ROOT
@@ -22,5 +24,15 @@ cp LICENSE $TEMP_DIR
 echo "***** Construct the installer *****"
 constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR
 
-echo "***** Move installer to build/ *****"
-mv $TEMP_DIR/Miniforge*.sh $CONSTRUCT_ROOT/build/
+echo "***** Generate installer hash *****"
+cd $TEMP_DIR
+# This line ill break if there is more than one installer in the folder.
+INSTALLER_PATH=$(find . -name "Miniforge*.sh" | head -n 1)
+HASH_PATH="$INSTALLER_PATH.sha256"
+sha256sum $INSTALLER_PATH > $HASH_PATH
+
+echo "***** Move installer and hash to build folder *****"
+mv $INSTALLER_PATH $CONSTRUCT_ROOT/build/
+mv $HASH_PATH $CONSTRUCT_ROOT/build/
+
+echo "***** Done: Building Miniforge installer *****"
