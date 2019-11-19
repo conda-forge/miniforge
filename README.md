@@ -50,6 +50,20 @@ export QEMU_BINARY=qemu-aarch64-static
 bash build_miniforge.sh
 ```
 
+## Release
+
+To release a new version of Miniforge:
+
+- Open a new PR.
+- Edit [`Miniforge3/construct.yaml`](./Miniforge3/construct.yaml).
+  - Update the `version` tag to: `$CONDA_VERSION-$BUILD_NUMBER`. For example, `4.7.11-0`.
+  - Update `conda` version in the `specs` section to `$CONDA_VERSION`.
+  - Update `python` version in the `specs` section to the Python version used in [Miniconda](https://repo.anaconda.com/miniconda/).
+- Once CI is happy, merge into `master`.
+- Tag `HEAD` to `$CONDA_VERSION-$BUILD_NUMBER` and push the tag:
+  - `git tag $CONDA_VERSION-$BUILD_NUMBER`
+  - `git push origin master --tags`
+
 ## License
 
 [BDS 3-clause](./LICENSE)
