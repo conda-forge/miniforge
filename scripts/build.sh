@@ -2,7 +2,9 @@
 
 set -e
 
-cd /construct
+CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-/construct}"
+
+cd $CONSTRUCT_ROOT
 
 # Constructor should be >= 3.0.1 for aarch64.
 # See https://github.com/conda-forge/miniforge/pull/2#issuecomment-554394343
@@ -21,4 +23,4 @@ echo "***** Construct the installer *****"
 constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR
 
 echo "***** Move installer to build/ *****"
-mv $TEMP_DIR/Miniforge*.sh /construct/build/
+mv $TEMP_DIR/Miniforge*.sh $CONSTRUCT_ROOT/build/
