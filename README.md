@@ -66,4 +66,4 @@ To release a new version of Miniforge:
 
 ## License
 
-[BDS 3-Clause](./LICENSE)
+[BSD 3-Clause](./LICENSE)
