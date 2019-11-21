@@ -1,5 +1,5 @@
 name: Miniforge3
-version: 4.7.12-0
+version: 4.7.12-1
 
 channels:
   - https://conda.anaconda.org/conda-forge
