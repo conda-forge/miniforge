@@ -6,16 +6,6 @@ echo "***** Start: Testing Miniforge installer *****"
 
 export CONDA_PATH="$HOME/miniforge"
 
-echo "***** Install dependencies *****"
-if [ -f /etc/redhat-release ]; then
-  yum install -y bzip2
-fi
-
-if [ -f /etc/debian_version ]; then
-  apt update -y
-  apt install -y bzip2
-fi
-
 cd /construct
 
 echo "***** Get the installer *****"
