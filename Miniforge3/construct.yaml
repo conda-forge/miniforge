@@ -11,6 +11,6 @@ write_condarc: True
 license_file: ../LICENSE
 
 specs:
-  - python 3.7
+  - python 3.7.*
   - conda 4.7.12
   - pip
