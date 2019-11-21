@@ -14,6 +14,10 @@ Relevant conversations:
 
 Miniforge installers are available here: https://github.com/conda-forge/miniforge/releases.
 
+Latest installers
+
+- [linux-aarch64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh)
+
 ## Supported architectures
 
 - `aarch64` (also called `arm64`)
