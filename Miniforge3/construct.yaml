@@ -1,5 +1,5 @@
 name: Miniforge3
-version: 4.7.11-0
+version: 4.7.12-0
 
 channels:
   - https://conda.anaconda.org/conda-forge
@@ -12,5 +12,5 @@ license_file: ../LICENSE
 
 specs:
   - python 3.7
-  - conda 4.7.11
+  - conda 4.7.12
   - pip
