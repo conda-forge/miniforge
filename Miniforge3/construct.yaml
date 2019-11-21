@@ -1,16 +1,16 @@
 name: Miniforge3
+version: 4.7.11-0
 
 channels:
   - https://conda.anaconda.org/conda-forge
-  - https://conda.anaconda.org/anaconda
   # This will continue to be a dependency until the compilers are
-  # moved to conda-forge or to anaconda
+  # moved to conda-forge.
   - https://conda.anaconda.org/c4aarch64   [linux-aarch64]
 
 write_condarc: True
 license_file: ../LICENSE
 
 specs:
-  - python >=3,<3.8
-  - conda
+  - python 3.7
+  - conda 4.7.11
   - pip
