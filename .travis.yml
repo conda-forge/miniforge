@@ -19,6 +19,7 @@ deploy:
   file:
     - "build/Miniforge*.sh"
     - "build/Miniforge*.sha256"
+  file_glob: true
   on:
     repo: conda-forge/miniforge
     tags: true
