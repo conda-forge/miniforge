@@ -21,4 +21,4 @@ deploy:
   on:
     repo: conda-forge/miniforge
     tags: true
-    
+  skip_cleanup: true
