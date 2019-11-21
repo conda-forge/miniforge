@@ -10,6 +10,8 @@ matrix:
 
 script:
   - bash build_miniforge.sh
+  # Copy for latest release
+  - cp build/Miniforge3-*-Linux-$ARCH.sh build/Miniforge3-Linux-$ARCH.sh
 
 deploy:
   provider: releases
