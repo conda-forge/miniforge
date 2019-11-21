@@ -13,12 +13,12 @@ script:
 
 deploy:
   provider: releases
+  api_key:
+    secure: "YGo9F1tNfKJ9H3NgDFdEGGQs+bgdfvlRsmgoAQ3CkVcZUy+rRCpzuLoV9BoobJQPCmcOFVZMMNBMtJ7BjJcuMFXaNeVtXmZX4MNOwhxqOD60y/2A57XZfux7wf4SV/qxmCvMmOZ63YVbLRrM5zmFjwtSUqwHW8NT7VwxH4jfu1fwkqR+XQnilfWVDnVQq2fPNu+RQ1ltxbu3ySDk7ALNIjvc4eSx6zHM1o/mHgR+UixADaLLz3wTzWwnH3uYyehXzpxdjqYQDvOaeQV+PzewsFTdBvzfLqWOPQdmCgiODq3SLdvFH/GjqMFDYNV2AdavRF9L7Mk1j/Y+8Iy9wHLKNsR0+wF6t1g28/vhcZOd1u/saF1vKhew7//KfKixVwtNihJ2sdNoKMhbiwR136kV2YNJYEAPyGjGU4wSnXqR+XBI3Nv8X2qbh50ZnUKQGoNjZqdI0itIiPF5M4hDJIc34Vj5oQp90kn5gwJImtqJPCyXSFBEgvvWCfWtNsmGZ2faCmS/fJO2eq7CTnlnzr1wiFEQB2c4TuE4WHY+YFGEBmuGHti7eADaS6WvsUR/cee+HHiiCTjYRXSIs2wFt3bGUiPTG1lvSDMH6E2WFv0C5CqsE88jFw17kxnHdruTXWwv4f7s/UcgWNs/aP4RsK5Xo59Cb4xY3boVa7RBBRPYOU4="
   file:
     - "build/Miniforge*.sh"
     - "build/Miniforge*.sha256"
   skip_cleanup: true
-  api_key:
-    secure: "nxUUhIOQ6zJPKRXu8NEzEY0F5gzzBkCVQbvWRhzDeW2KKWZzrL009FqVYltlBnHUbQFV7UZZvS0ahAx3j3yfolZq27Tdjzzwb0rBZDuW1L/AhIkCIlW9jktyvjod/RpaCYm++Nt7eB8jjf8VjGveWFkEYoDVhWCzcNhGzqJ+cRf63TglfDNeXm1Q/zi4o9vo6y1fOw4RdIUXj6qUJllO1BApT8sYWcmjtk7ZNUXBH68E4PKUivQNG/9wqlEATp0WKLUqJZd4wN/5FHOe1a0cJZlH9EmKXz1jJA+Ne/8hsHA5dBoFEMFhkJ8zDQ1Sn5tZKIebZvUDnUdC3HekYo/vUZimofoCuIUyYs+qZdIsLAosbu8SCHkAYlX/ETu1BZ7PkwG7OAjvZnxWNMIljnb0Hs3XWuLW0LEiD7K3xSWHsb5LURmP0ttqZ6yAcca/bQgwyRx44hQh5YBiqe3n7AKi8al/gqaV7docJKeeql6ya4IcOrGmnve4ZcdreDn5RGF/40ipmSX8Qi65I2hmrR1qBmkmC2l9xRqVP0lozbDZru50N/wBi2lEdQfk632e7Dzx3MEKcAYHT6rL9EWUq4endlU4opLUloamlLbEqYUqyA/QDSp4AbWZOVhwCslx/5ohCS1WxCBRv7SdZdUH89lsacQ+YeOwbA+0fC9WNyWtMZw="
   on:
     tags: true
-    all_branches: true
+    
