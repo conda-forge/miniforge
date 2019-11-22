@@ -3,6 +3,7 @@ language: generic
 matrix:
   include:
     - os: linux
+      arch: arm64
       env:
         - ARCH=aarch64
         - DOCKERIMAGE=condaforge/linux-anvil-aarch64
