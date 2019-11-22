@@ -1,4 +1,6 @@
 language: generic
+services:
+  - docker
 
 matrix:
   include:
