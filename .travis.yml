@@ -12,6 +12,7 @@ matrix:
         - QEMU_BINARY=qemu-aarch64-static
 
 script:
+  - docker run hello-world
   - bash build_miniforge.sh
   # Copy for latest release
   - cp build/Miniforge3-*-Linux-$ARCH.sh build/Miniforge3-Linux-$ARCH.sh
