@@ -10,6 +10,11 @@ matrix:
         - ARCH=aarch64
         - DOCKERIMAGE=condaforge/linux-anvil-aarch64
         - QEMU_BINARY=qemu-aarch64-static
+    - os: linux
+      env:
+        - ARCH=aarch64
+        - DOCKERIMAGE=condaforge/linux-anvil-aarch64
+        - QEMU_BINARY=qemu-aarch64-static
 
 script:
   - docker run hello-world

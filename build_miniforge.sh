@@ -12,7 +12,7 @@ mkdir -p build/
 chmod 777 build/
 
 echo "============= Enable QEMU ============="
-docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
+docker run --rm multiarch/qemu-user-static:register --reset --credential yes
 
 echo "============= Build the installer ============="
 docker run --rm -ti -v $(pwd):/construct $DOCKERIMAGE /construct/scripts/build.sh
