@@ -13,3 +13,5 @@ license_file: ../LICENSE
 specs:
   - python 3.7.*
   - conda 4.8.2
+  - pip
+  - bzip2
