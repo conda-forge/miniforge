@@ -3,9 +3,6 @@ version: 4.8.2-1
 
 channels:
   - https://conda.anaconda.org/conda-forge
-  # This will continue to be a dependency until the compilers are
-  # moved to conda-forge.
-  - https://conda.anaconda.org/c4aarch64   [aarch64]
 
 write_condarc: True
 license_file: ../LICENSE
