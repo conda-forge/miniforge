@@ -3,8 +3,6 @@
 
 This repository holds a minimal installer for conda on platforms that conda-forge supports but that aren't supported by [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
 
-**Important: This work is still very experimental.**
-
 Relevant conversations:
 
 - https://github.com/conda-forge/conda-forge.github.io/issues/871#issue-496677528
