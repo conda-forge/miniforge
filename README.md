@@ -10,6 +10,8 @@ Miniforge installers are available here: https://github.com/conda-forge/miniforg
 Latest installers
 
 - [linux-aarch64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh) (also called `arm64`)
+- [linux-ppc64le](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-ppc64le.sh) (also called `POWER8/9`)
+- [linux-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh) (also called `amd64`)
 
 Follow the aarch64 and ppc64le migration status here: https://conda-forge.org/status/
 
