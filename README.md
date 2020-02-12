@@ -1,24 +1,19 @@
 # miniforge
 [![Build Status](https://travis-ci.com/conda-forge/miniforge.svg?branch=master)](https://travis-ci.com/conda-forge/miniforge)
 
-This repository holds a minimal installer for conda on platforms that conda-forge supports but that aren't supported by [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
-
-Relevant conversations:
-
-- https://github.com/conda-forge/conda-forge.github.io/issues/871#issue-496677528
-- https://github.com/conda-forge/conda-forge.github.io/pull/922
+This repository holds a minimal installer for conda specific to conda-forge. It can be directly compared to [Miniconda](https://docs.conda.io/en/latest/miniconda.html), with the added feature that conda-forge is the default channel.
 
 ## Download
 
-Miniforge installers are available here: https://github.com/conda-forge/miniforge/releases.
+Miniforge installers are available here: https://github.com/conda-forge/miniforge/releases
 
 Latest installers
 
-- [linux-aarch64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh)
+- [linux-aarch64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh) (also called `arm64`)
+- [linux-ppc64le](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-ppc64le.sh) (also called `POWER8/9`)
+- [linux-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh) (also called `amd64`)
 
-## Supported architectures
-
-- `aarch64` (also called `arm64`)
+Follow the aarch64 and ppc64le migration status here: https://conda-forge.org/status/
 
 ## Features
 
@@ -68,3 +63,10 @@ To release a new version of Miniforge:
 ## License
 
 [BSD 3-Clause](./LICENSE)
+
+## History
+
+Relevant conversations:
+
+- https://github.com/conda-forge/conda-forge.github.io/issues/871#issue-496677528
+- https://github.com/conda-forge/conda-forge.github.io/pull/922
