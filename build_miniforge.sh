@@ -4,8 +4,8 @@ set -e
 
 # Check parameters
 ARCH=${ARCH:-aarch64}
+DOCKER_ARCH=${DOCKER_ARCH:arm64v8}
 DOCKERIMAGE=${DOCKERIMAGE:-condaforge/linux-anvil-aarch64}
-QEMU_BINARY=${QEMU_BINARY:-qemu-aarch64-static}
 
 echo "============= Create build directory ============="
 mkdir -p build/
@@ -21,15 +21,9 @@ echo "============= Download QEMU static binaries ============="
 bash scripts/get_qemu.sh
 
 echo "============= Test the installer ============="
-for DOCKERFILE_PATH in $(find test_images/ -name "*.$ARCH")
+for TEST_IMAGE_NAME in "ubuntu:19.10" "ubuntu:16.04" "ubuntu:18.04" "centos:7" "debian:buster"
 do
-  TEST_IMAGE_SUFFIX=$(echo $DOCKERFILE_PATH  | cut -d'.' -f2-)
-  TEST_IMAGE_NAME="miniforge_test_image.$TEST_IMAGE_SUFFIX"
-
-  echo "============= Building $TEST_IMAGE_NAME ============="
-  docker build -t $TEST_IMAGE_NAME -f $DOCKERFILE_PATH .
-
   echo "============= Test installer on $TEST_IMAGE_NAME ============="
-  docker run --rm -ti -v $(pwd):/construct $TEST_IMAGE_NAME /construct/scripts/test.sh
+  docker run --rm -ti -v $(pwd):/construct -v $(pwd)/build/qemu/qemu-${ARCH}-static:/usr/bin/qemu-${ARCH}-static ${DOCKER_ARCH}/$TEST_IMAGE_NAME /construct/scripts/test.sh
 done
 

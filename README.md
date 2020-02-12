@@ -47,7 +47,6 @@ Installers are built and uploaded via Travis but if you want to construct your o
 # Configuration
 export ARCH=aarch64
 export DOCKERIMAGE=condaforge/linux-anvil-aarch64
-export QEMU_BINARY=qemu-aarch64-static
 
 bash build_miniforge.sh
 ```
