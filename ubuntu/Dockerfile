@@ -29,15 +29,15 @@ RUN wget --quiet https://github.com/conda-forge/miniforge/releases/download/${MI
     find ${CONDA_DIR} -follow -type f -name '*.pyc' -delete && \
     conda clean -afy
 
-# Set up default conda environment systemwide for all interactive shells.
-# This allows users to mount volumes in $HOME and still have fully working conda
-# FIXME: In bash, we have everything setup right *except* for PS1, which doesn't show (base)
-# FIXME: In sh, we don't seem to have conda set up properly
-RUN ln -s ${CONDA_DIR}/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
-    echo "source ${CONDA_DIR}/etc/profile.d/conda.sh" >> /etc/bash.bashrc && \
-    echo "conda activate base" >> /etc/bash.bashrc
+# Activate base by default when running as any *non-root* user as well
+# Good security practice requires running most workloads as non-root
+# This makes sure any non-root users created also have base activated
+# for their interactive shells.
+RUN echo ". ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate base" >> /etc/skel/.bashrc
+
+# Activate base by default when running as root as well
+# The root user is already created, so won't pick up changes to /etc/skel
+RUN echo ". ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate base" >> ~/.bashrc
 
 ENTRYPOINT ["tini", "--"]
-
-# Without the "-l", conda activate won't work out of the box, since profiles aren't loaded
-CMD [ "/bin/bash", "-l" ]
+CMD [ "/bin/bash" ]
