@@ -11,7 +11,8 @@ RUN useradd \
 USER conder
 
 COPY tests /tmp/tests
-RUN for f in /tmp/tests/*; do \
+RUN set -e; \
+    for f in /tmp/tests/*; do \
         echo "Executing $f"; \
         $f; \
     done
