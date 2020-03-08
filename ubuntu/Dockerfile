@@ -15,13 +15,14 @@ RUN apt-get update > /dev/null && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN wget --quiet https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini -O /usr/local/bin/tini && \
+# Keep $HOME clean (no .wget-hsts file), since HSTS isn't useful in this context
+RUN wget --no-hsts --quiet https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini -O /usr/local/bin/tini && \
     chmod +x /usr/local/bin/tini
 
 # 1. Install miniforge from GitHub releases
 # 2. Apply some cleanup tips from https://jcrist.github.io/conda-docker-tips.html
 #    Particularly, we remove pyc and a files. The default install has no js, we can skip that
-RUN wget --quiet https://github.com/conda-forge/miniforge/releases/download/${MINIFORGE_VERSION}/Miniforge3-${MINIFORGE_VERSION}-Linux-x86_64.sh -O /tmp/miniforge.sh && \
+RUN wget --no-hsts --quiet https://github.com/conda-forge/miniforge/releases/download/${MINIFORGE_VERSION}/Miniforge3-${MINIFORGE_VERSION}-Linux-x86_64.sh -O /tmp/miniforge.sh && \
     /bin/bash /tmp/miniforge.sh -b -p ${CONDA_DIR} && \
     rm /tmp/miniforge.sh && \
     conda clean -tipsy && \
