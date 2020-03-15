@@ -15,7 +15,7 @@ echo "============= Enable QEMU ============="
 docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
 
 echo "============= Build the installer ============="
-docker run --rm -ti -v $(pwd):/construct $DOCKERIMAGE /construct/scripts/build.sh
+docker run --rm -ti -v $(pwd):/construct -e MINIFORGE_VERSION -e MINIFORGE_NAME $DOCKERIMAGE /construct/scripts/build.sh
 
 echo "============= Download QEMU static binaries ============="
 bash scripts/get_qemu.sh
