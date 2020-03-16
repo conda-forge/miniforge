@@ -49,6 +49,7 @@ script:
   - bash build_miniforge.sh
   # Copy for latest release
   - cp build/$MINIFORGE_NAME-*-Linux-$ARCH.sh build/$MINIFORGE_NAME-Linux-$ARCH.sh
+  - ls -alh build
 
 deploy:
   provider: releases
