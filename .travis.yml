@@ -7,23 +7,49 @@ matrix:
         - ARCH=aarch64
         - DOCKER_ARCH=arm64v8
         - DOCKERIMAGE=condaforge/linux-anvil-aarch64
+        - MINIFORGE_NAME="Miniforge3"
 
     - os: linux
       env:
         - ARCH=x86_64
         - DOCKER_ARCH=amd64
         - DOCKERIMAGE=condaforge/linux-anvil-comp7
+        - MINIFORGE_NAME="Miniforge3"
 
     - os: linux
       env:
         - ARCH=ppc64le
         - DOCKER_ARCH=ppc64le
         - DOCKERIMAGE=condaforge/linux-anvil-ppc64le
+        - MINIFORGE_NAME="Miniforge3"
+
+    - os: linux
+      env:
+        - ARCH=aarch64
+        - DOCKER_ARCH=arm64v8
+        - DOCKERIMAGE=condaforge/linux-anvil-aarch64
+        - MINIFORGE_NAME="Miniforge-pypy3"
+
+    - os: linux
+      env:
+        - ARCH=x86_64
+        - DOCKER_ARCH=amd64
+        - DOCKERIMAGE=condaforge/linux-anvil-comp7
+        - MINIFORGE_NAME="Miniforge-pypy3"
+
+    - os: linux
+      env:
+        - ARCH=ppc64le
+        - DOCKER_ARCH=ppc64le
+        - DOCKERIMAGE=condaforge/linux-anvil-ppc64le
+        - MINIFORGE_NAME="Miniforge-pypy3"
 
 script:
+  - if [[ "$TRAVIS_TAG" != "" ]]; then export MINIFORGE_VERSION=$TRAVIS_TAG; fi
   - bash build_miniforge.sh
   # Copy for latest release
-  - cp build/Miniforge3-*-Linux-$ARCH.sh build/Miniforge3-Linux-$ARCH.sh
+  - cp build/$MINIFORGE_NAME-*-Linux-$ARCH.sh build/$MINIFORGE_NAME-Linux-$ARCH.sh
+  - ls -alh build
 
 deploy:
   provider: releases
