@@ -6,13 +6,13 @@ matrix:
       env:
         - ARCH=x86_64
         - MINIFORGE_NAME="Miniforge-pypy3"
-        - OS_NAME="Linux"
+        - OS_NAME="OSX"
 
     - os: osx
       env:
         - ARCH=x86_64
         - MINIFORGE_NAME="Miniforge3"
-        - OS_NAME="Linux"
+        - OS_NAME="OSX"
 
     - os: linux
       env:
@@ -65,21 +65,7 @@ matrix:
 script:
   - if [[ "$TRAVIS_TAG" != "" ]]; then export MINIFORGE_VERSION=$TRAVIS_TAG; fi
   - if [[ "$OS_NAME" == "Linux" ]]; then bash build_miniforge.sh; fi
-  - if [[ "$OS_NAME" == "OSX" ]]; then
-        echo "Installing a fresh version of Miniconda."
-        MINICONDA_URL="https://repo.continuum.io/miniconda"
-        MINICONDA_FILE="Miniconda3-latest-MacOSX-x86_64.sh"
-        curl -L -O "${MINICONDA_URL}/${MINICONDA_FILE}"
-        bash $MINICONDA_FILE -b
-
-        echo "Configuring conda."
-        source ~/miniconda3/bin/activate root
-        conda config --add channels conda-forge
-
-        export CONSTRUCT_ROOT=$PWD
-        bash scripts/build.sh
-        bash scripts/test.sh
-    fi
+  - if [[ "$OS_NAME" == "OSX" ]]; then bash build_miniforge_osx.sh; fi
   # Copy for latest release
   - cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.sh build/$MINIFORGE_NAME-$OS_NAME-$ARCH.sh
   - ls -alh build
