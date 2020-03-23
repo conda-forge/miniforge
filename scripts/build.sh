@@ -19,8 +19,8 @@ echo "***** Make temp directory *****"
 TEMP_DIR=$(mktemp -d)
 
 echo "***** Copy file for installer construction *****"
-cp -R Miniforge3/ $TEMP_DIR/
-cp LICENSE $TEMP_DIR
+cp -R Miniforge3 $TEMP_DIR/
+cp LICENSE $TEMP_DIR/
 
 ls -al $TEMP_DIR
 
