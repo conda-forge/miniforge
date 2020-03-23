@@ -14,5 +14,5 @@ source ~/miniconda3/bin/activate root
 conda config --add channels conda-forge
 
 export CONSTRUCT_ROOT=$PWD
-bash scripts/build.sh
-bash scripts/test.sh
+source scripts/build.sh
+source scripts/test.sh
