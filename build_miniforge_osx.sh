@@ -10,8 +10,7 @@ curl -L -O "${MINIFORGE_URL}/${MINIFORGE_FILE}"
 bash $MINIFORGE_FILE -b
 
 echo "Configuring conda."
-source ~/miniconda3/bin/activate root
-conda config --add channels conda-forge
+source ~/miniforge3/bin/activate root
 
 export CONSTRUCT_ROOT=$PWD
 mkdir -p build
