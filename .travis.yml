@@ -2,12 +2,25 @@ language: generic
 
 matrix:
   include:
+    - os: osx
+      env:
+        - ARCH=x86_64
+        - MINIFORGE_NAME="Miniforge-pypy3"
+        - OS_NAME="Linux"
+
+    - os: osx
+      env:
+        - ARCH=x86_64
+        - MINIFORGE_NAME="Miniforge3"
+        - OS_NAME="Linux"
+
     - os: linux
       env:
         - ARCH=aarch64
         - DOCKER_ARCH=arm64v8
         - DOCKERIMAGE=condaforge/linux-anvil-aarch64
         - MINIFORGE_NAME="Miniforge3"
+        - OS_NAME="Linux"
 
     - os: linux
       env:
@@ -15,6 +28,7 @@ matrix:
         - DOCKER_ARCH=amd64
         - DOCKERIMAGE=condaforge/linux-anvil-comp7
         - MINIFORGE_NAME="Miniforge3"
+        - OS_NAME="Linux"
 
     - os: linux
       env:
@@ -22,6 +36,7 @@ matrix:
         - DOCKER_ARCH=ppc64le
         - DOCKERIMAGE=condaforge/linux-anvil-ppc64le
         - MINIFORGE_NAME="Miniforge3"
+        - OS_NAME="Linux"
 
     - os: linux
       env:
@@ -29,6 +44,7 @@ matrix:
         - DOCKER_ARCH=arm64v8
         - DOCKERIMAGE=condaforge/linux-anvil-aarch64
         - MINIFORGE_NAME="Miniforge-pypy3"
+        - OS_NAME="Linux"
 
     - os: linux
       env:
@@ -36,6 +52,7 @@ matrix:
         - DOCKER_ARCH=amd64
         - DOCKERIMAGE=condaforge/linux-anvil-comp7
         - MINIFORGE_NAME="Miniforge-pypy3"
+        - OS_NAME="Linux"
 
     - os: linux
       env:
@@ -43,12 +60,28 @@ matrix:
         - DOCKER_ARCH=ppc64le
         - DOCKERIMAGE=condaforge/linux-anvil-ppc64le
         - MINIFORGE_NAME="Miniforge-pypy3"
+        - OS_NAME="Linux"
 
 script:
   - if [[ "$TRAVIS_TAG" != "" ]]; then export MINIFORGE_VERSION=$TRAVIS_TAG; fi
-  - bash build_miniforge.sh
+  - if [[ "$OS_NAME" == "Linux" ]]; then bash build_miniforge.sh; fi
+  - if [[ "$OS_NAME" == "OSX" ]]; then
+        echo "Installing a fresh version of Miniconda."
+        MINICONDA_URL="https://repo.continuum.io/miniconda"
+        MINICONDA_FILE="Miniconda3-latest-MacOSX-x86_64.sh"
+        curl -L -O "${MINICONDA_URL}/${MINICONDA_FILE}"
+        bash $MINICONDA_FILE -b
+
+        echo "Configuring conda."
+        source ~/miniconda3/bin/activate root
+        conda config --add channels conda-forge
+
+        export CONSTRUCT_ROOT=$PWD
+        bash scripts/build.sh
+        bash scripts/test.sh
+    fi
   # Copy for latest release
-  - cp build/$MINIFORGE_NAME-*-Linux-$ARCH.sh build/$MINIFORGE_NAME-Linux-$ARCH.sh
+  - cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.sh build/$MINIFORGE_NAME-$OS_NAME-$ARCH.sh
   - ls -alh build
 
 deploy:

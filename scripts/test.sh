@@ -6,7 +6,9 @@ echo "***** Start: Testing Miniforge installer *****"
 
 export CONDA_PATH="$HOME/miniforge"
 
-cd /construct
+CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-/construct}"
+
+cd ${CONSTRUCT_ROOT}
 
 echo "***** Get the installer *****"
 INSTALLER_PATH=$(find build/ -name "Miniforge*$ARCH.sh" | head -n 1)
