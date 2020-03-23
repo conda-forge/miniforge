@@ -22,6 +22,8 @@ echo "***** Copy file for installer construction *****"
 cp -R Miniforge3/ $TEMP_DIR/
 cp LICENSE $TEMP_DIR
 
+ls -al $TEMP_DIR
+
 echo "***** Construct the installer *****"
 constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR
 
