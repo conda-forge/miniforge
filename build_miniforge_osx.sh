@@ -1,3 +1,8 @@
+#!/bin/bash
+
+set -e
+set -x
+
 echo "Installing a fresh version of Miniconda."
 MINICONDA_URL="https://repo.continuum.io/miniconda"
 MINICONDA_FILE="Miniconda3-latest-MacOSX-x86_64.sh"
