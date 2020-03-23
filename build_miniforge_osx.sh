@@ -16,5 +16,5 @@ conda config --add channels conda-forge
 export CONSTRUCT_ROOT=$PWD
 mkdir -p build
 
-source scripts/build.sh
-source scripts/test.sh
+bash scripts/build.sh
+bash scripts/test.sh
