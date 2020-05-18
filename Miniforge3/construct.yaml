@@ -8,6 +8,7 @@ channels:
   - https://conda.anaconda.org/conda-forge
 
 write_condarc: True
+keep_pkgs: True
 license_file: ../LICENSE
 
 specs:
