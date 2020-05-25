@@ -64,6 +64,8 @@ To release a new version of Miniforge:
 - Wait until all artifacts are uploaded by CI
 - Mark the pre-release as a release
 
+NOTE: using a pre-release is important to make sure the latest links work.
+
 ## License
 
 [BSD 3-Clause](./LICENSE)
