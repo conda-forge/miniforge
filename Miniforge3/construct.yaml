@@ -8,6 +8,9 @@ channels:
   - https://conda.anaconda.org/conda-forge
 
 write_condarc: True
+# keep pkgs for space-saving implications for hardlinks when create new environments
+# and keep the same with Miniconda
+keep_pkgs: True
 license_file: ../LICENSE
 
 specs:
