@@ -60,7 +60,7 @@ bash build_miniforge.sh
 
 To release a new version of Miniforge:
 
-- Make a new pre-release on github to with name `$CONDA_VERSION-$BUILD_NUMBER`
+- Make a new pre-release on GitHub with name `$CONDA_VERSION-$BUILD_NUMBER`
 - Wait until all artifacts are uploaded by CI
 - Mark the pre-release as a release
 
