@@ -12,7 +12,7 @@ cd $CONSTRUCT_ROOT
 # See https://github.com/conda-forge/miniforge/pull/2#issuecomment-554394343
 echo "***** Install constructor *****"
 conda install -y "constructor>=3.0.1" jinja2
-pip install git+git://github.com/conda/constructor@5c9539a95ed7eafb#egg=constructor --force --no-deps
+pip install git+git://github.com/conda/constructor@01209f0bf772c601dda062bc0167d0e00b70c6e4#egg=constructor --force --no-deps
 conda list
 
 echo "***** Make temp directory *****"
