@@ -28,6 +28,7 @@ REPO_ANACONDA=`conda config --show default_channels | grep repo.anaconda.com | w
 
 if [ "${REPO_ANACONDA}" != "0" ]; then
     echo Default Repository found in configuration
+    conda config --show default_channels
     exit 1;
 fi
 
