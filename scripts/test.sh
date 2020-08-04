@@ -22,6 +22,13 @@ source $CONDA_PATH/bin/activate
 
 echo "***** Print conda info *****"
 conda info
+conda config --show
+
+REPO_ANACONDA=`conda config --show default_channels | grep repo.anaconda.com | wc -l`
+
+if [ "${REPO_ANACONDA}" != "0" ]; then
+    exit 1;
+fi
 
 # 2020/09/15: Running conda update switches from pypy to cpython. Not sure why
 # echo "***** Run conda update *****"
