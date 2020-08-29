@@ -6,10 +6,10 @@ version: {{ version }}
 company: conda-forge
 
 channels:
-  - https://conda.anaconda.org/conda-forge
+  - conda-forge
 
 conda_default_channels:
-  - https://conda.anaconda.org/conda-forge
+  - conda-forge
 
 write_condarc: True
 # keep pkgs for space-saving implications for hardlinks when create new environments
