@@ -24,8 +24,7 @@ echo "***** Print conda info *****"
 conda info
 conda config --show
 
-# pass through xargs because osx adds a ton of whitespace
-# REPO_ANACONDA=`conda config --show default_channels | grep "repo.anaconda.com/pkgs/main" | wc -l | xargs`
+# ensure that the default channel doesn't point to Anaconda's defaults
 REPO_ANACONDA=`conda config --show default_channels | grep "repo.anaconda.com/pkgs/main" | wc -l`
 
 if [ "${REPO_ANACONDA}" -ne "0" ]; then
