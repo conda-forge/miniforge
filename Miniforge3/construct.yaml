@@ -5,7 +5,8 @@ name: {{ name }}
 version: {{ version }}
 # company: conda-forge
 
-# channels:
+channels:
+  - https://conda.anaconda.org/conda-forge 
 #   - conda-forge
 
 # conda_default_channels:
