@@ -3,13 +3,13 @@
 
 name: {{ name }}
 version: {{ version }}
-company: conda-forge
+# company: conda-forge
 
-channels:
-  - conda-forge
+# channels:
+#   - conda-forge
 
-conda_default_channels:
-  - conda-forge
+# conda_default_channels:
+#   - conda-forge
 
 write_condarc: True
 # keep pkgs for space-saving implications for hardlinks when create new environments
