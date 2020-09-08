@@ -15,7 +15,7 @@ license_file: ../LICENSE
 
 specs:
 {% if name == "Miniforge3" %}
-  - python 3.7.*
+  - python 3.8.*
 {% elif name == "Miniforge-pypy3" %}
   - python 3.6.* *_pypy
 {% endif %}
