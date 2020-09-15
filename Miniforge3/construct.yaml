@@ -1,4 +1,4 @@
-{% set version = os.environ.get("MINIFORGE_VERSION", "4.8.3-0") %}
+{% set version = os.environ.get("MINIFORGE_VERSION", "4.8.5-0") %}
 {% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
 
 name: {{ name }}
@@ -15,7 +15,7 @@ license_file: ../LICENSE
 
 specs:
 {% if name == "Miniforge3" %}
-  - python 3.7.*
+  - python 3.8.*
 {% elif name == "Miniforge-pypy3" %}
   - python 3.6.* *_pypy
 {% endif %}
