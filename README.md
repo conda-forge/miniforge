@@ -8,7 +8,7 @@ This repository holds a minimal installer for conda specific to conda-forge. It 
 Miniforge installers are available here: https://github.com/conda-forge/miniforge/releases
 
 #### Miniforge3
-Latest installers with python 3.7 in the base environment
+Latest installers with python 3.8 in the base environment
 
 - [linux-aarch64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh) (also called `arm64`)
 - [linux-ppc64le](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-ppc64le.sh) (also called `POWER8/9`)
@@ -43,6 +43,7 @@ After construction on Travis, the installer is tested against a range of distrib
 - Ubuntu 16.04
 - Ubuntu 18.04
 - Ubuntu 19.10
+- Ubuntu 20.04
 
 ## Usage
 
