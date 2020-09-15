@@ -1,7 +1,10 @@
 # miniforge
 [![Build Status](https://travis-ci.com/conda-forge/miniforge.svg?branch=master)](https://travis-ci.com/conda-forge/miniforge)
 
-This repository holds a minimal installer for conda specific to conda-forge. It can be directly compared to [Miniconda](https://docs.conda.io/en/latest/miniconda.html), with the added feature that conda-forge is the default channel.
+This repository holds a minimal installer for conda specific to conda-forge. It is comparable to [Miniconda](https://docs.conda.io/en/latest/miniconda.html), but with
+
+* conda-forge set as the default channel
+* an emphasis on supporting various CPU architectures 
 
 ## Download
 
