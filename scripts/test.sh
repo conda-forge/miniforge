@@ -23,8 +23,9 @@ source $CONDA_PATH/bin/activate
 echo "***** Print conda info *****"
 conda info
 
-echo "***** Run conda update *****"
-conda update --all -y
+# Running conda update switches from pypy to cpython. Not sure why
+# echo "***** Run conda update *****"
+# conda update --all -y
 
 echo "***** Python path *****"
 python -c "import sys; print(sys.executable)"
