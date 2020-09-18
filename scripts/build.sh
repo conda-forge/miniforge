@@ -27,7 +27,7 @@ ls -al $TEMP_DIR
 if [[ $(uname -r) != "$ARCH" ]]; then
     if [[ "$ARCH" == "arm64" ]]; then
         # Use a x86_64 binary here since we don't have a standalone conda for arm64 yet.
-        EXTRA_CONSTRUCTOR_ARGS="$EXTRA_CONSTRUCTOR_ARGS --conda-exe $CONDA_PREFIX/standalone_conda/conda.exe"
+        EXTRA_CONSTRUCTOR_ARGS="$EXTRA_CONSTRUCTOR_ARGS --conda-exe $CONDA_PREFIX/standalone_conda/conda.exe --platform osx-$ARCH"
     fi
 fi
 
