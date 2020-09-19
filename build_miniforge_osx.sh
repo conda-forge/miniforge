@@ -16,4 +16,6 @@ export CONSTRUCT_ROOT=$PWD
 mkdir -p build
 
 bash scripts/build.sh
-bash scripts/test.sh
+if [[ "$ARCH" != "$(uname -m)" ]]; then
+  bash scripts/test.sh
+fi
