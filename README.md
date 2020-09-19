@@ -17,6 +17,7 @@ Latest installers with python 3.8 in the base environment
 - [linux-ppc64le](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-ppc64le.sh) (also called `POWER8/9`)
 - [linux-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh) (also called `amd64`)
 - [osx-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-x86_64.sh)
+- [osx-arm64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh) (Apple Silicon)
 
 #### Miniforge-pypy3
 Latest installers with pypy3.6 in the base environment
@@ -70,7 +71,7 @@ To release a new version of Miniforge:
     1. One installer with the version name
     2. One installer without the version name
     3. The SHA256
-  - At the time of writing, the is a sum of 24 artifacts, and with the two sources, we expect a grand total of 26 artifacts.
+  - At the time of writing, the is a sum of 27 artifacts, and with the two sources, we expect a grand total of 29 artifacts.
 - Mark the pre-release as a release
 
 NOTE: using a pre-release is important to make sure the latest links work.

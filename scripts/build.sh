@@ -8,11 +8,11 @@ CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-/construct}"
 
 cd $CONSTRUCT_ROOT
 
-# Constructor should be >= 3.0.1 for aarch64.
-# See https://github.com/conda-forge/miniforge/pull/2#issuecomment-554394343
+# Constructor should be latest for non-native building
+# See https://github.com/conda/constructor
 echo "***** Install constructor *****"
-conda install -y "constructor>=3.0.1" jinja2
-pip install git+git://github.com/conda/constructor@01209f0bf772c601dda062bc0167d0e00b70c6e4#egg=constructor --force --no-deps
+conda install -y "constructor>=3.1.0" jinja2
+pip install git+git://github.com/conda/constructor@926707a34def8cb51be640b98842180260e7fa0a#egg=constructor --force --no-deps
 conda list
 
 echo "***** Make temp directory *****"
@@ -24,8 +24,15 @@ cp LICENSE $TEMP_DIR/
 
 ls -al $TEMP_DIR
 
+if [[ $(uname -r) != "$ARCH" ]]; then
+    if [[ "$ARCH" == "arm64" ]]; then
+        # Use a x86_64 binary here since we don't have a standalone conda for arm64 yet.
+        EXTRA_CONSTRUCTOR_ARGS="$EXTRA_CONSTRUCTOR_ARGS --conda-exe $CONDA_PREFIX/standalone_conda/conda.exe --platform osx-$ARCH"
+    fi
+fi
+
 echo "***** Construct the installer *****"
-constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR
+constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR $EXTRA_CONSTRUCTOR_ARGS
 
 echo "***** Generate installer hash *****"
 cd $TEMP_DIR
