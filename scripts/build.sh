@@ -12,7 +12,7 @@ cd $CONSTRUCT_ROOT
 # See https://github.com/conda/constructor
 echo "***** Install constructor *****"
 conda install -y "constructor>=3.1.0" jinja2
-pip install git+git://github.com/conda/constructor@926707a34def8cb51be640b98842180260e7fa0a#egg=constructor --force --no-deps
+pip install git+git://github.com/conda/constructor@3ce0664325f04d30c32bfc27a3fc7623dcd55f8e#egg=constructor --force --no-deps
 conda list
 
 echo "***** Make temp directory *****"
