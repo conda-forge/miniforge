@@ -72,6 +72,8 @@ script:
   - if [[ "$TRAVIS_TAG" != "" ]]; then export MINIFORGE_VERSION=$TRAVIS_TAG; fi
   - if [[ "$OS_NAME" == "Linux" ]]; then bash build_miniforge.sh; fi
   - if [[ "$OS_NAME" == "MacOSX" ]]; then bash build_miniforge_osx.sh; fi
+  - ls $HOME/.conda/constructor/osx-64/
+  - ls $HOME/.conda/constructor/linux-64/
   # Copy for latest release
   - cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.sh build/$MINIFORGE_NAME-$OS_NAME-$ARCH.sh
   - ls -alh build

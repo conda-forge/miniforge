@@ -12,6 +12,8 @@ channels:
   - conda-forge                                  # [not (osx and arm64)]
   - https://conda-web.anaconda.org/conda-forge   # [osx and arm64]
 
+transmute_file_type: '.conda'
+
 write_condarc: True
 # keep pkgs for space-saving implications for hardlinks when create new environments
 # and keep the same with Miniconda
