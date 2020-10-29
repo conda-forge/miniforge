@@ -12,7 +12,7 @@ cd $CONSTRUCT_ROOT
 # See https://github.com/conda/constructor
 echo "***** Install constructor *****"
 conda install -y "constructor>=3.1.0" jinja2
-pip install git+git://github.com/conda/constructor@926707a34def8cb51be640b98842180260e7fa0a#egg=constructor --force --no-deps
+pip install git+git://github.com/conda/constructor@8c0121d3b81846de42973b52f13135f0ffeaddda#egg=constructor --force --no-deps
 conda list
 
 echo "***** Make temp directory *****"
@@ -26,8 +26,8 @@ ls -al $TEMP_DIR
 
 if [[ $(uname -r) != "$ARCH" ]]; then
     if [[ "$ARCH" == "arm64" ]]; then
-        # Use a x86_64 binary here since we don't have a standalone conda for arm64 yet.
-        EXTRA_CONSTRUCTOR_ARGS="$EXTRA_CONSTRUCTOR_ARGS --conda-exe $CONDA_PREFIX/standalone_conda/conda.exe --platform osx-$ARCH"
+        CONDA_SUBDIR=osx-arm64 conda create -n micromamba micromamba=0.6.5 -c https://conda-web.anaconda.org/conda-forge --yes
+        EXTRA_CONSTRUCTOR_ARGS="$EXTRA_CONSTRUCTOR_ARGS --conda-exe $CONDA_PREFIX/envs/micromamba/bin/micromamba --platform osx-arm64"
     fi
 fi
 
