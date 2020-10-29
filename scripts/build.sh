@@ -26,7 +26,7 @@ ls -al $TEMP_DIR
 
 if [[ $(uname -r) != "$ARCH" ]]; then
     if [[ "$ARCH" == "arm64" ]]; then
-        CONDA_SUBDIR=osx-arm64 conda create -n micromamba micromamba=0.6.5 -c https://conda-web.anaconda.org/conda-forge
+        CONDA_SUBDIR=osx-arm64 conda create -n micromamba micromamba=0.6.5 -c https://conda-web.anaconda.org/conda-forge --yes
         EXTRA_CONSTRUCTOR_ARGS="$EXTRA_CONSTRUCTOR_ARGS --conda-exe $CONDA_PREFIX/envs/micromamba/bin/micromamba --platform osx-arm64"
     fi
 fi
