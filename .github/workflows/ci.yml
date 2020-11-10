@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
   build:
-    name: Publish for ${{ matrix.os }}
+    name: ${{ MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
