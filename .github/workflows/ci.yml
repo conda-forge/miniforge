@@ -1,6 +1,6 @@
 name: Build, test and publish miniforge installers
 
-on: [push, pull_request, tag]
+on: [push, pull_request]
 
 jobs:
   build-miniforge:
