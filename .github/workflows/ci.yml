@@ -32,6 +32,10 @@ jobs:
         # Copy for latest release
         cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.sh build/$MINIFORGE_NAME-$OS_NAME-$ARCH.sh
         ls -alh build
+      env:
+        ARCH: {{ matrix.ARCH }}
+        MINIFORGE_NAME: {{ matrix.MINIFORGE_NAME }}
+        OS_NAME: {{ matrix.OS_NAME }}
 
     - name: Upload miniforge to release
       uses: svenstaro/upload-release-action@v2
