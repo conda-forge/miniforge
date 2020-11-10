@@ -3,101 +3,100 @@ name: Build, test and publish miniforge installers
 on: [push, pull_request]
 
 jobs:
-  build-miniforge:
-    name: "Build, test and publish miniforge installers"
-    strategy:
-      matrix:
-        Miniforge3-MacOSX-arm64:
-            os: macos-latest
-            ARCH: arm64
-            MINIFORGE_NAME: "Miniforge3"
-            OS_NAME: "MacOSX"
+- job: miniforge
+  strategy:
+    matrix:
+      Miniforge3-MacOSX-arm64:
+          os: macos-latest
+          ARCH: arm64
+          MINIFORGE_NAME: "Miniforge3"
+          OS_NAME: "MacOSX"
 
-        Miniforge-pypy3-MacOSX-x86_64:
-            os: macos-latest
-            ARCH: x86_64
-            MINIFORGE_NAME: "Miniforge-pypy3"
-            OS_NAME: "MacOSX"
-      
-        Miniforge3-MacOSX-x86_64:
-            os: macos-latest
-            ARCH: x86_64
-            MINIFORGE_NAME: "Miniforge3"
-            OS_NAME: "MacOSX"
-      
-        Miniforge3-Linux-aarch64:
-            os: ubuntu-latest
-            ARCH: aarch64
-            DOCKER_ARCH: arm64v8
-            DOCKERIMAGE: condaforge/linux-anvil-aarch64
-            MINIFORGE_NAME: "Miniforge3"
-            OS_NAME: "Linux"
-      
-        Miniforge3-Linux-x86_64:
-            os: ubuntu-latest
-            ARCH: x86_64
-            DOCKER_ARCH: amd64
-            DOCKERIMAGE: condaforge/linux-anvil-comp7
-            MINIFORGE_NAME: "Miniforge3"
-            OS_NAME: "Linux"
-      
-        Miniforge3-Linux-ppc64le:
-            os: ubuntu-latest
-            ARCH: ppc64le
-            DOCKER_ARCH: ppc64le
-            DOCKERIMAGE: condaforge/linux-anvil-ppc64le
-            MINIFORGE_NAME: "Miniforge3"
-            OS_NAME: "Linux"
-      
-        Miniforge-pypy3-Linux-aarch64:
-            os: ubuntu-latest
-            ARCH: aarch64
-            DOCKER_ARCH: arm64v8
-            DOCKERIMAGE: condaforge/linux-anvil-aarch64
-            MINIFORGE_NAME: "Miniforge-pypy3"
-            OS_NAME: "Linux"
-      
-        Miniforge-pypy3-Linux-x86_64:
-            os: ubuntu-latest
-            ARCH: x86_64
-            DOCKER_ARCH: amd64
-            DOCKERIMAGE: condaforge/linux-anvil-comp7
-            MINIFORGE_NAME: "Miniforge-pypy3"
-            OS_NAME: "Linux"
-      
-        Miniforge-pypy3-Linux-ppc64le:
-            os: ubuntu-latest
-            ARCH: ppc64le
-            DOCKER_ARCH: ppc64le
-            DOCKERIMAGE: condaforge/linux-anvil-ppc64le
-            MINIFORGE_NAME: "Miniforge-pypy3"
-            OS_NAME: "Linux"
+      Miniforge-pypy3-MacOSX-x86_64:
+          os: macos-latest
+          ARCH: x86_64
+          MINIFORGE_NAME: "Miniforge-pypy3"
+          OS_NAME: "MacOSX"
+    
+      Miniforge3-MacOSX-x86_64:
+          os: macos-latest
+          ARCH: x86_64
+          MINIFORGE_NAME: "Miniforge3"
+          OS_NAME: "MacOSX"
+    
+      Miniforge3-Linux-aarch64:
+          os: ubuntu-latest
+          ARCH: aarch64
+          DOCKER_ARCH: arm64v8
+          DOCKERIMAGE: condaforge/linux-anvil-aarch64
+          MINIFORGE_NAME: "Miniforge3"
+          OS_NAME: "Linux"
+    
+      Miniforge3-Linux-x86_64:
+          os: ubuntu-latest
+          ARCH: x86_64
+          DOCKER_ARCH: amd64
+          DOCKERIMAGE: condaforge/linux-anvil-comp7
+          MINIFORGE_NAME: "Miniforge3"
+          OS_NAME: "Linux"
+    
+      Miniforge3-Linux-ppc64le:
+          os: ubuntu-latest
+          ARCH: ppc64le
+          DOCKER_ARCH: ppc64le
+          DOCKERIMAGE: condaforge/linux-anvil-ppc64le
+          MINIFORGE_NAME: "Miniforge3"
+          OS_NAME: "Linux"
+    
+      Miniforge-pypy3-Linux-aarch64:
+          os: ubuntu-latest
+          ARCH: aarch64
+          DOCKER_ARCH: arm64v8
+          DOCKERIMAGE: condaforge/linux-anvil-aarch64
+          MINIFORGE_NAME: "Miniforge-pypy3"
+          OS_NAME: "Linux"
+    
+      Miniforge-pypy3-Linux-x86_64:
+          os: ubuntu-latest
+          ARCH: x86_64
+          DOCKER_ARCH: amd64
+          DOCKERIMAGE: condaforge/linux-anvil-comp7
+          MINIFORGE_NAME: "Miniforge-pypy3"
+          OS_NAME: "Linux"
+    
+      Miniforge-pypy3-Linux-ppc64le:
+          os: ubuntu-latest
+          ARCH: ppc64le
+          DOCKER_ARCH: ppc64le
+          DOCKERIMAGE: condaforge/linux-anvil-ppc64le
+          MINIFORGE_NAME: "Miniforge-pypy3"
+          OS_NAME: "Linux"
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Build and test miniforge
-        run: |
-          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
-            export MINIFORGE_VERSION=$${GITHUB_REF##*/};
-          fi
-          if [[ "$OS_NAME" == "Linux" ]]; then
-            bash build_miniforge.sh;
-          fi
-          if [[ "$OS_NAME" == "MacOSX" ]]; then
-            bash build_miniforge_osx.sh;
-          fi
-          # Copy for latest release
-          cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.sh build/$MINIFORGE_NAME-$OS_NAME-$ARCH.sh
-          ls -alh build
+    - name: Build and test miniforge
+      run: |
+        if [[ "$GITHUB_REF" == refs/tags/* ]]; then
+          export MINIFORGE_VERSION=$${GITHUB_REF##*/};
+        fi
+        if [[ "$OS_NAME" == "Linux" ]]; then
+          bash build_miniforge.sh;
+        fi
+        if [[ "$OS_NAME" == "MacOSX" ]]; then
+          bash build_miniforge_osx.sh;
+        fi
+        # Copy for latest release
+        cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.sh build/$MINIFORGE_NAME-$OS_NAME-$ARCH.sh
+        ls -alh build
 
-      - name: Upload miniforge to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/Miniforge*
-          tag: ${{ github.ref }}
-          overwrite: true
-          file_glob: true
-        if: startsWith(github.ref, 'refs/tags/')
+    - name: Upload miniforge to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: build/Miniforge*
+        tag: ${{ github.ref }}
+        overwrite: true
+        file_glob: true
+      if: startsWith(github.ref, 'refs/tags/')
