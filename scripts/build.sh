@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -xe
 
 echo "***** Start: Building Miniforge installer *****"
 
