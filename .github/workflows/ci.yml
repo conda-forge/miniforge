@@ -16,6 +16,9 @@ jobs:
         os: [macos-latest]
         exclude:
           - os: macos-latest
+        include:
+          - os: macos-latest
+            ARCH: arm64
 
     steps:
     - uses: actions/checkout@v2
