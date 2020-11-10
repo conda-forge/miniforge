@@ -7,64 +7,16 @@ jobs:
     name: {{ matrix.MINIFORGE_NAME }}-{{ matrix.OS_NAME }}-{{ matrix.ARCH }}
     runs-on: {{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
+        os: [macos-latest]
+        exclude:
+          - os: macos-latest
         include:
           - os: macos-latest
             ARCH: arm64
             MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "MacOSX"
-  
-          - os: macos-latest
-            ARCH: x86_64
-            MINIFORGE_NAME: "Miniforge-pypy3"
-            OS_NAME: "MacOSX"
-      
-          - os: macos-latest
-            ARCH: x86_64
-            MINIFORGE_NAME: "Miniforge3"
-            OS_NAME: "MacOSX"
-      
-          - os: ubuntu-latest
-            ARCH: aarch64
-            DOCKER_ARCH: arm64v8
-            DOCKERIMAGE: condaforge/linux-anvil-aarch64
-            MINIFORGE_NAME: "Miniforge3"
-            OS_NAME: "Linux"
-      
-          - os: ubuntu-latest
-            ARCH: x86_64
-            DOCKER_ARCH: amd64
-            DOCKERIMAGE: condaforge/linux-anvil-comp7
-            MINIFORGE_NAME: "Miniforge3"
-            OS_NAME: "Linux"
-      
-          - os: ubuntu-latest
-            ARCH: ppc64le
-            DOCKER_ARCH: ppc64le
-            DOCKERIMAGE: condaforge/linux-anvil-ppc64le
-            MINIFORGE_NAME: "Miniforge3"
-            OS_NAME: "Linux"
-      
-          - os: ubuntu-latest
-            ARCH: aarch64
-            DOCKER_ARCH: arm64v8
-            DOCKERIMAGE: condaforge/linux-anvil-aarch64
-            MINIFORGE_NAME: "Miniforge-pypy3"
-            OS_NAME: "Linux"
-      
-          - os: ubuntu-latest
-            ARCH: x86_64
-            DOCKER_ARCH: amd64
-            DOCKERIMAGE: condaforge/linux-anvil-comp7
-            MINIFORGE_NAME: "Miniforge-pypy3"
-            OS_NAME: "Linux"
-      
-          - os: ubuntu-latest
-            ARCH: ppc64le
-            DOCKER_ARCH: ppc64le
-            DOCKERIMAGE: condaforge/linux-anvil-ppc64le
-            MINIFORGE_NAME: "Miniforge-pypy3"
-            OS_NAME: "Linux"
   
     steps:
     - name: Checkout code
