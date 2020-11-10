@@ -1,48 +1,21 @@
-name: Build, test and publish miniforge installers
-
-on: [push, pull_request]
-
+name: Build miniforge
+on:
+  push:
+    branches:
+      - master
+  create:
+    tags:
+      - v*
 jobs:
   build:
-    name: {{ matrix.MINIFORGE_NAME }}-{{ matrix.OS_NAME }}-{{ matrix.ARCH }}
-    runs-on: {{ matrix.os }}
+    name: Publish for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [macos-latest]
         exclude:
           - os: macos-latest
-        include:
-          - os: macos-latest
-            ARCH: arm64
-            MINIFORGE_NAME: "Miniforge3"
-            OS_NAME: "MacOSX"
-  
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Build and test miniforge
-      run: |
-        if [[ "$GITHUB_REF" == refs/tags/* ]]; then
-          export MINIFORGE_VERSION=$${GITHUB_REF##*/};
-        fi
-        if [[ "$OS_NAME" == "Linux" ]]; then
-          bash build_miniforge.sh;
-        fi
-        if [[ "$OS_NAME" == "MacOSX" ]]; then
-          bash build_miniforge_osx.sh;
-        fi
-        # Copy for latest release
-        cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.sh build/$MINIFORGE_NAME-$OS_NAME-$ARCH.sh
-        ls -alh build
-
-    - name: Upload miniforge to release
-      uses: svenstaro/upload-release-action@v2
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: build/Miniforge*
-        tag: ${{ github.ref }}
-        overwrite: true
-        file_glob: true
-      if: startsWith(github.ref, 'refs/tags/')
+    - uses: actions/checkout@v2
