@@ -1,11 +1,6 @@
 name: Build miniforge
-on:
-  push:
-    branches:
-      - master
-  create:
-    tags:
-      - v*
+on: [push, pull_request]
+
 jobs:
   build:
     name: Publish for ${{ matrix.os }}
