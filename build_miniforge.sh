@@ -24,6 +24,6 @@ echo "============= Test the installer ============="
 for TEST_IMAGE_NAME in "ubuntu:20.04" "ubuntu:19.10" "ubuntu:16.04" "ubuntu:18.04" "centos:7" "debian:buster"
 do
   echo "============= Test installer on $TEST_IMAGE_NAME ============="
-  docker run --rm -ti -v $(pwd):/construct -v $(pwd)/build/qemu/qemu-${ARCH}-static:/usr/bin/qemu-${ARCH}-static ${DOCKER_ARCH}/$TEST_IMAGE_NAME /construct/scripts/test.sh
+  docker run --rm -v $(pwd):/construct -v $(pwd)/build/qemu/qemu-${ARCH}-static:/usr/bin/qemu-${ARCH}-static ${DOCKER_ARCH}/$TEST_IMAGE_NAME /construct/scripts/test.sh
 done
 
