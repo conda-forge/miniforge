@@ -13,9 +13,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest]
-        exclude:
-          - os: macos-latest
         include:
           - os: macos-latest
             ARCH: arm64
