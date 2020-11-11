@@ -78,7 +78,7 @@ jobs:
     - uses: conda-incubator/setup-miniconda@v2
       with:
         miniconda-version: "latest"
-      if: contains(matrix.OS_NAME, "Windows")
+      if: contains(matrix.OS_NAME, 'Windows')
 
     - name: Build and test miniforge
       env:
