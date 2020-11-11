@@ -105,7 +105,7 @@ jobs:
           EXT=exe
         fi
         # Copy for latest release
-        cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.sh build/$MINIFORGE_NAME-$OS_NAME-$ARCH.$EXT
+        cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.$EXT build/$MINIFORGE_NAME-$OS_NAME-$ARCH.$EXT
         ls -alh build
       shell: bash
 
