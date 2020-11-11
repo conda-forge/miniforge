@@ -18,6 +18,7 @@ Latest installers with python 3.8 in the base environment
 - [linux-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh) (also called `amd64`)
 - [osx-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-x86_64.sh)
 - [osx-arm64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh) (Apple Silicon)
+- [win-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe)
 
 #### Miniforge-pypy3
 Latest installers with pypy3.6 in the base environment
@@ -28,6 +29,24 @@ Latest installers with pypy3.6 in the base environment
 - [osx-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-MacOSX-x86_64.sh)
 
 Follow the aarch64 and ppc64le migration status here: https://conda-forge.org/status/
+
+## Install
+
+To install download the installer and run,
+
+    bash Miniforge3-Linux-x86_64.sh   # or similar for other installers for unix platforms
+
+or if you are on Windows, double click on the installer.
+
+### Non-interactive install
+
+For non-interactive usage, look at the options by running the following
+
+    bash Miniforge3-Linux-x86_64.sh -p   # or similar for other installers for unix platforms
+
+or if you are on windows, run:
+
+    start /wait "" build/Miniforge3-4.9.0-0-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=%UserProfile%\Miniforge3
 
 ## Features
 
