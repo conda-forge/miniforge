@@ -42,7 +42,7 @@ or if you are on Windows, double click on the installer.
 
 For non-interactive usage, look at the options by running the following
 
-    bash Miniforge3-Linux-x86_64.sh -p   # or similar for other installers for unix platforms
+    bash Miniforge3-Linux-x86_64.sh -h   # or similar for other installers for unix platforms
 
 or if you are on windows, run:
 
