@@ -25,11 +25,13 @@ if [[ "$(uname)" == MINGW* ]]; then
 
   echo "***** Print conda info *****"
   conda.exe info
+  conda.exe list
 
   echo "***** Check if we are bundling packages from msys2 or defaults *****"
   conda.exe list | grep defaults && exit 1
   conda.exe list | grep msys2 && exit 1
-  conda.exe list
+
+  echo "***** Check if we can install a package which requires msys2 *****"
   conda.exe install r-base
 else
   bash $INSTALLER_PATH -b -p $CONDA_PATH
