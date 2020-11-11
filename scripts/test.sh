@@ -24,6 +24,7 @@ if [[ "$(uname)" == MINGW* ]]; then
 
   echo "***** Print conda info *****"
   conda.exe info
+  conda.exe list
 else
   bash $INSTALLER_PATH -b -p $CONDA_PATH
 
@@ -32,6 +33,7 @@ else
 
   echo "***** Print conda info *****"
   conda info
+  conda list
 fi
 
 
