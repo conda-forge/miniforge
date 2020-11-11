@@ -6,6 +6,7 @@ set -ex
 ARCH=${ARCH:-aarch64}
 DOCKER_ARCH=${DOCKER_ARCH:arm64v8}
 DOCKERIMAGE=${DOCKERIMAGE:-condaforge/linux-anvil-aarch64}
+export CONSTRUCT_ROOT=/construct
 
 echo "============= Create build directory ============="
 mkdir -p build/
@@ -15,7 +16,7 @@ echo "============= Enable QEMU ============="
 docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
 
 echo "============= Build the installer ============="
-docker run --rm -v $(pwd):/construct -e MINIFORGE_VERSION -e MINIFORGE_NAME $DOCKERIMAGE /construct/scripts/build.sh
+docker run --rm -v $(pwd):/construct -e CONSTRUCT_ROOT -e MINIFORGE_VERSION -e MINIFORGE_NAME $DOCKERIMAGE /construct/scripts/build.sh
 
 echo "============= Download QEMU static binaries ============="
 bash scripts/get_qemu.sh
@@ -24,6 +25,6 @@ echo "============= Test the installer ============="
 for TEST_IMAGE_NAME in "ubuntu:20.04" "ubuntu:19.10" "ubuntu:16.04" "ubuntu:18.04" "centos:7" "debian:buster"
 do
   echo "============= Test installer on $TEST_IMAGE_NAME ============="
-  docker run --rm -v $(pwd):/construct -v $(pwd)/build/qemu/qemu-${ARCH}-static:/usr/bin/qemu-${ARCH}-static ${DOCKER_ARCH}/$TEST_IMAGE_NAME /construct/scripts/test.sh
+  docker run --rm -v $(pwd):/construct -e CONSTRUCT_ROOT -v $(pwd)/build/qemu/qemu-${ARCH}-static:/usr/bin/qemu-${ARCH}-static ${DOCKER_ARCH}/$TEST_IMAGE_NAME /construct/scripts/test.sh
 done
 
