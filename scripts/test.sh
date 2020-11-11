@@ -18,17 +18,22 @@ chmod +x $INSTALLER_PATH
 if [[ "$(uname)" == MSYS* ]]; then
   echo "start /wait \"\" build/Miniforge3-4.9.0-0-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=$(cygpath -w $CONDA_PATH)" > install.bat
   cmd.exe /c install.bat
-  MINIFORGE_CONDA_EXE="conda.exe"
+
+  echo "***** Setup conda *****"
+  source $CONDA_PATH/Scripts/activate
+
+  echo "***** Print conda info *****"
+  conda.exe info
 else
   bash $INSTALLER_PATH -b -p $CONDA_PATH
-  MINIFORGE_CONDA_EXE="conda"
+
+  echo "***** Setup conda *****"
+  source $CONDA_PATH/bin/activate
+
+  echo "***** Print conda info *****"
+  conda info
 fi
 
-echo "***** Setup conda *****"
-source $CONDA_PATH/Scripts/activate
-
-echo "***** Print conda info *****"
-$MINIFORGE_CONDA_EXE info
 
 # 2020/09/15: Running conda update switches from pypy to cpython. Not sure why
 # echo "***** Run conda update *****"
