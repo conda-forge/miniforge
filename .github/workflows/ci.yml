@@ -98,7 +98,7 @@ jobs:
           bash build_miniforge_osx.sh;
         fi
         if [[ "$OS_NAME" == "Windows" ]]; then
-          source C:\Miniconda3\Scripts\activate
+          source /c/Miniconda3/Scripts/activate.sh
           bash build_miniforge_win.sh
         fi
         # Copy for latest release
