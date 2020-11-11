@@ -9,6 +9,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - os: windows-latest
+            ARCH: x86_64
+            MINIFORGE_NAME: "Miniforge3"
+            OS_NAME: "Windows"
+
           - os: macos-latest
             ARCH: arm64
             MINIFORGE_NAME: "Miniforge3"
@@ -70,6 +75,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - uses: conda-incubator/setup-miniconda@v2
+      with:
+        miniconda-version: "latest"
+      if: contains(matrix.OS_NAME, "Windows")
+
     - name: Build and test miniforge
       env:
         ARCH: ${{ matrix.ARCH }}
@@ -87,9 +97,13 @@ jobs:
         if [[ "$OS_NAME" == "MacOSX" ]]; then
           bash build_miniforge_osx.sh;
         fi
+        if [[ "$OS_NAME" == "Windows" ]]; then
+          cmd.exe /c build_miniforge.bat
+        fi
         # Copy for latest release
         cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.sh build/$MINIFORGE_NAME-$OS_NAME-$ARCH.sh
         ls -alh build
+      shell: bash
 
     - name: Upload miniforge to release
       uses: svenstaro/upload-release-action@v2

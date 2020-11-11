@@ -4,14 +4,19 @@ set -xe
 
 echo "***** Start: Building Miniforge installer *****"
 
-CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-/construct}"
+CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-$PWD}"
 
 cd $CONSTRUCT_ROOT
 
 # Constructor should be latest for non-native building
 # See https://github.com/conda/constructor
 echo "***** Install constructor *****"
-conda install -y "constructor>=3.1.0" jinja2 coreutils
+conda install -y "constructor>=3.1.0" jinja2
+if [[ "$(uname)" == "Darwin" ]]; then
+    conda install -y coreutils
+elif [[ "$(uname)" == "MSYS"* ]]; then
+    conda install -y "nsis=3.01"
+fi
 pip install git+git://github.com/conda/constructor@8c0121d3b81846de42973b52f13135f0ffeaddda#egg=constructor --force --no-deps
 conda list
 
@@ -37,11 +42,12 @@ constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR $EXTRA_CONSTRUCTOR_ARGS
 echo "***** Generate installer hash *****"
 cd $TEMP_DIR
 # This line ill break if there is more than one installer in the folder.
-INSTALLER_PATH=$(find . -name "Miniforge*.sh" | head -n 1)
+INSTALLER_PATH=$(find . -name "Miniforge*.sh" -or -name "Miniforge*.exe" | head -n 1)
 HASH_PATH="$INSTALLER_PATH.sha256"
 sha256sum $INSTALLER_PATH > $HASH_PATH
 
 echo "***** Move installer and hash to build folder *****"
+mkdir -p $CONSTRUCT_ROOT/build
 mv $INSTALLER_PATH $CONSTRUCT_ROOT/build/
 mv $HASH_PATH $CONSTRUCT_ROOT/build/
 

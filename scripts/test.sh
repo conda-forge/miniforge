@@ -6,22 +6,29 @@ echo "***** Start: Testing Miniforge installer *****"
 
 export CONDA_PATH="$HOME/miniforge"
 
-CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-/construct}"
+CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-$PWD}"
 
 cd ${CONSTRUCT_ROOT}
 
 echo "***** Get the installer *****"
-INSTALLER_PATH=$(find build/ -name "Miniforge*$ARCH.sh" | head -n 1)
+INSTALLER_PATH=$(find build/ -name "Miniforge*.sh" -or -name "Miniforge*.exe"| head -n 1)
 
 echo "***** Run the installer *****"
 chmod +x $INSTALLER_PATH
-bash $INSTALLER_PATH -b -p $CONDA_PATH
+if [[ "$(uname)" == MSYS* ]]; then
+  echo "start /wait \"\" build/Miniforge3-4.9.0-0-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=$(cygpath -w $CONDA_PATH)" > install.bat
+  cmd.exe /c install.bat
+  MINIFORGE_CONDA_EXE="conda.exe"
+else
+  bash $INSTALLER_PATH -b -p $CONDA_PATH
+  MINIFORGE_CONDA_EXE="conda"
+fi
 
 echo "***** Setup conda *****"
-source $CONDA_PATH/bin/activate
+source $CONDA_PATH/Scripts/activate
 
 echo "***** Print conda info *****"
-conda info
+$MINIFORGE_CONDA_EXE info
 
 # 2020/09/15: Running conda update switches from pypy to cpython. Not sure why
 # echo "***** Run conda update *****"
@@ -38,4 +45,4 @@ python -c "import platform; print(platform.system())"
 python -c "import platform; print(platform.machine())"
 python -c "import platform; print(platform.release())"
 
-echo "***** Done: Building Testing installer *****"
+echo "***** Done: Testing installer *****"
