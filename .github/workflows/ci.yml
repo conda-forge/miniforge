@@ -93,16 +93,19 @@ jobs:
         fi
         if [[ "$OS_NAME" == "Linux" ]]; then
           bash build_miniforge.sh;
+          EXT=sh
         fi
         if [[ "$OS_NAME" == "MacOSX" ]]; then
           bash build_miniforge_osx.sh;
+          EXT=sh
         fi
         if [[ "$OS_NAME" == "Windows" ]]; then
           source /c/Miniconda3/Scripts/activate
           bash build_miniforge_win.sh
+          EXT=exe
         fi
         # Copy for latest release
-        cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.sh build/$MINIFORGE_NAME-$OS_NAME-$ARCH.sh
+        cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.sh build/$MINIFORGE_NAME-$OS_NAME-$ARCH.$EXT
         ls -alh build
       shell: bash
 
