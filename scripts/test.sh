@@ -16,7 +16,7 @@ INSTALLER_PATH=$(find build/ -name "Miniforge*.sh" -or -name "Miniforge*.exe"| h
 echo "***** Run the installer *****"
 chmod +x $INSTALLER_PATH
 if [[ "$(uname)" == MINGW* ]]; then
-  echo "start /wait \"\" build/Miniforge3-4.9.2-0-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=$(cygpath -w $CONDA_PATH)" > install.bat
+  echo "start /wait \"\" ${INSTALLER_PATH} /InstallationType=JustMe /RegisterPython=0 /S /D=$(cygpath -w $CONDA_PATH)" > install.bat
   cmd.exe /c install.bat
 
   echo "***** Setup conda *****"
