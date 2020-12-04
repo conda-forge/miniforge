@@ -11,64 +11,64 @@ jobs:
         include:
           - os: windows-latest
             ARCH: x86_64
-            MINIFORGE_NAME: "Miniforge3"
+            MINIFORGE_NAME: "Mambaforge3"
             OS_NAME: "Windows"
 
           - os: macos-latest
             ARCH: arm64
-            MINIFORGE_NAME: "Miniforge3"
+            MINIFORGE_NAME: "Mambaforge3"
             OS_NAME: "MacOSX"
 
           - os: macos-latest
             ARCH: x86_64
-            MINIFORGE_NAME: "Miniforge-pypy3"
+            MINIFORGE_NAME: "Mambaforge-pypy3"
             OS_NAME: "MacOSX"
 
           - os: macos-latest
             ARCH: x86_64
-            MINIFORGE_NAME: "Miniforge3"
+            MINIFORGE_NAME: "Mambaforge3"
             OS_NAME: "MacOSX"
 
           - os: ubuntu-latest
             ARCH: aarch64
             DOCKER_ARCH: arm64v8
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
-            MINIFORGE_NAME: "Miniforge3"
+            MINIFORGE_NAME: "Mambaforge3"
             OS_NAME: "Linux"
 
           - os: ubuntu-latest
             ARCH: x86_64
             DOCKER_ARCH: amd64
             DOCKERIMAGE: condaforge/linux-anvil-comp7
-            MINIFORGE_NAME: "Miniforge3"
+            MINIFORGE_NAME: "Mambaforge3"
             OS_NAME: "Linux"
 
           - os: ubuntu-latest
             ARCH: ppc64le
             DOCKER_ARCH: ppc64le
             DOCKERIMAGE: condaforge/linux-anvil-ppc64le
-            MINIFORGE_NAME: "Miniforge3"
+            MINIFORGE_NAME: "Mambaforge3"
             OS_NAME: "Linux"
 
           - os: ubuntu-latest
             ARCH: aarch64
             DOCKER_ARCH: arm64v8
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
-            MINIFORGE_NAME: "Miniforge-pypy3"
+            MINIFORGE_NAME: "Mambaforge-pypy3"
             OS_NAME: "Linux"
 
           - os: ubuntu-latest
             ARCH: x86_64
             DOCKER_ARCH: amd64
             DOCKERIMAGE: condaforge/linux-anvil-comp7
-            MINIFORGE_NAME: "Miniforge-pypy3"
+            MINIFORGE_NAME: "Mambaforge-pypy3"
             OS_NAME: "Linux"
 
           - os: ubuntu-latest
             ARCH: ppc64le
             DOCKER_ARCH: ppc64le
             DOCKERIMAGE: condaforge/linux-anvil-ppc64le
-            MINIFORGE_NAME: "Miniforge-pypy3"
+            MINIFORGE_NAME: "Mambaforge-pypy3"
             OS_NAME: "Linux"
 
     steps:
@@ -113,7 +113,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: build/Miniforge*
+        file: build/*forge*
         tag: ${{ github.ref }}
         overwrite: true
         file_glob: true

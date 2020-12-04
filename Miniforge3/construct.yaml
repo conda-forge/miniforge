@@ -1,5 +1,9 @@
-{% set version = os.environ.get("MINIFORGE_VERSION", "4.9.2-0") %}
 {% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
+{% if name.startswith("Mamba") %}
+{% set version = os.environ.get("MINIFORGE_VERSION", "4.9.2-0.7.3-0") %}
+{% else %}
+{% set version = os.environ.get("MINIFORGE_VERSION", "4.9.2-0") %}
+{% endif %}
 
 name: {{ name }}
 version: {{ version }}
@@ -26,5 +30,8 @@ specs:
   - python 3.6.* *_pypy
 {% endif %}
   - conda {{ version.split("-")[0] }}
+{% if name.startswith("Mamba") %}
+  - mamba {{ version.split("-")[1] }}
+{% endif %}
   - pip
   - bzip2

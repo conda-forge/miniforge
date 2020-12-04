@@ -42,7 +42,7 @@ constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR $EXTRA_CONSTRUCTOR_ARGS
 echo "***** Generate installer hash *****"
 cd $TEMP_DIR
 # This line ill break if there is more than one installer in the folder.
-INSTALLER_PATH=$(find . -name "Miniforge*.sh" -or -name "Miniforge*.exe" | head -n 1)
+INSTALLER_PATH=$(find . -name "*forge*.sh" -or -name "*forge*.exe" | head -n 1)
 HASH_PATH="$INSTALLER_PATH.sha256"
 sha256sum $INSTALLER_PATH > $HASH_PATH
 
