@@ -50,6 +50,16 @@ or if you are on windows, run:
 
     start /wait "" build/Miniforge3-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=%UserProfile%\Miniforge3
 
+#### Mambaforge
+
+Latest installers with mamba and Python 3.8 in the base environment
+
+- [linux-aarch64](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-aarch64.sh) (also called `arm64`)
+- [linux-ppc64le](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-ppc64le.sh) (also called `POWER8/9`)
+- [linux-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh) (also called `amd64`)
+- [osx-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-MacOSX-x86_64.sh)
+- [osx-arm64](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-MacOSX-arm64.sh) (Apple Silicon)
+
 ## Features
 
 - [X] Automatic build of constructor.
@@ -92,7 +102,7 @@ To release a new version of Miniforge:
     1. One installer with the version name
     2. One installer without the version name
     3. The SHA256
-  - At the time of writing, the is a sum of 27 artifacts, and with the two sources, we expect a grand total of 29 artifacts.
+  - At the time of writing, the is a sum of 60 artifacts, and with the two sources, we expect a grand total of 62 artifacts.
 - Mark the pre-release as a release
 
 NOTE: using a pre-release is important to make sure the latest links work.
