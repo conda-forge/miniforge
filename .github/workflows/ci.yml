@@ -100,6 +100,7 @@ jobs:
           EXT=sh
         fi
         if [[ "$OS_NAME" == "Windows" ]]; then
+          echo $(which bash)
           source /c/Miniconda3/Scripts/activate
           bash build_miniforge_win.sh
           EXT=exe
