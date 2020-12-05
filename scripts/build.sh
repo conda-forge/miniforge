@@ -4,6 +4,9 @@ set -xe
 
 echo "***** Start: Building Miniforge installer *****"
 
+echo "which bash:"
+echo $(which bash)
+
 CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-$PWD}"
 
 cd $CONSTRUCT_ROOT
