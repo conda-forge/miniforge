@@ -175,7 +175,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: build/Miniforge*
+        file: build/M*forge*
         tag: ${{ github.ref }}
         overwrite: true
         file_glob: true
