@@ -16,12 +16,12 @@ Latest installers with python 3.8 in the base environment
 
 | OS      | Architecture          | Download  |
 | --------|-----------------------|-----------|
-| Linux   | x86_64 (amd64)        | https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh |
-| Linux   | aarch64 (arm64)       | https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh |
-| Linux   | ppc64 (POWER8/9)      | https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-ppc64le.sh |
-| OS X    | x86_64                | https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-x86_64.sh |
-| OS X    | arm64 (Apple Silicon) | https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh |
-| Windows | x86_64                | https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe |
+| Linux   | x86_64 (amd64)        | [Miniforge3-Linux-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh) |
+| Linux   | aarch64 (arm64)       | [Miniforge3-Linux-aarch64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh) |
+| Linux   | ppc64le (POWER8/9)    | [Miniforge3-Linux-ppc64le](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-ppc64le.sh) |
+| OS X    | x86_64                | [Miniforge3-MacOSX-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-x86_64.sh) |
+| OS X    | arm64 (Apple Silicon) | [Miniforge3-MacOSX-arm64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh) |
+| Windows | x86_64                | [Miniforge3-Windows-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe) |
 
 #### Miniforge-pypy3
 
@@ -29,10 +29,10 @@ Latest installers with pypy3.6 in the base environment
 
 | OS      | Architecture          | Download  |
 | --------|-----------------------|-----------|
-| Linux   | x86_64 (amd64)        | https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-x86_64.sh |
-| Linux   | aarch64 (arm64)       | https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-aarch64.sh |
-| Linux   | ppc64 (POWER8/9)      | https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-ppc64le.sh |
-| OS X    | x86_64                | https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-MacOSX-x86_64.sh |
+| Linux   | x86_64 (amd64)        | [Miniforge-pypy3-Linux-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-x86_64.sh) |
+| Linux   | aarch64 (arm64)       | [Miniforge-pypy3-Linux-aarch64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-aarch64.sh) |
+| Linux   | ppc64le (POWER8/9)    | [Miniforge-pypy3-Linux-ppc64le](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-ppc64le.sh) |
+| OS X    | x86_64                | [Miniforge-pypy3-MacOSX-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-MacOSX-x86_64.sh) |
 
 #### Mambaforge
 
@@ -41,12 +41,12 @@ Latest installers with mamba in the base environment
 
 | OS      | Architecture          | Download  |
 | --------|-----------------------|-----------|
-| Linux   | x86_64 (amd64)        | https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh |
-| Linux   | aarch64 (arm64)       | https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-aarch64.sh |
-| Linux   | ppc64le (POWER8/9)      | https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-ppc64le.sh |
-| OS X    | x86_64                | https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-MacOSX-x86_64.sh |
-| OS X    | arm64 (Apple Silicon) | https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-MacOSX-arm64.sh |
-| Windows | x86_64                | https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Windows-x86_64.exe |
+| Linux   | x86_64 (amd64)        | [Mambaforge-Linux-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh) |
+| Linux   | aarch64 (arm64)       | [Mambaforge-Linux-aarch64](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-aarch64.sh) |
+| Linux   | ppc64le (POWER8/9)    | [Mambaforge-Linux-ppc64le](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-ppc64le.sh) |
+| OS X    | x86_64                | [Mambaforge-MacOSX-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-MacOSX-x86_64.sh) |
+| OS X    | arm64 (Apple Silicon) | [Mambaforge-MacOSX-arm64](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-MacOSX-arm64.sh) |
+| Windows | x86_64                | [Mambaforge-Windows-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Windows-x86_64.exe) |
 
 #### Mambaforge-pypy3
 
@@ -54,10 +54,10 @@ Latest installers with mamba and pypy3.6 in the base environment
 
 | OS      | Architecture          | Download  |
 | --------|-----------------------|-----------|
-| Linux   | x86_64 (amd64)        | https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-Linux-x86_64.sh |
-| Linux   | aarch64 (arm64)       | https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-Linux-aarch64.sh |
-| Linux   | ppc64 (POWER8/9)      | https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-Linux-ppc64le.sh |
-| OS X    | x86_64                | https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-MacOSX-x86_64.sh |
+| Linux   | x86_64 (amd64)        | [Mambaforge-pypy3-Linux-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-Linux-x86_64.sh) |
+| Linux   | aarch64 (arm64)       | [Mambaforge-pypy3-Linux-aarch64](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-Linux-aarch64.sh) |
+| Linux   | ppc64le (POWER8/9)    | [Mambaforge-pypy3-Linux-ppc64le](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-Linux-ppc64le.sh) |
+| OS X    | x86_64                | [Mambaforge-pypy3-MacOSX-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-MacOSX-x86_64.sh) |
 
 ## Install
 
