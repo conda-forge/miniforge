@@ -43,7 +43,7 @@ Latest installers with mamba in the base environment
 | --------|-----------------------|-----------|
 | Linux   | x86_64 (amd64)        | https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh |
 | Linux   | aarch64 (arm64)       | https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-aarch64.sh |
-| Linux   | ppc64 (POWER8/9)      | https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-ppc64le.sh |
+| Linux   | ppc64le (POWER8/9)      | https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-ppc64le.sh |
 | OS X    | x86_64                | https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-MacOSX-x86_64.sh |
 | OS X    | arm64 (Apple Silicon) | https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-MacOSX-arm64.sh |
 | Windows | x86_64                | https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Windows-x86_64.exe |
