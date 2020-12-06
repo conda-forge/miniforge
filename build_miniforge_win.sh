@@ -1,3 +1,3 @@
 conda install posix --yes
-scripts/build.sh
-scripts/test.sh
+source scripts/build.sh
+source scripts/test.sh

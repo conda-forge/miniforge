@@ -21,7 +21,11 @@ pip install git+git://github.com/conda/constructor@8c0121d3b81846de42973b52f1313
 conda list
 
 echo "***** Make temp directory *****"
-TEMP_DIR=$(mktemp -d)
+if [[ "$(uname)" == MINGW* ]]; then
+   TEMP_DIR=$(mktemp -d --tmpdir=C:/Users/RUNNER~1/AppData/Local/Temp/);
+else
+   TEMP_DIR=$(mktemp -d);
+fi
 
 echo "***** Copy file for installer construction *****"
 cp -R Miniforge3 $TEMP_DIR/
@@ -41,8 +45,13 @@ constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR $EXTRA_CONSTRUCTOR_ARGS
 
 echo "***** Generate installer hash *****"
 cd $TEMP_DIR
-# This line ill break if there is more than one installer in the folder.
-INSTALLER_PATH=$(find . -name "Miniforge*.sh" -or -name "Miniforge*.exe" | head -n 1)
+if [[ "$(uname)" == MINGW* ]]; then
+   EXT=exe;
+else
+   EXT=sh;
+fi
+# This line will break if there is more than one installer in the folder.
+INSTALLER_PATH=$(find . -name "M*forge*.$EXT" | head -n 1)
 HASH_PATH="$INSTALLER_PATH.sha256"
 sha256sum $INSTALLER_PATH > $HASH_PATH
 
@@ -52,3 +61,4 @@ mv $INSTALLER_PATH $CONSTRUCT_ROOT/build/
 mv $HASH_PATH $CONSTRUCT_ROOT/build/
 
 echo "***** Done: Building Miniforge installer *****"
+cd $CONSTRUCT_ROOT

@@ -19,12 +19,17 @@ keep_pkgs: True
 license_file: ../LICENSE
 
 specs:
-{% if name == "Miniforge3" %}
+{% if name.endswith("pypy3") %}
+  - python 3.6.* *_pypy
+{% else %}
   - python 3.8.*    # [not (osx and arm64)]
   - python 3.9.*    # [osx and arm64]
-{% elif name == "Miniforge-pypy3" %}
-  - python 3.6.* *_pypy
+{% endif %}
+
+{% if name.startswith("Mambaforge") %}
+  - mamba
 {% endif %}
   - conda {{ version.split("-")[0] }}
+
   - pip
   - bzip2

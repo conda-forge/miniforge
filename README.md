@@ -30,7 +30,25 @@ Latest installers with pypy3.6 in the base environment
 - [`linux-x86_64`](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-x86_64.sh)
 - [`osx-x86_64`](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-MacOSX-x86_64.sh)
 
-Follow the `aarch64` and `ppc64le` migration status here: https://conda-forge.org/status/
+#### Mambaforge
+
+Latest installers with mamba in the base environment
+
+- [`linux-aarch64`](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-aarch64.sh) (also called `arm64`)
+- [`linux-ppc64le`](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-ppc64le.sh) (also called `POWER8/9`)
+- [`linux-x86_64`](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh) (also called `amd64`)
+- [`osx-x86_64`](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-MacOSX-x86_64.sh)
+- [`osx-arm64`](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-MacOSX-arm64.sh) (Apple Silicon)
+- [`win-x86_64`](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Windows-x86_64.exe)
+
+#### Mambaforge-pypy3
+
+Latest installers with mamba and pypy3.6 in the base environment
+
+- [`linux-aarch64`](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-Linux-aarch64.sh)
+- [`linux-ppc64le`](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-Linux-ppc64le.sh)
+- [`linux-x86_64`](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-Linux-x86_64.sh)
+- [`osx-x86_64`](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-MacOSX-x86_64.sh)
 
 ## Install
 
@@ -92,7 +110,7 @@ To release a new version of Miniforge:
     1. One installer with the version name
     2. One installer without the version name
     3. The SHA256
-  - At the time of writing, the is a sum of 27 artifacts, and with the two sources, we expect a grand total of 29 artifacts.
+  - At the time of writing, the is a sum of 60 artifacts, and with the two sources, we expect a grand total of 62 artifacts.
 - Mark the pre-release as a release
 
 NOTE: using a pre-release is important to make sure the latest links work.

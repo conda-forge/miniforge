@@ -11,7 +11,13 @@ CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-$PWD}"
 cd ${CONSTRUCT_ROOT}
 
 echo "***** Get the installer *****"
-INSTALLER_PATH=$(find build/ -name "Miniforge*.sh" -or -name "Miniforge*.exe"| head -n 1)
+ls build/
+if [[ "$(uname)" == MINGW* ]]; then
+   EXT=exe;
+else
+   EXT=sh;
+fi
+INSTALLER_PATH=$(find build/ -name "*forge*.$EXT" | head -n 1)
 
 echo "***** Run the installer *****"
 chmod +x $INSTALLER_PATH
