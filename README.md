@@ -23,6 +23,8 @@ Latest installers with python 3.8 in the base environment
 | OS X    | arm64 (Apple Silicon) | [Miniforge3-MacOSX-arm64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh) |
 | Windows | x86_64                | [Miniforge3-Windows-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe) |
 
+* OS X arm64 will be installed with Python 3.9
+
 #### Miniforge-pypy3
 
 Latest installers with pypy3.6 in the base environment
