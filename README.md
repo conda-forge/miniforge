@@ -12,7 +12,7 @@ Miniforge installers are available here: https://github.com/conda-forge/miniforg
 
 #### Miniforge3
 
-Latest installers with python 3.8 in the base environment
+Latest installers with python 3.8 `(*)` in the base environment `(**)`
 
 | OS      | Architecture          | Download  |
 | --------|-----------------------|-----------|
@@ -23,7 +23,9 @@ Latest installers with python 3.8 in the base environment
 | OS X    | arm64 (Apple Silicon) | [Miniforge3-MacOSX-arm64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh) |
 | Windows | x86_64                | [Miniforge3-Windows-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe) |
 
-* OS X arm64 will be installed with Python 3.9
+`(*)` OS X arm64 will be installed with Python 3.9
+
+`(**)` the python version is specific only to the base environment. installed conda can create new environments with different python versions and implementations
 
 #### Miniforge-pypy3
 
