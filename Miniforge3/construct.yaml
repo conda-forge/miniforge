@@ -10,7 +10,6 @@ channels:
   # when the end user adds the channel without the full URL
   # - https://conda.anaconda.org/conda-forge
   - conda-forge
-  - msys2         # [win]
 
 write_condarc: True
 # keep pkgs for space-saving implications for hardlinks when create new environments
