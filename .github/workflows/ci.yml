@@ -13,49 +13,41 @@ jobs:
             ARCH: x86_64
             MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "Windows"
-            UPLOAD_ARTEFACT: true
 
           - os: windows-latest
             ARCH: x86_64
             MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "Windows"
-            UPLOAD_ARTEFACT: true
 
           - os: macos-latest
             ARCH: arm64
             MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "MacOSX"
-            UPLOAD_ARTEFACT: false
 
           - os: macos-latest
             ARCH: arm64
             MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "MacOSX"
-            UPLOAD_ARTEFACT: false
 
           - os: macos-latest
             ARCH: x86_64
             MINIFORGE_NAME: "Miniforge-pypy3"
             OS_NAME: "MacOSX"
-            UPLOAD_ARTEFACT: false
 
           - os: macos-latest
             ARCH: x86_64
             MINIFORGE_NAME: "Mambaforge-pypy3"
             OS_NAME: "MacOSX"
-            UPLOAD_ARTEFACT: false
 
           - os: macos-latest
             ARCH: x86_64
             MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "MacOSX"
-            UPLOAD_ARTEFACT: false
 
           - os: macos-latest
             ARCH: x86_64
             MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "MacOSX"
-            UPLOAD_ARTEFACT: false
 
           - os: ubuntu-latest
             ARCH: aarch64
@@ -63,7 +55,6 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
             MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "Linux"
-            UPLOAD_ARTEFACT: false
 
           - os: ubuntu-latest
             ARCH: aarch64
@@ -71,7 +62,6 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
             MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "Linux"
-            UPLOAD_ARTEFACT: false
 
           - os: ubuntu-latest
             ARCH: x86_64
@@ -79,7 +69,6 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-comp7
             MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "Linux"
-            UPLOAD_ARTEFACT: false
 
           - os: ubuntu-latest
             ARCH: x86_64
@@ -87,7 +76,6 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-comp7
             MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "Linux"
-            UPLOAD_ARTEFACT: false
 
           - os: ubuntu-latest
             ARCH: ppc64le
@@ -95,7 +83,6 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-ppc64le
             MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "Linux"
-            UPLOAD_ARTEFACT: false
 
           - os: ubuntu-latest
             ARCH: ppc64le
@@ -103,7 +90,6 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-ppc64le
             MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "Linux"
-            UPLOAD_ARTEFACT: false
 
           - os: ubuntu-latest
             ARCH: aarch64
@@ -111,7 +97,6 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
             MINIFORGE_NAME: "Miniforge-pypy3"
             OS_NAME: "Linux"
-            UPLOAD_ARTEFACT: false
 
           - os: ubuntu-latest
             ARCH: aarch64
@@ -119,7 +104,6 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
             MINIFORGE_NAME: "Mambaforge-pypy3"
             OS_NAME: "Linux"
-            UPLOAD_ARTEFACT: false
 
           - os: ubuntu-latest
             ARCH: x86_64
@@ -127,7 +111,6 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-comp7
             MINIFORGE_NAME: "Miniforge-pypy3"
             OS_NAME: "Linux"
-            UPLOAD_ARTEFACT: false
 
           - os: ubuntu-latest
             ARCH: x86_64
@@ -135,7 +118,6 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-comp7
             MINIFORGE_NAME: "Mambaforge-pypy3"
             OS_NAME: "Linux"
-            UPLOAD_ARTEFACT: false
 
           - os: ubuntu-latest
             ARCH: ppc64le
@@ -143,7 +125,6 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-ppc64le
             MINIFORGE_NAME: "Miniforge-pypy3"
             OS_NAME: "Linux"
-            UPLOAD_ARTEFACT: false
 
           - os: ubuntu-latest
             ARCH: ppc64le
@@ -151,7 +132,6 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-ppc64le
             MINIFORGE_NAME: "Mambaforge-pypy3"
             OS_NAME: "Linux"
-            UPLOAD_ARTEFACT: false
 
     steps:
     - name: Checkout code
@@ -192,7 +172,7 @@ jobs:
       shell: bash
 
     - name: Upload miniforge to Github artefact
-      if: ${{ matrix.UPLOAD_ARTEFACT && !startsWith(github.ref, 'refs/tags/') }}
+      if: ${{ !startsWith(github.ref, 'refs/tags/') }}
       uses: actions/upload-artifact@v2
       with:
         path: build/${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}*
