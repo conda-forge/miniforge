@@ -196,6 +196,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         path: build/${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}*
+        name: ${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
 
     - name: Upload miniforge to release
       uses: svenstaro/upload-release-action@v2
