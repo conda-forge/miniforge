@@ -5,6 +5,8 @@ jobs:
   build:
     name: ${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
     runs-on: ${{ matrix.os }}
+    env:
+      UPLOAD_ARTEFACTS: true
     strategy:
       fail-fast: false
       matrix:
@@ -170,6 +172,12 @@ jobs:
         cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.$EXT build/$MINIFORGE_NAME-$OS_NAME-$ARCH.$EXT
         ls -alh build
       shell: bash
+
+    - name: Upload miniforge to release
+      if: env.UPLOAD_ARTEFACTS && ${{ !startsWith(github.ref, 'refs/tags/') }}
+      uses: actions/upload-artifact@v2
+      with:
+        path: build/M*forge*
 
     - name: Upload miniforge to release
       uses: svenstaro/upload-release-action@v2
