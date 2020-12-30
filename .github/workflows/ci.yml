@@ -5,8 +5,6 @@ jobs:
   build:
     name: ${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
     runs-on: ${{ matrix.os }}
-    env:
-      UPLOAD_ARTEFACTS: true
     strategy:
       fail-fast: false
       matrix:
@@ -15,11 +13,13 @@ jobs:
             ARCH: x86_64
             MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "Windows"
+            UPLOAD_ARTEFACTS: true
 
           - os: windows-latest
             ARCH: x86_64
             MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "Windows"
+            UPLOAD_ARTEFACTS: true
 
           - os: macos-latest
             ARCH: arm64
@@ -173,11 +173,11 @@ jobs:
         ls -alh build
       shell: bash
 
-    - name: Upload miniforge to release
-      if: env.UPLOAD_ARTEFACTS && ${{ !startsWith(github.ref, 'refs/tags/') }}
+    - name: Upload miniforge to Github artefact
+      if: ${{ matrix.UPLOAD_ARTEFACTS && !startsWith(github.ref, 'refs/tags/') }}
       uses: actions/upload-artifact@v2
       with:
-        path: build/M*forge*
+        path: build/${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}*
 
     - name: Upload miniforge to release
       uses: svenstaro/upload-release-action@v2
