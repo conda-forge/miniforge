@@ -60,6 +60,9 @@ def render(releases):
 
     release_html = DOCS / "all-releases" / "index.html"
 
+    if not release_html.parent.exists():
+        release_html.parent.mkdir(parents=True)
+
     release_html.write_text(html, encoding="utf-8")
 
 
