@@ -9,6 +9,9 @@ HERE = Path(__file__).parent
 BUILD = HERE.parent / "build"
 DOCS = BUILD / "docs"
 
+if not DOCS.exists():
+    DOCS.mkdir(parents=True)
+
 # TODO: handle pagination
 BASE_URL = "https://api.github.com/repos/conda-forge/miniforge/releases?per_page=100"
 ENV = jinja2.Environment(loader=jinja2.FileSystemLoader([HERE / "templates"]))
@@ -56,9 +59,6 @@ def render(releases):
     html = ENV.get_template("all-releases.html").render(**context)
 
     release_html = DOCS / "all-releases" / "index.html"
-
-    if not release_html.parent.exists():
-        release_html.parent.mkdir(parents=True)
 
     release_html.write_text(html, encoding="utf-8")
 
