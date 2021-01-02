@@ -15,3 +15,8 @@ jobs:
         with:
           path: build/docs
           name: docs
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/docs/all-releases
+        if: startsWith(github.ref, 'refs/tags/')
