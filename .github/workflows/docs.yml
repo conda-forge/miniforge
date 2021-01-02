@@ -1,0 +1,13 @@
+name: Build docs
+on: [push, pull_request]
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: pip install -r docs/requirements.txt
+      - run: python docs/releases.py
+      - uses: actions/upload-artifact@v2
+        with:
+          path: build/docs
+          name: docs
