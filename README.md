@@ -1,5 +1,5 @@
 # miniforge
-[![Build Status](https://travis-ci.com/conda-forge/miniforge.svg?branch=master)](https://travis-ci.com/conda-forge/miniforge)
+![Build miniforge](https://github.com/conda-forge/miniforge/workflows/Build%20miniforge/badge.svg)
 
 This repository holds a minimal installer for conda specific to conda-forge. It is comparable to [Miniconda](https://docs.conda.io/en/latest/miniconda.html), but with
 
@@ -92,7 +92,7 @@ or if you are on windows, run:
 
 ## Testing
 
-After construction on Travis, the installer is tested against a range of distribution that match the installer architecture (`$ARCH`). For example when architecture is `aarch64`, the constructed installer is tested against:
+After construction on the CI, the installer is tested against a range of distribution that match the installer architecture (`$ARCH`). For example when architecture is `aarch64`, the constructed installer is tested against:
 
 - Centos 7
 - Debian Buster (10)
@@ -103,7 +103,7 @@ After construction on Travis, the installer is tested against a range of distrib
 
 ## Usage
 
-Installers are built and uploaded via Travis but if you want to construct your own Miniforge installer, here is how:
+Installers are built and uploaded via the CI but if you want to construct your own Miniforge installer, here is how:
 
 ```bash
 # Configuration
