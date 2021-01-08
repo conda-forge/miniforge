@@ -1,7 +1,7 @@
 # Miniforge
 ![Build Miniforge](https://github.com/conda-forge/miniforge/workflows/Build%20miniforge/badge.svg)
 
-This repository holds a minimal installer for [Conda](https://conda.io/) specific to [Conda Forge](https://conda-forge.org/). It is comparable to [Miniconda](https://docs.conda.io/en/latest/miniconda.html), but with:
+This repository holds a minimal installer for [Conda](https://conda.io/) specific to [conda-forge](https://conda-forge.org/). It is comparable to [Miniconda](https://docs.conda.io/en/latest/miniconda.html), but with:
 
 * `conda-forge` set as the default channel
 * an emphasis on supporting various CPU architectures
