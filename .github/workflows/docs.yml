@@ -1,0 +1,22 @@
+name: Build docs
+on: [push, pull_request]
+jobs:
+  docs:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: conda-incubator/setup-miniconda@v2
+      - run: python -m pip install -r docs/requirements.txt
+      - run: python docs/releases.py
+      - uses: actions/upload-artifact@v2
+        with:
+          path: build/docs
+          name: docs
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/docs/all-releases
+        if: startsWith(github.ref, 'refs/tags/')
