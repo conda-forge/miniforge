@@ -27,7 +27,7 @@ Latest installers with Python 3.8 `(*)` in the base environment `(**)`:
 
 `(*)` OS X `arm64` will be installed with Python 3.9.
 
-`(**)` the Python version is specific only to the base environment. Conda/Mamba can create new environments with different Python versions and implementations.
+`(**)` the Python version is specific only to the base environment. Conda can create new environments with different Python versions and implementations.
 
 #### Miniforge-pypy3
 
