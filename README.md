@@ -1,10 +1,12 @@
-# miniforge
-![Build miniforge](https://github.com/conda-forge/miniforge/workflows/Build%20miniforge/badge.svg)
+# Miniforge
+![Build Miniforge](https://github.com/conda-forge/miniforge/workflows/Build%20miniforge/badge.svg)
 
-This repository holds a minimal installer for conda specific to conda-forge. It is comparable to [Miniconda](https://docs.conda.io/en/latest/miniconda.html), but with
+This repository holds a minimal installer for [Conda](https://conda.io/) specific to [Conda Forge](https://conda-forge.org/). It is comparable to [Miniconda](https://docs.conda.io/en/latest/miniconda.html), but with:
 
-* conda-forge set as the default channel
-* an emphasis on supporting various CPU architectures 
+* `conda-forge` set as the default channel
+* an emphasis on supporting various CPU architectures
+* optional support for [PyPy](https://www.pypy.org/) in place of standard Python (aka "CPython")
+* optional support for [Mamba](https://github.com/mamba-org/mamba) in place of Conda
 
 ## Download
 
@@ -12,7 +14,7 @@ Miniforge installers are available here: https://github.com/conda-forge/miniforg
 
 #### Miniforge3
 
-Latest installers with python 3.8 `(*)` in the base environment `(**)`
+Latest installers with Python 3.8 `(*)` in the base environment `(**)`:
 
 | OS      | Architecture          | Download  |
 | --------|-----------------------|-----------|
@@ -23,13 +25,13 @@ Latest installers with python 3.8 `(*)` in the base environment `(**)`
 | OS X    | arm64 (Apple Silicon) | [Miniforge3-MacOSX-arm64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh) |
 | Windows | x86_64                | [Miniforge3-Windows-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe) |
 
-`(*)` OS X arm64 will be installed with Python 3.9
+`(*)` OS X `arm64` will be installed with Python 3.9.
 
-`(**)` the python version is specific only to the base environment. installed conda can create new environments with different python versions and implementations
+`(**)` the Python version is specific only to the base environment. Conda/Mamba can create new environments with different Python versions and implementations.
 
 #### Miniforge-pypy3
 
-Latest installers with pypy3.6 in the base environment
+Latest installers with PyPy 3.6 in the base environment:
 
 | OS      | Architecture          | Download  |
 | --------|-----------------------|-----------|
@@ -40,7 +42,7 @@ Latest installers with pypy3.6 in the base environment
 
 #### Mambaforge
 
-Latest installers with mamba in the base environment
+Latest installers with Mamba in the base environment:
 
 
 | OS      | Architecture          | Download  |
@@ -54,7 +56,7 @@ Latest installers with mamba in the base environment
 
 #### Mambaforge-pypy3
 
-Latest installers with mamba and pypy3.6 in the base environment
+Latest installers with Mamba and PyPy 3.6 in the base environment:
 
 | OS      | Architecture          | Download  |
 | --------|-----------------------|-----------|
@@ -73,7 +75,7 @@ or if you are on Windows, double click on the installer.
 
 ### Non-interactive install
 
-For non-interactive usage, look at the options by running the following
+For non-interactive usage, look at the options by running the following:
 
     bash Miniforge3-Linux-x86_64.sh -h   # or similar for other installers for unix platforms
 
