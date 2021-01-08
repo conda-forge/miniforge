@@ -81,6 +81,12 @@ or if you are on windows, run:
 
     start /wait "" build/Miniforge3-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=%UserProfile%\Miniforge3
 
+### Homebrew
+
+On macOS, you can install miniforge with [Homebrew](https://brew.sh/) by running 
+
+    brew install miniforge
+
 ## Features
 
 - [X] Automatic build of constructor.
