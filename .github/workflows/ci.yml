@@ -190,3 +190,22 @@ jobs:
         overwrite: true
         file_glob: true
       if: startsWith(github.ref, 'refs/tags/')
+
+    - name: Update docker images to DockerHub and quay.io
+      if: startsWith(github.ref, 'refs/tags/') && ${{ matrix.OS_NAME }} == "Linux"
+      shell: bash
+      env:
+        MINIFORGE_NAME: ${{ matrix.MINIFORGE_NAME }}
+        CFD_QUAY_PASSWORD: ${{ secrets.CFD_QUAY_PASSWORD }}
+        DH_PASSWORD: ${{ secrets.DH_PASSWORD }}
+      run: |
+        export MINIFORGE_VERSION=${GITHUB_REF##*/}
+        docker login -u condaforgebot -p $DH_PASSWORD
+        docker push condaforge/${MINIFORGE_NAME/M/m}:latest
+        docker push condaforge/${MINIFORGE_NAME/M/m}:${MINIFORGE_VERSION}
+
+        docker login -u conda_forge_daemon -p ${CFD_QUAY_PASSWORD} quay.io
+        docker tag condaforge/${MINIFORGE_NAME/M/m}:latest quay.io/condaforge/${MINIFORGE_NAME/M/m}:latest
+        docker push quay.io/condaforge/${MINIFORGE_NAME/M/m}:latest
+        docker tag condaforge/${MINIFORGE_NAME/M/m}:${MINIFORGE_VERSION} quay.io/condaforge/${MINIFORGE_NAME/M/m}:${MINIFORGE_VERSION}
+        docker push quay.io/condaforge/${MINIFORGE_NAME/M/m}:${MINIFORGE_VERSION}
