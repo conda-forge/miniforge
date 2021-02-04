@@ -154,6 +154,9 @@ jobs:
           export MINIFORGE_VERSION=${GITHUB_REF##*/};
         fi
         if [[ "$OS_NAME" == "Linux" ]]; then
+          # Enable experimental mode to allow `docker build --squash`
+          echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
+          sudo systemctl restart docker
           bash build_miniforge.sh;
           EXT=sh
         fi
