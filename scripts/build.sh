@@ -33,8 +33,10 @@ cp LICENSE $TEMP_DIR/
 
 ls -al $TEMP_DIR
 
-CONDA_SUBDIR=$TARGET_PLATFORM conda create -n micromamba micromamba=0.6.5 -c conda-forge --yes
-EXTRA_CONSTRUCTOR_ARGS="$EXTRA_CONSTRUCTOR_ARGS --conda-exe $CONDA_PREFIX/envs/micromamba/bin/micromamba --platform $TARGET_PLATFORM"
+if [[ $TARGET_PLATFORM != win-* ]]; then
+  CONDA_SUBDIR=$TARGET_PLATFORM conda create -n micromamba micromamba=0.6.5 -c conda-forge --yes
+  EXTRA_CONSTRUCTOR_ARGS="$EXTRA_CONSTRUCTOR_ARGS --conda-exe $CONDA_PREFIX/envs/micromamba/bin/micromamba --platform $TARGET_PLATFORM"
+fi
 
 echo "***** Construct the installer *****"
 constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR $EXTRA_CONSTRUCTOR_ARGS
