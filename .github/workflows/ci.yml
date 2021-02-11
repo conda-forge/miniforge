@@ -175,17 +175,17 @@ jobs:
           export MINIFORGE_VERSION=${GITHUB_REF##*/};
         fi
         if [[ "$OS_NAME" == "Linux" ]]; then
+          export EXT=sh
           bash build_miniforge.sh;
-          EXT=sh
         fi
         if [[ "$OS_NAME" == "MacOSX" ]]; then
+          export EXT=sh
           bash build_miniforge_osx.sh;
-          EXT=sh
         fi
         if [[ "$OS_NAME" == "Windows" ]]; then
+          export EXT=exe
           source /c/Miniconda3/Scripts/activate;
           source build_miniforge_win.sh;
-          EXT=exe
         fi
         # Copy for latest release
         cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.$EXT build/$MINIFORGE_NAME-$OS_NAME-$ARCH.$EXT
