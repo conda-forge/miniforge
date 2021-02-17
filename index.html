@@ -1,0 +1,3484 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Miniforge Releases</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Description" content="Download page for latest and historical Miniforge releases">
+  </head>
+  <style>
+    :root {
+      --cf-border-color: solid 1px rgba(255,255,255,0.25);
+      --cf-link-color: rgb(66, 220, 163);
+      --cf-anvil-img: url('data:image/svg+xml;base64,CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjQgMjQiPgo8cGF0aCBmaWxsPSIjZmZmIiBkPSJNOC4yMDYgNS44NjZsLjAwNS4zOTZINi43NTRsLjAwNi42NTV2LjAwNWwtNi43NTguMDAydi4yMTFMMCA3Ljk3M2wuMDIuMDQxYy4yMTIuNDY3LjY2My45MDEgMS4yNTcgMS4zMTMuNTk0LjQxMSAxLjMzNS43OTYgMi4xNDUgMS4xMyAxLjYyLjY2NCAzLjUwMiAxLjEyIDUuMDA2IDEuMS43NDYtLjAxIDEuMjY1LjIyOCAxLjYyLjY3Mi4zNDEuNDI2LjUxIDEuMDkyLjUyNCAxLjkyTDcuOTQgMTYuMjM5bC4wMDggMS44OTZIMjAuMjlsLS4wMDQtMS43Ni0yLjYzLTIuMjJjLjA1NS0yLjAxMy43MDgtMy40NDMgMS43NzctNC40MDUgMS4wODctLjk3OSAyLjYxLTEuNDkgNC4zNy0xLjYxNmwuMTk1LS4wMTVMMjQgNS44NzJ6bS40MjUuNDIybDE0Ljk0Ni4wMDYtLjAwNCAxLjQ1N2MtMS43MzcuMTU1LTMuMjkuNjY2LTQuNDI0IDEuNjg1LS45MTIuODIyLTEuNDMzIDIuMDYyLTEuNjkxIDMuNTM0bC0xLjYxNy4wMDQuMDAyLjQyMiAxLjUzNS0uMDA0Yy0uMDI3LjIyNi0uMTEzLjQtLjEyMy42NGwtLjg5My0uMDAzLS4wMDIuNDIyLjk5NS4wMDQgMi4xMzggMS44MDItMi45NDEuMDAyYy0uNzI0LS42NzUtMS41NTItMS4xMTYtMi40MTYtMS4xNTgtLjgxNy0uMDQtMS42MzguMzI0LTIuMzg3IDEuMDRsLTIuOTc4LS4wMjQgMi4yNDgtMS43ODF2LS4xMDJjLjAwMi0uOTQzLS4yLTEuNzItLjY0LTIuMjY5LS4zOTYtLjQ5Ni0xLjAwNy0uNzQ5LTEuNzQxLS43OWwtLjAwOC00LjQ5aC4wMDh6bS0xLjQ1LjM5NmgxLjAyNmwuMDA4IDQuNDA0Yy0xLjM4Ny0uMDItMy4xMjUtLjQwNC00LjYzMS0xLjAyMy0uNzg3LS4zMjQtMS41MDctLjY5OC0yLjA2Ni0xLjA4NkMuOTY4IDguNi41ODcgOC4yMDMuNDI0IDcuODZ2LS41MTRsNi4zMzYtLjAwMnYyLjE2aC40MjJ2LTIuMTZoLjAwNGwtLjAwNC0uNDM1di0uMjI2em02LjkzNSA4LjgzOWMuNzUuMDM3IDEuNTAzLjQzNiAyLjE4IDEuMDc4bC0uMDAyIDEuMTEyaC00LjM0NWwtLjAwNi0xLjJjLjcwNi0uNzE3IDEuNDQzLTEuMDI2IDIuMTczLS45OXpNOC4zNiAxNi41MzdsMy4xNi4wMjMuMDA2IDEuMTUzaC0zLjE2em0xMS41LjE0MmwuMDAyIDEuMDM0aC0zLjE0OFYxNi42OHoiLz4KPC9zdmc+Cg==');
+      --cf-padding: 2em;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      padding: 0;
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.5;
+      box-sizing: border-box;
+      color: #fff;
+      background-color: #000;
+    }
+    header {
+      background-color: #000;
+      padding: 0 var(--cf-padding);
+      color: #fff;
+      z-index: 1;
+      border-bottom: solid 1px var(--cf-link-color);
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+    }
+    article, h2 {
+      scroll-margin-top: 6rem;
+    }
+    footer {
+      border-top: solid 1px var(--cf-link-color);
+      background-color: #000;
+      padding: var(--cf-padding);
+      text-align: center;
+    }
+    h1 {
+      background-image: var(--cf-anvil-img);
+      background-repeat: no-repeat;
+      padding-left: 2em;
+    }
+    nav {
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    nav ul {
+      flex: 1;
+      display: flex;
+    }
+    nav ul:last-child {
+      flex: 0;
+    }
+    nav ul li {
+      flex: 0;
+      list-style: none;
+    }
+    nav ul li a {
+      padding: 0.5em var(--cf-padding);
+      font-size: 150%;
+    }
+    main {
+      padding: var(--cf-padding);
+      background-color: rgba(255,255,255,0.05);
+    }
+    a, a code {
+      text-decoration: none;
+      color: var(--cf-link-color);
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    table {
+      border-collapse: collapse;
+      margin: auto;
+    }
+    td, th {
+      padding: 0.1em 0.5em;
+      vertical-align: center;
+    }
+    tbody tr:nth-child(odd) {
+      background-color: rgba(255,255,255,.05);
+    }
+    table pre {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline-block;
+      max-width: 6em;
+      margin: 0;
+    }
+    label {
+      font-style: italic;
+    }
+    tr.variant-row {
+      border-top: var(--cf-border-color);
+    }
+    tr td, tr th {
+      border-bottom: var(--cf-border-color);
+    }
+
+    tr:hover td {
+      border-bottom: solid 1px var(--cf-link-color);
+    }
+    td:nth-last-child(2) {
+      text-align: right;
+    }
+  </style>
+  <body>
+    <header>
+      <h1>Miniforge Releases</h1>
+      <nav>
+        <ul>
+          <li><a href="#latest-release">Latest</a></li>
+          <li><a href="#history">History</a></li>
+        </ul>
+        <ul>
+          <li><a href="https://github.com/conda-forge/miniforge">Source</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      
+      <h2 id="latest-release">Latest</h2>
+      
+      <article id="4.9.2-5">
+        <h3>
+          Miniforge 4.9.2-5
+          <a title="Link to 4.9.2-5" href="#4.9.2-5">#</a>
+        </h3><label>
+          20 artifacts
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.9.2-5">released</a>
+          <span title="2020-12-30T21:27:23Z">2020-12-30</span>
+        </label>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="6">Mambaforge</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Mambaforge-4.9.2-5-Linux-aarch64.sh"
+                   title="Download Mambaforge 4.9.2-5 for Linux on aarch64">
+                  Mambaforge-4.9.2-5-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>77.4 MB</td>
+              <td>
+                <pre><code>9043182c7fd67a75d26f27049d6fe5b0b59d8d7e33a2b59dbc77066352dc8c13</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Mambaforge-4.9.2-5-Linux-ppc64le.sh"
+                   title="Download Mambaforge 4.9.2-5 for Linux on ppc64le">
+                  Mambaforge-4.9.2-5-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>82.7 MB</td>
+              <td>
+                <pre><code>8905ec2d7c149e8b3b3625a73e5ca7a01ce7f93e77af71d94f12f3cfc7e57fa2</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Mambaforge-4.9.2-5-Linux-x86_64.sh"
+                   title="Download Mambaforge 4.9.2-5 for Linux on x86_64">
+                  Mambaforge-4.9.2-5-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>92.8 MB</td>
+              <td>
+                <pre><code>7f0ad0c2f367751f7878d25a7bc1b4aa48b8dcea864daf9bc09acb595102368b</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="2">MacOSX</th>
+              <th>
+                <code>arm64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Mambaforge-4.9.2-5-MacOSX-arm64.sh"
+                   title="Download Mambaforge 4.9.2-5 for MacOSX on arm64">
+                  Mambaforge-4.9.2-5-MacOSX-arm64.sh
+                </a>
+              </td>
+              <td>62.6 MB</td>
+              <td>
+                <pre><code>795bdeb7c5452b3fc5e902e9ea9e70c675879bdf32219068b27f05ae43830ce8</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Mambaforge-4.9.2-5-MacOSX-x86_64.sh"
+                   title="Download Mambaforge 4.9.2-5 for MacOSX on x86_64">
+                  Mambaforge-4.9.2-5-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>65.8 MB</td>
+              <td>
+                <pre><code>f66d1026541168bd4606b9d231f737734dab304ff980c6579c8521eab324b412</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">Windows</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Mambaforge-4.9.2-5-Windows-x86_64.exe"
+                   title="Download Mambaforge 4.9.2-5 for Windows on x86_64">
+                  Mambaforge-4.9.2-5-Windows-x86_64.exe
+                </a>
+              </td>
+              <td>74.5 MB</td>
+              <td>
+                <pre><code>dfb1c4fbb39c76ba008d63bf0544fc27759302853a8aaed25aca1b6babf8125c</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="4">Mambaforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Mambaforge-pypy3-4.9.2-5-Linux-aarch64.sh"
+                   title="Download Mambaforge-pypy3 4.9.2-5 for Linux on aarch64">
+                  Mambaforge-pypy3-4.9.2-5-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>95.5 MB</td>
+              <td>
+                <pre><code>b2e9af4b686fef5a442f9fc7c7d049c9e0ca0bc676e072aacb86f90fe7571cea</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Mambaforge-pypy3-4.9.2-5-Linux-ppc64le.sh"
+                   title="Download Mambaforge-pypy3 4.9.2-5 for Linux on ppc64le">
+                  Mambaforge-pypy3-4.9.2-5-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>101.2 MB</td>
+              <td>
+                <pre><code>cea7f4c1571f860fe777a86d4937ddeff8a517105cdbe2853e8994ac63b18df5</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Mambaforge-pypy3-4.9.2-5-Linux-x86_64.sh"
+                   title="Download Mambaforge-pypy3 4.9.2-5 for Linux on x86_64">
+                  Mambaforge-pypy3-4.9.2-5-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>97.6 MB</td>
+              <td>
+                <pre><code>a2af854ce1e90a5e18e6379aacc384a37f69becee172f97a2d3a413b5e554037</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Mambaforge-pypy3-4.9.2-5-MacOSX-x86_64.sh"
+                   title="Download Mambaforge-pypy3 4.9.2-5 for MacOSX on x86_64">
+                  Mambaforge-pypy3-4.9.2-5-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>79.8 MB</td>
+              <td>
+                <pre><code>6b8853eaaeade105e69fe6081c1b76d4525381386bf25bf894347ceade308e24</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Miniforge-pypy3-4.9.2-5-Linux-aarch64.sh"
+                   title="Download Miniforge-pypy3 4.9.2-5 for Linux on aarch64">
+                  Miniforge-pypy3-4.9.2-5-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>70.5 MB</td>
+              <td>
+                <pre><code>35972d1d255f105f4313313c3cbec16aae4470b414d6576838d84a61811f601c</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Miniforge-pypy3-4.9.2-5-Linux-ppc64le.sh"
+                   title="Download Miniforge-pypy3 4.9.2-5 for Linux on ppc64le">
+                  Miniforge-pypy3-4.9.2-5-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>75.3 MB</td>
+              <td>
+                <pre><code>b487b153c35fa8031d9912361c6236da4327cb174ac3eb34da90c6b9aa6063e2</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Miniforge-pypy3-4.9.2-5-Linux-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.9.2-5 for Linux on x86_64">
+                  Miniforge-pypy3-4.9.2-5-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>74.0 MB</td>
+              <td>
+                <pre><code>980644fcc87954bcff2ffef48e45dafc25f29d5ad66ccd19822e69405970fa6e</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Miniforge-pypy3-4.9.2-5-MacOSX-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.9.2-5 for MacOSX on x86_64">
+                  Miniforge-pypy3-4.9.2-5-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>57.0 MB</td>
+              <td>
+                <pre><code>6ddd888d8728fc09b78a2bff26db9231e493c6b4fd6b876a380188594475fac5</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="6">Miniforge3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Miniforge3-4.9.2-5-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.9.2-5 for Linux on aarch64">
+                  Miniforge3-4.9.2-5-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>52.4 MB</td>
+              <td>
+                <pre><code>1f9c74963e63db4c9bbe09f99ec5feea67bafafec7cf65604aa5afbacc132c3a</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Miniforge3-4.9.2-5-Linux-ppc64le.sh"
+                   title="Download Miniforge3 4.9.2-5 for Linux on ppc64le">
+                  Miniforge3-4.9.2-5-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>56.7 MB</td>
+              <td>
+                <pre><code>b4a238b84b3ffd899ce06c9435aadb2b34a4cc06aa594edb2da9df49325bf30b</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Miniforge3-4.9.2-5-Linux-x86_64.sh"
+                   title="Download Miniforge3 4.9.2-5 for Linux on x86_64">
+                  Miniforge3-4.9.2-5-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>69.2 MB</td>
+              <td>
+                <pre><code>49dddb3998550e40adc904dae55b0a2aeeb0bd9fc4306869cc4a600ec4b8b47c</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="2">MacOSX</th>
+              <th>
+                <code>arm64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Miniforge3-4.9.2-5-MacOSX-arm64.sh"
+                   title="Download Miniforge3 4.9.2-5 for MacOSX on arm64">
+                  Miniforge3-4.9.2-5-MacOSX-arm64.sh
+                </a>
+              </td>
+              <td>39.7 MB</td>
+              <td>
+                <pre><code>c73d84a842a0b56ee546e6d180515ed660394eb22ce61864f88bc3ddd0b034c7</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Miniforge3-4.9.2-5-MacOSX-x86_64.sh"
+                   title="Download Miniforge3 4.9.2-5 for MacOSX on x86_64">
+                  Miniforge3-4.9.2-5-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>43.1 MB</td>
+              <td>
+                <pre><code>a33aca4dd6686b1dba790b224c9e686d7e08c86e6074379194f3bde478d883ed</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">Windows</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-5/Miniforge3-4.9.2-5-Windows-x86_64.exe"
+                   title="Download Miniforge3 4.9.2-5 for Windows on x86_64">
+                  Miniforge3-4.9.2-5-Windows-x86_64.exe
+                </a>
+              </td>
+              <td>61.2 MB</td>
+              <td>
+                <pre><code>ab11ab9d2fb51d2db757fe3e86c5670eed0444d19344a9d6a96d4607295898a0</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </article>
+      
+      
+      <h2 id="history">History</h2>
+      
+      <article id="4.9.2-4">
+        <h3>
+          Miniforge 4.9.2-4
+          <a title="Link to 4.9.2-4" href="#4.9.2-4">#</a>
+        </h3><details><summary><label>
+          20 artifacts
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.9.2-4">released</a>
+          <span title="2020-12-17T21:16:50Z">2020-12-17</span>
+        </label></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="6">Mambaforge</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Mambaforge-4.9.2-4-Linux-aarch64.sh"
+                   title="Download Mambaforge 4.9.2-4 for Linux on aarch64">
+                  Mambaforge-4.9.2-4-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>77.1 MB</td>
+              <td>
+                <pre><code>ecc2ed6e6eb4aef98843ada74df71b4e5c8872b885c3a0b8db9cecc836512c6c</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Mambaforge-4.9.2-4-Linux-ppc64le.sh"
+                   title="Download Mambaforge 4.9.2-4 for Linux on ppc64le">
+                  Mambaforge-4.9.2-4-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>82.4 MB</td>
+              <td>
+                <pre><code>f2a71d27d77bc96a61b78f5c2e8d6d1dfb16219c9ac43798c7ba9be039cf1b12</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Mambaforge-4.9.2-4-Linux-x86_64.sh"
+                   title="Download Mambaforge 4.9.2-4 for Linux on x86_64">
+                  Mambaforge-4.9.2-4-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>92.6 MB</td>
+              <td>
+                <pre><code>8040cd2a686f5b84cd5aac8b4a7d3d490b39bb6d6fa13a7df71d9ea9059c05e8</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="2">MacOSX</th>
+              <th>
+                <code>arm64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Mambaforge-4.9.2-4-MacOSX-arm64.sh"
+                   title="Download Mambaforge 4.9.2-4 for MacOSX on arm64">
+                  Mambaforge-4.9.2-4-MacOSX-arm64.sh
+                </a>
+              </td>
+              <td>61.9 MB</td>
+              <td>
+                <pre><code>ab1909f39a9564c941c947d5014f6f2e9b20a207fef8747a7092f20e0caade71</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Mambaforge-4.9.2-4-MacOSX-x86_64.sh"
+                   title="Download Mambaforge 4.9.2-4 for MacOSX on x86_64">
+                  Mambaforge-4.9.2-4-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>65.5 MB</td>
+              <td>
+                <pre><code>c17a60645e544b2c49829258497e2e02fac9ada18795d1e71777b92a458c5b64</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">Windows</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Mambaforge-4.9.2-4-Windows-x86_64.exe"
+                   title="Download Mambaforge 4.9.2-4 for Windows on x86_64">
+                  Mambaforge-4.9.2-4-Windows-x86_64.exe
+                </a>
+              </td>
+              <td>75.5 MB</td>
+              <td>
+                <pre><code>baec17f994634ddd08b15ae7b08fcca65cbba353af933fb2aa0fcbcebd38bcff</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="4">Mambaforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Mambaforge-pypy3-4.9.2-4-Linux-aarch64.sh"
+                   title="Download Mambaforge-pypy3 4.9.2-4 for Linux on aarch64">
+                  Mambaforge-pypy3-4.9.2-4-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>95.1 MB</td>
+              <td>
+                <pre><code>4cee26adfe4a8d81e034608a5a741005a79cfbd91ad87d36bc32efbd8131581b</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Mambaforge-pypy3-4.9.2-4-Linux-ppc64le.sh"
+                   title="Download Mambaforge-pypy3 4.9.2-4 for Linux on ppc64le">
+                  Mambaforge-pypy3-4.9.2-4-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>101.0 MB</td>
+              <td>
+                <pre><code>bd7ea3a1819e76991588a06870641a221622a84e76314eed93c7c7245b4a66f2</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Mambaforge-pypy3-4.9.2-4-Linux-x86_64.sh"
+                   title="Download Mambaforge-pypy3 4.9.2-4 for Linux on x86_64">
+                  Mambaforge-pypy3-4.9.2-4-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>97.4 MB</td>
+              <td>
+                <pre><code>3d1f5dda550b0e0e12ac585797b063243ed8f53fe4bc874a64e98385da138d7a</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Mambaforge-pypy3-4.9.2-4-MacOSX-x86_64.sh"
+                   title="Download Mambaforge-pypy3 4.9.2-4 for MacOSX on x86_64">
+                  Mambaforge-pypy3-4.9.2-4-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>79.6 MB</td>
+              <td>
+                <pre><code>262a0d617513e7822a1f958dc417b835fddf58db7eeb2bb4ab4e4ae7e815eee8</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Miniforge-pypy3-4.9.2-4-Linux-aarch64.sh"
+                   title="Download Miniforge-pypy3 4.9.2-4 for Linux on aarch64">
+                  Miniforge-pypy3-4.9.2-4-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>70.5 MB</td>
+              <td>
+                <pre><code>d945358dd46b8c96131099448d4f0dc029f9a9309c88102ad379b8980c36d5ae</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Miniforge-pypy3-4.9.2-4-Linux-ppc64le.sh"
+                   title="Download Miniforge-pypy3 4.9.2-4 for Linux on ppc64le">
+                  Miniforge-pypy3-4.9.2-4-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>75.2 MB</td>
+              <td>
+                <pre><code>4e569c09e139ecacd326b787652f9845c390a099f60a759bfbda28d51fea6173</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Miniforge-pypy3-4.9.2-4-Linux-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.9.2-4 for Linux on x86_64">
+                  Miniforge-pypy3-4.9.2-4-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>74.0 MB</td>
+              <td>
+                <pre><code>921f5666b5b797a2af3253ec633d42e30e74ced1373e6f4c7704334cc330a9a2</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Miniforge-pypy3-4.9.2-4-MacOSX-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.9.2-4 for MacOSX on x86_64">
+                  Miniforge-pypy3-4.9.2-4-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>57.0 MB</td>
+              <td>
+                <pre><code>c3aa48fee1b55074f850fe800afc29264ca89a0a6cecbd79cf0bb718f13cb837</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="6">Miniforge3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Miniforge3-4.9.2-4-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.9.2-4 for Linux on aarch64">
+                  Miniforge3-4.9.2-4-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>52.4 MB</td>
+              <td>
+                <pre><code>27a9f92617d654186f20da7b6d9a34696e5bd912399f8576e7aa7682bfd35b8a</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Miniforge3-4.9.2-4-Linux-ppc64le.sh"
+                   title="Download Miniforge3 4.9.2-4 for Linux on ppc64le">
+                  Miniforge3-4.9.2-4-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>56.6 MB</td>
+              <td>
+                <pre><code>bb674c16318ab01f5ae139b0cd685e008dda3eafe289781c388205a827c3752b</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Miniforge3-4.9.2-4-Linux-x86_64.sh"
+                   title="Download Miniforge3 4.9.2-4 for Linux on x86_64">
+                  Miniforge3-4.9.2-4-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>69.2 MB</td>
+              <td>
+                <pre><code>1c556ece01a6a15840901124dc599d99c158adbd65e076ba384ccb75e1ddb811</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="2">MacOSX</th>
+              <th>
+                <code>arm64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Miniforge3-4.9.2-4-MacOSX-arm64.sh"
+                   title="Download Miniforge3 4.9.2-4 for MacOSX on arm64">
+                  Miniforge3-4.9.2-4-MacOSX-arm64.sh
+                </a>
+              </td>
+              <td>39.7 MB</td>
+              <td>
+                <pre><code>d85e3f9927da70f61b9b69f2ac36b94bc17f6675e6725af7d7fc962449aaf804</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Miniforge3-4.9.2-4-MacOSX-x86_64.sh"
+                   title="Download Miniforge3 4.9.2-4 for MacOSX on x86_64">
+                  Miniforge3-4.9.2-4-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>43.1 MB</td>
+              <td>
+                <pre><code>81cdb6838197543a1c2b29a9c703c10dacb276ab47f01022cfcc026819da259c</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">Windows</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-4/Miniforge3-4.9.2-4-Windows-x86_64.exe"
+                   title="Download Miniforge3 4.9.2-4 for Windows on x86_64">
+                  Miniforge3-4.9.2-4-Windows-x86_64.exe
+                </a>
+              </td>
+              <td>62.2 MB</td>
+              <td>
+                <pre><code>a536a8ffa046b966257538fae16b9f40fde2f0fb728942c7fca8de63757645f5</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </summary></article>
+      
+      
+      <article id="4.9.2-3">
+        <h3>
+          Miniforge 4.9.2-3
+          <a title="Link to 4.9.2-3" href="#4.9.2-3">#</a>
+        </h3><details><summary><label>
+          20 artifacts
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.9.2-3">released</a>
+          <span title="2020-12-12T19:06:34Z">2020-12-12</span>
+        </label></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="6">Mambaforge</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Mambaforge-4.9.2-3-Linux-aarch64.sh"
+                   title="Download Mambaforge 4.9.2-3 for Linux on aarch64">
+                  Mambaforge-4.9.2-3-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>77.1 MB</td>
+              <td>
+                <pre><code>d63f5765ad78e29fac8f1b2479ffc8d25ba6e7e9ac7ca05c65157a8f71e07f11</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Mambaforge-4.9.2-3-Linux-ppc64le.sh"
+                   title="Download Mambaforge 4.9.2-3 for Linux on ppc64le">
+                  Mambaforge-4.9.2-3-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>82.3 MB</td>
+              <td>
+                <pre><code>1503c84f4a7f264c8c8cd38b6a858e0c8ce018a72b14fe9bc72e976ab609eea0</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Mambaforge-4.9.2-3-Linux-x86_64.sh"
+                   title="Download Mambaforge 4.9.2-3 for Linux on x86_64">
+                  Mambaforge-4.9.2-3-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>92.6 MB</td>
+              <td>
+                <pre><code>2263861c8927fce272fd97072e1822f268c6bec8c2fee9724d7df54d7fe80a36</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="2">MacOSX</th>
+              <th>
+                <code>arm64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Mambaforge-4.9.2-3-MacOSX-arm64.sh"
+                   title="Download Mambaforge 4.9.2-3 for MacOSX on arm64">
+                  Mambaforge-4.9.2-3-MacOSX-arm64.sh
+                </a>
+              </td>
+              <td>61.8 MB</td>
+              <td>
+                <pre><code>9a4074a6d99ee023f4afd5c3c86cdba2d723df630460a1bf36e4c95a1a2af300</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Mambaforge-4.9.2-3-MacOSX-x86_64.sh"
+                   title="Download Mambaforge 4.9.2-3 for MacOSX on x86_64">
+                  Mambaforge-4.9.2-3-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>65.5 MB</td>
+              <td>
+                <pre><code>109c8b66b74fa6c44f7552320996f8c1c2bb64ae573220885a4752f6353273f6</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">Windows</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Mambaforge-4.9.2-3-Windows-x86_64.exe"
+                   title="Download Mambaforge 4.9.2-3 for Windows on x86_64">
+                  Mambaforge-4.9.2-3-Windows-x86_64.exe
+                </a>
+              </td>
+              <td>75.4 MB</td>
+              <td>
+                <pre><code>fd46d6d2a93dcc4056caa4b3d9b0daa28bd0afbab752791367f167612185f50b</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="4">Mambaforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Mambaforge-pypy3-4.9.2-3-Linux-aarch64.sh"
+                   title="Download Mambaforge-pypy3 4.9.2-3 for Linux on aarch64">
+                  Mambaforge-pypy3-4.9.2-3-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>95.1 MB</td>
+              <td>
+                <pre><code>9d39a4e10fcc567a510bd1ed3c01ec3321bfe3af04a7843fb1a899f4cac70df6</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Mambaforge-pypy3-4.9.2-3-Linux-ppc64le.sh"
+                   title="Download Mambaforge-pypy3 4.9.2-3 for Linux on ppc64le">
+                  Mambaforge-pypy3-4.9.2-3-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>101.0 MB</td>
+              <td>
+                <pre><code>c01da62e25f0deb3af249f3e20324b59cc4c412858eada05b4a0a30675ad7785</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Mambaforge-pypy3-4.9.2-3-Linux-x86_64.sh"
+                   title="Download Mambaforge-pypy3 4.9.2-3 for Linux on x86_64">
+                  Mambaforge-pypy3-4.9.2-3-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>97.4 MB</td>
+              <td>
+                <pre><code>19d96a771dd84a64d34bc546f39cd2f0cde3672a4955d8592302dfe37ba2d597</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Mambaforge-pypy3-4.9.2-3-MacOSX-x86_64.sh"
+                   title="Download Mambaforge-pypy3 4.9.2-3 for MacOSX on x86_64">
+                  Mambaforge-pypy3-4.9.2-3-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>79.6 MB</td>
+              <td>
+                <pre><code>0cd70d494ba276b2b5d06cbd0c2ee7df19f5eae746cc4471873dc0f5dd5383e0</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Miniforge-pypy3-4.9.2-3-Linux-aarch64.sh"
+                   title="Download Miniforge-pypy3 4.9.2-3 for Linux on aarch64">
+                  Miniforge-pypy3-4.9.2-3-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>70.5 MB</td>
+              <td>
+                <pre><code>c8e2f907ecc53db843b0c67276e9b5aa1f2074839d32f2084bed0b472df54961</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Miniforge-pypy3-4.9.2-3-Linux-ppc64le.sh"
+                   title="Download Miniforge-pypy3 4.9.2-3 for Linux on ppc64le">
+                  Miniforge-pypy3-4.9.2-3-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>75.2 MB</td>
+              <td>
+                <pre><code>81a377a4bc04da9f41e6e134b2d4a371d8f380a37a1e0f2372099c48f5815611</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Miniforge-pypy3-4.9.2-3-Linux-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.9.2-3 for Linux on x86_64">
+                  Miniforge-pypy3-4.9.2-3-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>73.9 MB</td>
+              <td>
+                <pre><code>6d542c7cc465f3ea2ed143c85cbc426d8c3765e6bd3d304b1d68e07d7e7ff78a</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Miniforge-pypy3-4.9.2-3-MacOSX-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.9.2-3 for MacOSX on x86_64">
+                  Miniforge-pypy3-4.9.2-3-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>57.0 MB</td>
+              <td>
+                <pre><code>68acf948bef9d29025ddcdebc3afa36d6c57d177ba48aff78e795782daa201d1</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="6">Miniforge3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Miniforge3-4.9.2-3-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.9.2-3 for Linux on aarch64">
+                  Miniforge3-4.9.2-3-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>52.4 MB</td>
+              <td>
+                <pre><code>85b6fbb39b32e859c6dfcd76d028a6e473baa5acb9d7d4d1f18f2c61e5887a7e</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Miniforge3-4.9.2-3-Linux-ppc64le.sh"
+                   title="Download Miniforge3 4.9.2-3 for Linux on ppc64le">
+                  Miniforge3-4.9.2-3-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>56.6 MB</td>
+              <td>
+                <pre><code>04c1d627b703d1a9e7ba1d3e33bc59fb50b9d9c5487581be2d85054373dea3b4</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Miniforge3-4.9.2-3-Linux-x86_64.sh"
+                   title="Download Miniforge3 4.9.2-3 for Linux on x86_64">
+                  Miniforge3-4.9.2-3-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>69.2 MB</td>
+              <td>
+                <pre><code>de5b309312e9b2e3ad777262324865cbc40a61bfd1f497d7eb9925bf593b9d94</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="2">MacOSX</th>
+              <th>
+                <code>arm64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Miniforge3-4.9.2-3-MacOSX-arm64.sh"
+                   title="Download Miniforge3 4.9.2-3 for MacOSX on arm64">
+                  Miniforge3-4.9.2-3-MacOSX-arm64.sh
+                </a>
+              </td>
+              <td>39.7 MB</td>
+              <td>
+                <pre><code>b7e224b454cbe15eb4f82223debd53cf8426476f84649b5150e5e92bdbd27487</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Miniforge3-4.9.2-3-MacOSX-x86_64.sh"
+                   title="Download Miniforge3 4.9.2-3 for MacOSX on x86_64">
+                  Miniforge3-4.9.2-3-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>43.0 MB</td>
+              <td>
+                <pre><code>1514582dcab6f12ebffca1f3b64cfd9cf95c37138c3b0e735c3c8f086ce41f2f</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">Windows</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-3/Miniforge3-4.9.2-3-Windows-x86_64.exe"
+                   title="Download Miniforge3 4.9.2-3 for Windows on x86_64">
+                  Miniforge3-4.9.2-3-Windows-x86_64.exe
+                </a>
+              </td>
+              <td>62.1 MB</td>
+              <td>
+                <pre><code>dc534f87cb3eb62414233863620dd9c29b08bca8b477f3b846ecb4c723141dea</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </summary></article>
+      
+      
+      <article id="4.9.2-2">
+        <h3>
+          Miniforge 4.9.2-2
+          <a title="Link to 4.9.2-2" href="#4.9.2-2">#</a>
+        </h3><details><summary><label>
+          20 artifacts
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.9.2-2">released</a>
+          <span title="2020-12-06T07:12:52Z">2020-12-06</span>
+        </label></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="6">Mambaforge</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Mambaforge-4.9.2-2-Linux-aarch64.sh"
+                   title="Download Mambaforge 4.9.2-2 for Linux on aarch64">
+                  Mambaforge-4.9.2-2-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>76.9 MB</td>
+              <td>
+                <pre><code>740564b34e3f1575d36e9d0051c7ed5a6af29f164924e3afeb9e654308358be5</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Mambaforge-4.9.2-2-Linux-ppc64le.sh"
+                   title="Download Mambaforge 4.9.2-2 for Linux on ppc64le">
+                  Mambaforge-4.9.2-2-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>82.4 MB</td>
+              <td>
+                <pre><code>2c5f8ca69b8927afb6b31163a5f4cecae3a105a2414afcfecda60467ebdf345d</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Mambaforge-4.9.2-2-Linux-x86_64.sh"
+                   title="Download Mambaforge 4.9.2-2 for Linux on x86_64">
+                  Mambaforge-4.9.2-2-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>92.6 MB</td>
+              <td>
+                <pre><code>7a7bfaff87680298304a97ba69bcf92f66c810995a7155a2918b99fafb8ca1dc</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="2">MacOSX</th>
+              <th>
+                <code>arm64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Mambaforge-4.9.2-2-MacOSX-arm64.sh"
+                   title="Download Mambaforge 4.9.2-2 for MacOSX on arm64">
+                  Mambaforge-4.9.2-2-MacOSX-arm64.sh
+                </a>
+              </td>
+              <td>61.8 MB</td>
+              <td>
+                <pre><code>51ada1267a970788cf1699a69652ebcf611ac1a0d03344002bbc21579d20f27d</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Mambaforge-4.9.2-2-MacOSX-x86_64.sh"
+                   title="Download Mambaforge 4.9.2-2 for MacOSX on x86_64">
+                  Mambaforge-4.9.2-2-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>65.5 MB</td>
+              <td>
+                <pre><code>1b589181a4a7e713b87eb488f61598241abe1e81fd1fbaa3da0770b0492323fb</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">Windows</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Mambaforge-4.9.2-2-Windows-x86_64.exe"
+                   title="Download Mambaforge 4.9.2-2 for Windows on x86_64">
+                  Mambaforge-4.9.2-2-Windows-x86_64.exe
+                </a>
+              </td>
+              <td>75.4 MB</td>
+              <td>
+                <pre><code>27e4662fb54aba3a1a0abca28d1ff2d707df39608b6eedd9f796ef3355127f4f</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="4">Mambaforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Mambaforge-pypy3-4.9.2-2-Linux-aarch64.sh"
+                   title="Download Mambaforge-pypy3 4.9.2-2 for Linux on aarch64">
+                  Mambaforge-pypy3-4.9.2-2-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>95.2 MB</td>
+              <td>
+                <pre><code>4cf545fe170d289650c41c94c8b0baf6b5acce44b9a90a4f736991dd05ec1c43</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Mambaforge-pypy3-4.9.2-2-Linux-ppc64le.sh"
+                   title="Download Mambaforge-pypy3 4.9.2-2 for Linux on ppc64le">
+                  Mambaforge-pypy3-4.9.2-2-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>101.1 MB</td>
+              <td>
+                <pre><code>1492ff08464772922edb2bda5e5b41f73c6ff148c78a090d2d9c14a3b163b5f2</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Mambaforge-pypy3-4.9.2-2-Linux-x86_64.sh"
+                   title="Download Mambaforge-pypy3 4.9.2-2 for Linux on x86_64">
+                  Mambaforge-pypy3-4.9.2-2-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>97.2 MB</td>
+              <td>
+                <pre><code>3cd75065fdd604e2884692fba6a867c13f5ed82c3191fce53dea9987ab22f33b</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Mambaforge-pypy3-4.9.2-2-MacOSX-x86_64.sh"
+                   title="Download Mambaforge-pypy3 4.9.2-2 for MacOSX on x86_64">
+                  Mambaforge-pypy3-4.9.2-2-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>79.7 MB</td>
+              <td>
+                <pre><code>c0d4e2b63707b34a9cff7fe16128e589ee0d86c0374b6217acf00b0c01190b07</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Miniforge-pypy3-4.9.2-2-Linux-aarch64.sh"
+                   title="Download Miniforge-pypy3 4.9.2-2 for Linux on aarch64">
+                  Miniforge-pypy3-4.9.2-2-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>70.5 MB</td>
+              <td>
+                <pre><code>88e8d8a7f44552fb330527f7014e73086da0834afcbd5fb77208a86659438793</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Miniforge-pypy3-4.9.2-2-Linux-ppc64le.sh"
+                   title="Download Miniforge-pypy3 4.9.2-2 for Linux on ppc64le">
+                  Miniforge-pypy3-4.9.2-2-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>75.4 MB</td>
+              <td>
+                <pre><code>4d144953065728230e7b4acc5f6b12f6d94f151712a1ef324ad0d4548e514eee</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Miniforge-pypy3-4.9.2-2-Linux-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.9.2-2 for Linux on x86_64">
+                  Miniforge-pypy3-4.9.2-2-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>73.8 MB</td>
+              <td>
+                <pre><code>dd74919ec6002bbcd5b9455cff756afe7e2b51546d5538fb038b2944e57859f2</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Miniforge-pypy3-4.9.2-2-MacOSX-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.9.2-2 for MacOSX on x86_64">
+                  Miniforge-pypy3-4.9.2-2-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>57.1 MB</td>
+              <td>
+                <pre><code>efa919382800f5e4c74f54fb88f54aecdeaa17e4a088bccd37652bd1ee686d30</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="6">Miniforge3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Miniforge3-4.9.2-2-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.9.2-2 for Linux on aarch64">
+                  Miniforge3-4.9.2-2-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>52.2 MB</td>
+              <td>
+                <pre><code>8c3fefea567b4cfea23207d1431d2a77f160bdc638cfaf1af1ad7212a0e67b9c</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Miniforge3-4.9.2-2-Linux-ppc64le.sh"
+                   title="Download Miniforge3 4.9.2-2 for Linux on ppc64le">
+                  Miniforge3-4.9.2-2-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>56.6 MB</td>
+              <td>
+                <pre><code>cbfe60dc27995a9ba62e3b12d1f9d7366e8747e3bd78cf9294a463f59fc7d707</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Miniforge3-4.9.2-2-Linux-x86_64.sh"
+                   title="Download Miniforge3 4.9.2-2 for Linux on x86_64">
+                  Miniforge3-4.9.2-2-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>69.2 MB</td>
+              <td>
+                <pre><code>0f98be5598fc164bf065190ae7154576c7dc4dceadc8b2aecebec0f66a2814d0</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="2">MacOSX</th>
+              <th>
+                <code>arm64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Miniforge3-4.9.2-2-MacOSX-arm64.sh"
+                   title="Download Miniforge3 4.9.2-2 for MacOSX on arm64">
+                  Miniforge3-4.9.2-2-MacOSX-arm64.sh
+                </a>
+              </td>
+              <td>39.7 MB</td>
+              <td>
+                <pre><code>8ba58b364b7e67517e1356c0393083b440a9f094c83d69dd391b0bbcdc5acd52</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Miniforge3-4.9.2-2-MacOSX-x86_64.sh"
+                   title="Download Miniforge3 4.9.2-2 for MacOSX on x86_64">
+                  Miniforge3-4.9.2-2-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>43.0 MB</td>
+              <td>
+                <pre><code>a9cebda511be799a833849c13bc00cf9fdda90e00c9ffd2d48b0343e7ca8a006</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">Windows</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-2/Miniforge3-4.9.2-2-Windows-x86_64.exe"
+                   title="Download Miniforge3 4.9.2-2 for Windows on x86_64">
+                  Miniforge3-4.9.2-2-Windows-x86_64.exe
+                </a>
+              </td>
+              <td>62.1 MB</td>
+              <td>
+                <pre><code>fe104988c3b0ac4cfcd57a4fd7da00b6286bc639fd136b7d3d629664353f4d85</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </summary></article>
+      
+      
+      <article id="4.9.2-0">
+        <h3>
+          Miniforge 4.9.2-0
+          <a title="Link to 4.9.2-0" href="#4.9.2-0">#</a>
+        </h3><details><summary><label>
+          10 artifacts
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.9.2-0">released</a>
+          <span title="2020-12-02T07:46:10Z">2020-12-02</span>
+        </label></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-0/Miniforge-pypy3-4.9.2-0-Linux-aarch64.sh"
+                   title="Download Miniforge-pypy3 4.9.2-0 for Linux on aarch64">
+                  Miniforge-pypy3-4.9.2-0-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>70.2 MB</td>
+              <td>
+                <pre><code>a68dcf56424133df593fe6fa987c8f0f0c752036de1e68ac58f9f7d33f260b16</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-0/Miniforge-pypy3-4.9.2-0-Linux-ppc64le.sh"
+                   title="Download Miniforge-pypy3 4.9.2-0 for Linux on ppc64le">
+                  Miniforge-pypy3-4.9.2-0-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>75.2 MB</td>
+              <td>
+                <pre><code>54c4b3cdab1f275c82ea40fcb6cb8728b2e7dc56e84466a91bdec70c7f17556e</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-0/Miniforge-pypy3-4.9.2-0-Linux-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.9.2-0 for Linux on x86_64">
+                  Miniforge-pypy3-4.9.2-0-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>73.8 MB</td>
+              <td>
+                <pre><code>7c8c35e8787b49c22c5fb98a053e8d978bd2e564f02852a6d8a54e1ada93d01e</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-0/Miniforge-pypy3-4.9.2-0-MacOSX-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.9.2-0 for MacOSX on x86_64">
+                  Miniforge-pypy3-4.9.2-0-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>57.0 MB</td>
+              <td>
+                <pre><code>4c0b877e83e5c3796594db2086fa1d99f6a5232f55c1c7f874f7d3db73c2f285</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="6">Miniforge3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-0/Miniforge3-4.9.2-0-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.9.2-0 for Linux on aarch64">
+                  Miniforge3-4.9.2-0-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>51.9 MB</td>
+              <td>
+                <pre><code>3c6f3f5dd5dcbd1fe8bce7cfc5c11b46ea51a432f8e3c03b60384680ea621b3a</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-0/Miniforge3-4.9.2-0-Linux-ppc64le.sh"
+                   title="Download Miniforge3 4.9.2-0 for Linux on ppc64le">
+                  Miniforge3-4.9.2-0-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>56.5 MB</td>
+              <td>
+                <pre><code>2ac5780924f6eb6613b99ed7266d0b23126e555a45faf4ceff6e8f3fa3a48e0e</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-0/Miniforge3-4.9.2-0-Linux-x86_64.sh"
+                   title="Download Miniforge3 4.9.2-0 for Linux on x86_64">
+                  Miniforge3-4.9.2-0-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>69.2 MB</td>
+              <td>
+                <pre><code>6321775eb2c02d7f51d3a9004ce0be839099f126f4099c781531428536669560</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="2">MacOSX</th>
+              <th>
+                <code>arm64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-0/Miniforge3-4.9.2-0-MacOSX-arm64.sh"
+                   title="Download Miniforge3 4.9.2-0 for MacOSX on arm64">
+                  Miniforge3-4.9.2-0-MacOSX-arm64.sh
+                </a>
+              </td>
+              <td>39.6 MB</td>
+              <td>
+                <pre><code>7e9600d9e2c5df61cde583c0470d50449cff48a4c2375cfa6aa286079a974b57</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-0/Miniforge3-4.9.2-0-MacOSX-x86_64.sh"
+                   title="Download Miniforge3 4.9.2-0 for MacOSX on x86_64">
+                  Miniforge3-4.9.2-0-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>42.9 MB</td>
+              <td>
+                <pre><code>623ac766cea5a0ff8d5e4748bc256723f69092388f84312fc0027afcdcfc0d0f</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">Windows</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.2-0/Miniforge3-4.9.2-0-Windows-x86_64.exe"
+                   title="Download Miniforge3 4.9.2-0 for Windows on x86_64">
+                  Miniforge3-4.9.2-0-Windows-x86_64.exe
+                </a>
+              </td>
+              <td>62.1 MB</td>
+              <td>
+                <pre><code>2a24f5070d1702a792372f0b3c0c195dd59f04f605632f76e438ce65cdf10c4c</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </summary></article>
+      
+      
+      <article id="4.9.0-4">
+        <h3>
+          Miniforge 4.9.0-4
+          <a title="Link to 4.9.0-4" href="#4.9.0-4">#</a>
+        </h3><details><summary><label>
+          9 artifacts
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.9.0-4">released</a>
+          <span title="2020-11-18T20:30:54Z">2020-11-18</span>
+        </label></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-4/Miniforge-pypy3-4.9.0-4-Linux-aarch64.sh"
+                   title="Download Miniforge-pypy3 4.9.0-4 for Linux on aarch64">
+                  Miniforge-pypy3-4.9.0-4-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>70.7 MB</td>
+              <td>
+                <pre><code>b081cd8e49da881e8bcca4e2c075fdd5f0394739ca9be3304029068d968923bb</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-4/Miniforge-pypy3-4.9.0-4-Linux-ppc64le.sh"
+                   title="Download Miniforge-pypy3 4.9.0-4 for Linux on ppc64le">
+                  Miniforge-pypy3-4.9.0-4-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>75.7 MB</td>
+              <td>
+                <pre><code>2ddf07cd7a0a0de9b04aa700bb89f8280c488c02762344bae45a2af9a13adc85</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-4/Miniforge-pypy3-4.9.0-4-Linux-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.9.0-4 for Linux on x86_64">
+                  Miniforge-pypy3-4.9.0-4-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>74.3 MB</td>
+              <td>
+                <pre><code>878ac769e13b1857c11a49f74d08e18b9dcb09262b1847ac8e575673e874d825</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-4/Miniforge-pypy3-4.9.0-4-MacOSX-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.9.0-4 for MacOSX on x86_64">
+                  Miniforge-pypy3-4.9.0-4-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>57.7 MB</td>
+              <td>
+                <pre><code>9d307b21ee6ca37c0922707e81babbc97b52b87d770deb3eb23aaec5a26b5b38</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="5">Miniforge3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-4/Miniforge3-4.9.0-4-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.9.0-4 for Linux on aarch64">
+                  Miniforge3-4.9.0-4-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>52.1 MB</td>
+              <td>
+                <pre><code>30b3424f0d22211cfbb38bfff80f825dcae3e2b0d2f1cf0e2d26709df8867363</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-4/Miniforge3-4.9.0-4-Linux-ppc64le.sh"
+                   title="Download Miniforge3 4.9.0-4 for Linux on ppc64le">
+                  Miniforge3-4.9.0-4-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>57.2 MB</td>
+              <td>
+                <pre><code>d7990ab70ffa96d011ba4ebbe847ec69a568eca13ca32e964549a89e37381e89</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-4/Miniforge3-4.9.0-4-Linux-x86_64.sh"
+                   title="Download Miniforge3 4.9.0-4 for Linux on x86_64">
+                  Miniforge3-4.9.0-4-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>65.6 MB</td>
+              <td>
+                <pre><code>dae28a05f0fcfed0b47c66468e8434ab42cb1ff90de96540a506949cdecd2b5a</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="2">MacOSX</th>
+              <th>
+                <code>arm64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-4/Miniforge3-4.9.0-4-MacOSX-arm64.sh"
+                   title="Download Miniforge3 4.9.0-4 for MacOSX on arm64">
+                  Miniforge3-4.9.0-4-MacOSX-arm64.sh
+                </a>
+              </td>
+              <td>41.0 MB</td>
+              <td>
+                <pre><code>49b0507ff7ab0c8fc1dc382b9f86413e213ea972f4730dd4fd12a5f8f2b83232</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-4/Miniforge3-4.9.0-4-MacOSX-x86_64.sh"
+                   title="Download Miniforge3 4.9.0-4 for MacOSX on x86_64">
+                  Miniforge3-4.9.0-4-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>43.6 MB</td>
+              <td>
+                <pre><code>c96fdca29290ceaf45ebe8477f63147bcf3a2e3e22415e4df9241fd31666cde0</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </summary></article>
+      
+      
+      <article id="4.9.0-3">
+        <h3>
+          Miniforge 4.9.0-3
+          <a title="Link to 4.9.0-3" href="#4.9.0-3">#</a>
+        </h3><details><summary><label>
+          9 artifacts
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.9.0-3">released</a>
+          <span title="2020-11-11T17:08:44Z">2020-11-11</span>
+        </label></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-3/Miniforge-pypy3-4.9.0-3-Linux-aarch64.sh"
+                   title="Download Miniforge-pypy3 4.9.0-3 for Linux on aarch64">
+                  Miniforge-pypy3-4.9.0-3-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>70.2 MB</td>
+              <td>
+                <pre><code>ab297a361cfb76a7a1da69bf812c3d2f3225f68b5b246c43313c9a9c867b82b1</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-3/Miniforge-pypy3-4.9.0-3-Linux-ppc64le.sh"
+                   title="Download Miniforge-pypy3 4.9.0-3 for Linux on ppc64le">
+                  Miniforge-pypy3-4.9.0-3-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>75.3 MB</td>
+              <td>
+                <pre><code>2b98e3af8b4606ac50b5a79fd1340ea61c52769c1dd531ca8254ca54886b3075</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-3/Miniforge-pypy3-4.9.0-3-Linux-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.9.0-3 for Linux on x86_64">
+                  Miniforge-pypy3-4.9.0-3-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>73.7 MB</td>
+              <td>
+                <pre><code>f32150ad73f15aa7daec92ee5df430c2eef71529b2f45574001c0cdd7abfa32d</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-3/Miniforge-pypy3-4.9.0-3-MacOSX-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.9.0-3 for MacOSX on x86_64">
+                  Miniforge-pypy3-4.9.0-3-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>57.1 MB</td>
+              <td>
+                <pre><code>4d312f4846d8ea48dabef3a56716c49e5a3b18915863019c01937516ce39accf</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="5">Miniforge3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-3/Miniforge3-4.9.0-3-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.9.0-3 for Linux on aarch64">
+                  Miniforge3-4.9.0-3-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>51.7 MB</td>
+              <td>
+                <pre><code>c8a5752ca140506c6ac730a603ebc60461e67c3b5e9888cb2bf953ebb16dca13</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-3/Miniforge3-4.9.0-3-Linux-ppc64le.sh"
+                   title="Download Miniforge3 4.9.0-3 for Linux on ppc64le">
+                  Miniforge3-4.9.0-3-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>56.7 MB</td>
+              <td>
+                <pre><code>df4c3a283b7b50ae347ed5f0a50e36f5286bf1816c79d392ded340babb7ac66d</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-3/Miniforge3-4.9.0-3-Linux-x86_64.sh"
+                   title="Download Miniforge3 4.9.0-3 for Linux on x86_64">
+                  Miniforge3-4.9.0-3-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>65.0 MB</td>
+              <td>
+                <pre><code>29f0eb17dd02aceb0dfd4dad2654e974b1699baed06ee6d350b0ab4a2ccf3d02</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="2">MacOSX</th>
+              <th>
+                <code>arm64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-3/Miniforge3-4.9.0-3-MacOSX-arm64.sh"
+                   title="Download Miniforge3 4.9.0-3 for MacOSX on arm64">
+                  Miniforge3-4.9.0-3-MacOSX-arm64.sh
+                </a>
+              </td>
+              <td>40.9 MB</td>
+              <td>
+                <pre><code>5b8f9a227a419aaf7aca71bf49b12c125a187cffa160e8c297f434660ddc78e7</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-3/Miniforge3-4.9.0-3-MacOSX-x86_64.sh"
+                   title="Download Miniforge3 4.9.0-3 for MacOSX on x86_64">
+                  Miniforge3-4.9.0-3-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>43.0 MB</td>
+              <td>
+                <pre><code>e8cb60f46fedb89a63a7d3d82c1f3c570e325c48a7c0845ea4ce91336a6f52bd</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </summary></article>
+      
+      
+      <article id="4.9.0-0">
+        <h3>
+          Miniforge 4.9.0-0
+          <a title="Link to 4.9.0-0" href="#4.9.0-0">#</a>
+        </h3><details><summary><label>
+          9 artifacts
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.9.0-0">released</a>
+          <span title="2020-10-29T09:01:44Z">2020-10-29</span>
+        </label></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-0/Miniforge-pypy3-4.9.0-0-Linux-aarch64.sh"
+                   title="Download Miniforge-pypy3 4.9.0-0 for Linux on aarch64">
+                  Miniforge-pypy3-4.9.0-0-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>70.2 MB</td>
+              <td>
+                <pre><code>d4853d154b30a8464f6a74492166ba08a598af7f21d34d679c812dc0399e4b06</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-0/Miniforge-pypy3-4.9.0-0-Linux-ppc64le.sh"
+                   title="Download Miniforge-pypy3 4.9.0-0 for Linux on ppc64le">
+                  Miniforge-pypy3-4.9.0-0-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>75.3 MB</td>
+              <td>
+                <pre><code>613f9c22787fe80399b74c528433da4b27cc1ac8293982360c86151f9021c2da</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-0/Miniforge-pypy3-4.9.0-0-Linux-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.9.0-0 for Linux on x86_64">
+                  Miniforge-pypy3-4.9.0-0-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>73.7 MB</td>
+              <td>
+                <pre><code>5ba1e5dd928072c47485ab9ed92f91a1d39cd3523ffb69dc16e4822733df5236</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-0/Miniforge-pypy3-4.9.0-0-MacOSX-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.9.0-0 for MacOSX on x86_64">
+                  Miniforge-pypy3-4.9.0-0-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>57.2 MB</td>
+              <td>
+                <pre><code>64b329666baadc14fe084e286b3d9ffe78cd5a081eee7e15442f30d739d1f4fa</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="5">Miniforge3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-0/Miniforge3-4.9.0-0-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.9.0-0 for Linux on aarch64">
+                  Miniforge3-4.9.0-0-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>51.7 MB</td>
+              <td>
+                <pre><code>3e2ad560a6a1078f269b948c1420def3c958b7614ce2a41521ddcf52c9729efd</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-0/Miniforge3-4.9.0-0-Linux-ppc64le.sh"
+                   title="Download Miniforge3 4.9.0-0 for Linux on ppc64le">
+                  Miniforge3-4.9.0-0-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>56.8 MB</td>
+              <td>
+                <pre><code>92dfc7b3279e0c15321a6acfaa8824a509f75e9d31d8481a088c48480fb39373</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-0/Miniforge3-4.9.0-0-Linux-x86_64.sh"
+                   title="Download Miniforge3 4.9.0-0 for Linux on x86_64">
+                  Miniforge3-4.9.0-0-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>65.0 MB</td>
+              <td>
+                <pre><code>b86f13b6eda5abfbab891f5ff4eec39b0e16b9ab6504ba21cf5b0de45ca44c9e</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="2">MacOSX</th>
+              <th>
+                <code>arm64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-0/Miniforge3-4.9.0-0-MacOSX-arm64.sh"
+                   title="Download Miniforge3 4.9.0-0 for MacOSX on arm64">
+                  Miniforge3-4.9.0-0-MacOSX-arm64.sh
+                </a>
+              </td>
+              <td>40.9 MB</td>
+              <td>
+                <pre><code>ebe51e216b7dd069a4b78b86ef435d83d94bb72926e728d5029f508fc7beebe6</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.9.0-0/Miniforge3-4.9.0-0-MacOSX-x86_64.sh"
+                   title="Download Miniforge3 4.9.0-0 for MacOSX on x86_64">
+                  Miniforge3-4.9.0-0-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>43.0 MB</td>
+              <td>
+                <pre><code>30a791d0d447f0b87dc7455d73a5e4c365ddacdb8cb5f60df59539ddf0fe0f7f</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </summary></article>
+      
+      
+      <article id="4.8.5-2">
+        <h3>
+          Miniforge 4.8.5-2
+          <a title="Link to 4.8.5-2" href="#4.8.5-2">#</a>
+        </h3><details><summary><label>
+          9 artifacts
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.8.5-2">released</a>
+          <span title="2020-10-08T22:46:04Z">2020-10-08</span>
+        </label></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-2/Miniforge-pypy3-4.8.5-2-Linux-aarch64.sh"
+                   title="Download Miniforge-pypy3 4.8.5-2 for Linux on aarch64">
+                  Miniforge-pypy3-4.8.5-2-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>70.2 MB</td>
+              <td>
+                <pre><code>4accccdd9288a4d671570d433383175e9a11479fdf6168486269783272e70d01</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-2/Miniforge-pypy3-4.8.5-2-Linux-ppc64le.sh"
+                   title="Download Miniforge-pypy3 4.8.5-2 for Linux on ppc64le">
+                  Miniforge-pypy3-4.8.5-2-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>75.1 MB</td>
+              <td>
+                <pre><code>6d14d271d576126f5b4a485cc680bde00128c111ffbb308ac7abf8da0ce824bc</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-2/Miniforge-pypy3-4.8.5-2-Linux-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.8.5-2 for Linux on x86_64">
+                  Miniforge-pypy3-4.8.5-2-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>73.8 MB</td>
+              <td>
+                <pre><code>dbf7c4f3faaa235877f8b2c3f45dd86689d5b950cb3eff06c3063c377ac49166</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-2/Miniforge-pypy3-4.8.5-2-MacOSX-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.8.5-2 for MacOSX on x86_64">
+                  Miniforge-pypy3-4.8.5-2-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>57.1 MB</td>
+              <td>
+                <pre><code>b002a217bb239b3d0f88dc1f305ade3255030b28404f8d2c8671d07042f9f12a</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="5">Miniforge3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-2/Miniforge3-4.8.5-2-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.8.5-2 for Linux on aarch64">
+                  Miniforge3-4.8.5-2-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>51.7 MB</td>
+              <td>
+                <pre><code>8352b5f24acf8409cf2717db68a744ef7ae5b3abf92bf901515e27be03461c55</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-2/Miniforge3-4.8.5-2-Linux-ppc64le.sh"
+                   title="Download Miniforge3 4.8.5-2 for Linux on ppc64le">
+                  Miniforge3-4.8.5-2-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>56.6 MB</td>
+              <td>
+                <pre><code>13b535e744c879eb667272a4a5bc105c67e2ea69bc88b06acb5d2e80b1402caa</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-2/Miniforge3-4.8.5-2-Linux-x86_64.sh"
+                   title="Download Miniforge3 4.8.5-2 for Linux on x86_64">
+                  Miniforge3-4.8.5-2-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>64.9 MB</td>
+              <td>
+                <pre><code>67e15be1628cfc191d95f84b7de4db82d11f32953245c913c7846a85fdbe68bc</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="2">MacOSX</th>
+              <th>
+                <code>arm64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-2/Miniforge3-4.8.5-2-MacOSX-arm64.sh"
+                   title="Download Miniforge3 4.8.5-2 for MacOSX on arm64">
+                  Miniforge3-4.8.5-2-MacOSX-arm64.sh
+                </a>
+              </td>
+              <td>41.8 MB</td>
+              <td>
+                <pre><code>b4ed045c0d791eecfe42ec2fd609d03e0877fa1edf2fd327b2e86d2939ae8a8f</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-2/Miniforge3-4.8.5-2-MacOSX-x86_64.sh"
+                   title="Download Miniforge3 4.8.5-2 for MacOSX on x86_64">
+                  Miniforge3-4.8.5-2-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>42.9 MB</td>
+              <td>
+                <pre><code>fffa2854f13ceb06a0b6e3d6b013f64b86981e9327a122ad983f5dde44070347</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </summary></article>
+      
+      
+      <article id="4.8.5-1">
+        <h3>
+          Miniforge 4.8.5-1
+          <a title="Link to 4.8.5-1" href="#4.8.5-1">#</a>
+        </h3><details><summary><label>
+          9 artifacts
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.8.5-1">released</a>
+          <span title="2020-09-19T16:51:21Z">2020-09-19</span>
+        </label></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-1/Miniforge-pypy3-4.8.5-1-Linux-aarch64.sh"
+                   title="Download Miniforge-pypy3 4.8.5-1 for Linux on aarch64">
+                  Miniforge-pypy3-4.8.5-1-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>70.1 MB</td>
+              <td>
+                <pre><code>16b7fdd4da078db8ea86fa15262f32111fcbb7ee7692c8b21da4840e32a7aebf</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-1/Miniforge-pypy3-4.8.5-1-Linux-ppc64le.sh"
+                   title="Download Miniforge-pypy3 4.8.5-1 for Linux on ppc64le">
+                  Miniforge-pypy3-4.8.5-1-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>75.0 MB</td>
+              <td>
+                <pre><code>ce49605b3c4f0a9f9101230d3c6c3f0a419034fa7f815eef1dea5ef2a43f0f76</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-1/Miniforge-pypy3-4.8.5-1-Linux-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.8.5-1 for Linux on x86_64">
+                  Miniforge-pypy3-4.8.5-1-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>73.7 MB</td>
+              <td>
+                <pre><code>73a876fec9e28a2e8201637aac77d00179da072e473a716a212fb28e3692f658</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-1/Miniforge-pypy3-4.8.5-1-MacOSX-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.8.5-1 for MacOSX on x86_64">
+                  Miniforge-pypy3-4.8.5-1-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>56.3 MB</td>
+              <td>
+                <pre><code>50f4568d29ed830abaabc7bf9805d42910e66d90e78d8188382cf77713c7063f</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="5">Miniforge3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-1/Miniforge3-4.8.5-1-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.8.5-1 for Linux on aarch64">
+                  Miniforge3-4.8.5-1-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>51.4 MB</td>
+              <td>
+                <pre><code>8e475b8dc89aae9b245f17e89abca83c6b2a63e56b5784c0fa9b046d51c65ae6</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-1/Miniforge3-4.8.5-1-Linux-ppc64le.sh"
+                   title="Download Miniforge3 4.8.5-1 for Linux on ppc64le">
+                  Miniforge3-4.8.5-1-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>56.4 MB</td>
+              <td>
+                <pre><code>a7ba7ebadcbc8cba556e9476bbd2a8dd395fd775045a403c7ccd9f712a1e0765</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-1/Miniforge3-4.8.5-1-Linux-x86_64.sh"
+                   title="Download Miniforge3 4.8.5-1 for Linux on x86_64">
+                  Miniforge3-4.8.5-1-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>64.8 MB</td>
+              <td>
+                <pre><code>d36fe37034c9e6996844ae3ca708cdd5ebb2159f8daa66ccd8b7d4e71ad58b60</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="2">MacOSX</th>
+              <th>
+                <code>arm64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-1/Miniforge3-4.8.5-1-MacOSX-arm64.sh"
+                   title="Download Miniforge3 4.8.5-1 for MacOSX on arm64">
+                  Miniforge3-4.8.5-1-MacOSX-arm64.sh
+                </a>
+              </td>
+              <td>41.2 MB</td>
+              <td>
+                <pre><code>15f07a0f16157f4b51fbaa032bb81443d601986a171ce6aa7c2ab40043c05207</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-1/Miniforge3-4.8.5-1-MacOSX-x86_64.sh"
+                   title="Download Miniforge3 4.8.5-1 for MacOSX on x86_64">
+                  Miniforge3-4.8.5-1-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>42.7 MB</td>
+              <td>
+                <pre><code>5054599ee6ea639209b831d859935da50229040d7993b1736358734d1e9c5edc</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </summary></article>
+      
+      
+      <article id="4.8.5-0">
+        <h3>
+          Miniforge 4.8.5-0
+          <a title="Link to 4.8.5-0" href="#4.8.5-0">#</a>
+        </h3><details><summary><label>
+          8 artifacts
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.8.5-0">released</a>
+          <span title="2020-09-15T22:37:34Z">2020-09-15</span>
+        </label></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-0/Miniforge-pypy3-4.8.5-0-Linux-aarch64.sh"
+                   title="Download Miniforge-pypy3 4.8.5-0 for Linux on aarch64">
+                  Miniforge-pypy3-4.8.5-0-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>70.7 MB</td>
+              <td>
+                <pre><code>dfd1922c18ad37b9588298629a068b24123fd41600a74fdcdb0d496a1f7faab5</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-0/Miniforge-pypy3-4.8.5-0-Linux-ppc64le.sh"
+                   title="Download Miniforge-pypy3 4.8.5-0 for Linux on ppc64le">
+                  Miniforge-pypy3-4.8.5-0-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>76.0 MB</td>
+              <td>
+                <pre><code>2a5d50994c809351ec6eba89b98f3d4c99599eb9aff01b15243dfc44ccb37d2d</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-0/Miniforge-pypy3-4.8.5-0-Linux-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.8.5-0 for Linux on x86_64">
+                  Miniforge-pypy3-4.8.5-0-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>74.5 MB</td>
+              <td>
+                <pre><code>afe04330afa30d8452a898bac5930974ed436fe91faf4490eea07ca3c81f25ef</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-0/Miniforge-pypy3-4.8.5-0-MacOSX-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.8.5-0 for MacOSX on x86_64">
+                  Miniforge-pypy3-4.8.5-0-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>55.9 MB</td>
+              <td>
+                <pre><code>81973bc69565c66c2c15ad19b86b2d29769ac2d8c9241ac94107d9ccbb89a9b9</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-0/Miniforge3-4.8.5-0-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.8.5-0 for Linux on aarch64">
+                  Miniforge3-4.8.5-0-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>52.1 MB</td>
+              <td>
+                <pre><code>ffdaff615ac7ddcdc2df4c80ea80d9c27c6dfe4a3c7933b5e62f321177f115e5</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-0/Miniforge3-4.8.5-0-Linux-ppc64le.sh"
+                   title="Download Miniforge3 4.8.5-0 for Linux on ppc64le">
+                  Miniforge3-4.8.5-0-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>57.4 MB</td>
+              <td>
+                <pre><code>676df7a94ca7673470a59a2708c514d4c019217c8b6db713e8ffbfcab46c942d</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-0/Miniforge3-4.8.5-0-Linux-x86_64.sh"
+                   title="Download Miniforge3 4.8.5-0 for Linux on x86_64">
+                  Miniforge3-4.8.5-0-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>65.6 MB</td>
+              <td>
+                <pre><code>7aa68b80e1c7ec4f774a576224464d7154e58142aae22e120fdd8a87fc98ce43</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.5-0/Miniforge3-4.8.5-0-MacOSX-x86_64.sh"
+                   title="Download Miniforge3 4.8.5-0 for MacOSX on x86_64">
+                  Miniforge3-4.8.5-0-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>42.3 MB</td>
+              <td>
+                <pre><code>feae56c8e223ee18ee3e6914e9c6a2490f569f531837119d4c3a97df3cb8e39e</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </summary></article>
+      
+      
+      <article id="4.8.3-5">
+        <h3>
+          Miniforge 4.8.3-5
+          <a title="Link to 4.8.3-5" href="#4.8.3-5">#</a>
+        </h3><details><summary><label>
+          8 artifacts
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.8.3-5">released</a>
+          <span title="2020-07-30T16:18:15Z">2020-07-30</span>
+        </label></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-5/Miniforge-pypy3-4.8.3-5-Linux-aarch64.sh"
+                   title="Download Miniforge-pypy3 4.8.3-5 for Linux on aarch64">
+                  Miniforge-pypy3-4.8.3-5-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>69.1 MB</td>
+              <td>
+                <pre><code>cd161e31e9c3fc6d4983cc395b97d85fc2936564b56cb68e4efe62843699bde7</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-5/Miniforge-pypy3-4.8.3-5-Linux-ppc64le.sh"
+                   title="Download Miniforge-pypy3 4.8.3-5 for Linux on ppc64le">
+                  Miniforge-pypy3-4.8.3-5-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>74.7 MB</td>
+              <td>
+                <pre><code>ca85304cec41439e7106d4f32fcebfee654a6518a761ebfbe8f3326876571296</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-5/Miniforge-pypy3-4.8.3-5-Linux-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.8.3-5 for Linux on x86_64">
+                  Miniforge-pypy3-4.8.3-5-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>75.1 MB</td>
+              <td>
+                <pre><code>db3e280fff7ccb3c5d3fee78f8f33b381ba16f661654bf7b07c88b99ea92d0de</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-5/Miniforge-pypy3-4.8.3-5-MacOSX-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.8.3-5 for MacOSX on x86_64">
+                  Miniforge-pypy3-4.8.3-5-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>55.8 MB</td>
+              <td>
+                <pre><code>cb0b13096656814e6a3dfbc81b110968a88dd941e14852991a4972e1bf20f47a</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-5/Miniforge3-4.8.3-5-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.8.3-5 for Linux on aarch64">
+                  Miniforge3-4.8.3-5-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>52.5 MB</td>
+              <td>
+                <pre><code>482feb3b2c415baa352bd81be724871f23f65276b9076a428b26fcf695aa2ef4</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-5/Miniforge3-4.8.3-5-Linux-ppc64le.sh"
+                   title="Download Miniforge3 4.8.3-5 for Linux on ppc64le">
+                  Miniforge3-4.8.3-5-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>58.5 MB</td>
+              <td>
+                <pre><code>ecc460e16f3c6217dd2f542c0be5aeca90b2caff305dcc4c241c3507d8173500</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-5/Miniforge3-4.8.3-5-Linux-x86_64.sh"
+                   title="Download Miniforge3 4.8.3-5 for Linux on x86_64">
+                  Miniforge3-4.8.3-5-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>98.8 MB</td>
+              <td>
+                <pre><code>cb8e6901051978498ed99fb936ae284e2e63fc512bac1787e9229031163da9b4</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-5/Miniforge3-4.8.3-5-MacOSX-x86_64.sh"
+                   title="Download Miniforge3 4.8.3-5 for MacOSX on x86_64">
+                  Miniforge3-4.8.3-5-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>54.6 MB</td>
+              <td>
+                <pre><code>b1cd137c124b715e5b614cf457965e9832d23f35a38aef2d8da84ec523af828a</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </summary></article>
+      
+      
+      <article id="4.8.3-4">
+        <h3>
+          Miniforge 4.8.3-4
+          <a title="Link to 4.8.3-4" href="#4.8.3-4">#</a>
+        </h3><details><summary><label>
+          8 artifacts
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.8.3-4">released</a>
+          <span title="2020-05-28T05:56:41Z">2020-05-28</span>
+        </label></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-4/Miniforge-pypy3-4.8.3-4-Linux-aarch64.sh"
+                   title="Download Miniforge-pypy3 4.8.3-4 for Linux on aarch64">
+                  Miniforge-pypy3-4.8.3-4-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>70.0 MB</td>
+              <td>
+                <pre><code>6e4ff601b41979b9681147651fc66f2956dbba3da98c4848343e1354deec5056</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-4/Miniforge-pypy3-4.8.3-4-Linux-ppc64le.sh"
+                   title="Download Miniforge-pypy3 4.8.3-4 for Linux on ppc64le">
+                  Miniforge-pypy3-4.8.3-4-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>75.7 MB</td>
+              <td>
+                <pre><code>ce440dde495a85616077f734bcb6b377884200180fafd330da02be369af154f9</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-4/Miniforge-pypy3-4.8.3-4-Linux-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.8.3-4 for Linux on x86_64">
+                  Miniforge-pypy3-4.8.3-4-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>75.7 MB</td>
+              <td>
+                <pre><code>6a9fd246a1fed5ee2dae5a08fffabad9f3216df13516ab41b39439aaac404de8</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-4/Miniforge-pypy3-4.8.3-4-MacOSX-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.8.3-4 for MacOSX on x86_64">
+                  Miniforge-pypy3-4.8.3-4-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>56.7 MB</td>
+              <td>
+                <pre><code>610624459ffbea753996bd2bb36487f45cd8df782e0918acdf6c962838f49cca</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-4/Miniforge3-4.8.3-4-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.8.3-4 for Linux on aarch64">
+                  Miniforge3-4.8.3-4-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>53.6 MB</td>
+              <td>
+                <pre><code>52a8dde14ecfb633800a2de26543a78315058e30f5883701da1ad2f2d5ba9ed8</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-4/Miniforge3-4.8.3-4-Linux-ppc64le.sh"
+                   title="Download Miniforge3 4.8.3-4 for Linux on ppc64le">
+                  Miniforge3-4.8.3-4-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>59.7 MB</td>
+              <td>
+                <pre><code>44c139fe397bc9d93362f38d61268ddbbe4ffd35c0a48f0901fed5833a29f431</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-4/Miniforge3-4.8.3-4-Linux-x86_64.sh"
+                   title="Download Miniforge3 4.8.3-4 for Linux on x86_64">
+                  Miniforge3-4.8.3-4-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>99.4 MB</td>
+              <td>
+                <pre><code>24951262a126582f5f2e1cf82c9cd0fa20e936ef3309fdb8397175f29e647646</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-4/Miniforge3-4.8.3-4-MacOSX-x86_64.sh"
+                   title="Download Miniforge3 4.8.3-4 for MacOSX on x86_64">
+                  Miniforge3-4.8.3-4-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>55.6 MB</td>
+              <td>
+                <pre><code>5f2043954660a112750feae45daf9ff2139571409e53964e8f71f8986d218ebe</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </summary></article>
+      
+      
+      <article id="4.8.3-2">
+        <h3>
+          Miniforge 4.8.3-2
+          <a title="Link to 4.8.3-2" href="#4.8.3-2">#</a>
+        </h3><details><summary><label>
+          8 artifacts
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.8.3-2">released</a>
+          <span title="2020-04-11T02:11:49Z">2020-04-11</span>
+        </label></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-2/Miniforge-pypy3-4.8.3-2-Linux-aarch64.sh"
+                   title="Download Miniforge-pypy3 4.8.3-2 for Linux on aarch64">
+                  Miniforge-pypy3-4.8.3-2-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>69.9 MB</td>
+              <td>
+                <pre><code>34ba1c1504528493907fc2433a20103202b067be6cc0bdd3cfd0f3f88bae670d</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-2/Miniforge-pypy3-4.8.3-2-Linux-ppc64le.sh"
+                   title="Download Miniforge-pypy3 4.8.3-2 for Linux on ppc64le">
+                  Miniforge-pypy3-4.8.3-2-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>75.6 MB</td>
+              <td>
+                <pre><code>e5457bf085cbaf370d806422fdd0090a65484eb751f6d2d3fd96ebec36ad2114</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-2/Miniforge-pypy3-4.8.3-2-Linux-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.8.3-2 for Linux on x86_64">
+                  Miniforge-pypy3-4.8.3-2-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>75.7 MB</td>
+              <td>
+                <pre><code>02b4138603fe0f3fcbfd521db8c2130ebf3e0928d7bc36e4afd24dace1a42919</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-2/Miniforge-pypy3-4.8.3-2-MacOSX-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.8.3-2 for MacOSX on x86_64">
+                  Miniforge-pypy3-4.8.3-2-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>56.6 MB</td>
+              <td>
+                <pre><code>a175bad8e15484b775b01aaddf45e00eb8a11b4612e14799ffb58628a3be6b34</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-2/Miniforge3-4.8.3-2-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.8.3-2 for Linux on aarch64">
+                  Miniforge3-4.8.3-2-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>53.2 MB</td>
+              <td>
+                <pre><code>bfefc0ede6354568978b4198607edd7f17c2f50ca4c6a47e9f22f8c257c8230a</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-2/Miniforge3-4.8.3-2-Linux-ppc64le.sh"
+                   title="Download Miniforge3 4.8.3-2 for Linux on ppc64le">
+                  Miniforge3-4.8.3-2-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>59.3 MB</td>
+              <td>
+                <pre><code>edea62bfa2242b592a70fb3bcb5f38d4a188a6111a0b5dea87c013fe7b354228</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-2/Miniforge3-4.8.3-2-Linux-x86_64.sh"
+                   title="Download Miniforge3 4.8.3-2 for Linux on x86_64">
+                  Miniforge3-4.8.3-2-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>99.1 MB</td>
+              <td>
+                <pre><code>c8e5b894fe91ce0f86e61065d2247346af107f8d53de0ad89ec848701c4ec1f9</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-2/Miniforge3-4.8.3-2-MacOSX-x86_64.sh"
+                   title="Download Miniforge3 4.8.3-2 for MacOSX on x86_64">
+                  Miniforge3-4.8.3-2-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>55.3 MB</td>
+              <td>
+                <pre><code>25ca082ab00a776db356f9bbc660edf6d24659e2aec1cbec5fd4ce992d4d193d</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </summary></article>
+      
+      
+      <article id="4.8.3-1">
+        <h3>
+          Miniforge 4.8.3-1
+          <a title="Link to 4.8.3-1" href="#4.8.3-1">#</a>
+        </h3><details><summary><label>
+          8 artifacts
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.8.3-1">released</a>
+          <span title="2020-03-23T20:39:11Z">2020-03-23</span>
+        </label></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-1/Miniforge-pypy3-4.8.3-1-Linux-aarch64.sh"
+                   title="Download Miniforge-pypy3 4.8.3-1 for Linux on aarch64">
+                  Miniforge-pypy3-4.8.3-1-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>69.7 MB</td>
+              <td>
+                <pre><code>afa595b19d5665d432cafcce6fce2d506c80ade208cdc1c7abc497179a67b530</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-1/Miniforge-pypy3-4.8.3-1-Linux-ppc64le.sh"
+                   title="Download Miniforge-pypy3 4.8.3-1 for Linux on ppc64le">
+                  Miniforge-pypy3-4.8.3-1-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>75.5 MB</td>
+              <td>
+                <pre><code>d5753eabe13d20dc9710c198ac3dc6b27063a68bab207fc6643a193262b22103</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-1/Miniforge-pypy3-4.8.3-1-Linux-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.8.3-1 for Linux on x86_64">
+                  Miniforge-pypy3-4.8.3-1-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>75.5 MB</td>
+              <td>
+                <pre><code>0129953210274e5e79f947e81224af8713dd8f801414372e675ff91d02a09a6a</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-1/Miniforge-pypy3-4.8.3-1-MacOSX-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.8.3-1 for MacOSX on x86_64">
+                  Miniforge-pypy3-4.8.3-1-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>56.5 MB</td>
+              <td>
+                <pre><code>c83854d6920f1abc622a66dfdda503c14cb6c9ba48f7f580fde475c43eb1563a</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="4">Miniforge3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-1/Miniforge3-4.8.3-1-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.8.3-1 for Linux on aarch64">
+                  Miniforge3-4.8.3-1-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>53.1 MB</td>
+              <td>
+                <pre><code>7635f10d8ee17de1bb06934043c6abe1fb615c449a331f7e71b71b054f331aaa</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-1/Miniforge3-4.8.3-1-Linux-ppc64le.sh"
+                   title="Download Miniforge3 4.8.3-1 for Linux on ppc64le">
+                  Miniforge3-4.8.3-1-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>59.2 MB</td>
+              <td>
+                <pre><code>80b788337a03d14bb582a417e9a4d67502b0ac9fd7a9ac15ca2a3f7d05e8e15e</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-1/Miniforge3-4.8.3-1-Linux-x86_64.sh"
+                   title="Download Miniforge3 4.8.3-1 for Linux on x86_64">
+                  Miniforge3-4.8.3-1-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>99.1 MB</td>
+              <td>
+                <pre><code>3d9e41e493bf3bfd38d9b9d69e03489606f26fc270d1a679d9e47ae40acc9b95</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <th rowspan="1">MacOSX</th>
+              <th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-1/Miniforge3-4.8.3-1-MacOSX-x86_64.sh"
+                   title="Download Miniforge3 4.8.3-1 for MacOSX on x86_64">
+                  Miniforge3-4.8.3-1-MacOSX-x86_64.sh
+                </a>
+              </td>
+              <td>54.1 MB</td>
+              <td>
+                <pre><code>fd5dcee77efe428242c9d4c77bf00167f74aca99cf17df7a509359bb4f515164</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </summary></article>
+      
+      
+      <article id="4.8.3-0">
+        <h3>
+          Miniforge 4.8.3-0
+          <a title="Link to 4.8.3-0" href="#4.8.3-0">#</a>
+        </h3><details><summary><label>
+          6 artifacts
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.8.3-0">released</a>
+          <span title="2020-03-17T23:33:43Z">2020-03-17</span>
+        </label></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="3">Miniforge-pypy3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-0/Miniforge-pypy3-4.8.3-0-Linux-aarch64.sh"
+                   title="Download Miniforge-pypy3 4.8.3-0 for Linux on aarch64">
+                  Miniforge-pypy3-4.8.3-0-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>69.7 MB</td>
+              <td>
+                <pre><code>45a636f1d6f2ed45cca66867c844212d7aae37a9928a16142c61051a12c8ac31</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-0/Miniforge-pypy3-4.8.3-0-Linux-ppc64le.sh"
+                   title="Download Miniforge-pypy3 4.8.3-0 for Linux on ppc64le">
+                  Miniforge-pypy3-4.8.3-0-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>75.5 MB</td>
+              <td>
+                <pre><code>b120012dc59dec8e49a5f57df1098be7b83e4cfd4e28dc4393d4756eb5d28bf7</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-0/Miniforge-pypy3-4.8.3-0-Linux-x86_64.sh"
+                   title="Download Miniforge-pypy3 4.8.3-0 for Linux on x86_64">
+                  Miniforge-pypy3-4.8.3-0-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>75.5 MB</td>
+              <td>
+                <pre><code>941cf60561edc25cae1c1a46885872b982bdd06d7ba0df123a4ab8c02cd06c13</code></pre>
+              </td>
+            </tr>
+            
+            <tr class="variant-row">
+              <th rowspan="3">Miniforge3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-0/Miniforge3-4.8.3-0-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.8.3-0 for Linux on aarch64">
+                  Miniforge3-4.8.3-0-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>53.1 MB</td>
+              <td>
+                <pre><code>359fa54c375d1af3dd21d76aa8a64f800347d3b3a6e53d3b37dcdd88b4a2e7b6</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-0/Miniforge3-4.8.3-0-Linux-ppc64le.sh"
+                   title="Download Miniforge3 4.8.3-0 for Linux on ppc64le">
+                  Miniforge3-4.8.3-0-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>59.2 MB</td>
+              <td>
+                <pre><code>d9f11778ab03710fe9f82964b56f67de6ce29b551459dc6903b114cd5df1e4a0</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.3-0/Miniforge3-4.8.3-0-Linux-x86_64.sh"
+                   title="Download Miniforge3 4.8.3-0 for Linux on x86_64">
+                  Miniforge3-4.8.3-0-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>99.0 MB</td>
+              <td>
+                <pre><code>1db6013e836da2ea817a53c44b0fd9beea521013bcb94b2b5440b1a61ba8b338</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </summary></article>
+      
+      
+      <article id="4.8.2-1">
+        <h3>
+          Miniforge 4.8.2-1
+          <a title="Link to 4.8.2-1" href="#4.8.2-1">#</a>
+        </h3><details><summary><label>
+          3 artifacts
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.8.2-1">released</a>
+          <span title="2020-02-12T08:05:58Z">2020-02-12</span>
+        </label></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="3">Miniforge3</th>
+              <th rowspan="3">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.2-1/Miniforge3-4.8.2-1-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.8.2-1 for Linux on aarch64">
+                  Miniforge3-4.8.2-1-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>64.7 MB</td>
+              <td>
+                <pre><code>a24320fabceef73dfe3240379ee7834ce8f167ace1630dcba314c7ade5e01208</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>ppc64le</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.2-1/Miniforge3-4.8.2-1-Linux-ppc64le.sh"
+                   title="Download Miniforge3 4.8.2-1 for Linux on ppc64le">
+                  Miniforge3-4.8.2-1-Linux-ppc64le.sh
+                </a>
+              </td>
+              <td>61.3 MB</td>
+              <td>
+                <pre><code>7dbb4cbd4f6d661e82bc41ff0d93bc4b37bf5f90145ca4edc91bcc6e6ae5f7b5</code></pre>
+              </td>
+            </tr>
+            <tr><th>
+                <code>x86_64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.2-1/Miniforge3-4.8.2-1-Linux-x86_64.sh"
+                   title="Download Miniforge3 4.8.2-1 for Linux on x86_64">
+                  Miniforge3-4.8.2-1-Linux-x86_64.sh
+                </a>
+              </td>
+              <td>107.4 MB</td>
+              <td>
+                <pre><code>4f897e503bd0edfb277524ca5b6a5b14ad818b3198c2f07a36858b7d88c928db</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </summary></article>
+      
+      
+      <article id="4.8.2-0">
+        <h3>
+          Miniforge 4.8.2-0
+          <a title="Link to 4.8.2-0" href="#4.8.2-0">#</a>
+        </h3><details><summary><label>
+          1 artifact
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.8.2-0">released</a>
+          <span title="2020-02-02T03:12:06Z">2020-02-02</span>
+        </label></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="1">Miniforge3</th>
+              <th rowspan="1">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.8.2-0/Miniforge3-4.8.2-0-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.8.2-0 for Linux on aarch64">
+                  Miniforge3-4.8.2-0-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>63.9 MB</td>
+              <td>
+                <pre><code>279ffbd86bec7a8c7a3a01fa996f4b5cf1937bb613a586fadac9129cfa09ab3e</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </summary></article>
+      
+      
+      <article id="4.7.12-1">
+        <h3>
+          Miniforge 4.7.12-1
+          <a title="Link to 4.7.12-1" href="#4.7.12-1">#</a>
+        </h3><details><summary><label>
+          1 artifact
+          <a href="https://github.com/conda-forge/miniforge/releases/tag/4.7.12-1">released</a>
+          <span title="2019-11-21T05:07:02Z">2019-11-21</span>
+        </label></summary>
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>OS</th>
+              <th>Arch</th>
+              <th>Artifact</th>
+              <th>Size</th>
+              <th>SHA256<th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="variant-row">
+              <th rowspan="1">Miniforge3</th>
+              <th rowspan="1">Linux</th>
+              <th>
+                <code>aarch64</code>
+              </th>
+              <td>
+                <a href="https://github.com/conda-forge/miniforge/releases/download/4.7.12-1/Miniforge3-4.7.12-1-Linux-aarch64.sh"
+                   title="Download Miniforge3 4.7.12-1 for Linux on aarch64">
+                  Miniforge3-4.7.12-1-Linux-aarch64.sh
+                </a>
+              </td>
+              <td>52.3 MB</td>
+              <td>
+                <pre><code>afe2e8dee5939e3890772bf3936144e783b0c9727531b4543ce349fd01f1df50</code></pre>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+        </summary></article>
+      </main>
+    <footer>
+      &copy; 2021 Miniforge Contributors
+    </footer>
+</html>
