@@ -1,4 +1,4 @@
-name: Auto-update conda & mamba
+name: Auto-update mamba
 on:
  schedule:
    - cron: "0 */6 * * *"
@@ -19,12 +19,12 @@ jobs:
         # This is the v3 tag but for security purposes we pin to the exact commit.
         uses: peter-evans/create-pull-request@052fc72b4198ba9fbc81b818c6e1859f747d49a8
         with:
-          commit-message: "Update conda/mamba version"
-          title: "Update conda/mamba version"
+          commit-message: "Update mamba version"
+          title: "Update mamba version"
           body: |
             This PR was created by the autoupdate action as it detected that
-            either the conda or mamba version has changed and thus should be
-            updated in the configuration.
+            the mamba version has changed and thus should be updated
+            in the configuration.
 
             Due to limitations of Github Actions, you will need to close/reopen
             the PR to get the actions running.
