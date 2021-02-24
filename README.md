@@ -84,9 +84,25 @@ or if you are on windows, run:
 
     start /wait "" build/Miniforge3-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=%UserProfile%\Miniforge3
 
+### Downloading the installer as part of a CI pipeline
+
+If you wish to download the appropriate installer through the command line in a
+more automated fashion, you may wish to a command similar to
+
+    # For Linux, any architecture, use the following command
+    wget -O Miniforge3.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh
+    # For MacOSX, any architecture, use the following command
+    curl -fsSLo Miniforge3.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-$(uname -m).sh
+
+This will download the appropriate installer for the present architecture with
+the filename ``Miniforge3.sh``. Run the shell script with the command in batch
+mode with the `-b` flash:
+
+    bash Miniforge3.sh -b
+
 ### Homebrew
 
-On macOS, you can install miniforge with [Homebrew](https://brew.sh/) by running 
+On macOS, you can install miniforge with [Homebrew](https://brew.sh/) by running
 
     brew install miniforge
 
