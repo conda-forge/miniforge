@@ -89,9 +89,12 @@ or if you are on windows, run:
 If you wish to download the appropriate installer through the command line in a
 more automated fashion, you may wish to a command similar to
 
-    # For Linux, any architecture, use the following command
+For Linux, any architecture, use the following command
+
     wget -O Miniforge3.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh
-    # For MacOSX, any architecture, use the following command
+
+For MacOSX, any architecture, use the following command
+
     curl -fsSLo Miniforge3.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-$(uname -m).sh
 
 This will download the appropriate installer for the present architecture with
