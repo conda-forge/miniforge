@@ -11,7 +11,7 @@ cd $CONSTRUCT_ROOT
 # Constructor should be latest for non-native building
 # See https://github.com/conda/constructor
 echo "***** Install constructor *****"
-conda install -y "constructor>=3.1.0" jinja2 -c conda-forge -c defaults --override-channels
+conda install -y "constructor>=3.1.0" jinja2 tree -c conda-forge -c defaults --override-channels
 if [[ "$(uname)" == "Darwin" ]]; then
     conda install -y coreutils -c conda-forge -c defaults --override-channels
 elif [[ "$(uname)" == MINGW* ]]; then
@@ -41,7 +41,8 @@ if [[ $(uname -r) != "$ARCH" ]]; then
 fi
 
 echo "***** Construct the installer *****"
-constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR $EXTRA_CONSTRUCTOR_ARGS
+constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR $EXTRA_CONSTRUCTOR_ARGS || \
+    (tree /home/conda/.conda/constructor && exit 1)
 
 echo "***** Generate installer hash *****"
 cd $TEMP_DIR
