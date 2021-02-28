@@ -11,6 +11,7 @@ channels:
   # - https://conda.anaconda.org/conda-forge
   - conda-forge
 
+transmute_file_type: '.conda'
 write_condarc: True
 # keep pkgs for space-saving implications for hardlinks when create new environments
 # and keep the same with Miniconda
