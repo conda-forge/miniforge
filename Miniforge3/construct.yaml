@@ -31,5 +31,4 @@ specs:
   - conda {{ version.split("-")[0] }}
 
   - pip
-  - bzip2
   - miniforge_console_shortcut  # [win]
