@@ -1,0 +1,17 @@
+name: Check for new conda releases
+on:
+ schedule:
+   - cron: "0 */6 * * *"
+jobs:
+  check_conda_release:
+    name: "Check for release and open issue"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.1.0
+      - name: Run Actions script
+        uses: actions/github-script@v3
+        with:
+          script: |
+            const script = require(`${process.env.GITHUB_WORKSPACE}/.github/workflows/conda_release.js`)
+            console.log(script({github, context}))
