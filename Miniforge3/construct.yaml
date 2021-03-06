@@ -26,7 +26,7 @@ specs:
 {% endif %}
 
 {% if name.startswith("Mambaforge") %}
-  - mamba 0.7.12
+  - mamba 0.7.14
 {% endif %}
   - conda {{ version.split("-")[0] }}
 
