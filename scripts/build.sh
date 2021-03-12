@@ -35,7 +35,8 @@ ls -al $TEMP_DIR
 
 if [[ $TARGET_PLATFORM != win-* ]]; then
   CONDA_SUBDIR=$TARGET_PLATFORM conda create -n micromamba micromamba=0.8.2 -c conda-forge --yes
-  EXTRA_CONSTRUCTOR_ARGS="$EXTRA_CONSTRUCTOR_ARGS --conda-exe $CONDA_PREFIX/envs/micromamba/bin/micromamba --platform $TARGET_PLATFORM"
+  MICROMAMBA_FILE=$(find $CONDA_PREFIX/pkgs -iname micromamba)
+  EXTRA_CONSTRUCTOR_ARGS="$EXTRA_CONSTRUCTOR_ARGS --conda-exe $MICROMAMBA_FILE --platform $TARGET_PLATFORM"
 fi
 
 echo "***** Construct the installer *****"
