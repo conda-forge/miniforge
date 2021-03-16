@@ -193,7 +193,7 @@ jobs:
       shell: bash
 
     - name: Upload miniforge to Github artifact
-      if: ${{ failure() }}
+      if: ${{ !startsWith(github.ref, 'refs/tags/') }}
       uses: actions/upload-artifact@v2
       with:
         path: build/${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}*
