@@ -17,7 +17,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
 elif [[ "$(uname)" == MINGW* ]]; then
     conda install -y "nsis=3.01" -c conda-forge -c defaults --override-channels
 fi
-pip install git+git://github.com/isuruf/constructor@432214cc4d41ea3284ed12f08721b9380d508ac5#egg=constructor --force --no-deps
+pip install git+git://github.com/conda/constructor@1fb0463ce01734e95b35c12d8c7ecbc4b29cca85#egg=constructor --force --no-deps
 conda list
 
 echo "***** Make temp directory *****"
