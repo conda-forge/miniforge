@@ -19,16 +19,22 @@ Latest installers with Python 3.8 `(*)` in the base environment:
 | OS      | Architecture          | Download  |
 | --------|-----------------------|-----------|
 | Linux   | x86_64 (amd64)        | [Miniforge3-Linux-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh) |
-| Linux   | aarch64 (arm64)       | [Miniforge3-Linux-aarch64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh) |
+| Linux   | aarch64 (arm64) `(**)` | [Miniforge3-Linux-aarch64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh) |
 | Linux   | ppc64le (POWER8/9)    | [Miniforge3-Linux-ppc64le](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-ppc64le.sh) |
 | OS X    | x86_64                | [Miniforge3-MacOSX-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-x86_64.sh) |
-| OS X    | arm64 (Apple Silicon) `(**)` | [Miniforge3-MacOSX-arm64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh) |
+| OS X    | arm64 (Apple Silicon) `(***)` | [Miniforge3-MacOSX-arm64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh) |
 | Windows | x86_64                | [Miniforge3-Windows-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe) |
 
 `(*)` OS X `arm64` will be installed with Python 3.9.
 The Python version is specific only to the base environment. Conda can create new environments with different Python versions and implementations.
 
-`(**)` Apple silicon builds are experimental and haven't had testing like the other platforms.
+`(**)` While the Raspberry PI includes a 64 bit processor, the
+[RasbianOS](https://www.raspberrypi.org/software/operating-systems/) is built
+on a 32 bit kernel and is not a supported configuration for these installers.
+We recommend using a 64 bit linux distribution such as [Ubuntu for Raspberry
+PI](https://ubuntu.com/raspberry-pi).
+
+`(***)` Apple silicon builds are experimental and haven't had testing like the other platforms.
 
 #### Miniforge-pypy3
 
