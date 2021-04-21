@@ -1,9 +1,18 @@
 Miniforge installer code uses BSD-3-Clause license as stated below.
+
 Binary packages that come with it have their own licensing terms
 and by installing miniforge you agree to the licensing terms of individual
 packages as well. They include different OSI-approved licenses including
 the GNU General Public License and can be found in pkgs/<pkg-name>/info/licenses
 folder.
+
+Miniforge installer comes with a boostrapping executable that is used
+when installing miniforge and is deleted after miniforge is installed.
+The bootstrapping executable uses micromamba, cli11, cpp-filesystem,
+curl, c-ares, krb5, libarchive, libev, lz4, nghttp2, openssl, libsolv,
+nlohmann-json, reproc and zstd. Licenses and copyright notices of these
+projects can be found at the following URL.
+https://github.com/conda-forge/micromamba-feedstock/tree/master/recipe.
 
 =============================================================================
 
