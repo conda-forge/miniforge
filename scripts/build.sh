@@ -3,7 +3,6 @@
 set -xe
 
 echo "***** Start: Building Miniforge installer *****"
-
 CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-$PWD}"
 
 cd $CONSTRUCT_ROOT
@@ -11,11 +10,11 @@ cd $CONSTRUCT_ROOT
 # Constructor should be latest for non-native building
 # See https://github.com/conda/constructor
 echo "***** Install constructor *****"
-conda install -y "constructor>=3.1.0" jinja2 -c conda-forge -c defaults --override-channels
+conda install -y "constructor>=3.1.0" jinja2 curl libarchive -c conda-forge --override-channels
 if [[ "$(uname)" == "Darwin" ]]; then
-    conda install -y coreutils -c conda-forge -c defaults --override-channels
+    conda install -y coreutils -c conda-forge --override-channels
 elif [[ "$(uname)" == MINGW* ]]; then
-    conda install -y "nsis=3.01" -c conda-forge -c defaults --override-channels
+    conda install -y "nsis=3.01" -c conda-forge --override-channels
 fi
 pip install git+git://github.com/conda/constructor@1fb0463ce01734e95b35c12d8c7ecbc4b29cca85#egg=constructor --force --no-deps
 conda list
@@ -33,11 +32,18 @@ cp LICENSE $TEMP_DIR/
 
 ls -al $TEMP_DIR
 
-if [[ $TARGET_PLATFORM != win-* ]]; then
-  CONDA_SUBDIR=$TARGET_PLATFORM conda create -n micromamba micromamba=0.8.2 -c conda-forge --yes
-  MICROMAMBA_FILE=$(find $CONDA_PREFIX/pkgs -iname micromamba)
-  EXTRA_CONSTRUCTOR_ARGS="$EXTRA_CONSTRUCTOR_ARGS --conda-exe $MICROMAMBA_FILE --platform $TARGET_PLATFORM"
+MICROMAMBA_VERSION=0.11.1
+curl -L -O https://anaconda.org/conda-forge/micromamba/$MICROMAMBA_VERSION/download/$TARGET_PLATFORM/micromamba-$MICROMAMBA_VERSION-0.tar.bz2
+mkdir micromamba
+pushd micromamba
+bsdtar -x micromamba-$MICROMAMBA_VERSION-0.tar.bz2
+if [[ "$TARGET_PLATFORM" == win-* ]]; then
+  MICROMAMBA_FILE=$PWD/Library/bin/micromamba.exe
+else
+  MICROMAMBA_FILE=$PWD/bin/micromamba
 fi
+popd
+EXTRA_CONSTRUCTOR_ARGS="$EXTRA_CONSTRUCTOR_ARGS --conda-exe $MICROMAMBA_FILE --platform $TARGET_PLATFORM"
 
 echo "***** Construct the installer *****"
 constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR $EXTRA_CONSTRUCTOR_ARGS
