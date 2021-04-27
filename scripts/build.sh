@@ -32,7 +32,7 @@ cp LICENSE $TEMP_DIR/
 
 ls -al $TEMP_DIR
 
-MICROMAMBA_VERSION=0.11.3
+MICROMAMBA_VERSION=0.12.0
 mkdir $TEMP_DIR/micromamba
 pushd $TEMP_DIR/micromamba
 curl -L -O https://anaconda.org/conda-forge/micromamba/$MICROMAMBA_VERSION/download/$TARGET_PLATFORM/micromamba-$MICROMAMBA_VERSION-0.tar.bz2
