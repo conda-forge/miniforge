@@ -1,4 +1,4 @@
-{% set version = os.environ.get("MINIFORGE_VERSION", "4.9.2-0") %}
+{% set version = os.environ.get("MINIFORGE_VERSION", "4.10.1-0") %}
 {% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
 
 name: {{ name }}
@@ -19,14 +19,13 @@ license_file: ../LICENSE
 
 specs:
 {% if name.endswith("pypy3") %}
-  - python 3.6.* *_pypy
+  - python 3.7.* *_pypy
 {% else %}
-  - python 3.8.*    # [not (osx and arm64)]
-  - python 3.9.*    # [osx and arm64]
+  - python 3.9.*
 {% endif %}
 
 {% if name.startswith("Mambaforge") %}
-  - mamba 0.8.0
+  - mamba 0.11.3
 {% endif %}
   - conda {{ version.split("-")[0] }}
 
