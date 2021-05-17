@@ -10,16 +10,13 @@ cd $CONSTRUCT_ROOT
 # Constructor should be latest for non-native building
 # See https://github.com/conda/constructor
 echo "***** Install constructor *****"
-if [[ "${TARGET_PLATFORM}" == "linux-ppc64le" ]]; then
-  USE_DEFAULTS="-c defaults"
-fi
-
-conda install -y "constructor>=3.1.0" jinja2 curl libarchive -c conda-forge $USE_DEFAULTS --override-channels
+conda install -y "constructor>=3.1.0" jinja2 curl libarchive -c conda-forge --override-channels
 
 
 if [[ "$(uname)" == "Darwin" ]]; then
     conda install -y coreutils -c conda-forge --override-channels
-elif [[ "$(uname)" == MINGW* ]]; then
+fi
+if [[ "$TARGET_PLATFORM" == win-* ]]; then
     conda install -y "nsis=3.01" -c conda-forge --override-channels
 fi
 pip install git+git://github.com/wolfv/constructor@69eaa20b12ea1020438f645ec834f47ac9d3c3a7#egg=constructor --force --no-deps
