@@ -189,6 +189,9 @@ jobs:
         fi
         # Copy for latest release
         cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.$EXT build/$MINIFORGE_NAME-$OS_NAME-$ARCH.$EXT
+        if [[ "$OS_NAME" == "MacOSX" ]]; then
+          cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.$EXT build/$MINIFORGE_NAME-Darwin-$ARCH.$EXT
+        fi
         ls -alh build
       shell: bash
 
