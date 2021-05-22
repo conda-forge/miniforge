@@ -67,11 +67,22 @@ Latest installers with Mamba and PyPy 3.7 in the base environment:
 
 ## Install
 
-To install download the installer and run,
+### Unix-like platforms
 
-    bash Miniforge3-Linux-x86_64.sh   # or similar for other installers for unix platforms
+Download the installer using curl or wget or your favorite program download files and run the script.
+For eg:
 
-or if you are on Windows, double click on the installer.
+    curl -L -O https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh
+    bash Mambaforge-$(uname)-$(uname -m).sh
+
+or
+
+    wget https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh
+    bash Mambaforge-$(uname)-$(uname -m).sh
+
+### Windows
+
+Download the installer and double click it on the file browser.
 
 ### Non-interactive install
 
