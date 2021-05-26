@@ -35,18 +35,20 @@ cp LICENSE $TEMP_DIR/
 
 ls -al $TEMP_DIR
 
-MICROMAMBA_VERSION=0.13.0
-mkdir $TEMP_DIR/micromamba
-pushd $TEMP_DIR/micromamba
-curl -L -O https://anaconda.org/conda-forge/micromamba/$MICROMAMBA_VERSION/download/$TARGET_PLATFORM/micromamba-$MICROMAMBA_VERSION-0.tar.bz2
-bsdtar -xf micromamba-$MICROMAMBA_VERSION-0.tar.bz2
-if [[ "$TARGET_PLATFORM" == win-* ]]; then
-  MICROMAMBA_FILE=$PWD/Library/bin/micromamba.exe
-else
-  MICROMAMBA_FILE=$PWD/bin/micromamba
+if [[ "$TARGET_PLATFORM" != win-* ]]; then
+    MICROMAMBA_VERSION=0.13.0
+    mkdir $TEMP_DIR/micromamba
+    pushd $TEMP_DIR/micromamba
+    curl -L -O https://anaconda.org/conda-forge/micromamba/$MICROMAMBA_VERSION/download/$TARGET_PLATFORM/micromamba-$MICROMAMBA_VERSION-0.tar.bz2
+    bsdtar -xf micromamba-$MICROMAMBA_VERSION-0.tar.bz2
+    if [[ "$TARGET_PLATFORM" == win-* ]]; then
+      MICROMAMBA_FILE=$PWD/Library/bin/micromamba.exe
+    else
+      MICROMAMBA_FILE=$PWD/bin/micromamba
+    fi
+    popd
+    EXTRA_CONSTRUCTOR_ARGS="$EXTRA_CONSTRUCTOR_ARGS --conda-exe $MICROMAMBA_FILE --platform $TARGET_PLATFORM"
 fi
-popd
-EXTRA_CONSTRUCTOR_ARGS="$EXTRA_CONSTRUCTOR_ARGS --conda-exe $MICROMAMBA_FILE --platform $TARGET_PLATFORM"
 
 echo "***** Construct the installer *****"
 constructor $TEMP_DIR/Miniforge3/ --output-dir $TEMP_DIR $EXTRA_CONSTRUCTOR_ARGS
