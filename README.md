@@ -8,7 +8,7 @@ Miniforge allows you to install the conda package manager with the following fea
     * Packages in the base environment are obtained from the [conda-forge channel](https://anaconda.org/conda-forge).
 * Optional support for PyPy in place of standard Python interpretter (aka "CPython").
 * Optional support for [Mamba](https://github.com/mamba-org/mamba) in place of Conda.
-* An emphasis on supporting various CPU architectures (x86_64, ppc64le, and aarch64 including M1).
+* An emphasis on supporting various CPU architectures (x86_64, ppc64le, and aarch64 including Apple M1).
 
 It can be compared to the [Miniconda](https://docs.conda.io/en/latest/miniconda.html) installer.
 
