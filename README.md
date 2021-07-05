@@ -5,10 +5,10 @@ This repository holds a minimal installer for [Conda](https://conda.io/) specifi
 Miniforge allows you to install the conda package manager with the following features pre-configured:
 
 * [conda-forge](https://conda-forge.org/) set as the default (and only) channel.
-    * Packages in the base environment are sourced from the conda-forge channel.
-* Optional support for PyPy in place of standard Python interpretter(aka "CPython").
+    * Packages in the base environment are obtained from the [conda-forge channel](https://anaconda.org/conda-forge).
+* Optional support for PyPy in place of standard Python interpretter (aka "CPython").
 * Optional support for [Mamba](https://github.com/mamba-org/mamba) in place of Conda.
-* An emphasis on supporting various CPU architectures (aarch64, ppc64le, x86_64, M1).
+* An emphasis on supporting various CPU architectures (x86_64, ppc64le, and aarch64 including M1).
 
 It can be compared to the [Miniconda](https://docs.conda.io/en/latest/miniconda.html) installer.
 
