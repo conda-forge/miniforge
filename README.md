@@ -94,7 +94,7 @@ conda init --reverse --dry-run
 conda init --reverse
 ```
 
-2. Remove the folder and all subfolders where the base environment (Miniforge) was installed:
+2. Remove the folder and all subfolders where the base environment for Miniforge was installed:
 
 ```bash
 CONDA_BASE_ENVIRONMENT=$(conda info --base)
@@ -104,6 +104,7 @@ echo The next command will delete all files in ${CONDA_BASE_ENVIRONMENT}
 # To make sure you are deleting the correct directory
 rm -rf ${CONDA_BASE_ENVIRONMENT}
 ```
+
 3. Any global conda configuration files that are left behind.
 
 ```bash
