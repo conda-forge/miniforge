@@ -17,7 +17,7 @@ jobs:
       - name: Create Pull Request
         id: cpr
         # This is the v3 tag but for security purposes we pin to the exact commit.
-        uses: peter-evans/create-pull-request@052fc72b4198ba9fbc81b818c6e1859f747d49a8
+        uses: peter-evans/create-pull-request@9825ae65b1cb54b543b938503728b432a0176d29
         with:
           commit-message: "Update mamba version"
           title: "Update mamba version"
