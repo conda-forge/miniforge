@@ -2,6 +2,8 @@
 
 set -xe
 
+env | sort
+
 echo "***** Start: Building Miniforge installer *****"
 CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-$PWD}"
 

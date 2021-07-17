@@ -2,16 +2,21 @@
 # Build miniforge installers for Linux
 # on various architectures (aarch64, x86_64, ppc64le)
 # Notes:
-# It uses the qemu-user-static [1] emulator to enable
+# It uses the qemu emulator (see [1] or [2]) to enable
 # the use of containers images with different architectures than the host
 # [1]: https://github.com/multiarch/qemu-user-static/
+# [2]: https://github.com/tonistiigi/binfmt
 # See also: [setup-qemu-action](https://github.com/docker/setup-qemu-action)
 set -ex
 
 # Check parameters
 ARCH=${ARCH:-aarch64}
+export TARGET_PLATFORM=${TARGET_PLATFORM:-linux-aarch64}
 DOCKER_ARCH=${DOCKER_ARCH:-arm64v8}
 DOCKERIMAGE=${DOCKERIMAGE:-condaforge/linux-anvil-aarch64}
+export MINIFORGE_NAME=${MINIFORGE_NAME:-Miniforge3}
+OS_NAME=${OS_NAME:-Linux}
+EXT=${EXT:-sh}
 export CONSTRUCT_ROOT=/construct
 
 echo "============= Create build directory ============="
@@ -20,8 +25,7 @@ chmod 777 build/
 
 echo "============= Enable QEMU ============="
 # Enable qemu in persistent mode
-docker run --rm --privileged multiarch/qemu-user-static \
-  --reset --credential yes --persistent yes
+docker run --privileged --rm tonistiigi/binfmt --install all
 
 echo "============= Build the installer ============="
 docker run --rm -v "$(pwd):/construct" \
