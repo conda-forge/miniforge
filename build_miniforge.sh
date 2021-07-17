@@ -10,8 +10,12 @@ set -ex
 
 # Check parameters
 ARCH=${ARCH:-aarch64}
+export TARGET_PLATFORM=${TARGET_PLATFORM:-linux-aarch64}
 DOCKER_ARCH=${DOCKER_ARCH:-arm64v8}
 DOCKERIMAGE=${DOCKERIMAGE:-condaforge/linux-anvil-aarch64}
+export MINIFORGE_NAME=${MINIFORGE_NAME:-Miniforge3}
+OS_NAME=${OS_NAME:-Linux}
+EXT=${EXT:-sh}
 export CONSTRUCT_ROOT=/construct
 
 echo "============= Create build directory ============="
