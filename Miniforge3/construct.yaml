@@ -30,4 +30,4 @@ specs:
   - conda {{ version.split("-")[0] }}
 
   - pip
-  - miniforge_console_shortcut  # [win]
+  - miniforge_console_shortcut 1.*  # [win]
