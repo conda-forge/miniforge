@@ -4,29 +4,30 @@ set -ex
 
 echo "***** Start: Testing Miniforge installer *****"
 
-export CONDA_PATH="$HOME/miniforge"
+export CONDA_PATH="${HOME}/miniforge"
 
-CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-$PWD}"
+CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-${PWD}}"
 
-cd ${CONSTRUCT_ROOT}
+cd "${CONSTRUCT_ROOT}"
 
 echo "***** Get the installer *****"
 ls build/
 if [[ "$(uname)" == MINGW* ]]; then
-   EXT=exe;
+   EXT="exe";
 else
-   EXT=sh;
+   EXT="sh";
 fi
-INSTALLER_PATH=$(find build/ -name "*forge*.$EXT" | head -n 1)
+INSTALLER_PATH=$(find build/ -name "*forge*.${EXT}" | head -n 1)
 
 echo "***** Run the installer *****"
-chmod +x $INSTALLER_PATH
+chmod +x "${INSTALLER_PATH}"
 if [[ "$(uname)" == MINGW* ]]; then
-  echo "start /wait \"\" ${INSTALLER_PATH} /InstallationType=JustMe /RegisterPython=0 /S /D=$(cygpath -w $CONDA_PATH)" > install.bat
+  echo "start /wait \"\" ${INSTALLER_PATH} /InstallationType=JustMe /RegisterPython=0 /S /D=$(cygpath -w "${CONDA_PATH}")" > install.bat
   cmd.exe /c install.bat
 
   echo "***** Setup conda *****"
-  source $CONDA_PATH/Scripts/activate
+  # shellcheck disable=SC1091
+  source "${CONDA_PATH}/Scripts/activate"
   conda.exe config --set show_channel_urls true
 
   echo "***** Print conda info *****"
@@ -41,10 +42,11 @@ if [[ "$(uname)" == MINGW* ]]; then
   conda.exe install r-base --yes --quiet
   conda.exe list
 else
-  bash $INSTALLER_PATH -b -p $CONDA_PATH
+  bash "${INSTALLER_PATH}" -b -p "${CONDA_PATH}"
 
   echo "***** Setup conda *****"
-  source $CONDA_PATH/bin/activate
+  # shellcheck disable=SC1091
+  source "${CONDA_PATH}/bin/activate"
 
   echo "***** Print conda info *****"
   conda info
