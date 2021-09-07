@@ -1,5 +1,12 @@
 name: Build miniforge
-on: [push, pull_request]
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  release:
+    # published = released or prereleased
+    types: [published]
 
 jobs:
   build:
@@ -234,4 +241,21 @@ jobs:
         tag: ${{ github.ref }}
         overwrite: true
         file_glob: true
+      if: startsWith(github.ref, 'refs/tags/')
+
+  scan:
+    name: VirusTotal Scan
+    needs: [build]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+    - name: Scan
+      uses: crazy-max/ghaction-virustotal@v3
+      with:
+        vt_api_key: ${{ secrets.VT_API_KEY }}
+        update_release_body: true
+        request_rate: 4
+        files: |
+          .sh$
+          .exe$
       if: startsWith(github.ref, 'refs/tags/')
