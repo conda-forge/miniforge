@@ -41,6 +41,9 @@ if [[ "$(uname)" == MINGW* ]]; then
   echo "***** Check if we can install a package which requires msys2 *****"
   conda.exe install r-base --yes --quiet
   conda.exe list
+
+  echo "***** Run conda update *****"
+  conda.exe update --all --yes
 else
   bash "${INSTALLER_PATH}" -b -p "${CONDA_PATH}"
 
@@ -51,12 +54,12 @@ else
   echo "***** Print conda info *****"
   conda info
   conda list
+
+  # Try to update packages
+  # https://github.com/conda-forge/conda-feedstock/pull/135#issuecomment-915377400
+  echo "***** Run conda update *****"
+  conda update --all --yes
 fi
-
-
-# 2020/09/15: Running conda update switches from pypy to cpython. Not sure why
-# echo "***** Run conda update *****"
-# conda update --all -y
 
 echo "***** Python path *****"
 python -c "import sys; print(sys.executable)"
