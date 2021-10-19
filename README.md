@@ -90,6 +90,38 @@ or
     wget https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh
     bash Mambaforge-$(uname)-$(uname -m).sh
 
+#### Uninstallation
+
+Uninstalling Miniforge means removing the files that were created during the installation process.
+You will typically want to remove:
+
+1. Any modifications to your shell rc files that were made by Miniforge:
+
+```bash
+# Use this first command to see what rc files will be updated
+conda init --reverse --dry-run
+# Use this next command to take action on the rc files listed above
+conda init --reverse
+```
+
+2. Remove the folder and all subfolders where the base environment for Miniforge was installed:
+
+```bash
+CONDA_BASE_ENVIRONMENT=$(conda info --base)
+echo The next command will delete all files in ${CONDA_BASE_ENVIRONMENT}
+# Warning, the rm command below is irreversible!
+# check the output of the echo command above
+# To make sure you are deleting the correct directory
+rm -rf ${CONDA_BASE_ENVIRONMENT}
+```
+
+3. Any global conda configuration files that are left behind.
+
+```bash
+echo ${HOME}/.condarc will be removed if it exists
+rm -f ${HOME}/.condarc
+```
+
 ### Windows
 
 Download the installer and double click it on the file browser.
@@ -150,7 +182,7 @@ After construction on the CI, the installer is tested against a range of distrib
 - Ubuntu 20.04 ([LTS](https://ubuntu.com/about/release-cycle))
 - Ubuntu 21.04 (Latest non-LTS version)
 
-## Usage
+## Local usage
 
 Installers are built and uploaded via the CI but if you want to construct your own Miniforge installer, here is how:
 
