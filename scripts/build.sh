@@ -14,7 +14,7 @@ cd "${CONSTRUCT_ROOT}"
 echo "***** Install constructor *****"
 # pyyaml 6 broke constructor
 # https://github.com/conda/constructor/pull/473
-mamba install -y "constructor>=3.1.0" "pyyaml<6" jinja2 curl libarchive -c conda-forge --override-channels
+conda install -y "constructor>=3.1.0" "pyyaml<6" jinja2 curl libarchive -c conda-forge --override-channels
 
 
 if [[ "$(uname)" == "Darwin" ]]; then
