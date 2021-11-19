@@ -38,6 +38,7 @@ cp "build/${MINIFORGE_NAME}-"*"-${OS_NAME}-${ARCH}.${EXT}" "build/${MINIFORGE_NA
 echo "============= Test the installer ============="
 for TEST_IMAGE_NAME in "ubuntu:21.04" "ubuntu:20.04" "ubuntu:18.04" "ubuntu:16.04" "centos:7" "debian:bullseye" "debian:buster" "opensuse/tumbleweed"; do
   echo "============= Test installer on ${TEST_IMAGE_NAME} ============="
-  docker run --rm -v "$(pwd):/construct" -e CONSTRUCT_ROOT \
-    "${DOCKER_ARCH}/${TEST_IMAGE_NAME}" /construct/scripts/test.sh
+  docker run --platform=${DOCKER_ARCH} \
+      --rm -v "$(pwd):/construct" -e CONSTRUCT_ROOT \
+    "${TEST_IMAGE_NAME}" /construct/scripts/test.sh
 done
