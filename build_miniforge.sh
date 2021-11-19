@@ -33,12 +33,17 @@ docker run --rm -v "$(pwd):/construct" \
   "${DOCKERIMAGE}" /construct/scripts/build.sh
 
 # copy the installer for latest
-cp "build/${MINIFORGE_NAME}-"*"-${OS_NAME}-${ARCH}.${EXT}" "build/${MINIFORGE_NAME}-${OS_NAME}-${ARCH}.${EXT}"
+FORGE_INSTALLER_LATEST="${MINIFORGE_NAME}-${OS_NAME}-${ARCH}.${EXT}"
+export INSTALLER_PATH="build/${FORGE_INSTALLER_LATEST}"
+cp "build/${MINIFORGE_NAME}-"*"-${OS_NAME}-${ARCH}.${EXT}" "${INSTALLER_PATH}"
+
 
 echo "============= Test the installer ============="
-for TEST_IMAGE_NAME in "ubuntu:21.04" "ubuntu:20.04" "ubuntu:18.04" "ubuntu:16.04" "centos:7" "debian:bullseye" "debian:buster" "opensuse/tumbleweed"; do
+A
+for TEST_IMAGE_NAME in "opensuse/tumbleweed" "ubuntu:21.04" "ubuntu:20.04" "ubuntu:18.04" "ubuntu:16.04" "centos:7" "debian:bullseye" "debian:buster"; do
   echo "============= Test installer on ${TEST_IMAGE_NAME} ============="
   docker run --platform=${DOCKER_ARCH} \
-      --rm -v "$(pwd):/construct" -e CONSTRUCT_ROOT \
+      --rm -v "$(pwd):/construct" \
+      -e INSTALLER_PATH -e CONSTRUCT_ROOT \
     "${TEST_IMAGE_NAME}" /construct/scripts/test.sh
 done

@@ -17,7 +17,9 @@ if [[ "$(uname)" == MINGW* ]]; then
 else
    EXT="sh";
 fi
-INSTALLER_PATH=$(find build/ -name "*forge*.${EXT}" | head -n 1)
+if [[ "${INSTALLER_PATH}" == "" ]]; then
+    INSTALLER_PATH=$(find build/ -name "*forge*.${EXT}" | head -n 1)
+fi
 
 echo "***** Run the installer *****"
 chmod +x "${INSTALLER_PATH}"
