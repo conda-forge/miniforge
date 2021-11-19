@@ -41,7 +41,12 @@ cp "build/${MINIFORGE_NAME}-"*"-${OS_NAME}-${ARCH}.${EXT}" "${INSTALLER_PATH}"
 echo "============= Test the installer ============="
 for TEST_IMAGE_NAME in "opensuse/tumbleweed" "ubuntu:21.04" "ubuntu:20.04" "ubuntu:18.04" "ubuntu:16.04" "centos:7" "debian:bullseye" "debian:buster"; do
   echo "============= Test installer on ${TEST_IMAGE_NAME} ============="
-  docker run --platform=${DOCKER_ARCH} \
+  DOCKER_PLATFORM="${DOCKER_ARCH}"
+  if [[ "${TEST_IMAGE_NAME}" == "opensuse/tumbleweed" ]] && [[ "${DOCKER_ARCH}" == "arm64v8" ]]; then
+    # OpenSUSE has slightly different naming conventions
+    DOCKER_PLATFORM=aarch64
+  fi
+  docker run --platform=${DOCKER_PLATFORM} \
       --rm -v "$(pwd):/construct" \
       -e INSTALLER_PATH -e CONSTRUCT_ROOT \
     "${TEST_IMAGE_NAME}" /construct/scripts/test.sh
