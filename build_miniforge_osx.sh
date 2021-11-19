@@ -4,14 +4,15 @@ set -e
 set -x
 
 echo "Installing a fresh version of Miniforge3."
-MINIFORGE_URL="https://github.com/conda-forge/miniforge/releases/download/4.8.3-1"
-MINIFORGE_FILE="Miniforge3-4.8.3-1-MacOSX-x86_64.sh"
+MINIFORGE_VERSION="4.10.3-10"
+MINIFORGE_URL="https://github.com/conda-forge/miniforge/releases/download/${MINIFORGE_VERSION}"
+MINIFORGE_FILE="Mambaforge-${MINIFORGE_VERSION}-MacOSX-x86_64.sh"
 curl -L -O "${MINIFORGE_URL}/${MINIFORGE_FILE}"
 bash "${MINIFORGE_FILE}" -b
 
 echo "Configuring conda."
 # shellcheck disable=SC1090
-source ~/miniforge3/bin/activate root
+source ~/mambaforge/bin/activate root
 
 export CONSTRUCT_ROOT="${PWD}"
 mkdir -p build
