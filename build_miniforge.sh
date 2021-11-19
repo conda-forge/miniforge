@@ -39,7 +39,6 @@ cp "build/${MINIFORGE_NAME}-"*"-${OS_NAME}-${ARCH}.${EXT}" "${INSTALLER_PATH}"
 
 
 echo "============= Test the installer ============="
-A
 for TEST_IMAGE_NAME in "opensuse/tumbleweed" "ubuntu:21.04" "ubuntu:20.04" "ubuntu:18.04" "ubuntu:16.04" "centos:7" "debian:bullseye" "debian:buster"; do
   echo "============= Test installer on ${TEST_IMAGE_NAME} ============="
   docker run --platform=${DOCKER_ARCH} \
