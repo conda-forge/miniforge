@@ -194,6 +194,15 @@ export DOCKERIMAGE=condaforge/linux-anvil-aarch64
 bash build_miniforge.sh
 ```
 
+## Rosetta on Mac with Apple Silicon Hardware
+To create new environments that use packages compiled for Intel chips (using rosetta) one should use `CONDA_SUBDIR=osx-64`.
+This environment variable should be used upon creation and permanently set in the respective environment:
+```bash
+CONDA_SUBDIR=osx-64 conda create -n [environment]   # create a new environment
+conda activate [environment]
+conda env config vars set CONDA_SUBDIR=osx-64  # subsequent commands use intel packages
+```
+
 ## Release
 
 To release a new version of Miniforge:
