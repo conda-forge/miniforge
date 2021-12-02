@@ -10,8 +10,12 @@ miniforge_arch="$(uname -m)"
 miniforge_version="4.10.3-10"
 condapkg="https://github.com/conda-forge/miniforge/releases/download/${miniforge_version}/Mambaforge-${miniforge_version}-MacOSX-${miniforge_arch}.sh"
 if [ "$(uname -m)" = "x86_64" ]; then
+   # hmaarrfk: 2021/12/01 Not too sure how to check sha256sums on OSX
+   # shellcheck disable=SC2034
    conda_chksum="7c44259a0982cd3ef212649678af5f0dd4e0bb7306e8fffc93601dd1d739ec0b"
 elif [ "$(uname -m)" = "arm64" ]; then
+   # hmaarrfk: 2021/12/01 Not too sure how to check sha256sums on OSX
+   # shellcheck disable=SC2034
    conda_chksum="72bc86612ab9435915b616c2edb076737cbabe2c33fd684d58c2f9ae72e1957c"
 else
    exit 1
