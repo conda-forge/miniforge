@@ -17,7 +17,8 @@ else
    exit 1
 fi
 curl -s -L "$condapkg" > miniconda.sh
-sha256sum miniconda.sh | grep $conda_chksum
+# hmaarrfk: 2021/12/01 Not too sure how to check sha256sums on OSX
+# sha256sum miniconda.sh | grep $conda_chksum
 
 bash miniconda.sh -b -p ~/conda
 
