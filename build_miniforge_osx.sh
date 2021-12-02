@@ -16,12 +16,13 @@ elif [ "$(uname -m)" = "arm64" ]; then
 else
    exit 1
 fi
-curl -s -L $condapkg > miniconda.sh
+curl -s -L "$condapkg" > miniconda.sh
 sha256sum miniconda.sh | grep $conda_chksum
 
 bash miniconda.sh -b -p ~/conda
 
 echo "Configuring conda."
+# shellcheck disable=SC1090
 source ~/conda/bin/activate root
 
 export CONSTRUCT_ROOT="${PWD}"
