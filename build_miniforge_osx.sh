@@ -22,7 +22,6 @@ sha256sum miniconda.sh | grep $conda_chksum
 bash miniconda.sh -b -p ~/conda
 
 echo "Configuring conda."
-# shellcheck disable=SC1090
 source ~/conda/bin/activate root
 
 export CONSTRUCT_ROOT="${PWD}"
