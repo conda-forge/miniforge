@@ -82,12 +82,12 @@ Latest installers with Mamba and PyPy 3.7 in the base environment:
 Download the installer using curl or wget or your favorite program download files and run the script.
 For eg:
 
-    curl -L -O https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh
+    curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
     bash Mambaforge-$(uname)-$(uname -m).sh
 
 or
 
-    wget https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh
+    wget "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
     bash Mambaforge-$(uname)-$(uname -m).sh
 
 #### Uninstallation
@@ -119,7 +119,7 @@ rm -rf ${CONDA_BASE_ENVIRONMENT}
 
 ```bash
 echo ${HOME}/.condarc will be removed if it exists
-rm -f ${HOME}/.condarc
+rm -f "${HOME}/.condarc"
 ```
 
 ### Windows
@@ -143,11 +143,11 @@ more automated fashion, you may wish to a command similar to
 
 For Linux, any architecture, use the following command
 
-    wget -O Miniforge3.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh
+    wget -O Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
 
 For MacOSX, any architecture, use the following command
 
-    curl -fsSLo Miniforge3.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-$(uname -m).sh
+    curl -fsSLo Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-$(uname -m).sh"
 
 This will download the appropriate installer for the present architecture with
 the filename ``Miniforge3.sh``. Run the shell script with the command in batch
