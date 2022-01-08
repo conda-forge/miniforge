@@ -9,26 +9,26 @@
 # See also: [setup-qemu-action](https://github.com/docker/setup-qemu-action)
 set -ex
 
-HOST_ARCH=$(uname -m)
+BUILD_ARCH=$(uname -m)
 # Check parameters
-ARCH=${ARCH:-${HOST_ARCH}}
-if [[ "${HOST_ARCH}" == "x86_64" ]]; then
+ARCH=${ARCH:-${BUILD_ARCH}}
+if [[ "${BUILD_ARCH}" == "x86_64" ]]; then
     export TARGET_PLATFORM=${TARGET_PLATFORM:-linux-64}
 else
-    export TARGET_PLATFORM=${TARGET_PLATFORM:-linux-${HOST_ARCH}}
+    export TARGET_PLATFORM=${TARGET_PLATFORM:-linux-${BUILD_ARCH}}
 fi
-if [[ "${HOST_ARCH}" == "aarch64" ]]; then
+if [[ "${BUILD_ARCH}" == "aarch64" ]]; then
     DOCKER_ARCH=${DOCKER_ARCH:-arm64v8}
-elif [[ "${HOST_ARCH}" == "x86_64" ]]; then
+elif [[ "${BUILD_ARCH}" == "x86_64" ]]; then
     DOCKER_ARCH=${DOCKER_ARCH:-amd64}
 else
-    DOCKER_ARCH=${DOCKER_ARCH:-${HOST_ARCH}}
+    DOCKER_ARCH=${DOCKER_ARCH:-${BUILD_ARCH}}
 fi
 
-if [[ "${HOST_ARCH}" == "x86_64" ]]; then
+if [[ "${BUILD_ARCH}" == "x86_64" ]]; then
     DOCKERIMAGE=${DOCKERIMAGE:-condaforge/linux-anvil-comp7}
 else
-    DOCKERIMAGE=${DOCKERIMAGE:-condaforge/linux-anvil-${HOST_ARCH}}
+    DOCKERIMAGE=${DOCKERIMAGE:-condaforge/linux-anvil-${BUILD_ARCH}}
 fi
 
 export MINIFORGE_NAME=${MINIFORGE_NAME:-Miniforge3}
