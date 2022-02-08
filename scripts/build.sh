@@ -24,7 +24,7 @@ fi
 if [[ "${TARGET_PLATFORM}" == win-* ]]; then
     conda install -y "nsis=3.01" -c conda-forge --override-channels
 fi
-pip install git+git://github.com/wolfv/constructor@69eaa20b12ea1020438f645ec834f47ac9d3c3a7#egg=constructor --force --no-deps
+pip install git+git://github.com/chrisburr/constructor@40c312c8d3f63f9a76b93bf347f05b8e1f7c8228#egg=constructor --force --no-deps
 conda list
 
 echo "***** Make temp directory *****"
