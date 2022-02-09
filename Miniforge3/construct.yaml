@@ -16,6 +16,7 @@ write_condarc: True
 # and keep the same with Miniconda
 keep_pkgs: True
 license_file: ../LICENSE
+transmute_file_type: .conda
 
 specs:
 {% if name.endswith("pypy3") %}
@@ -25,7 +26,7 @@ specs:
 {% endif %}
 
 {% if name.startswith("Mambaforge") %}
-  - mamba 0.20.0
+  - mamba 0.21.0
 {% endif %}
   - conda {{ version.split("-")[0] }}
 
