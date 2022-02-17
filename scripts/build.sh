@@ -12,9 +12,7 @@ cd "${CONSTRUCT_ROOT}"
 # Constructor should be latest for non-native building
 # See https://github.com/conda/constructor
 echo "***** Install constructor *****"
-# pyyaml 6 broke constructor
-# https://github.com/conda/constructor/pull/473
-conda install -y "constructor>=3.1.0" "pyyaml<6" jinja2 curl libarchive -c conda-forge --override-channels
+conda install -y "constructor>=3.1.0" jinja2 curl libarchive -c conda-forge --override-channels
 
 
 if [[ "$(uname)" == "Darwin" ]]; then
@@ -24,7 +22,7 @@ fi
 if [[ "${TARGET_PLATFORM}" == win-* ]]; then
     conda install -y "nsis=3.01" -c conda-forge --override-channels
 fi
-pip install git+git://github.com/chrisburr/constructor@51415f3d62091daae7d21dab84add91d3cc73039#egg=constructor --force --no-deps
+pip install git+git://github.com/chrisburr/constructor@64ebd6d34f0f18684c76c0bebcfab41c38d55083#egg=constructor --force --no-deps
 conda list
 
 echo "***** Make temp directory *****"
@@ -41,7 +39,7 @@ cp LICENSE "${TEMP_DIR}/"
 ls -al "${TEMP_DIR}"
 
 if [[ "${TARGET_PLATFORM}" != win-* ]]; then
-    MICROMAMBA_VERSION=0.21.0
+    MICROMAMBA_VERSION=0.21.2
     mkdir "${TEMP_DIR}/micromamba"
     pushd "${TEMP_DIR}/micromamba"
     curl -L -O "https://anaconda.org/conda-forge/micromamba/${MICROMAMBA_VERSION}/download/${TARGET_PLATFORM}/micromamba-${MICROMAMBA_VERSION}-0.tar.bz2"
@@ -53,7 +51,6 @@ if [[ "${TARGET_PLATFORM}" != win-* ]]; then
     fi
     popd
     EXTRA_CONSTRUCTOR_ARGS="${EXTRA_CONSTRUCTOR_ARGS} --conda-exe ${MICROMAMBA_FILE} --platform ${TARGET_PLATFORM}"
-    conda install -y libmambapy
 fi
 
 echo "***** Construct the installer *****"
