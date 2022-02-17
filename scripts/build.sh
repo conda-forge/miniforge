@@ -24,7 +24,7 @@ fi
 if [[ "${TARGET_PLATFORM}" == win-* ]]; then
     conda install -y "nsis=3.01" -c conda-forge --override-channels
 fi
-pip install git+git://github.com/chrisburr/constructor@51415f3d62091daae7d21dab84add91d3cc73039#egg=constructor --force --no-deps
+pip install git+git://github.com/chrisburr/constructor@64ebd6d34f0f18684c76c0bebcfab41c38d55083#egg=constructor --force --no-deps
 conda list
 
 echo "***** Make temp directory *****"
@@ -53,7 +53,6 @@ if [[ "${TARGET_PLATFORM}" != win-* ]]; then
     fi
     popd
     EXTRA_CONSTRUCTOR_ARGS="${EXTRA_CONSTRUCTOR_ARGS} --conda-exe ${MICROMAMBA_FILE} --platform ${TARGET_PLATFORM}"
-    conda install -y libmambapy
 fi
 
 echo "***** Construct the installer *****"
