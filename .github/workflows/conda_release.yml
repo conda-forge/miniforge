@@ -10,7 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.1.0
       - name: Run Actions script
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         with:
           script: |
             const script = require(`${process.env.GITHUB_WORKSPACE}/.github/workflows/conda_release.js`)
