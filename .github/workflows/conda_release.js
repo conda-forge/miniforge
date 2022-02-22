@@ -41,20 +41,20 @@ module.exports = ({github, context}) => {
       versions.sort(compareVersions);
       conda_version = versions.pop();
 
-      github.repos.getLatestRelease({
+      github.rest.repos.getLatestRelease({
         owner: context.repo.owner,
         repo: context.repo.repo,
       }).then((release) => {
         const current_version = release['data']['tag_name'].split("-")[0]
         if (compareVersions(conda_version, current_version) === 1) {
-          github.issues.listForRepo({
+          github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: "open",
               labels: "[bot] conda release"
           }).then((issues) => {
             if (issues.data.length === 0) {
-              github.issues.create({
+              github.rest.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 title: "New conda release: please tag a miniforge release",
