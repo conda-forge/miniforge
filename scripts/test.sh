@@ -51,6 +51,11 @@ else
   echo "***** Print conda info *****"
   conda info
   conda list
+
+  if which mamba; then
+      mamba install python=3.8
+  else
+
 fi
 
 
