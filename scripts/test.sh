@@ -54,7 +54,7 @@ else
 
   if which mamba; then
       mamba install python=3.8
-  else
+  fi
 
 fi
 
