@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # include:
+        include:
         #   - os: windows-latest
         #     ARCH: x86_64
         #     TARGET_PLATFORM: win-64
