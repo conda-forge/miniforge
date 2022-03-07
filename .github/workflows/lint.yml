@@ -7,7 +7,7 @@ jobs:
       run:
         shell: bash -l {0}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup Miniconda
         uses: conda-incubator/setup-miniconda@v2
       - name: Install dependencies
