@@ -12,8 +12,7 @@ cd "${CONSTRUCT_ROOT}"
 # Constructor should be latest for non-native building
 # See https://github.com/conda/constructor
 echo "***** Install constructor *****"
-conda install -y "constructor>=3.1.0" jinja2 curl libarchive -c conda-forge --override-channels
-
+conda install -y "constructor>=3.3.1" jinja2 curl libarchive -c conda-forge --override-channels
 
 if [[ "$(uname)" == "Darwin" ]]; then
     conda install -y coreutils -c conda-forge --override-channels
@@ -22,7 +21,7 @@ fi
 if [[ "${TARGET_PLATFORM}" == win-* ]]; then
     conda install -y "nsis=3.01" -c conda-forge --override-channels
 fi
-pip install git+git://github.com/chrisburr/constructor@64ebd6d34f0f18684c76c0bebcfab41c38d55083#egg=constructor --force --no-deps
+# pip install git+git://github.com/conda/constructor@3.3.1#egg=constructor --force --no-deps
 conda list
 
 echo "***** Make temp directory *****"
