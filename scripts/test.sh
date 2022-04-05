@@ -75,6 +75,6 @@ if [[ "$(uname)" == MINGW* ]]; then
     echo not reinstalling
 else
     echo ****** Attempting to install in the same path ******
-    bash "${INSTALLER_PATH}" -b -p "${CONDA_PATH}"
+    bash "${INSTALLER_PATH}" -b -u -p "${CONDA_PATH}"
     echo ****** Reinstall in the same path successful ******
 fi
