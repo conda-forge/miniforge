@@ -71,5 +71,10 @@ python -c "import platform; print(platform.release())"
 
 echo "***** Done: Testing installer *****"
 
-echo ****** Attempting to install in the same path ******
-bash "${INSTALLER_PATH}" -b -p "${CONDA_PATH}"
+if [[ "$(uname)" == MINGW* ]]; then
+    echo not reinstalling
+else
+    echo ****** Attempting to install in the same path ******
+    bash "${INSTALLER_PATH}" -b -p "${CONDA_PATH}"
+    echo ****** Reinstall in the same path successful ******
+fi
