@@ -70,3 +70,6 @@ python -c "import platform; print(platform.machine())"
 python -c "import platform; print(platform.release())"
 
 echo "***** Done: Testing installer *****"
+
+echo ****** Attempting to install in the same path ******
+bash "${INSTALLER_PATH}" -b -p "${CONDA_PATH}"
