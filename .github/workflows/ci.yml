@@ -197,7 +197,7 @@ jobs:
 
     - name: Upload miniforge to Github artifact
       if: ${{ !startsWith(github.ref, 'refs/tags/') }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         path: build/${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}*
         name: ${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
