@@ -11,7 +11,7 @@ jobs:
       - uses: conda-incubator/setup-miniconda@35d1405e78aa3f784fe3ce9a2eb378d5eeb62169
       - run: python -m pip install -r docs/requirements.txt
       - run: python docs/releases.py
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           path: build/docs
           name: docs
