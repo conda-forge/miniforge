@@ -102,6 +102,7 @@ You will typically want to remove:
 conda init --reverse --dry-run
 # Use this next command to take action on the rc files listed above
 conda init --reverse
+# Temporarily IGNORE the shell message 'For changes to take effect, close and re-open your current shell.', and CLOSE THE SHELL ONLY AFTER the 3rd step below is completed.
 ```
 
 2. Remove the folder and all subfolders where the base environment for Miniforge was installed:
