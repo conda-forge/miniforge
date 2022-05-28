@@ -31,11 +31,12 @@ Latest installers with Python 3.9 `(*)` in the base environment:
 
 `(*)` The Python version is specific only to the base environment. Conda can create new environments with different Python versions and implementations.
 
-`(**)` While the Raspberry PI includes a 64 bit processor, the
-[RasbianOS](https://www.raspberrypi.org/software/operating-systems/) is built
-on a 32 bit kernel and is not a supported configuration for these installers.
-We recommend using a 64 bit linux distribution such as [Ubuntu for Raspberry
-PI](https://ubuntu.com/raspberry-pi).
+`(**)` For Raspberry PI that include a 64 bit processor, you must also use 
+a 64-bit operating system such as 
+[Raspberry Pi OS 64-bit](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-64-bit) 
+or 
+[Ubuntu for Raspberry PI](https://ubuntu.com/raspberry-pi). 
+The versions listed as "System: 32-bit" are not compatible with the installers on this website.
 
 `(***)` Apple silicon builds are experimental and haven't had testing like the other platforms.
 
