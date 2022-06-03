@@ -129,13 +129,17 @@ Download the installer and double click it on the file browser.
 
 ### Non-interactive install
 
-For non-interactive usage, look at the options by running the following:
+For non-interactive usage one can use the batch install option:
 
-    bash Miniforge3-Linux-x86_64.sh -h   # or similar for other installers for unix platforms
+    bash Miniforge3-Linux-x86_64.sh -b  # or similar for other installers for unix platforms
+
+Look at the extra options by running the following:
+
+    bash Miniforge3-Linux-x86_64.sh -h
 
 or if you are on windows, run:
 
-    start /wait "" build/Miniforge3-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=%UserProfile%\Miniforge3
+    start /wait "" Miniforge3-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=%UserProfile%\Miniforge3
 
 ### Downloading the installer as part of a CI pipeline
 
