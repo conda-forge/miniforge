@@ -21,6 +21,18 @@ jobs:
             MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "Windows"
 
+          - os: windows-latest
+            ARCH: x86_64
+            TARGET_PLATFORM: win-64
+            MINIFORGE_NAME: "Miniforge-pypy3"
+            OS_NAME: "Windows"
+
+          - os: windows-latest
+            ARCH: x86_64
+            TARGET_PLATFORM: win-64
+            MINIFORGE_NAME: "Mambaforge-pypy3"
+            OS_NAME: "Windows"
+
           - os: macos-latest
             ARCH: arm64
             TARGET_PLATFORM: osx-arm64
