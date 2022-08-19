@@ -32,9 +32,6 @@ docker run --rm -v "$(pwd):/construct" \
   -e CONSTRUCT_ROOT -e MINIFORGE_VERSION -e MINIFORGE_NAME -e TARGET_PLATFORM \
   "${DOCKERIMAGE}" /construct/scripts/build.sh
 
-# copy the installer for latest
-cp "build/${MINIFORGE_NAME}-"*"-${OS_NAME}-${ARCH}.${EXT}" "build/${MINIFORGE_NAME}-${OS_NAME}-${ARCH}.${EXT}"
-
 echo "============= Test the installer ============="
 for TEST_IMAGE_NAME in "ubuntu:21.10" "ubuntu:20.04" "ubuntu:18.04" "ubuntu:16.04" "centos:7" "debian:bullseye" "debian:buster"; do
   echo "============= Test installer on ${TEST_IMAGE_NAME} ============="
