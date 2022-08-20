@@ -26,6 +26,7 @@ if [[ "$(uname)" == MINGW* ]]; then
   cmd.exe /c install.bat
 
   echo "***** Setup conda *****"
+  echo "WINDIR: $WINDIR"
   # shellcheck disable=SC1091
   source "${CONDA_PATH}/Scripts/activate"
   conda.exe config --set show_channel_urls true
