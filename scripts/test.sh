@@ -26,7 +26,8 @@ if [[ "$(uname)" == MINGW* ]]; then
   cmd.exe /c install.bat
 
   echo "***** Setup conda *****"
-  echo "WINDIR: $WINDIR"
+  # Workaround a conda bug where it uses Unix style separators, but MinGW doesn't understand them
+  export PATH=$CONDA_PATH/Library/bin:$PATH
   # shellcheck disable=SC1091
   source "${CONDA_PATH}/Scripts/activate"
   conda.exe config --set show_channel_urls true
