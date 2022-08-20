@@ -196,6 +196,7 @@ jobs:
         fi
         if [[ "$OS_NAME" == "Windows" ]]; then
           export EXT=exe
+          echo "WINDIR:$WINDIR"
           source /c/Miniconda3/Scripts/activate;
           source build_miniforge_win.sh;
         fi
