@@ -18,6 +18,7 @@ else
    EXT="sh";
 fi
 INSTALLER_PATH=$(find build/ -name "*forge*.${EXT}" | head -n 1)
+INSTALLER_NAME=$(basename "${INSTALLER_PATH}" | cut -d "-" -f 1)
 
 echo "***** Run the installer *****"
 chmod +x "${INSTALLER_PATH}"
@@ -43,6 +44,12 @@ if [[ "$(uname)" == MINGW* ]]; then
   echo "***** Check if we can install a package which requires msys2 *****"
   conda.exe install r-base --yes --quiet
   conda.exe list
+
+  if [[ "${INSTALLER_NAME}" == "Mambaforge" ]]; then
+    echo "***** Mambaforge detected. Checking for boa compatibility *****"
+    mamba_version=$(mamba --version | grep mamba | cut -d ' ' -f 2)
+    mamba.exe install "mamba=${mamba_version}" boa --yes
+  fi
 else
   bash "${INSTALLER_PATH}" -b -p "${CONDA_PATH}"
 
@@ -53,6 +60,12 @@ else
   echo "***** Print conda info *****"
   conda info
   conda list
+
+  if [[ "${INSTALLER_NAME}" == "Mambaforge" ]]; then
+    echo "***** Mambaforge detected. Checking for boa compatibility *****"
+    mamba_version=$(mamba --version | grep mamba | cut -d ' ' -f 2)
+    mamba install "mamba=${mamba_version}" boa --yes
+  fi
 fi
 
 
