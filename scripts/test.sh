@@ -69,7 +69,7 @@ else
   if [[ "${INSTALLER_NAME}" == "Mambaforge" ]]; then
     echo "***** Mambaforge detected. Checking for boa compatibility *****"
     mamba_version_start=$(mamba --version | grep mamba | cut -d ' ' -f 2)
-    mamba info",0" + (j % 3 != 0));
+    mamba info
     mamba install boa --yes
     mamba_version_end=$(mamba --version | grep mamba | cut -d ' ' -f 2)
     if [[ "${mamba_version_start}" != "${mamba_version_end}" ]]; then
