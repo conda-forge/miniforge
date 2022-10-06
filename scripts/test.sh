@@ -47,8 +47,13 @@ if [[ "$(uname)" == MINGW* ]]; then
 
   if [[ "${INSTALLER_NAME}" == "Mambaforge" ]]; then
     echo "***** Mambaforge detected. Checking for boa compatibility *****"
-    mamba_version=$(mamba --version | grep mamba | cut -d ' ' -f 2)
-    mamba.exe install "mamba=${mamba_version}" boa --yes
+    mamba_version_start=$(mamba --version | grep mamba | cut -d ' ' -f 2)
+    mamba.exe install boa --yes
+    mamba_version_end=$(mamba --version | grep mamba | cut -d ' ' -f 2)
+    if [[ ${mamba_version_start} != ${mamba_version_end} ]]; then
+        echo mamba version changed from ${mamba_version_start} to ${mamba_version_end}
+        exit 1
+    fi
   fi
 else
   bash "${INSTALLER_PATH}" -b -p "${CONDA_PATH}"
@@ -63,8 +68,14 @@ else
 
   if [[ "${INSTALLER_NAME}" == "Mambaforge" ]]; then
     echo "***** Mambaforge detected. Checking for boa compatibility *****"
-    mamba_version=$(mamba --version | grep mamba | cut -d ' ' -f 2)
-    mamba install "mamba=${mamba_version}" boa --yes
+    mamba_version_start=$(mamba --version | grep mamba | cut -d ' ' -f 2)
+    mamba install boa --yes
+    mamba_version_end=$(mamba --version | grep mamba | cut -d ' ' -f 2)
+    if [[ ${mamba_version_start} != ${mamba_version_end} ]]; then
+        echo mamba version changed from ${mamba_version_start} to ${mamba_version_end}
+        exit 1
+    fi
+
   fi
 fi
 
