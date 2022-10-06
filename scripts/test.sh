@@ -50,8 +50,8 @@ if [[ "$(uname)" == MINGW* ]]; then
     mamba_version_start=$(mamba --version | grep mamba | cut -d ' ' -f 2)
     mamba.exe install boa --yes
     mamba_version_end=$(mamba --version | grep mamba | cut -d ' ' -f 2)
-    if [[ ${mamba_version_start} != ${mamba_version_end} ]]; then
-        echo mamba version changed from ${mamba_version_start} to ${mamba_version_end}
+    if [[ "${mamba_version_start}" != "${mamba_version_end}" ]]; then
+        echo "mamba version changed from ${mamba_version_start} to ${mamba_version_end}"
         exit 1
     fi
   fi
@@ -71,8 +71,8 @@ else
     mamba_version_start=$(mamba --version | grep mamba | cut -d ' ' -f 2)
     mamba install boa --yes
     mamba_version_end=$(mamba --version | grep mamba | cut -d ' ' -f 2)
-    if [[ ${mamba_version_start} != ${mamba_version_end} ]]; then
-        echo mamba version changed from ${mamba_version_start} to ${mamba_version_end}
+    if [[ "${mamba_version_start}" != "${mamba_version_end}" ]]; then
+        echo "mamba version changed from ${mamba_version_start} to ${mamba_version_end}"
         exit 1
     fi
 
