@@ -33,7 +33,7 @@ docker run --rm -v "$(pwd):/construct" \
   "${DOCKERIMAGE}" /construct/scripts/build.sh
 
 echo "============= Test the installer ============="
-for TEST_IMAGE_NAME in "ubuntu:21.10" "ubuntu:20.04" "ubuntu:18.04" "ubuntu:16.04" "centos:7" "debian:bullseye" "debian:buster"; do
+for TEST_IMAGE_NAME in "ubuntu:22.04" "ubuntu:20.04" "ubuntu:18.04" "ubuntu:16.04" "centos:7" "debian:bullseye" "debian:buster"; do
   echo "============= Test installer on ${TEST_IMAGE_NAME} ============="
   docker run --rm -v "$(pwd):/construct" -e CONSTRUCT_ROOT \
     "${DOCKER_ARCH}/${TEST_IMAGE_NAME}" /construct/scripts/test.sh
