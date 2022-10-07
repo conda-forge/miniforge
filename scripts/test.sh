@@ -65,7 +65,7 @@ else
   echo "***** Print conda info *****"
   conda info
   conda list
-  conda clean --yes --index-cache
+  # conda clean --yes --index-cache
 
   if [[ "${INSTALLER_NAME}" == "Mambaforge" ]]; then
     echo "***** Mambaforge detected. Checking for boa compatibility *****"
