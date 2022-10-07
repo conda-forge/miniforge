@@ -65,13 +65,13 @@ else
   echo "***** Print conda info *****"
   conda info
   conda list
-  conda clean -yi
+  conda clean --yes --index-cache
 
   if [[ "${INSTALLER_NAME}" == "Mambaforge" ]]; then
     echo "***** Mambaforge detected. Checking for boa compatibility *****"
     mamba_version_start=$(mamba --version | grep mamba | cut -d ' ' -f 2)
     mamba info
-    mamba install boa --yes
+    mamba install "mamba=${mamba_version_start}" boa --yes
     mamba_version_end=$(mamba --version | grep mamba | cut -d ' ' -f 2)
     if [[ "${mamba_version_start}" != "${mamba_version_end}" ]]; then
         echo "mamba version changed from ${mamba_version_start} to ${mamba_version_end}"
