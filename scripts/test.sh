@@ -71,7 +71,7 @@ else
     echo "***** Mambaforge detected. Checking for boa compatibility *****"
     mamba_version_start=$(mamba --version | grep mamba | cut -d ' ' -f 2)
     mamba info
-    mamba install boa --yes
+    mamba install boa --yes --verbose
     mamba_version_end=$(mamba --version | grep mamba | cut -d ' ' -f 2)
     if [[ "${mamba_version_start}" != "${mamba_version_end}" ]]; then
         echo "mamba version changed from ${mamba_version_start} to ${mamba_version_end}"
