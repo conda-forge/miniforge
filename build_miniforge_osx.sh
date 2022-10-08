@@ -4,10 +4,10 @@ set -e
 set -x
 
 echo "Installing a fresh version of Miniforge3."
-# Keep variable names in sync with 
+# Keep variable names in sync with
 # https://github.com/conda-forge/docker-images/blob/main/scripts/run_commands
 miniforge_arch="$(uname -m)"
-miniforge_version="4.10.3-10"
+miniforge_version="4.14.0-0"
 condapkg="https://github.com/conda-forge/miniforge/releases/download/${miniforge_version}/Mambaforge-${miniforge_version}-MacOSX-${miniforge_arch}.sh"
 if [ "$(uname -m)" = "x86_64" ]; then
    conda_chksum="7c44259a0982cd3ef212649678af5f0dd4e0bb7306e8fffc93601dd1d739ec0b"
