@@ -188,7 +188,7 @@ Your conda enviroment will be active:
 
 you can use conda enviroment. 
 
-If you download Mambaforge installer, you should try this command after `source "${HOME}/conda/etc/profile.d/conda.sh`:
+If you downloaded the Mambaforge installer, you should also run the following command after `source "${HOME}/conda/etc/profile.d/conda.sh`:
 
     source "${HOME}/conda/etc/profile.d/mamba.sh"
 
