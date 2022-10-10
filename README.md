@@ -155,15 +155,44 @@ For Linux, any architecture, use the following command
 
     wget -O Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
 
+When you want to use `Mambaforge`, you should replace Miniforge into Mamabaforge:
+
+    wget -O Mambaforge3.sh  "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+
+
 For MacOSX, any architecture, use the following command
 
     curl -fsSLo Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-$(uname -m).sh"
 
 This will download the appropriate installer for the present architecture with
-the filename ``Miniforge3.sh``. Run the shell script with the command in batch
+the filename ``Miniforge3.sh`` (or ``Mambaforge3.sh``). Run the shell script with the command in batch
 mode with the `-b` flash:
 
-    bash Miniforge3.sh -b
+    bash Miniforge3.sh -b -p "${HOME}/conda"
+
+`-p` is prefix option. A directory wil be createrd on `"${HOME}/conda"`.
+
+Then you should create the path to conda and activate conda. 
+Run this command:
+
+    source "${HOME}/conda/etc/profile.d/conda.sh
+
+Finally, you can run this command. 
+
+    conda activate
+
+Your conda enviroment will be active:
+
+    (base) ubuntu@ip-xxxxx:path$
+
+
+you can use conda enviroment. 
+
+If you download Mambaforge installer, you should try this command after `source "${HOME}/conda/etc/profile.d/conda.sh`:
+
+    source "${HOME}/conda/etc/profile.d/mamba.sh"
+
+
 
 ### Homebrew
 
