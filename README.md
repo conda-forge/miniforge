@@ -177,7 +177,7 @@ Run this command:
 
     source "${HOME}/conda/etc/profile.d/conda.sh
 
-Finally, you can run this command. 
+Finally, you can run the command to activate the base environment 
 
     conda activate
 
