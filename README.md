@@ -181,13 +181,6 @@ Finally, you can run the command to activate the base environment
 
     conda activate
 
-Your conda enviroment will be active:
-
-    (base) ubuntu@ip-xxxxx:path$
-
-
-you can use conda enviroment. 
-
 If you downloaded the Mambaforge installer, you should also run the following command after `source "${HOME}/conda/etc/profile.d/conda.sh`:
 
     source "${HOME}/conda/etc/profile.d/mamba.sh"
