@@ -165,7 +165,7 @@ For MacOSX, any architecture, use the following command
     curl -fsSLo Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-$(uname -m).sh"
 
 This will download the appropriate installer for the present architecture with
-the filename ``Miniforge3.sh`` (or ``Mambaforge3.sh``). Run the shell script with the command in batch
+the filename ``Miniforge3.sh`` (or ``Mambaforge.sh``). Run the shell script with the command in batch
 mode with the `-b` flash:
 
     bash Miniforge3.sh -b -p "${HOME}/conda"
