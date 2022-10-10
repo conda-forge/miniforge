@@ -157,7 +157,7 @@ For Linux, any architecture, use the following command
 
 When you want to use `Mambaforge`, you should replace Miniforge into Mamabaforge:
 
-    wget -O Mambaforge3.sh  "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+    wget -O Mambaforge.sh  "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
 
 
 For MacOSX, any architecture, use the following command
