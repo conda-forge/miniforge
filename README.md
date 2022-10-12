@@ -175,7 +175,7 @@ mode with the `-b` flash:
 Then you should create the path to conda and activate conda. 
 Run this command:
 
-    source "${HOME}/conda/etc/profile.d/conda.sh
+    source "${HOME}/conda/etc/profile.d/conda.sh"
 
 Finally, you can run the command to activate the base environment 
 
