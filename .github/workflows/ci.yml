@@ -132,6 +132,11 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
             MINIFORGE_NAME: "Mambaforge-pypy3"
             OS_NAME: "Linux"
+            # Reduce the test matrix because the builds timeouts on emulated architectures
+            # The time consuming operation is an attempt a full solve of conda/mamba/boa
+            # for as a compatibility
+            # xref https://github.com/conda-forge/miniforge/pull/361
+            TEST_IMAGE_NAMES: "ubuntu:22.04"
 
           - os: ubuntu-latest
             ARCH: x86_64
@@ -164,6 +169,14 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-ppc64le
             MINIFORGE_NAME: "Mambaforge-pypy3"
             OS_NAME: "Linux"
+            # Reduce the test matrix because the builds timeouts on emulated architectures
+            # The time consuming operation is an attempt a full solve of conda/mamba/boa
+            # for as a compatibility
+            # xref https://github.com/conda-forge/miniforge/pull/361
+            TEST_IMAGE_NAMES: "centos:7"
+            # It turns out, tat on this particular image, even a single test
+            # for compatibility does not finish in time.
+            TEST_CONDA_MAMBA_BOA_COMPATIBILITY: "no"
 
     steps:
     - name: Checkout code
