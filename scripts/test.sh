@@ -7,7 +7,6 @@ echo "***** Start: Testing Miniforge installer *****"
 export CONDA_PATH="${HOME}/miniforge"
 
 CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-${PWD}}"
-TEST_CONDA_MAMBA_BOA_COMPATIBILITY=${TEST_CONDA_MAMBA_BOA_COMPATIBILITY:-yes}
 
 cd "${CONSTRUCT_ROOT}"
 
@@ -46,7 +45,7 @@ if [[ "$(uname)" == MINGW* ]]; then
   conda.exe install r-base --yes --quiet
   conda.exe list
 
-  if [[ "${INSTALLER_NAME}" == "Mambaforge" ]] && [[ "${TEST_CONDA_MAMBA_BOA_COMPATIBILITY}" == "yes" ]]; then
+  if [[ "${INSTALLER_NAME}" == "Mambaforge" ]]; then
     echo "***** Mambaforge detected. Checking for boa compatibility *****"
     mamba_version_start=$(mamba --version | grep mamba | cut -d ' ' -f 2)
     mamba.exe install boa --yes
@@ -67,7 +66,7 @@ else
   conda info
   conda list
 
-  if [[ "${INSTALLER_NAME}" == "Mambaforge" ]] && [[ "${TEST_CONDA_MAMBA_BOA_COMPATIBILITY}" == "yes" ]]; then
+  if [[ "${INSTALLER_NAME}" == "Mambaforge" ]]; then
     echo "***** Mambaforge detected. Checking for boa compatibility *****"
     implementation=$(python -c "import platform; print(platform.python_implementation().lower())")
     major_minor_version=$(python -c 'import sys; print(f"{sys.version_info[0]}.{sys.version_info[1]}")')

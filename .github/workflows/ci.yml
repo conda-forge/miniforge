@@ -174,9 +174,6 @@ jobs:
             # for as a compatibility
             # xref https://github.com/conda-forge/miniforge/pull/361
             TEST_IMAGE_NAMES: "centos:7"
-            # It turns out, tat on this particular image, even a single test
-            # for compatibility does not finish in time.
-            TEST_CONDA_MAMBA_BOA_COMPATIBILITY: "no"
 
     steps:
     - name: Checkout code
