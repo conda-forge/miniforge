@@ -68,7 +68,7 @@ Latest installers with Mamba in the base environment:
 
 #### Mambaforge-pypy3
 
-Latest installers with Mamba and PyPy 3.7 in the base environment:
+Latest installers with Mamba and PyPy in the base environment:
 
 | OS      | Architecture          | Download  |
 | --------|-----------------------|-----------|
