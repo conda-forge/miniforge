@@ -40,10 +40,11 @@ ls -al "${TEMP_DIR}"
 
 if [[ "${TARGET_PLATFORM}" != win-* ]]; then
     MICROMAMBA_VERSION=0.27.0
+    MICROMAMBA_BUILD=3
     mkdir "${TEMP_DIR}/micromamba"
     pushd "${TEMP_DIR}/micromamba"
-    curl -L -O "https://anaconda.org/conda-forge/micromamba/${MICROMAMBA_VERSION}/download/${TARGET_PLATFORM}/micromamba-${MICROMAMBA_VERSION}-0.tar.bz2"
-    bsdtar -xf "micromamba-${MICROMAMBA_VERSION}-0.tar.bz2"
+    curl -L -O "https://anaconda.org/conda-forge/micromamba/${MICROMAMBA_VERSION}/download/${TARGET_PLATFORM}/micromamba-${MICROMAMBA_VERSION}-${MICROMAMBA_BUILD}.tar.bz2"
+    bsdtar -xf "micromamba-${MICROMAMBA_VERSION}-${MICROMAMBA_BUILD}.tar.bz2"
     if [[ "${TARGET_PLATFORM}" == win-* ]]; then
       MICROMAMBA_FILE="${PWD}/Library/bin/micromamba.exe"
     else
