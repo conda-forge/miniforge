@@ -179,11 +179,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - uses: conda-incubator/setup-miniconda@35d1405e78aa3f784fe3ce9a2eb378d5eeb62169
-      with:
-        miniconda-version: "latest"
-      if: contains(matrix.OS_NAME, 'Windows')
-
     - name: Build and test miniforge
       env:
         ARCH: ${{ matrix.ARCH }}
@@ -208,7 +203,7 @@ jobs:
         if [[ "$OS_NAME" == "Windows" ]]; then
           export EXT=exe
           echo "WINDIR:$WINDIR"
-          source /c/Miniconda3/Scripts/activate;
+          source /c/Miniconda/Scripts/activate;
           source build_miniforge_win.sh;
         fi
         # Copy for latest release
