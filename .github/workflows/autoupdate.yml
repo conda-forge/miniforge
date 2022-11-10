@@ -2,13 +2,18 @@ name: Auto-update mamba
 on:
  schedule:
    - cron: "0 */6 * * *"
+
+# set permissions of temporary default GITHUB_TOKEN token to be able to create PRs,
+# without the need of ssh keys or personal access tokens
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   createPullRequest:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          ssh-key: ${{ secrets.MINIFORGE_AUTOUPDATE_SSH_PRIVATE_KEY }}
       - uses: conda-incubator/setup-miniconda@35d1405e78aa3f784fe3ce9a2eb378d5eeb62169
         with:
           miniforge-variant: Miniforge3
