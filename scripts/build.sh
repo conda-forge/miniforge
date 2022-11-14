@@ -39,8 +39,8 @@ cp LICENSE "${TEMP_DIR}/"
 ls -al "${TEMP_DIR}"
 
 if [[ "${TARGET_PLATFORM}" != win-* ]]; then
-    MICROMAMBA_VERSION=0.27.0
-    MICROMAMBA_BUILD=3
+    MICROMAMBA_VERSION=1.0.0
+    MICROMAMBA_BUILD=1
     mkdir "${TEMP_DIR}/micromamba"
     pushd "${TEMP_DIR}/micromamba"
     curl -L -O "https://anaconda.org/conda-forge/micromamba/${MICROMAMBA_VERSION}/download/${TARGET_PLATFORM}/micromamba-${MICROMAMBA_VERSION}-${MICROMAMBA_BUILD}.tar.bz2"
