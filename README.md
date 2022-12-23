@@ -1,5 +1,6 @@
 # Miniforge
-![Build Miniforge](https://github.com/conda-forge/miniforge/workflows/Build%20miniforge/badge.svg)
+[![Build miniforge](https://github.com/conda-forge/miniforge/actions/workflows/ci.yml/badge.svg)](https://github.com/conda-forge/miniforge/actions/workflows/ci.yml)
+[![GitHub downloads](https://img.shields.io/github/downloads/conda-forge/miniforge/total.svg)](https://tooomm.github.io/github-release-stats/?username=conda-forge&repository=miniforge)
 
 This repository holds a minimal installer for [Conda](https://conda.io/) specific to [conda-forge](https://conda-forge.org/).
 Miniforge allows you to install the conda package manager with the following features pre-configured:
