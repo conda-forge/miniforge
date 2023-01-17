@@ -15,7 +15,7 @@ echo "***** Install constructor *****"
 conda install --yes \
     --channel conda-forge --override-channels \
     jinja2 curl libarchive \
-    "constructor>=3.3.1"
+    "constructor==3.3.1"
 if [[ "$(uname)" == "Darwin" ]]; then
     conda install --yes coreutils --channel conda-forge --override-channels
 fi
