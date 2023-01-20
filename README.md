@@ -156,7 +156,7 @@ For Linux, any architecture, use the following command
 
     wget -O Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
 
-When you want to use `Mambaforge`, you should replace Miniforge into Mamabaforge:
+When you want to use `Mambaforge`, you should replace Miniforge into Mambaforge:
 
     wget -O Mambaforge.sh  "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
 
