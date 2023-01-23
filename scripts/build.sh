@@ -19,10 +19,6 @@ conda install --yes \
 if [[ "$(uname)" == "Darwin" ]]; then
     conda install --yes coreutils --channel conda-forge --override-channels
 fi
-# shellcheck disable=SC2154
-if [[ "${TARGET_PLATFORM}" == win-* ]]; then
-    conda install --yes "nsis=3.01" --channel conda-forge --override-channels
-fi
 conda list
 
 echo "***** Make temp directory *****"
