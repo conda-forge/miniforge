@@ -15,13 +15,9 @@ echo "***** Install constructor *****"
 conda install --yes \
     --channel conda-forge --override-channels \
     jinja2 curl libarchive \
-    "constructor>=3.3.1"
+    "constructor>=3.4.2"
 if [[ "$(uname)" == "Darwin" ]]; then
     conda install --yes coreutils --channel conda-forge --override-channels
-fi
-# shellcheck disable=SC2154
-if [[ "${TARGET_PLATFORM}" == win-* ]]; then
-    conda install --yes "nsis=3.01" --channel conda-forge --override-channels
 fi
 conda list
 
