@@ -56,7 +56,23 @@ if [[ "$(uname)" == MINGW* ]]; then
     fi
   fi
 else
-  bash "${INSTALLER_PATH}" -b -p "${CONDA_PATH}"
+  # Test one of our installers in batch mode
+  if [[ "${INSTALLER_NAME}" == "Mambaforge" ]]; then
+    bash "${INSTALLER_PATH}" -b -p "${CONDA_PATH}"
+  # And the other in interactive mode
+  else
+    # Test interactive install. The install will ask the user to
+    # read the EULA
+    # then accept
+    # Then specify the path
+    # Then whether or not they want to initialize conda
+    cat <<EOF | bash "${INSTALLER_PATH}"
+
+yes
+${CONDA_PATH}
+no
+EOF
+  fi
 
   echo "***** Setup conda *****"
   # shellcheck disable=SC1091
