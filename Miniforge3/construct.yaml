@@ -16,8 +16,11 @@ write_condarc: True
 # and keep the same with Miniconda
 keep_pkgs: True
 license_file: ../LICENSE
-# Blocked until https://github.com/mamba-org/mamba/issues/1497 is fixed
-# transmute_file_type: .conda
+
+# During the interactive installation, these variables are checked.
+# During batch installation, conda is never initialized
+initialize_conda: True
+initialize_by_default: True
 
 specs:
 {% if name.endswith("pypy3") %}
