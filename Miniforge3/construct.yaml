@@ -1,4 +1,4 @@
-{% set version = os.environ.get("MINIFORGE_VERSION", "22.11.1-1") %}
+{% set version = os.environ.get("MINIFORGE_VERSION", "22.11.1-2") %}
 {% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
 
 name: {{ name }}
@@ -20,7 +20,7 @@ license_file: ../LICENSE
 # During the interactive installation, these variables are checked.
 # During batch installation, conda is never initialized
 initialize_conda: True
-initialize_by_default: True
+initialize_by_default: False
 
 specs:
 {% if name.endswith("pypy3") %}
