@@ -9,17 +9,20 @@ CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-${PWD}}"
 
 cd "${CONSTRUCT_ROOT}"
 
-# Constructor should be latest for non-native building
-# See https://github.com/conda/constructor
 echo "***** Install constructor *****"
-conda install --yes \
+
+mamba install --yes \
     --channel conda-forge --override-channels \
     jinja2 curl libarchive \
     "constructor>=3.4.2"
+
 if [[ "$(uname)" == "Darwin" ]]; then
-    conda install --yes coreutils --channel conda-forge --override-channels
+    mamba install --yes \
+        --channel conda-forge --override-channels \
+        coreutils
 fi
-conda list
+
+mamba list
 
 echo "***** Make temp directory *****"
 if [[ "$(uname)" == MINGW* ]]; then
@@ -35,8 +38,8 @@ cp LICENSE "${TEMP_DIR}/"
 ls -al "${TEMP_DIR}"
 
 if [[ "${TARGET_PLATFORM}" != win-* ]]; then
-    MICROMAMBA_VERSION=1.0.0
-    MICROMAMBA_BUILD=1
+    MICROMAMBA_VERSION=1.3.1
+    MICROMAMBA_BUILD=0
     mkdir "${TEMP_DIR}/micromamba"
     pushd "${TEMP_DIR}/micromamba"
     curl -L -O "https://anaconda.org/conda-forge/micromamba/${MICROMAMBA_VERSION}/download/${TARGET_PLATFORM}/micromamba-${MICROMAMBA_VERSION}-${MICROMAMBA_BUILD}.tar.bz2"
