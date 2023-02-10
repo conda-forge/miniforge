@@ -191,7 +191,9 @@ jobs:
 
     - uses: conda-incubator/setup-miniconda@v2.2.0
       with:
-        miniconda-version: "latest"
+        miniforge-version: "latest"
+        miniforge-variant: Mambaforge
+        use-mamba: true
       if: contains(matrix.OS_NAME, 'Windows')
 
     - name: Build and test miniforge
