@@ -10,7 +10,6 @@ CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-${PWD}}"
 cd "${CONSTRUCT_ROOT}"
 
 echo "***** Install constructor *****"
-extra_packages=
 
 mamba install --yes \
     --channel conda-forge --override-channels \
