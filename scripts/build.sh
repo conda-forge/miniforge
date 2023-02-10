@@ -12,14 +12,16 @@ cd "${CONSTRUCT_ROOT}"
 # Constructor should be latest for non-native building
 # See https://github.com/conda/constructor
 echo "***** Install constructor *****"
-conda install --yes \
+extra_packages=
+if [[ "$(uname)" == "Darwin" ]]; then
+    extra_packages="${extra_packages} coreutils"
+fi
+mamba install --yes \
     --channel conda-forge --override-channels \
     jinja2 curl libarchive \
     "constructor>=3.4.2"
-if [[ "$(uname)" == "Darwin" ]]; then
-    conda install --yes coreutils --channel conda-forge --override-channels
-fi
-conda list
+    ${extra_packages}
+mamba list
 
 echo "***** Make temp directory *****"
 if [[ "$(uname)" == MINGW* ]]; then
