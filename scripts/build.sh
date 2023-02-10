@@ -35,7 +35,8 @@ cp LICENSE "${TEMP_DIR}/"
 ls -al "${TEMP_DIR}"
 
 if [[ "${TARGET_PLATFORM}" != win-* ]]; then
-    MICROMAMBA_VERSION=1.0.0
+    MICROMAMBA_VERSION=1.3.0
+    # BUILD #1 of 1.3.0 includes some patches that we upstreamed to 1.3.1
     MICROMAMBA_BUILD=1
     mkdir "${TEMP_DIR}/micromamba"
     pushd "${TEMP_DIR}/micromamba"
