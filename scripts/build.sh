@@ -19,7 +19,7 @@ fi
 mamba install --yes \
     --channel conda-forge --override-channels \
     jinja2 curl libarchive \
-    "constructor>=3.4.2"
+    "constructor>=3.4.2" \
     ${extra_packages}
 mamba list
 
