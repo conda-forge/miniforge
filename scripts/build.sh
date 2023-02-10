@@ -9,18 +9,20 @@ CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-${PWD}}"
 
 cd "${CONSTRUCT_ROOT}"
 
-# Constructor should be latest for non-native building
-# See https://github.com/conda/constructor
 echo "***** Install constructor *****"
 extra_packages=
-if [[ "$(uname)" == "Darwin" ]]; then
-    extra_packages="${extra_packages} coreutils"
-fi
+
 mamba install --yes \
     --channel conda-forge --override-channels \
     jinja2 curl libarchive \
-    "constructor>=3.4.2" \
-    ${extra_packages}
+    "constructor>=3.4.2"
+
+if [[ "$(uname)" == "Darwin" ]]; then
+    mamba install --yes \
+        --channel conda-forge --override-channels \
+        coreutils
+fi
+
 mamba list
 
 echo "***** Make temp directory *****"
