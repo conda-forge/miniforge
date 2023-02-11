@@ -19,6 +19,7 @@ else
 fi
 INSTALLER_PATH=$(find build/ -name "*forge*.${EXT}" | head -n 1)
 INSTALLER_NAME=$(basename "${INSTALLER_PATH}" | cut -d "-" -f 1)
+INSTALLER_EXE=$(basename "${INSTALLER_PATH}")
 
 echo "***** Run the installer *****"
 chmod +x "${INSTALLER_PATH}"
@@ -45,7 +46,10 @@ if [[ "$(uname)" == MINGW* ]]; then
   conda.exe install r-base --yes --quiet
   conda.exe list
 
-  if [[ "${INSTALLER_NAME}" == "Mambaforge" ]]; then
+  # hmaarrfk -- 2023/02
+  # For some reason the Mambaforge-Linux-ppc64le works fine in under 15 mins on a branch
+  # but then fails to build within the 6 hour time limit on the release CI.
+  if [[ "${INSTALLER_NAME}" == "Mambaforge" ]] && [[ "${INSTALLER_EXE}" != "Mambaforge-Linux-ppc64le.sh" ]]; then
     echo "***** Mambaforge detected. Checking for boa compatibility *****"
     mamba_version_start=$(mamba --version | grep mamba | cut -d ' ' -f 2)
     mamba.exe install boa --yes
@@ -62,10 +66,10 @@ else
   # And the other in interactive mode
   else
     # Test interactive install. The install will ask the user to
-    # read the EULA
-    # then accept
-    # Then specify the path
-    # Then whether or not they want to initialize conda
+    # - newline -- read the EULA
+    # - yes -- then accept
+    # - ${CONDA_PATH} -- Then specify the path
+    # - no -- Then whether or not they want to initialize conda
     cat <<EOF | bash "${INSTALLER_PATH}"
 
 yes
