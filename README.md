@@ -81,7 +81,7 @@ Latest installers with Mamba and PyPy in the base environment:
 
 ## Install
 
-### Unix-like platforms
+### Unix-like platforms (Mac OS & Linux)
 
 Download the installer using curl or wget or your favorite program download files and run the script.
 For eg:
