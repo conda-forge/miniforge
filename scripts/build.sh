@@ -70,7 +70,7 @@ else
    EXTS=("sh");
 fi
 
-for EXT in ${EXTS[@]}; do
+for EXT in "${EXTS[@]}"; do
    # This line will break if there is more than one installer in the folder.
    INSTALLER_PATH=$(find . -name "M*forge*.${EXT}" | head -n 1)
    HASH_PATH="${INSTALLER_PATH}.sha256"
