@@ -22,6 +22,15 @@ license_file: ../LICENSE
 initialize_conda: True
 initialize_by_default: False
 
+# macOS PKG options
+installer_type: all  # [osx]
+welcome_image: osx_pkg_background.png  # [osx]
+# Reset everything to system default (no Anaconda stuff)
+# We can customize it if needed
+welcome_text: ""  # [osx]
+readme_text: ""  # [osx]
+conclusion_text: ""  # [osx]
+
 specs:
 {% if name.endswith("pypy3") %}
   - python 3.9.* *_pypy
