@@ -83,7 +83,7 @@ Latest installers with Mamba and PyPy in the base environment:
 
 ### Unix-like platforms (Mac OS & Linux)
 
-Download the installer using curl or wget or your favorite program download files and run the script.
+Download the installer using curl or wget or your favorite program and run the script.
 For eg:
 
     curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
