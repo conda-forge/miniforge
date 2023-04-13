@@ -35,7 +35,4 @@ specs:
   - conda {{ version.split("-")[0] }}
 
   - pip
-  # Unpin setuptools when the issue below is resolved
-  # https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/3973
-  - setuptools 65.*
   - miniforge_console_shortcut 1.*  # [win]
