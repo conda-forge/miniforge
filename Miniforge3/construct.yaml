@@ -1,4 +1,4 @@
-{% set version = os.environ.get("MINIFORGE_VERSION", "23.1.0-1") %}
+{% set version = os.environ.get("MINIFORGE_VERSION", "23.1.0-2") %}
 {% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
 
 name: {{ name }}
@@ -30,7 +30,7 @@ specs:
 {% endif %}
 
 {% if name.startswith("Mambaforge") %}
-  - mamba 1.4.1
+  - mamba 1.4.2
 {% endif %}
   - conda {{ version.split("-")[0] }}
 
