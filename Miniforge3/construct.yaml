@@ -47,5 +47,5 @@ specs:
   - miniforge_console_shortcut 1.*  # [win]
 
 # Signing settings will be added by CI
-signing_identity_name: {{ os.environ.get("APPLE_SIGNING_IDENTITY") }}
-notarization_identity_name: {{ os.environ.get("APPLE_NOTARIZATION_IDENTITY") }}
+signing_identity_name: {{ os.environ.get("APPLE_SIGNING_IDENTITY", "") }}
+notarization_identity_name: {{ os.environ.get("APPLE_NOTARIZATION_IDENTITY", "") }}
