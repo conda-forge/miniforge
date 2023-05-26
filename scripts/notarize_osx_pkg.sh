@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # This script takes a macOS installer package (.pkg) and notarizes it.
 # It expects the following environment variables to be set:

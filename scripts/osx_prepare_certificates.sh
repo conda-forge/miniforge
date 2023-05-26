@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Import AppleID certificates on macOS
 # This script is used to import the AppleID certificates into the keychain
