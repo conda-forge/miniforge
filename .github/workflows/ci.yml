@@ -214,23 +214,18 @@ jobs:
           export MINIFORGE_VERSION=${GITHUB_REF##*/};
         fi
         if [[ "$OS_NAME" == "Linux" ]]; then
-          export EXT=sh
           bash build_miniforge.sh;
         fi
         if [[ "$OS_NAME" == "MacOSX" ]]; then
-          export EXT=sh
           bash build_miniforge_osx.sh;
+          # Provide a Darwin alias
+          cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.sh build/$MINIFORGE_NAME-Darwin-$ARCH.sh;
+          cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.pkg build/$MINIFORGE_NAME-Darwin-$ARCH.pkg;
         fi
         if [[ "$OS_NAME" == "Windows" ]]; then
-          export EXT=exe
           echo "WINDIR:$WINDIR"
           source /c/Miniconda3/Scripts/activate;
           source build_miniforge_win.sh;
-        fi
-        # Copy for latest release
-        cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.$EXT build/$MINIFORGE_NAME-$OS_NAME-$ARCH.$EXT
-        if [[ "$OS_NAME" == "MacOSX" ]]; then
-          cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.$EXT build/$MINIFORGE_NAME-Darwin-$ARCH.$EXT
         fi
         ls -alh build
       shell: bash
