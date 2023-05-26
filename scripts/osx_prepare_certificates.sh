@@ -25,8 +25,8 @@ security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
 security unlock-keychain -p "${TEMP_KEYCHAIN_PASSWORD}" "$KEYCHAIN_PATH"
 
 # import certificate to keychain
-security import "$INSTALLER_CERTIFICATE_PATH" -P ${APPLE_INSTALLER_CERTIFICATE_PASSWORD} -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
-security import "$APPLICATION_CERTIFICATE_PATH" -P ${APPLE_INSTALLER_CERTIFICATE_PASSWORD} -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
+security import "$INSTALLER_CERTIFICATE_PATH" -P "${APPLE_INSTALLER_CERTIFICATE_PASSWORD}" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
+security import "$APPLICATION_CERTIFICATE_PATH" -P "${APPLE_INSTALLER_CERTIFICATE_PASSWORD}" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
 security list-keychain -d user -s "$KEYCHAIN_PATH"
 
 # export identity name to construct.yaml
