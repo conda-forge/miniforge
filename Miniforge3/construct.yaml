@@ -1,4 +1,4 @@
-{% set version = os.environ.get("MINIFORGE_VERSION", "22.11.1-4") %}
+{% set version = os.environ.get("MINIFORGE_VERSION", "23.1.0-2") %}
 {% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
 
 name: {{ name }}
@@ -39,12 +39,9 @@ specs:
 {% endif %}
 
 {% if name.startswith("Mambaforge") %}
-  - mamba 1.1.0
+  - mamba 1.4.2
 {% endif %}
   - conda {{ version.split("-")[0] }}
 
   - pip
-  # Unpin setuptools when the issue below is resolved
-  # https://github.com/conda-forge/conda-forge-pinning-feedstock/issues/3973
-  - setuptools 65.*
   - miniforge_console_shortcut 1.*  # [win]
