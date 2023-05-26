@@ -74,7 +74,7 @@ for EXT in "${EXTS[@]}"; do
    # This line will break if there is more than one installer in the folder.
    INSTALLER_PATH=$(find . -name "M*forge*.${EXT}" | head -n 1)
 
-   if [[ "${EXT}" == "pkg" && -n "${APPLE_NOTARIZATION_USERNAME:-}"]]; then
+   if [[ "${EXT}" == "pkg" && -n "${APPLE_NOTARIZATION_USERNAME:-}" ]]; then
       # notarize the PKG installer
       echo ""***** Notarizing the PKG installer "*****"
       scripts/notarize_osx_pkg.sh "${INSTALLER_PATH}"
