@@ -62,6 +62,7 @@ cd -
 
 echo "***** Generate installer hash *****"
 cd "${TEMP_DIR}"
+ls -alh
 if [[ "$(uname)" == MINGW* ]]; then
    EXT="exe";
 else

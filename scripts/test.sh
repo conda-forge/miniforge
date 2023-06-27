@@ -25,7 +25,7 @@ echo "***** Run the installer *****"
 chmod +x "${INSTALLER_PATH}"
 if [[ "$(uname)" == MINGW* ]]; then
   echo "start /wait \"\" ${INSTALLER_PATH} /InstallationType=JustMe /RegisterPython=0 /S /D=$(cygpath -w "${CONDA_PATH}")" > install.bat
-  cmd.exe /c install.bat
+  cmd.exe //c install.bat
 
   echo "***** Setup conda *****"
   # Workaround a conda bug where it uses Unix style separators, but MinGW doesn't understand them
