@@ -50,8 +50,6 @@ jobs:
         echo "WINDIR:$WINDIR"
         source /c/Miniconda3/Scripts/activate;
         source build_miniforge_win.sh;
-        # Copy for latest release
-        cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.$EXT build/$MINIFORGE_NAME-uninstaller-patch-$OS_NAME-$ARCH.$EXT
         ls -alh build
       shell: bash
 
