@@ -1,6 +1,6 @@
 name: Build uninstaller patches
 on: 
-  workflow_dispatch:
+  push:
 
 jobs:
   build:
