@@ -1,4 +1,4 @@
-{% set version = os.environ.get("MINIFORGE_VERSION", "23.3.0-1") %}
+{% set version = os.environ.get("MINIFORGE_VERSION", "23.1.0-4") %}  # TEMPORARY, revert to 23.3.0-0
 {% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
 
 name: {{ name }}
