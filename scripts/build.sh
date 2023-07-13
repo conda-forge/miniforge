@@ -14,17 +14,13 @@ echo "***** Install constructor *****"
 mamba install --yes \
     --channel conda-forge --override-channels \
     jinja2 curl libarchive \
-    "constructor>=3.4.2" \
-    "ruamel.yaml >=0.11.14,<0.18"  # TEMPORARY
+    "constructor>=3.4.4"
 
 if [[ "$(uname)" == "Darwin" ]]; then
     mamba install --yes \
         --channel conda-forge --override-channels \
         coreutils
 fi
-
-# Temporary: use latest constructor from current `main`
-python -m pip install --no-deps --ignore-installed https://github.com/conda/constructor/archive/bc0d653.tar.gz
 
 mamba list
 
