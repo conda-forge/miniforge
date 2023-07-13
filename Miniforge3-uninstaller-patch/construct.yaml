@@ -1,13 +1,14 @@
 {% set version = os.environ.get("MINIFORGE_VERSION", "2023.7.0") %}
 {% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
 
-name: {{ name }}-uninstaller-patch
+name: {{ name }}
 version: {{ version }}
 company: conda-forge
 
 ignore_duplicate_files: True
 installer_type: exe
 license_file: ../LICENSE
+installer_filename: {{ name }}-uninstaller-patch-{{ version }}-Windows-x86_64.exe
 
 nsis_template: nsis.tmpl
 
