@@ -14,7 +14,8 @@ echo "***** Install constructor *****"
 mamba install --yes \
     --channel conda-forge --override-channels \
     jinja2 curl libarchive \
-    "constructor>=3.4.2"
+    "constructor>=3.4.2" \
+    "ruamel.yaml >=0.11.14,<0.18"  # TEMPORARY
 
 if [[ "$(uname)" == "Darwin" ]]; then
     mamba install --yes \
