@@ -22,6 +22,9 @@ if [[ "$(uname)" == "Darwin" ]]; then
         coreutils
 fi
 
+# Temporary: use latest constructor from current `main`
+python -m pip install --no-deps --ignore-installed https://github.com/conda/constructor/archive/bc0d653.tar.gz
+
 mamba list
 
 echo "***** Make temp directory *****"
