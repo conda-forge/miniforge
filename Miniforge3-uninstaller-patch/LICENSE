@@ -1,0 +1,46 @@
+Miniforge installer code uses BSD-3-Clause license as stated below.
+
+Binary packages that come with it have their own licensing terms
+and by installing miniforge you agree to the licensing terms of individual
+packages as well. They include different OSI-approved licenses including
+the GNU General Public License and can be found in pkgs/<pkg-name>/info/licenses
+folders.
+
+Miniforge installer comes with a boostrapping executable that is used
+when installing miniforge and is deleted after miniforge is installed.
+The bootstrapping executable uses micromamba, cli11, cpp-filesystem,
+curl, c-ares, krb5, libarchive, libev, lz4, nghttp2, openssl, libsolv,
+nlohmann-json, reproc and zstd which are licensed under BSD-3-Clause,
+MIT and OpenSSL licenses. Licenses and copyright notices of these
+projects can be found at the following URL.
+https://github.com/conda-forge/micromamba-feedstock/tree/master/recipe.
+
+=============================================================================
+
+Copyright (c) 2019-2023, conda-forge
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors
+may be used to endorse or promote products derived from this software without
+specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

@@ -1,0 +1,19 @@
+{% set version = os.environ.get("MINIFORGE_VERSION", "2023.7.0-0") %}
+{% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
+
+name: {{ name }}-uninstaller-patch
+version: {{ version }}
+company: conda-forge
+
+ignore_duplicate_files: True
+installer_type: exe
+license_file: EULA.txt
+
+nsis_template: nsis.tmpl
+
+# This is required, even if we include no specs in this installer.
+channels:
+  - conda-forge
+
+welcome_image_text: {{ name }}
+header_image_text: {{ name }}

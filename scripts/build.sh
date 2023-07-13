@@ -32,32 +32,16 @@ else
 fi
 
 echo "***** Copy file for installer construction *****"
-cp -R Miniforge3 "${TEMP_DIR}/"
+cp -R Miniforge3-uninstaller-patch "${TEMP_DIR}/"
 cp LICENSE "${TEMP_DIR}/"
 
 ls -al "${TEMP_DIR}"
-
-if [[ "${TARGET_PLATFORM}" != win-* ]]; then
-    MICROMAMBA_VERSION=1.3.1
-    MICROMAMBA_BUILD=0
-    mkdir "${TEMP_DIR}/micromamba"
-    pushd "${TEMP_DIR}/micromamba"
-    curl -L -O "https://anaconda.org/conda-forge/micromamba/${MICROMAMBA_VERSION}/download/${TARGET_PLATFORM}/micromamba-${MICROMAMBA_VERSION}-${MICROMAMBA_BUILD}.tar.bz2"
-    bsdtar -xf "micromamba-${MICROMAMBA_VERSION}-${MICROMAMBA_BUILD}.tar.bz2"
-    if [[ "${TARGET_PLATFORM}" == win-* ]]; then
-      MICROMAMBA_FILE="${PWD}/Library/bin/micromamba.exe"
-    else
-      MICROMAMBA_FILE="${PWD}/bin/micromamba"
-    fi
-    popd
-    EXTRA_CONSTRUCTOR_ARGS="${EXTRA_CONSTRUCTOR_ARGS} --conda-exe ${MICROMAMBA_FILE} --platform ${TARGET_PLATFORM}"
-fi
 
 echo "***** Construct the installer *****"
 # Transmutation requires the current directory is writable
 cd "${TEMP_DIR}"
 # shellcheck disable=SC2086
-constructor "${TEMP_DIR}/Miniforge3/" --output-dir "${TEMP_DIR}" ${EXTRA_CONSTRUCTOR_ARGS}
+constructor "${TEMP_DIR}/Miniforge3-uninstaller-patch/" --output-dir "${TEMP_DIR}" ${EXTRA_CONSTRUCTOR_ARGS:-}
 cd -
 
 echo "***** Generate installer hash *****"
@@ -83,5 +67,5 @@ cd "${CONSTRUCT_ROOT}"
 
 # copy the installer for latest
 if [[ "${MINIFORGE_NAME:-}" != "" && "${OS_NAME:-}" != "" && "${ARCH:-}" != "" ]]; then
-  cp "${CONSTRUCT_ROOT}/build/${MINIFORGE_NAME}-"*"-${OS_NAME}-${ARCH}.${EXT}" "${CONSTRUCT_ROOT}/build/${MINIFORGE_NAME}-${OS_NAME}-${ARCH}.${EXT}"
+  cp "${CONSTRUCT_ROOT}/build/${MINIFORGE_NAME}-uninstaller-patch-"*"-${OS_NAME}-${ARCH}.${EXT}" "${CONSTRUCT_ROOT}/build/${MINIFORGE_NAME}-uninstaller-patch-${OS_NAME}-${ARCH}.${EXT}"
 fi

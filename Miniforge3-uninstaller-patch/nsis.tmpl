@@ -1,0 +1,714 @@
+# Installer template file for creating a Windows installer using NSIS.
+
+# Dependencies:
+#   NSIS >=3.08      conda install "nsis>=3.08"  (includes extra unicode plugins)
+
+Unicode "true"
+
+#if enable_debugging is True
+# Special logging build needed for ENABLE_LOGGING
+# See https://nsis.sourceforge.io/Special_Builds
+!define ENABLE_LOGGING
+#endif
+
+# Comes from https://nsis.sourceforge.io/Logging:Enable_Logs_Quickly
+!define LogSet "!insertmacro LogSetMacro"
+!macro LogSetMacro SETTING
+  !ifdef ENABLE_LOGGING
+    LogSet ${SETTING}
+  !endif
+!macroend
+
+!define LogText "!insertmacro LogTextMacro"
+!macro LogTextMacro INPUT_TEXT
+  !ifdef ENABLE_LOGGING
+    LogText ${INPUT_TEXT}
+  !endif
+!macroend
+
+!include "WinMessages.nsh"
+!include "WordFunc.nsh"
+!include "LogicLib.nsh"
+!include "WinVer.nsh"
+!include "MUI2.nsh"
+!include "x64.nsh"
+
+!include "FileFunc.nsh"
+!insertmacro GetParameters
+!insertmacro GetOptions
+
+!include "UAC.nsh"
+!include "nsDialogs.nsh"
+
+!include "Utils.nsh"
+
+!define NAME __NAME__
+!define VERSION __VERSION__
+!define COMPANY __COMPANY__
+!define ARCH __ARCH__
+!define PLATFORM __PLATFORM__
+!define CONSTRUCTOR_VERSION __CONSTRUCTOR_VERSION__
+!define DEFAULT_PREFIX __DEFAULT_PREFIX__
+!define DEFAULT_PREFIX_DOMAIN_USER __DEFAULT_PREFIX_DOMAIN_USER__
+!define DEFAULT_PREFIX_ALL_USERS __DEFAULT_PREFIX_ALL_USERS__
+# The SHOW_* and *_DESC variables are required by the
+# OptionsDialog.nsh plug-in constructor uses
+!define PRE_INSTALL_DESC __PRE_INSTALL_DESC__
+!define POST_INSTALL_DESC __POST_INSTALL_DESC__
+!define SHOW_REGISTER_PYTHON __SHOW_REGISTER_PYTHON__
+!define SHOW_ADD_TO_PATH __SHOW_ADD_TO_PATH__
+!define PRODUCT_NAME "${NAME} Uninstaller Patch"
+!define UNINSTREG "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\"
+
+var /global INSTDIR_JUSTME
+var /global INSTALLER_VERSION
+var /global INSTALLER_NAME_FULL
+
+# UAC shield overlay
+!ifndef BCM_SETSHIELD
+    !define BCM_SETSHIELD 0x0000160C
+!endif
+
+var /global IsDomainUser
+
+var /global InstMode # 0 = Just Me, 1 = All Users.
+!define JUST_ME 0
+!define ALL_USERS 1
+
+# Include this one after our defines
+!include "OptionsDialog.nsh"
+
+CRCCheck On
+
+# Basic options
+var /global ProductName
+Name "$ProductName"
+OutFile __OUTFILE__
+ShowInstDetails "hide"
+ShowUninstDetails "hide"
+SetCompress "off"
+
+# Start off with the lowest permissions and work our way up.
+RequestExecutionLevel user
+
+# Version information & branding text
+VIAddVersionKey "ProductName" "${PRODUCT_NAME}"
+VIAddVersionKey "FileVersion" "${VERSION}"
+VIAddVersionKey "CompanyName" "${COMPANY}"
+VIAddVersionKey "LegalCopyright" "(c) ${COMPANY}"
+VIAddVersionKey "FileDescription" "${NAME} Installer"
+VIAddVersionKey "Comments" "Created by constructor ${CONSTRUCTOR_VERSION}"
+VIProductVersion __VIPV__
+BrandingText /TRIMLEFT "${COMPANY}"
+
+# Interface configuration
+!define MUI_ICON __ICONFILE__
+!define MUI_UNICON __ICONFILE__
+!define MUI_HEADERIMAGE
+!define MUI_HEADERIMAGE_BITMAP __HEADERIMAGE__
+!define MUI_HEADERIMAGE_UNBITMAP __HEADERIMAGE__
+!define MUI_ABORTWARNING
+!define MUI_FINISHPAGE_NOAUTOCLOSE
+!define MUI_UNFINISHPAGE_NOAUTOCLOSE
+!define MUI_WELCOMEFINISHPAGE_BITMAP __WELCOMEIMAGE__
+!define MUI_UNWELCOMEFINISHPAGE_BITMAP __WELCOMEIMAGE__
+
+# Pages
+#if custom_welcome
+# Custom welcome file(s)
+@CUSTOM_WELCOME_FILE@
+#else
+!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipPageIfUACInnerInstance
+!insertmacro MUI_PAGE_WELCOME
+#endif
+!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipPageIfUACInnerInstance
+!insertmacro MUI_PAGE_LICENSE __LICENSEFILE__
+!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipPageIfUACInnerInstance
+!define MUI_PAGE_CUSTOMFUNCTION_LEAVE OnDirectoryLeave
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+#if with_conclusion_text is True
+!define MUI_FINISHPAGE_TITLE __CONCLUSION_TITLE__
+!define MUI_FINISHPAGE_TITLE_3LINES
+!define MUI_FINISHPAGE_TEXT __CONCLUSION_TEXT__
+#endif
+
+# Custom conclusion file(s)
+@CUSTOM_CONCLUSION_FILE@
+
+!insertmacro MUI_PAGE_FINISH
+
+!insertmacro MUI_UNPAGE_WELCOME
+!define MUI_PAGE_CUSTOMFUNCTION_LEAVE un.OnDirectoryLeave
+!insertmacro MUI_UNPAGE_CONFIRM
+!insertmacro MUI_UNPAGE_INSTFILES
+!insertmacro MUI_UNPAGE_FINISH
+
+# Language
+!insertmacro MUI_LANGUAGE "English"
+
+# Pass variable from an inner instance to an outer instance
+# https://nsis-dev.github.io/NSIS-Forums/html/t-324491.html
+!macro _SyncVariable _variable
+    !define Lprefix L{__LINE__}
+    push $R0
+    goto _SyncVariableInner${Lprefix}
+    _SyncVariableOuter${Lprefix}:
+        StrCpy $R0 ${_variable}
+	return
+    _SyncVariableInner${Lprefix}:
+    !insertmacro UAC_AsUser_Call Label _SyncVariableOuter${Lprefix} ${UAC_SYNCREGISTERS}
+    StrCpy ${_variable} $R0
+    !undef Lprefix
+    pop $R0
+!macroend
+!define SyncVariable `!insertmacro _SyncVariable`
+
+Function SkipPageIfUACInnerInstance
+    ${LogSet} on
+    ${If} ${UAC_IsInnerInstance}
+        Abort
+    ${EndIf}
+FunctionEnd
+
+!macro DoElevation
+    GetDlgItem $1 $HWNDParent 1
+    System::Call user32::GetFocus()i.s
+    # Disable 'Next' button.
+    EnableWindow $1 0
+    !insertmacro UAC_PageElevation_RunElevated
+    EnableWindow $1 1
+    System::call user32::SetFocus(is)
+    ${If} $2 = 0x666
+        MessageBox MB_ICONEXCLAMATION \
+            "You need to log in with an administrative account \
+             in order to perform an 'All Users' installation."
+        Abort
+    ${ElseIf} $0 = 1223
+        # UAC canceled by user.
+        Abort
+    ${Else}
+        ${If} $0 <> 0
+            ${If} $0 = 1062
+                MessageBox MB_ICONSTOP \
+                    "Elevation failed; Secondary Logon service is \
+                     not running."
+            ${Else}
+                MessageBox MB_ICONSTOP \
+                    "Elevation failed; error code: $0."
+            ${EndIf}
+            Abort
+        ${EndIf}
+    ${EndIf}
+    # UAC worked, we're the outer installer, so we can quit.
+    Quit
+!macroend
+
+Function GetUninstallString
+    Push $R0
+    Push $R1
+    Push $R2
+    Push $0
+    Push $1
+    Push $2
+    StrCpy $R0 ""
+    StrLen $R1 ${NAME}
+    StrCpy $0 0
+
+    loop:
+        EnumRegKey $1 SHCTX ${UNINSTREG} $0
+        StrCmp $1 "" endloop
+        StrCpy $2 $1 $R1
+        ${If} $2 == ${NAME}
+            ReadRegStr $R0 SHCTX "${UNINSTREG}\$1" "UninstallString"
+            goto endloop
+        ${EndIf}
+        IntOp $0 $0 + 1
+        goto loop
+    endloop:
+
+    Pop $R1
+    Pop $0
+    Pop $1
+    Pop $2
+    Exch $R0
+FunctionEnd
+
+Function .onInit
+    ${LogSet} on
+    Push $0
+    Push $1
+    Push $2
+    Push $R1
+    Push $R2
+
+    StrCpy $ProductName "${PRODUCT_NAME}"
+
+    InitPluginsDir
+
+    # Select the correct registry to look at, depending
+    # on whether it's a 32-bit or 64-bit installer
+    SetRegView @BITS@
+#if win64
+    # If we're a 64-bit installer, make sure it's 64-bit Windows
+    ${IfNot} ${RunningX64}
+        MessageBox MB_OK|MB_ICONEXCLAMATION \
+            "This installer is for a 64-bit version for ${NAME}$\n\
+            but your system is 32-bit. Please use the 32-bit Windows$\n\
+            ${NAME} installer." \
+            /SD IDOK
+        Abort
+    ${EndIf}
+#endif
+
+    !insertmacro UAC_PageElevation_OnInit
+    ${If} ${UAC_IsInnerInstance}
+        ${IfNot} ${UAC_IsAdmin}
+            SetErrorLevel 0x666
+            Quit
+	${EndIf}
+	${SyncVariable} $INSTDIR
+	SetShellVarContext All
+    ${EndIf}
+
+    # The actual installation mode will be determined by the presence/absence
+    # of the .nonadmin file. Here, InstMode will be used to get a good default
+    # value for $INSTDIR
+    StrCpy $InstMode ${JUST_ME}
+    ${IfThen} ${UAC_IsAdmin} ${|} StrCpy $InstMode ${ALL_USERS} ${|}
+    # If running as 'SYSTEM' then JustMe is not appropriate; note that
+    # we should advise against this. SCCM has an option to run as user
+    System::Call "advapi32::GetUserName(t .r0, *i ${NSIS_MAX_STRLEN} r1) i.r2"
+    ${IfThen} $0 == "SYSTEM" ${|} StrCpy $InstMode ${ALL_USERS} ${|}
+
+    # /D was not used, check the registry
+    ${If} $InstDir == ""
+        # Skip HKCU if running as 'SYSTEM'
+	StrCpy $0 ""
+        StrCmp $InstMode ${JUST_ME} check_hklm check_hkcu
+        check_hklm:
+            SetShellVarContext current
+            call GetUninstallString
+            pop $0
+
+        check_hkcu:
+        # It is possible for a regular user to have run an AllUsers installation,
+        # so check HKLM as well
+        ${If} $0 == ""
+            SetShellVarContext all
+            call GetUninstallString
+            pop $0
+            SetShellVarContext current
+        ${EndIf}
+        ${IfNot} $0 == ""
+            StrLen $1 "Uninstall-${NAME}.exe"
+            StrLen $2 $0
+            IntOp $2 $2 - $1
+            IntOp $2 $2 - 3
+            StrCpy $InstDir $0 $2 1
+        ${EndIf}
+    ${EndIf}
+
+    # Nothing found in the registry, so take a default value,
+    # based on if we are admin or not
+    ${If} $InstDir == ""
+        # Look for a number of signs that indicate the user is a domain user and
+        # alter the default installation directory for 'Just Me' accordingly.  We
+        # want to ensure that if we're a user domain account, we always install to
+        # %LOCALAPPDATA% (i.e. C:\Users\Trent\AppData\Local\Continuum\Anaconda),
+        # as this is the only place guaranteed to not be backed by a network share
+        # or included in a user's roaming profile.  However, if we're a normal user
+        # account, then C:\Users\Trent\Anaconda is fine.
+        ReadEnvStr $0 USERDNSDOMAIN
+        ${If} $0 != ""
+            # If not null, USERDNSDOMAIN is an unambiguous indication that we're
+            # logged into a domain account.
+            StrCpy $IsDomainUser 1
+        ${Else}
+            # If it's not set, apply some simple heuristics to discern whether or
+            # not we're logged in as a domain user.
+            ReadEnvStr $0 LOGONSERVER
+            ${If} $0 == ""
+                # This should never be unset; but if it is, we're definitely not
+                # a domain user.
+                StrCpy $IsDomainUser 0
+            ${Else}
+                StrCpy $1 $0 "" 2               # lop-off the leading \\.
+                ${StrFilter} $1 "+" "" "" $2    # convert to uppercase, store in $2
+                ${If} $2 == "MICROSOFTACCOUNT"
+                    # The new Windows 8.x live accounts have \\MicrosoftAccount
+                    # set as LOGONSERVER; interpret this as being a non-domain
+                    # user.
+                    StrCpy $IsDomainUser 0
+                ${Else}
+                    ReadEnvStr $R1 COMPUTERNAME
+                    ${If} $R1 == ""
+                        # This should never be unset either; if it is, assume
+                        # we're not a domain user.
+                        StrCpy $IsDomainUser 0
+                    ${Else}
+                        # We've got a value for both LOGONSERVER and COMPUTERNAME
+                        # environment variables (which should always be the case).
+                        # Proceed to compare LOGONSERVER[-2:] to COMPUTERNAME; if
+                        # they match, assume we're not a domain user account.
+
+                        ${StrFilter} $R1 "+" "" "" $R2 # convert to uppercase
+                        ${If} $2 != $R2
+                            # COMPUTERNAME doesn't match LOGONSERVER; assume we're
+                            # logged in via a domain account.
+                            StrCpy $IsDomainUser 1
+                        ${Else}
+                            # COMPUTERNAME matches LOGONSERVER; safe to assume
+                            # we're logged in as a user account.  (I guess there's
+                            # the remote possibility a domain user has logged onto
+                            # a server that has the same NetBIOS name as the Active
+                            # Directory name...  if that's the case, potentially
+                            # installing Anaconda into an area that gets picked up
+                            # by a roaming profile is the very least of your
+                            # problems.)
+                            StrCpy $IsDomainUser 0
+
+                        ${EndIf} # LOGONSERVER[-2:] != COMPUTERNAME
+
+                    ${EndIf} # COMPUTERNAME != ""
+
+                ${EndIf} # LOGONSERVER != "\\MicrosoftAccount"
+
+            ${EndIf} # LOGONSERVER != ""
+
+        ${EndIf} # USERDNSDOMAIN != ""
+
+        ${If} $IsDomainUser = 0
+            ExpandEnvStrings $0 ${DEFAULT_PREFIX}
+            StrCpy $INSTDIR_JUSTME $0
+        ${ElseIf} $IsDomainUser = 1
+            ExpandEnvStrings $0 ${DEFAULT_PREFIX_DOMAIN_USER}
+            StrCpy $INSTDIR_JUSTME $0
+        ${Else}
+            # Should never happen; indicates a logic error above.
+            MessageBox MB_OK "Internal error: IsUserDomain not set properly!" \
+                       /SD IDOK
+            Abort
+        ${EndIf}
+
+        ${If} $InstMode == ${ALL_USERS}
+            ExpandEnvStrings $0 ${DEFAULT_PREFIX_ALL_USERS}
+            StrCpy $INSTDIR $0
+        ${Else}
+            strcpy $INSTDIR $INSTDIR_JUSTME
+        ${EndIf}
+    ${EndIf}
+
+    Pop $R2
+    Pop $R1
+    Pop $2
+    Pop $1
+    Pop $0
+FunctionEnd
+
+Function un.onInit
+    Push $0
+    Push $1
+    Push $2
+    Push $3
+    Push $R0
+
+    # Resolve INSTDIR
+    GetFullPathName $0 $INSTDIR
+    # If the directory does not exist or cannot be resolved, $0 will be empty
+    StrCmp $0 "" invalid_dir
+    StrCpy $INSTDIR $0
+
+    # Read variables the uninstaller needs from the registry
+    StrLen $R0 "Uninstall-${NAME}.exe"
+    IntOp $R0 $R0 + 3
+    StrCpy $0 0
+    loop_path:
+        EnumRegKey $1 SHCTX ${UNINSTREG} $0
+        StrCmp $1 "" endloop_path
+        StrCpy $2 "${UNINSTREG}\$1"
+        ReadRegStr $4 SHCTX $2 "UninstallString"
+        StrLen $5 $4
+        IntOp $5 $5 - $R0
+        StrCpy $4 $4 $5 1
+        ${If} $4 == $INSTDIR
+            StrCpy $INSTALLER_NAME_FULL $1
+            ReadRegStr $INSTALLER_VERSION SHCTX $2 "DisplayVersion"
+            goto endloop_path
+        ${EndIf}
+        IntOp $0 $0 + 1
+        goto loop_path
+    endloop_path:
+
+    StrCpy $ProductName "${NAME} $INSTALLER_VERSION"
+
+    # Never run the uninstaller when $INSTDIR points at system-critical directories
+
+    StrLen $0 $INSTDIR
+    # INSTDIR is a full path and has no trailing backslash,
+    # so if its length is 2, it is pointed at a system root
+    StrCmp $0 2 invalid_dir
+
+    # Never delete anything inside Windows
+    StrCpy $0 $INSTDIR 7 3
+    StrCmp $0 "Windows" invalid_dir
+
+    StrCpy $0 "ALLUSERSPROFILE APPDATA LOCALAPPDATA PROGRAMDATA PROGRAMFILES PROGRAMFILES(x86) PUBLIC SYSTEMDRIVE SYSTEMROOT USERPROFILE"
+    StrCpy $1 1
+    loop_critical:
+        ${WordFind} $0 " " "E+$1" $2
+        IfErrors endloop_critical
+        ReadEnvStr $3 $2
+        StrCmp $3 $INSTDIR invalid_dir
+        IntOp $1 $1 + 1
+        goto loop_critical
+    endloop_critical:
+
+    # Primitive check to see that $INSTDIR points to a conda directory
+    StrCpy $0 "_conda.exe conda-meta\history Scripts\activate.bat"
+    StrCpy $1 1
+    loop_conda:
+        ${WordFind} $0 " " "E+$1" $2
+        IfErrors endloop_conda
+        IfFileExists $INSTDIR\$2 0 invalid_dir
+        IntOp $1 $1 + 1
+        goto loop_conda
+    endloop_conda:
+
+    # All checks have passed
+    goto valid_dir
+
+    invalid_dir:
+        MessageBox MB_OK|MB_ICONSTOP \
+            "Error: $INSTDIR is not a valid conda directory. Please run the uninstaller from a conda directory." \
+            /SD IDABORT
+        abort
+    valid_dir:
+
+    # Select the correct registry to look at, depending
+    # on whether it's a 32-bit or 64-bit installer
+    SetRegView @BITS@
+
+    # Since the switch to a dual-mode installer (All Users/Just Me), the
+    # uninstaller will inherit the requested execution level of the main
+    # installer -- which we now have to set to 'user'.  Thus, Windows will
+    # not automatically elevate the uninstaller for us -- we need to do it
+    # ourselves if we're not a 'Just Me' installation.
+    !insertmacro UAC_PageElevation_OnInit
+    ${IfNot} ${FileExists} "$INSTDIR\.nonadmin"
+    ${AndIfNot} ${UAC_IsAdmin}
+        !insertmacro DoElevation
+    ${EndIf}
+
+    ${If} ${FileExists} "$INSTDIR\.nonadmin"
+        SetShellVarContext Current
+    ${Else}
+        SetShellVarContext All
+    ${EndIf}
+
+    Pop $3
+    Pop $2
+    Pop $1
+    Pop $0
+FunctionEnd
+
+Function OnDirectoryLeave
+    IfFileExists $INSTDIR\Uninstall-${NAME}.exe uninstaller_exists
+        MessageBox MB_OK|MB_ICONSTOP \
+            "Error: $INSTDIR does not contain the uninstaller for ${NAME}. Please choose a different directory." \
+            /SD IDABORT
+        abort
+    uninstaller_exists:
+
+    ${IfNot} ${UAC_IsInnerInstance}
+        ${If} ${FileExists} "$INSTDIR\.nonadmin"
+            SetShellVarContext Current
+        ${Else}
+            SetShellVarContext All
+            ${IfNot} ${UAC_IsAdmin}
+                !insertmacro DoElevation
+            ${EndIf}
+        ${EndIf}
+    ${EndIf}
+
+    Push $R1
+    ${IsWritable} $INSTDIR $R1
+    IntCmp $R1 0 pathgood
+    Pop $R1
+    DetailPrint "::error: Path $INSTDIR is not writable. Please check permissions or \
+                 try respawning the installer with elevated privileges."
+    MessageBox MB_OK|MB_ICONEXCLAMATION \
+        "Error: Path $INSTDIR is not writable. Please check permissions or \
+         try respawning the installer with elevated privileges." \
+        /SD IDOK
+    Abort
+
+    pathgood:
+    Pop $R1
+
+FunctionEnd
+
+Function .onVerifyInstDir
+    ${LogSet} on
+    StrLen $0 $Desktop
+    StrCpy $0 $INSTDIR $0
+    StrCmp $0 $Desktop 0 PathGood
+    Abort
+    PathGood:
+FunctionEnd
+
+Function un.OnDirectoryLeave
+    MessageBox MB_YESNO \
+	    "Are you sure you want to remove '$INSTDIR' and all of its contents?" \
+	    /SD IDYES \
+	    IDYES confirmed_yes IDNO confirmed_no
+    confirmed_no:
+        MessageBox MB_OK|MB_ICONSTOP "Uninstallation aborted by user." /SD IDOK
+	Quit
+    confirmed_yes:
+FunctionEnd
+
+Function un.AbortRetryNSExecWait
+    # This function expects three arguments in the stack
+    # $1: 'WithLog' or 'NoLog': Use ExecToLog or just Exec, respectively
+    # $2: The message to show if an error occurred
+    # $3: The command to run, quoted
+    # Note that the args need to be pushed to the stack in reverse order!
+    # Search 'AbortRetryNSExecWait' in this script to see examples
+    ${LogSet} on
+    Pop $1
+    Pop $2
+    Pop $3
+    ${Do}
+        ${If} $1 == "WithLog"
+            nsExec::ExecToLog $3
+        ${ElseIf} $1 == "NoLog"
+            nsExec::Exec $3
+        ${Else}
+            DetailPrint "::error:: AbortRetryNSExecWait: 1st argument must be 'WithLog' or 'NoLog'. You used: $1"
+            Abort
+        ${EndIf}
+        pop $0
+        ${If} $0 != "0"
+            DetailPrint "::error:: $2"
+            MessageBox MB_ABORTRETRYIGNORE|MB_ICONEXCLAMATION|MB_DEFBUTTON3 \
+                    $2 /SD IDIGNORE IDABORT abort IDRETRY retry
+            ; IDIGNORE: Continue anyway
+            StrCpy $0 "0"
+            goto retry
+        abort:
+            ; Abort installation
+            Abort
+        retry:
+            ; Retry the nsExec command
+        ${EndIf}
+    ${LoopWhile} $0 != "0"
+FunctionEnd
+
+# Installer sections
+Section "Install"
+    ${LogSet} on
+
+    DetailPrint "Patching uninstaller..."
+    WriteUninstaller "$INSTDIR\Uninstall-${NAME}.exe"
+
+    # To address CVE-2022-26526.
+    # Revoke the write permission on directory "$INSTDIR" for Users if this is
+    # being run with administrative privileges. Users are:
+    #   AU - authenticated users
+    #   BU - built-in (local) users
+    #   DU - domain users
+    ${If} ${UAC_IsAdmin}
+        DetailPrint "Setting installation directory permissions..."
+        AccessControl::DisableFileInheritance "$INSTDIR"
+        AccessControl::RevokeOnFile "$INSTDIR" "(AU)" "GenericWrite"
+        AccessControl::RevokeOnFile "$INSTDIR" "(DU)" "GenericWrite"
+        AccessControl::RevokeOnFile "$INSTDIR" "(BU)" "GenericWrite"
+        AccessControl::SetOnFile "$INSTDIR" "(BU)" "GenericRead + GenericExecute"
+        AccessControl::SetOnFile "$INSTDIR" "(DU)" "GenericRead + GenericExecute"
+    ${EndIf}
+SectionEnd
+
+!macro AbortRetryNSExecWaitLibNsisCmd cmd
+    SetDetailsPrint both
+    DetailPrint "Running ${cmd} scripts..."
+    SetDetailsPrint listonly
+    ${If} ${Silent}
+        push '"$INSTDIR\pythonw.exe" -E -s "$INSTDIR\Lib\_nsis.py" ${cmd}'
+    ${Else}
+        push '"$INSTDIR\python.exe" -E -s "$INSTDIR\Lib\_nsis.py" ${cmd}'
+    ${EndIf}
+    push "Failed to run ${cmd}"
+    push 'WithLog'
+    call un.AbortRetryNSExecWait
+    SetDetailsPrint both
+!macroend
+
+Section "Uninstall"
+    # Remove menu items, path entries
+    DetailPrint "Deleting @NAME@ menus..."
+    nsExec::ExecToLog '"$INSTDIR\_conda.exe" constructor --prefix "$INSTDIR" --rm-menus'
+
+    # ensure that MSVC runtime DLLs are on PATH during uninstallation
+    ReadEnvStr $0 PATH
+    # set PATH for the installer process, so that MSVC runtimes get found OK
+    System::Call 'kernel32::SetEnvironmentVariable(t,t)i("PATH", \
+                 "$INSTDIR;$INSTDIR\Library\mingw-w64\bin;$INSTDIR\Library\usr\bin;$INSTDIR\Library\bin;$INSTDIR\Scripts;$INSTDIR\bin;$0;$0\system32;$0\system32\Wbem").r0'
+
+    # our newest Python builds have a patch that allows us to control the PATH search stuff much more
+    #   carefully.  More info at https://docs.conda.io/projects/conda/en/latest/user-guide/troubleshooting.html#solution
+    System::Call 'kernel32::SetEnvironmentVariable(t,t)i("CONDA_DLL_SEARCH_MODIFICATION_ENABLE", "1").r0'
+
+    # Extra info for pre_uninstall scripts
+    System::Call 'kernel32::SetEnvironmentVariable(t,t)i("PREFIX", "$INSTDIR").r0'
+    System::Call 'kernel32::SetEnvironmentVariable(t,t)i("INSTALLER_NAME", "${NAME}").r0'
+    StrCpy $0 ""
+    ${If} $INSTALLER_VERSION != ""
+	StrCpy $0 $INSTALLER_VERSION
+    ${Else}
+	StrCpy $0 ${VERSION}
+    ${EndIf}
+    System::Call 'kernel32::SetEnvironmentVariable(t,t)i("INSTALLER_VER", "$0").r0'
+    System::Call 'kernel32::SetEnvironmentVariable(t,t)i("INSTALLER_PLAT", "win-64").r0'
+    System::Call 'kernel32::SetEnvironmentVariable(t,t)i("INSTALLER_TYPE", "EXE").r0'
+
+    !insertmacro AbortRetryNSExecWaitLibNsisCmd "pre_uninstall"
+    !insertmacro AbortRetryNSExecWaitLibNsisCmd "rmpath"
+    !insertmacro AbortRetryNSExecWaitLibNsisCmd "rmreg"
+
+    DetailPrint "Removing files and folders..."
+    nsExec::Exec 'cmd.exe /D /C RMDIR /Q /S "$INSTDIR"'
+
+    # In case the last command fails, run the slow method to remove leftover
+    RMDir /r /REBOOTOK "$INSTDIR"
+
+    ${If} $INSTALLER_NAME_FULL != ""
+        DeleteRegKey SHCTX "${UNINSTREG}\$INSTALLER_NAME_FULL"
+    ${EndIf}
+
+    # If Anaconda was registered as the official Python for this version,
+    # remove it from the registry
+    StrCpy $R0 "SOFTWARE\Python\PythonCore"
+    StrCpy $0 0
+    loop_py:
+        EnumRegKey $1 SHCTX $R0 $0
+	StrCmp $1 "" endloop_py
+        ReadRegStr $2 SHCTX "$R0\$1\InstallPath" ""
+        ${If} $2 == $INSTDIR
+            StrCpy $R1 $1
+            DeleteRegKey SHCTX "$R0\$1"
+            goto endloop_py
+        ${EndIf}
+        IntOp $0 $0 + 1
+        goto loop_py
+    endloop_py:
+
+SectionEnd
+
+!if '@SIGNTOOL_COMMAND@' != ''
+    # Signing for installer and uninstaller; nsis 3.08 required for uninstfinalize!
+    # "= 0" comparison required to prevent both tasks running in parallel, which would cause signtool to fail
+    # %1 is replaced by the installer and uninstaller paths, respectively
+    !finalize '@SIGNTOOL_COMMAND@ "%1"' = 0
+    !uninstfinalize '@SIGNTOOL_COMMAND@ "%1"' = 0
+!endif
