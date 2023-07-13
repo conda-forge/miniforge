@@ -41,7 +41,7 @@ echo "***** Construct the installer *****"
 # Transmutation requires the current directory is writable
 cd "${TEMP_DIR}"
 # shellcheck disable=SC2086
-constructor "${TEMP_DIR}/Miniforge3-uninstaller-patch/" --output-dir "${TEMP_DIR}" ${EXTRA_CONSTRUCTOR_ARGS:-}
+constructor -v "${TEMP_DIR}/Miniforge3-uninstaller-patch/" --output-dir "${TEMP_DIR}" ${EXTRA_CONSTRUCTOR_ARGS:-}
 cd -
 
 echo "***** Generate installer hash *****"
