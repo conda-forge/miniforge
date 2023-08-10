@@ -17,6 +17,7 @@ DOCKERIMAGE=${DOCKERIMAGE:-condaforge/linux-anvil-aarch64}
 export MINIFORGE_NAME=${MINIFORGE_NAME:-Miniforge3}
 OS_NAME=${OS_NAME:-Linux}
 EXT=${EXT:-sh}
+TEST_IMAGE_NAMES=${TEST_IMAGE_NAMES:-ubuntu:22.04 ubuntu:20.04 ubuntu:18.04 ubuntu:16.04 centos:7 debian:bullseye debian:buster}
 export CONSTRUCT_ROOT=/construct
 
 echo "============= Create build directory ============="
@@ -32,12 +33,10 @@ docker run --rm -v "$(pwd):/construct" \
   -e CONSTRUCT_ROOT -e MINIFORGE_VERSION -e MINIFORGE_NAME -e TARGET_PLATFORM \
   "${DOCKERIMAGE}" /construct/scripts/build.sh
 
-# copy the installer for latest
-cp "build/${MINIFORGE_NAME}-"*"-${OS_NAME}-${ARCH}.${EXT}" "build/${MINIFORGE_NAME}-${OS_NAME}-${ARCH}.${EXT}"
-
 echo "============= Test the installer ============="
-for TEST_IMAGE_NAME in "ubuntu:21.10" "ubuntu:20.04" "ubuntu:18.04" "ubuntu:16.04" "centos:7" "debian:bullseye" "debian:buster"; do
+for TEST_IMAGE_NAME in ${TEST_IMAGE_NAMES}; do
   echo "============= Test installer on ${TEST_IMAGE_NAME} ============="
-  docker run --rm -v "$(pwd):/construct" -e CONSTRUCT_ROOT \
+  docker run --rm \
+    -v "$(pwd):${CONSTRUCT_ROOT}" -e CONSTRUCT_ROOT \
     "${DOCKER_ARCH}/${TEST_IMAGE_NAME}" /construct/scripts/test.sh
 done

@@ -9,21 +9,20 @@ CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-${PWD}}"
 
 cd "${CONSTRUCT_ROOT}"
 
-# Constructor should be latest for non-native building
-# See https://github.com/conda/constructor
 echo "***** Install constructor *****"
-conda install -y "constructor>=3.1.0" jinja2 curl libarchive -c conda-forge --override-channels
 
+mamba install --yes \
+    --channel conda-forge --override-channels \
+    jinja2 curl libarchive \
+    "constructor>=3.4.4"
 
 if [[ "$(uname)" == "Darwin" ]]; then
-    conda install -y coreutils -c conda-forge --override-channels
+    mamba install --yes \
+        --channel conda-forge --override-channels \
+        coreutils
 fi
-# shellcheck disable=SC2154
-if [[ "${TARGET_PLATFORM}" == win-* ]]; then
-    conda install -y "nsis=3.01" -c conda-forge --override-channels
-fi
-pip install git+https://github.com/conda/constructor@3.3.1#egg=constructor --force --no-deps
-conda list
+
+mamba list
 
 echo "***** Make temp directory *****"
 if [[ "$(uname)" == MINGW* ]]; then
@@ -39,11 +38,12 @@ cp LICENSE "${TEMP_DIR}/"
 ls -al "${TEMP_DIR}"
 
 if [[ "${TARGET_PLATFORM}" != win-* ]]; then
-    MICROMAMBA_VERSION=0.21.2
+    MICROMAMBA_VERSION=1.3.1
+    MICROMAMBA_BUILD=0
     mkdir "${TEMP_DIR}/micromamba"
     pushd "${TEMP_DIR}/micromamba"
-    curl -L -O "https://anaconda.org/conda-forge/micromamba/${MICROMAMBA_VERSION}/download/${TARGET_PLATFORM}/micromamba-${MICROMAMBA_VERSION}-0.tar.bz2"
-    bsdtar -xf "micromamba-${MICROMAMBA_VERSION}-0.tar.bz2"
+    curl -L -O "https://anaconda.org/conda-forge/micromamba/${MICROMAMBA_VERSION}/download/${TARGET_PLATFORM}/micromamba-${MICROMAMBA_VERSION}-${MICROMAMBA_BUILD}.tar.bz2"
+    bsdtar -xf "micromamba-${MICROMAMBA_VERSION}-${MICROMAMBA_BUILD}.tar.bz2"
     if [[ "${TARGET_PLATFORM}" == win-* ]]; then
       MICROMAMBA_FILE="${PWD}/Library/bin/micromamba.exe"
     else
@@ -62,6 +62,7 @@ cd -
 
 echo "***** Generate installer hash *****"
 cd "${TEMP_DIR}"
+ls -alh
 if [[ "$(uname)" == MINGW* ]]; then
    EXT="exe";
 else
@@ -79,3 +80,8 @@ mv "${HASH_PATH}" "${CONSTRUCT_ROOT}/build/"
 
 echo "***** Done: Building Miniforge installer *****"
 cd "${CONSTRUCT_ROOT}"
+
+# copy the installer for latest
+if [[ "${MINIFORGE_NAME:-}" != "" && "${OS_NAME:-}" != "" && "${ARCH:-}" != "" ]]; then
+  cp "${CONSTRUCT_ROOT}/build/${MINIFORGE_NAME}-"*"-${OS_NAME}-${ARCH}.${EXT}" "${CONSTRUCT_ROOT}/build/${MINIFORGE_NAME}-${OS_NAME}-${ARCH}.${EXT}"
+fi

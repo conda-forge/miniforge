@@ -21,6 +21,18 @@ jobs:
             MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "Windows"
 
+          - os: windows-latest
+            ARCH: x86_64
+            TARGET_PLATFORM: win-64
+            MINIFORGE_NAME: "Miniforge-pypy3"
+            OS_NAME: "Windows"
+
+          - os: windows-latest
+            ARCH: x86_64
+            TARGET_PLATFORM: win-64
+            MINIFORGE_NAME: "Mambaforge-pypy3"
+            OS_NAME: "Windows"
+
           - os: macos-latest
             ARCH: arm64
             TARGET_PLATFORM: osx-arm64
@@ -72,6 +84,11 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
             MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "Linux"
+            # Reduce the test matrix because the builds timeouts on emulated architectures
+            # The time consuming operation is an attempt a full solve of conda/mamba/boa
+            # for as a compatibility
+            # xref https://github.com/conda-forge/miniforge/pull/361
+            TEST_IMAGE_NAMES: "ubuntu:22.04"
 
           - os: ubuntu-latest
             ARCH: x86_64
@@ -104,6 +121,11 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-ppc64le
             MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "Linux"
+            # Reduce the test matrix because the builds timeouts on emulated architectures
+            # The time consuming operation is an attempt a full solve of conda/mamba/boa
+            # for as a compatibility
+            # xref https://github.com/conda-forge/miniforge/pull/361
+            TEST_IMAGE_NAMES: "ubuntu:22.04"
 
           - os: ubuntu-latest
             ARCH: aarch64
@@ -120,6 +142,11 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
             MINIFORGE_NAME: "Mambaforge-pypy3"
             OS_NAME: "Linux"
+            # Reduce the test matrix because the builds timeouts on emulated architectures
+            # The time consuming operation is an attempt a full solve of conda/mamba/boa
+            # for as a compatibility
+            # xref https://github.com/conda-forge/miniforge/pull/361
+            TEST_IMAGE_NAMES: "ubuntu:22.04"
 
           - os: ubuntu-latest
             ARCH: x86_64
@@ -152,14 +179,21 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-ppc64le
             MINIFORGE_NAME: "Mambaforge-pypy3"
             OS_NAME: "Linux"
+            # Reduce the test matrix because the builds timeouts on emulated architectures
+            # The time consuming operation is an attempt a full solve of conda/mamba/boa
+            # for as a compatibility
+            # xref https://github.com/conda-forge/miniforge/pull/361
+            TEST_IMAGE_NAMES: "centos:7"
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - uses: conda-incubator/setup-miniconda@35d1405e78aa3f784fe3ce9a2eb378d5eeb62169
+    - uses: conda-incubator/setup-miniconda@v2.2.0
       with:
-        miniconda-version: "latest"
+        miniforge-version: "latest"
+        miniforge-variant: Mambaforge
+        use-mamba: true
       if: contains(matrix.OS_NAME, 'Windows')
 
     - name: Build and test miniforge
@@ -170,6 +204,7 @@ jobs:
         DOCKERIMAGE: ${{ matrix.DOCKERIMAGE }}
         DOCKER_ARCH: ${{ matrix.DOCKER_ARCH }}
         TARGET_PLATFORM: ${{ matrix.TARGET_PLATFORM }}
+        TEST_IMAGE_NAMES: ${{ matrix.TEST_IMAGE_NAMES }}
       run: |
         if [[ "$GITHUB_REF" == refs/tags/* ]]; then
           export MINIFORGE_VERSION=${GITHUB_REF##*/};
@@ -184,6 +219,7 @@ jobs:
         fi
         if [[ "$OS_NAME" == "Windows" ]]; then
           export EXT=exe
+          echo "WINDIR:$WINDIR"
           source /c/Miniconda3/Scripts/activate;
           source build_miniforge_win.sh;
         fi
@@ -196,8 +232,8 @@ jobs:
       shell: bash
 
     - name: Upload miniforge to Github artifact
-      if: ${{ !startsWith(github.ref, 'refs/tags/') }}
-      uses: actions/upload-artifact@v2
+      if: always()
+      uses: actions/upload-artifact@v3
       with:
         path: build/${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}*
         name: ${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}

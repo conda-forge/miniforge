@@ -1,4 +1,4 @@
-{% set version = os.environ.get("MINIFORGE_VERSION", "4.12.0-0") %}
+{% set version = os.environ.get("MINIFORGE_VERSION", "23.3.0-0") %}
 {% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
 
 name: {{ name }}
@@ -16,22 +16,21 @@ write_condarc: True
 # and keep the same with Miniconda
 keep_pkgs: True
 license_file: ../LICENSE
-# Blocked until https://github.com/mamba-org/mamba/issues/1497 is fixed
-# transmute_file_type: .conda
+
+# During the interactive installation, these variables are checked.
+# During batch installation, conda is never initialized
+initialize_conda: True
+initialize_by_default: False
 
 specs:
 {% if name.endswith("pypy3") %}
-  - python 3.7.* *_pypy
+  - python 3.9.* *_pypy
 {% else %}
-  - python 3.9.*
-{% endif %}
-
-{% if name.startswith("Mambaforge") %}
-  - mamba 0.22.1
-{% else %}
-  - conda-libmamba-solver 22.3.0
+  - python 3.10.*
 {% endif %}
   - conda {{ version.split("-")[0] }}
+  - conda-libmamba-solver 23.3.0
+  - mamba 1.4.2
 
   - pip
   - miniforge_console_shortcut 1.*  # [win]

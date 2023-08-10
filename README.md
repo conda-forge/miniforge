@@ -1,12 +1,13 @@
 # Miniforge
-![Build Miniforge](https://github.com/conda-forge/miniforge/workflows/Build%20miniforge/badge.svg)
+[![Build miniforge](https://github.com/conda-forge/miniforge/actions/workflows/ci.yml/badge.svg)](https://github.com/conda-forge/miniforge/actions/workflows/ci.yml)
+[![GitHub downloads](https://img.shields.io/github/downloads/conda-forge/miniforge/total.svg)](https://tooomm.github.io/github-release-stats/?username=conda-forge&repository=miniforge)
 
 This repository holds a minimal installer for [Conda](https://conda.io/) specific to [conda-forge](https://conda-forge.org/).
 Miniforge allows you to install the conda package manager with the following features pre-configured:
 
 * [conda-forge](https://conda-forge.org/) set as the default (and only) channel.
     * Packages in the base environment are obtained from the [conda-forge channel](https://anaconda.org/conda-forge).
-* Optional support for PyPy in place of standard Python interpretter (aka "CPython").
+* Optional support for PyPy in place of standard Python interpreter (aka "CPython").
 * Optional support for [Mamba](https://github.com/mamba-org/mamba) in place of Conda.
 * An emphasis on supporting various CPU architectures (x86_64, ppc64le, and aarch64 including Apple M1).
 
@@ -18,7 +19,7 @@ Miniforge installers are available here: https://github.com/conda-forge/miniforg
 
 #### Miniforge3
 
-Latest installers with Python 3.9 `(*)` in the base environment:
+Latest installers with Python 3.10 `(*)` in the base environment:
 
 | OS      | Architecture          | Download  |
 | --------|-----------------------|-----------|
@@ -31,17 +32,18 @@ Latest installers with Python 3.9 `(*)` in the base environment:
 
 `(*)` The Python version is specific only to the base environment. Conda can create new environments with different Python versions and implementations.
 
-`(**)` While the Raspberry PI includes a 64 bit processor, the
-[RasbianOS](https://www.raspberrypi.org/software/operating-systems/) is built
-on a 32 bit kernel and is not a supported configuration for these installers.
-We recommend using a 64 bit linux distribution such as [Ubuntu for Raspberry
-PI](https://ubuntu.com/raspberry-pi).
+`(**)` For Raspberry PI that include a 64 bit processor, you must also use 
+a 64-bit operating system such as 
+[Raspberry Pi OS 64-bit](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-64-bit) 
+or 
+[Ubuntu for Raspberry PI](https://ubuntu.com/raspberry-pi). 
+The versions listed as "System: 32-bit" are not compatible with the installers on this website.
 
 `(***)` Apple silicon builds are experimental and haven't had testing like the other platforms.
 
 #### Miniforge-pypy3
 
-Latest installers with PyPy 3.7 in the base environment:
+Latest installers with PyPy 3.9 in the base environment:
 
 | OS      | Architecture          | Download  |
 | --------|-----------------------|-----------|
@@ -49,6 +51,7 @@ Latest installers with PyPy 3.7 in the base environment:
 | Linux   | aarch64 (arm64)       | [Miniforge-pypy3-Linux-aarch64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-aarch64.sh) |
 | Linux   | ppc64le (POWER8/9)    | [Miniforge-pypy3-Linux-ppc64le](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-ppc64le.sh) |
 | OS X    | x86_64                | [Miniforge-pypy3-MacOSX-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-MacOSX-x86_64.sh) |
+| Windows | x86_64                | [Miniforge-pypy3-Windows-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Windows-x86_64.exe) |
 
 #### Mambaforge
 
@@ -66,7 +69,7 @@ Latest installers with Mamba in the base environment:
 
 #### Mambaforge-pypy3
 
-Latest installers with Mamba and PyPy 3.7 in the base environment:
+Latest installers with Mamba and PyPy in the base environment:
 
 | OS      | Architecture          | Download  |
 | --------|-----------------------|-----------|
@@ -74,12 +77,13 @@ Latest installers with Mamba and PyPy 3.7 in the base environment:
 | Linux   | aarch64 (arm64)       | [Mambaforge-pypy3-Linux-aarch64](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-Linux-aarch64.sh) |
 | Linux   | ppc64le (POWER8/9)    | [Mambaforge-pypy3-Linux-ppc64le](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-Linux-ppc64le.sh) |
 | OS X    | x86_64                | [Mambaforge-pypy3-MacOSX-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-MacOSX-x86_64.sh) |
+| Windows | x86_64                | [Mambaforge-pypy3-Windows-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-Windows-x86_64.exe) |
 
 ## Install
 
-### Unix-like platforms
+### Unix-like platforms (Mac OS & Linux)
 
-Download the installer using curl or wget or your favorite program download files and run the script.
+Download the installer using curl or wget or your favorite program and run the script.
 For eg:
 
     curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
@@ -102,6 +106,9 @@ You will typically want to remove:
 conda init --reverse --dry-run
 # Use this next command to take action on the rc files listed above
 conda init --reverse
+# Temporarily IGNORE the shell message 
+#       'For changes to take effect, close and re-open your current shell.', 
+# and CLOSE THE SHELL ONLY AFTER the 3rd step below is completed.
 ```
 
 2. Remove the folder and all subfolders where the base environment for Miniforge was installed:
@@ -128,13 +135,17 @@ Download the installer and double click it on the file browser.
 
 ### Non-interactive install
 
-For non-interactive usage, look at the options by running the following:
+For non-interactive usage one can use the batch install option:
 
-    bash Miniforge3-Linux-x86_64.sh -h   # or similar for other installers for unix platforms
+    bash Miniforge3-Linux-x86_64.sh -b  # or similar for other installers for unix platforms
+
+Look at the extra options by running the following:
+
+    bash Miniforge3-Linux-x86_64.sh -h
 
 or if you are on windows, run:
 
-    start /wait "" build/Miniforge3-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=%UserProfile%\Miniforge3
+    start /wait "" Miniforge3-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=%UserProfile%\Miniforge3
 
 ### Downloading the installer as part of a CI pipeline
 
@@ -145,15 +156,37 @@ For Linux, any architecture, use the following command
 
     wget -O Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
 
+When you want to use `Mambaforge`, you should replace Miniforge into Mambaforge:
+
+    wget -O Mambaforge.sh  "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+
+
 For MacOSX, any architecture, use the following command
 
     curl -fsSLo Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-$(uname -m).sh"
 
 This will download the appropriate installer for the present architecture with
-the filename ``Miniforge3.sh``. Run the shell script with the command in batch
+the filename ``Miniforge3.sh`` (or ``Mambaforge.sh``). Run the shell script with the command in batch
 mode with the `-b` flash:
 
-    bash Miniforge3.sh -b
+    bash Miniforge3.sh -b -p "${HOME}/conda"
+
+`-p` is prefix option. A directory wil be createrd on `"${HOME}/conda"`.
+
+Then you should create the path to conda and activate conda. 
+Run this command:
+
+    source "${HOME}/conda/etc/profile.d/conda.sh"
+
+Finally, you can run the command to activate the base environment 
+
+    conda activate
+
+If you downloaded the Mambaforge installer, you should also run the following command after `source "${HOME}/conda/etc/profile.d/conda.sh`:
+
+    source "${HOME}/conda/etc/profile.d/mamba.sh"
+
+
 
 ### Homebrew
 
@@ -180,7 +213,7 @@ After construction on the CI, the installer is tested against a range of distrib
 - Ubuntu 16.04 ([LTS](https://ubuntu.com/about/release-cycle))
 - Ubuntu 18.04 ([LTS](https://ubuntu.com/about/release-cycle))
 - Ubuntu 20.04 ([LTS](https://ubuntu.com/about/release-cycle))
-- Ubuntu 21.10 (Latest non-LTS version)
+- Ubuntu 22.04 (Latest release -- also happens to be LTS)
 
 ## Local usage
 
@@ -204,7 +237,7 @@ To release a new version of Miniforge:
     1. One installer with the version name
     2. One installer without the version name
     3. The SHA256
-  - At the time of writing, the is a sum of 60 artifacts, and with the two sources, we expect a grand total of 62 artifacts.
+  - At the time of writing, the is a sum of 72 artifacts, and with the two sources, we expect a grand total of 74 artifacts.
 - Mark the pre-release as a release
 
 NOTE: using a pre-release is important to make sure the latest links work.
