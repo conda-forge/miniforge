@@ -127,6 +127,8 @@ rm -rf ${CONDA_BASE_ENVIRONMENT}
 ```bash
 echo ${HOME}/.condarc will be removed if it exists
 rm -f "${HOME}/.condarc"
+echo ${HOME}/.conda and underlying files will be removed if they exist.
+rm -fr ${HOME}/.conda
 ```
 
 ### Windows
