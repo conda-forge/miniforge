@@ -229,6 +229,21 @@ export DOCKERIMAGE=condaforge/linux-anvil-aarch64
 bash build_miniforge.sh
 ```
 
+## FAQ
+ 
+### What's the difference between Mambaforge and Miniforge?
+    
+After the release of Miniforge 23.3.1 in August 2023, Miniforge and Mambaforge are essentially identical. The only difference is the name of the installer and subsequently the default installation path.
+
+Before that release, Miniforge only shipped conda, while Mambaforge added mamba on top. Since Miniconda started shipping conda-libmamba-solver in July 2023, Miniforge followed suit and started shipping it too in August. At that point, since conda-libmamba-solver depends on libmambapy, the only difference between Miniforge and Mambaforge was the presence of the mamba Python package. To minimize surprises, we decided to add mamba to Miniforge too.
+        
+### Should I choose one or another going forward at the risk of one of them gettting deprecated?
+        
+Given its wide usage, there are no plans to deprecate Mambaforge. If at some point we decide to deprecate Mambaforge, it will be appropriately announced and communicated with sufficient time in advance.
+
+That said, if you had to start using one today, we recommend to stick to Miniforge.
+
+
 ## Release
 
 To release a new version of Miniforge:
