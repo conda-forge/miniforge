@@ -12,6 +12,7 @@ channels:
   # when the end user adds the channel without the full URL
   # - https://conda.anaconda.org/conda-forge
   - conda-forge
+  - conda-canary/label/dev
 
 write_condarc: True
 # keep pkgs for space-saving implications for hardlinks when create new environments
@@ -36,3 +37,4 @@ specs:
 
   - pip
   - miniforge_console_shortcut 1.*  # [win]
+  - menuinst >=2.0.0a0  # [win]
