@@ -14,8 +14,7 @@ echo "***** Install constructor *****"
 mamba install --yes \
     --channel conda-forge --override-channels \
     jinja2 curl libarchive \
-    "constructor>=3.4.5" \
-    "conda-canary/label/dev::conda-standalone"
+    "constructor>=3.4.5"
 
 if [[ "$(uname)" == "Darwin" ]]; then
     mamba install --yes \
@@ -52,6 +51,14 @@ if [[ "${TARGET_PLATFORM}" != win-* ]]; then
     fi
     popd
     EXTRA_CONSTRUCTOR_ARGS="${EXTRA_CONSTRUCTOR_ARGS} --conda-exe ${MICROMAMBA_FILE} --platform ${TARGET_PLATFORM}"
+else
+    mkdir "${TEMP_DIR}/conda-standalone-canary"
+    pushd "${TEMP_DIR}/conda-standalone-canary"
+    curl -LO "https://anaconda.org/conda-canary/conda-standalone/23.7.2/download/win-64/conda-standalone-23.7.2-ga3111af_py39_0.tar.bz2"
+    bsdtar -xf conda-standalone-23.7.2-ga3111af_py39_0.tar.bz2
+    CONDA_STANDALONE_FILE="${PWD}/standalone_conda/conda.exe"
+    EXTRA_CONSTRUCTOR_ARGS="${EXTRA_CONSTRUCTOR_ARGS} --conda-exe ${CONDA_STANDALONE_FILE}"
+    popd
 fi
 
 echo "***** Construct the installer *****"
