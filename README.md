@@ -139,6 +139,11 @@ not selected by default due to potential conflicts with other software. Without 
 path, the most convenient way to use the installed software (such as commands `conda` and `mamba`)
 will be via the "Miniforge Prompt" installed to the start menu.
 
+There are known issues with the usage of special characters and spaces in
+the installation location, see for example
+https://github.com/conda-forge/miniforge/issues/484.
+We recommend users install in a directory without any such characters in the name.
+
 ### Non-interactive install
 
 For non-interactive usage one can use the batch install option:
