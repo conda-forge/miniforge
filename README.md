@@ -133,7 +133,11 @@ rm -fr ${HOME}/.conda
 
 ### Windows
 
-Download the installer and double click it on the file browser.
+Download and execute the Windows installer. Follow the prompts, taking note of the options to
+"Create start menu shortcuts" and "Add Miniforge3 to my PATH environment variable". The latter is
+not selected by default due to potential conflicts with other software. Without Miniforge3 on the
+path, the most convenient way to use the installed software (such as commands `conda` and `mamba`)
+will be via the "Miniforge Prompt" installed to the start menu.
 
 ### Non-interactive install
 
@@ -196,6 +200,20 @@ On macOS, you can install miniforge with [Homebrew](https://brew.sh/) by running
 
     brew install miniforge
 
+## Usage
+
+If Miniforge is on the system path (default on Mac and Linux), its versions of the
+[`conda`] (https://conda.io/projects/conda/en/latest/user-guide/getting-started.html#managing-environments) and 
+[`mamba`] (https://mamba.readthedocs.io/en/latest/user_guide/mamba.html#mamba-user-guide) programs can be used 
+at any command prompt. The most notable difference is that the default channel for packages will be conda-forge. 
+
+On Windows, Miniforge is not added to the system path by default. In this case, `conda`/`mamba` cannot be used from
+ordinary command prompts without the full path of the executables, e.g. `C:\Users\myusername\miniforge3\condabin\conda`.
+Instead, it is recommended to use the Miniforge Prompt, available from the Start menu. If desired, the 
+`C:\Users\myusername\miniforge3\condabin` folder may be added to the path environment variable [manually]
+(https://www.geeksforgeeks.org/how-to-setup-anaconda-path-to-environment-variable/) after installation so the 
+software may be used more conveniently from any command prompt with limited chance of software conflicts. 
+
 ## Features
 
 - [X] Automatic build of constructor.
@@ -217,7 +235,7 @@ After construction on the CI, the installer is tested against a range of distrib
 - Ubuntu 20.04 ([LTS](https://ubuntu.com/about/release-cycle))
 - Ubuntu 22.04 (Latest release -- also happens to be LTS)
 
-## Local usage
+## Building a Miniforge Installer
 
 Installers are built and uploaded via the CI but if you want to construct your own Miniforge installer, here is how:
 
