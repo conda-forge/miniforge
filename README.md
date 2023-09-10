@@ -208,16 +208,16 @@ On macOS, you can install miniforge with [Homebrew](https://brew.sh/) by running
 ## Usage
 
 If Miniforge is on the system path (default on Mac and Linux), its versions of the
-[`conda`] (https://conda.io/projects/conda/en/latest/user-guide/getting-started.html#managing-environments) and 
-[`mamba`] (https://mamba.readthedocs.io/en/latest/user_guide/mamba.html#mamba-user-guide) programs can be used 
-at any command prompt. The most notable difference is that the default channel for packages will be conda-forge. 
+[`conda`](https://conda.io/projects/conda/en/latest/user-guide/getting-started.html#managing-environments) and
+[`mamba`](https://mamba.readthedocs.io/en/latest/user_guide/mamba.html#mamba-user-guide) programs can be used
+at any command prompt. The most notable difference is that the default channel for packages will be conda-forge.
 
 On Windows, Miniforge is not added to the system path by default. In this case, `conda`/`mamba` cannot be used from
 ordinary command prompts without the full path of the executables, e.g. `C:\Users\myusername\miniforge3\condabin\conda`.
-Instead, it is recommended to use the Miniforge Prompt, available from the Start menu. If desired, the 
-`C:\Users\myusername\miniforge3\condabin` folder may be added to the path environment variable [manually]
-(https://www.geeksforgeeks.org/how-to-setup-anaconda-path-to-environment-variable/) after installation so the 
-software may be used more conveniently from any command prompt with limited chance of software conflicts. 
+Instead, it is recommended to use the Miniforge Prompt, available from the Start menu. If desired, the
+`C:\Users\myusername\miniforge3\condabin` folder may be added to the path environment variable
+[manually](https://learn.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14)#to-add-a-path-to-the-path-environment-variable)
+after installation so the software may be used more conveniently from any command prompt with limited chance of software conflicts.
 
 ## Features
 
