@@ -32,11 +32,11 @@ Latest installers with Python 3.10 `(*)` in the base environment:
 
 `(*)` The Python version is specific only to the base environment. Conda can create new environments with different Python versions and implementations.
 
-`(**)` For Raspberry PI that include a 64 bit processor, you must also use 
-a 64-bit operating system such as 
-[Raspberry Pi OS 64-bit](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-64-bit) 
-or 
-[Ubuntu for Raspberry PI](https://ubuntu.com/raspberry-pi). 
+`(**)` For Raspberry PI that include a 64 bit processor, you must also use
+a 64-bit operating system such as
+[Raspberry Pi OS 64-bit](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-64-bit)
+or
+[Ubuntu for Raspberry PI](https://ubuntu.com/raspberry-pi).
 The versions listed as "System: 32-bit" are not compatible with the installers on this website.
 
 `(***)` Apple silicon builds are experimental and haven't had testing like the other platforms.
@@ -52,6 +52,22 @@ Latest installers with PyPy 3.9 in the base environment:
 | Linux   | ppc64le (POWER8/9)    | [Miniforge-pypy3-Linux-ppc64le](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-ppc64le.sh) |
 | OS X    | x86_64                | [Miniforge-pypy3-MacOSX-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-MacOSX-x86_64.sh) |
 | Windows | x86_64                | [Miniforge-pypy3-Windows-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Windows-x86_64.exe) |
+
+<details><summary>Mambaforge (Discouraged as of September 2023)</summary>
+
+With the [release](https://github.com/conda-forge/miniforge/releases/tag/23.3.1-0) of
+`Miniforge3-22.3.1-0`, that incorporated the changes in
+[#277](https://github.com/conda-forge/miniforge/pull/277), the packages and
+configuration of `Mambaforge` and `Miniforge3` are now **identical**. The
+only difference between the two is the name of the installer and, subsequently,
+the default installation directory.
+
+Given its wide usage, there are no plans to deprecate Mambaforge. If at some
+point we decide to deprecate Mambaforge, it will be appropriately announced and
+communicated with sufficient time in advance.
+
+As of September 2023, the new usage of Mambaforge is thus discouraged. Bug
+reports specific to Mambaforge will be closed as won't fix.
 
 #### Mambaforge
 
@@ -79,6 +95,8 @@ Latest installers with Mamba and PyPy in the base environment:
 | OS X    | x86_64                | [Mambaforge-pypy3-MacOSX-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-MacOSX-x86_64.sh) |
 | Windows | x86_64                | [Mambaforge-pypy3-Windows-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-pypy3-Windows-x86_64.exe) |
 
+</details>
+
 ## Install
 
 ### Unix-like platforms (Mac OS & Linux)
@@ -86,13 +104,13 @@ Latest installers with Mamba and PyPy in the base environment:
 Download the installer using curl or wget or your favorite program and run the script.
 For eg:
 
-    curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
-    bash Mambaforge-$(uname)-$(uname -m).sh
+    curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+    bash Miniforge3-$(uname)-$(uname -m).sh
 
 or
 
-    wget "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
-    bash Mambaforge-$(uname)-$(uname -m).sh
+    wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+    bash Miniforge3-$(uname)-$(uname -m).sh
 
 #### Uninstallation
 
@@ -106,8 +124,8 @@ You will typically want to remove:
 conda init --reverse --dry-run
 # Use this next command to take action on the rc files listed above
 conda init --reverse
-# Temporarily IGNORE the shell message 
-#       'For changes to take effect, close and re-open your current shell.', 
+# Temporarily IGNORE the shell message
+#       'For changes to take effect, close and re-open your current shell.',
 # and CLOSE THE SHELL ONLY AFTER the 3rd step below is completed.
 ```
 
@@ -167,36 +185,29 @@ For Linux, any architecture, use the following command
 
     wget -O Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
 
-When you want to use `Mambaforge`, you should replace Miniforge into Mambaforge:
-
-    wget -O Mambaforge.sh  "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
-
 
 For MacOSX, any architecture, use the following command
 
     curl -fsSLo Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-$(uname -m).sh"
 
 This will download the appropriate installer for the present architecture with
-the filename ``Miniforge3.sh`` (or ``Mambaforge.sh``). Run the shell script with the command in batch
+the filename ``Miniforge3.sh``. Run the shell script with the command in batch
 mode with the `-b` flash:
 
     bash Miniforge3.sh -b -p "${HOME}/conda"
 
 `-p` is prefix option. A directory wil be createrd on `"${HOME}/conda"`.
 
-Then you should create the path to conda and activate conda. 
+Then you should create the path to conda and activate conda.
 Run this command:
 
     source "${HOME}/conda/etc/profile.d/conda.sh"
-
-Finally, you can run the command to activate the base environment 
-
-    conda activate
-
-If you downloaded the Mambaforge installer, you should also run the following command after `source "${HOME}/conda/etc/profile.d/conda.sh`:
-
+    # For mamba support also run the following command
     source "${HOME}/conda/etc/profile.d/mamba.sh"
 
+Finally, you can run the command to activate the base environment
+
+    conda activate
 
 
 ### Homebrew
@@ -253,18 +264,28 @@ bash build_miniforge.sh
 ```
 
 ## FAQ
- 
+
 ### What's the difference between Mambaforge and Miniforge?
-    
-After the release of Miniforge 23.3.1 in August 2023, Miniforge and Mambaforge are essentially identical. The only difference is the name of the installer and subsequently the default installation path.
 
-Before that release, Miniforge only shipped conda, while Mambaforge added mamba on top. Since Miniconda started shipping conda-libmamba-solver in July 2023, Miniforge followed suit and started shipping it too in August. At that point, since conda-libmamba-solver depends on libmambapy, the only difference between Miniforge and Mambaforge was the presence of the mamba Python package. To minimize surprises, we decided to add mamba to Miniforge too.
-        
+After the release of Miniforge 23.3.1 in August 2023, Miniforge and Mambaforge
+are essentially identical. The only difference is the name of the installer and
+subsequently the default installation path.
+
+Before that release, Miniforge only shipped conda, while Mambaforge added mamba
+on top. Since Miniconda started shipping conda-libmamba-solver in July 2023,
+Miniforge followed suit and started shipping it too in August. At that point,
+since conda-libmamba-solver depends on libmambapy, the only difference between
+Miniforge and Mambaforge was the presence of the mamba Python package. To
+minimize surprises, we decided to add mamba to Miniforge too.
+
 ### Should I choose one or another going forward at the risk of one of them gettting deprecated?
-        
-Given its wide usage, there are no plans to deprecate Mambaforge. If at some point we decide to deprecate Mambaforge, it will be appropriately announced and communicated with sufficient time in advance.
 
-That said, if you had to start using one today, we recommend to stick to Miniforge.
+Given its wide usage, there are no plans to deprecate Mambaforge. If at some
+point we decide to deprecate Mambaforge, it will be appropriately announced and
+communicated with sufficient time in advance.
+
+That said, if you had to start using one today, we recommend to stick to
+Miniforge.
 
 
 ## Release
