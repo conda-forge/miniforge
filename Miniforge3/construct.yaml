@@ -1,6 +1,6 @@
 {% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
 {% set version = os.environ.get("MINIFORGE_VERSION", "23.7.4-0") %}
-{% set conda_libmamba_solver_version = "23.7.0"%}
+{% set conda_libmamba_solver_version = "23.9.1"%}
 {% set mamba_version = "1.5.1"%}
 
 name: {{ name }}
