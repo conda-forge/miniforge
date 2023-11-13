@@ -56,7 +56,7 @@ Latest installers with PyPy 3.9 in the base environment:
 <details><summary>Mambaforge (Discouraged as of September 2023)</summary>
 
 With the [release](https://github.com/conda-forge/miniforge/releases/tag/23.3.1-0) of
-`Miniforge3-22.3.1-0`, that incorporated the changes in
+`Miniforge3-23.3.1-0`, that incorporated the changes in
 [#277](https://github.com/conda-forge/miniforge/pull/277), the packages and
 configuration of `Mambaforge` and `Miniforge3` are now **identical**. The
 only difference between the two is the name of the installer and, subsequently,
