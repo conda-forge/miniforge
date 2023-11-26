@@ -194,7 +194,7 @@ jobs:
         miniforge-version: "latest"
         miniforge-variant: Mambaforge
         use-mamba: true
-      if: contains(matrix.OS_NAME, 'Windows')
+      if: ${{ ! contains(matrix.OS_NAME, 'Linux') }}
 
     - name: Build and test miniforge
       env:
