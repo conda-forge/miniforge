@@ -1,7 +1,7 @@
 {% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
-{% set version = os.environ.get("MINIFORGE_VERSION", "23.10.0-0") %}
-{% set conda_libmamba_solver_version = "23.11.1"%}
-{% set mamba_version = "1.5.3"%}
+{% set version = os.environ.get("MINIFORGE_VERSION", "23.11.0-0") %}
+{% set conda_libmamba_solver_version = "23.12.0"%}
+{% set mamba_version = "1.5.5"%}
 
 name: {{ name }}
 version: {{ version }}
@@ -23,6 +23,18 @@ license_file: ../LICENSE
 # During batch installation, conda is never initialized
 initialize_conda: True
 initialize_by_default: False
+
+user_requested_specs:
+{% if name.endswith("pypy3") %}
+  - python 3.9.* *_pypy
+{% else %}
+  - python 3.10.*
+{% endif %}
+  - pip
+  - conda >={{ version.split("-")[0] }}
+  # Omit conda-libmamba-solver so that conda is free to remove it later
+  - mamba >={{ mamba_version }}
+  - miniforge_console_shortcut 1.*  # [win]
 
 specs:
 {% if name.endswith("pypy3") %}
