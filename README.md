@@ -7,7 +7,7 @@ This repository holds the minimal installers for [Conda](https://conda.io/) and 
 * Packages in the base environment are obtained from the [conda-forge channel](https://anaconda.org/conda-forge).
 * The [conda-forge](https://conda-forge.org/) channel is set as the default (and only) channel.
 
-We put an emphasis on supporting various CPU architectures (x86_64, ppc64le, and aarch64 including Apple Silicon). Optional support for PyPy in place of standard Python interpreter (aka "CPython") is provided.
+We put an emphasis on supporting various CPU architectures (x86_64, ppc64le, and aarch64 including Apple Silicon). Optional support for PyPy in place of standard Python interpreter (aka "CPython") is provided in the installers with `-pypy3-` in their filenames.
 
 ## Download
 
