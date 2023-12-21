@@ -233,7 +233,7 @@ jobs:
 
     - name: Upload miniforge to Github artifact
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         path: build/${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}*
         name: ${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
