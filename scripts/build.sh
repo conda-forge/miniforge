@@ -14,7 +14,7 @@ echo "***** Install constructor *****"
 mamba install --yes \
     --channel conda-forge --override-channels \
     jinja2 curl libarchive \
-    "constructor>=3.4.2"
+    "constructor>=3.4.5"
 
 if [[ "$(uname)" == "Darwin" ]]; then
     mamba install --yes \
@@ -62,6 +62,7 @@ cd -
 
 echo "***** Generate installer hash *****"
 cd "${TEMP_DIR}"
+ls -alh
 if [[ "$(uname)" == MINGW* ]]; then
    EXTS=("exe");
 elif [[ "$(uname)" == Darwin ]]; then
