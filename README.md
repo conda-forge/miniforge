@@ -192,7 +192,7 @@ mode with the `-b` flash:
 
     bash Miniforge3.sh -b -p "${HOME}/conda"
 
-`-p` is prefix option. A directory wil be createrd on `"${HOME}/conda"`.
+`-p` is prefix option. A directory wil be created on `"${HOME}/conda"`.
 
 Then you should create the path to conda and activate conda.
 Run this command:
