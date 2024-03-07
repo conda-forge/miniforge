@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ssh-key: ${{ secrets.MINIFORGE_AUTOUPDATE_SSH_PRIVATE_KEY }}
-      - uses: conda-incubator/setup-miniconda@v2.2.0
+      - uses: conda-incubator/setup-miniconda@v3.0.3
         with:
           miniforge-variant: Miniforge3
           environment-file: .github/actions/autoupdate/environment.yml
