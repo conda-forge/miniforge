@@ -54,6 +54,9 @@ if [[ "$(uname)" == MINGW* ]]; then
       exit 1
   fi
 else
+  # https://github.com/conda-forge/miniforge/issues/566
+  touch $HOME/micromamba
+
   # Test one of our installers in batch mode
   if [[ "${INSTALLER_NAME}" == "Mambaforge" ]]; then
     bash "${INSTALLER_PATH}" -b -p "${CONDA_PATH}"
