@@ -24,6 +24,15 @@ license_file: ../LICENSE
 initialize_conda: True
 initialize_by_default: False
 
+# macOS PKG options
+installer_type: all  # [osx]
+welcome_image: osx_pkg_background.png  # [osx]
+# Reset everything to system default (no Anaconda stuff)
+# We can customize it if needed
+welcome_text: ""  # [osx]
+readme_text: ""  # [osx]
+conclusion_text: ""  # [osx]
+
 user_requested_specs:
 {% if name.endswith("pypy3") %}
   - python 3.9.* *_pypy
@@ -48,3 +57,7 @@ specs:
 
   - pip
   - miniforge_console_shortcut 1.*  # [win]
+
+# Signing settings will be added by CI
+signing_identity_name: {{ os.environ.get("APPLE_SIGNING_IDENTITY", "") }}
+notarization_identity_name: {{ os.environ.get("APPLE_NOTARIZATION_IDENTITY", "") }}
