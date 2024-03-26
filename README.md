@@ -95,18 +95,29 @@ Latest installers with Mamba and PyPy in the base environment:
 
 ## Install
 
-### Unix-like platforms (Mac OS & Linux)
+### Unix-like platforms (macOS & Linux)
 
 Download the installer using curl or wget or your favorite program and run the script.
 For eg:
 
-    curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
-    bash Miniforge3-$(uname)-$(uname -m).sh
+```bash
+curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+bash Miniforge3-$(uname)-$(uname -m).sh
+```
 
 or
 
-    wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
-    bash Miniforge3-$(uname)-$(uname -m).sh
+```bash
+wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+bash Miniforge3-$(uname)-$(uname -m).sh
+```
+
+**NOTE:** For macOS, you may need to run `bash` with `sudo`:
+
+```bash
+curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+sudo bash Miniforge3-$(uname)-$(uname -m).sh
+```
 
 #### Uninstallation
 
