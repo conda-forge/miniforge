@@ -33,37 +33,37 @@ jobs:
             MINIFORGE_NAME: "Mambaforge-pypy3"
             OS_NAME: "Windows"
 
-          - os: macos-latest
+          - os: macos-14
             ARCH: arm64
             TARGET_PLATFORM: osx-arm64
             MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "MacOSX"
 
-          - os: macos-latest
+          - os: macos-14
             ARCH: arm64
             TARGET_PLATFORM: osx-arm64
             MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "MacOSX"
 
-          - os: macos-latest
+          - os: macos-14
             ARCH: x86_64
             TARGET_PLATFORM: osx-64
             MINIFORGE_NAME: "Miniforge-pypy3"
             OS_NAME: "MacOSX"
 
-          - os: macos-latest
+          - os: macos-14
             ARCH: x86_64
             TARGET_PLATFORM: osx-64
             MINIFORGE_NAME: "Mambaforge-pypy3"
             OS_NAME: "MacOSX"
 
-          - os: macos-latest
+          - os: macos-14
             ARCH: x86_64
             TARGET_PLATFORM: osx-64
             MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "MacOSX"
 
-          - os: macos-latest
+          - os: macos-14
             ARCH: x86_64
             TARGET_PLATFORM: osx-64
             MINIFORGE_NAME: "Mambaforge"
