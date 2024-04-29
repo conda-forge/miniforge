@@ -189,7 +189,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - uses: conda-incubator/setup-miniconda@v3.0.3
+    - uses: conda-incubator/setup-miniconda@v3.0.4
       with:
         miniforge-version: "latest"
         miniforge-variant: Mambaforge
