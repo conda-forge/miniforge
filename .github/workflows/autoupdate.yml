@@ -1,15 +1,15 @@
 name: Auto-update mamba
 on:
- schedule:
-   - cron: "0 */6 * * *"
+  schedule:
+    - cron: "0 */6 * * *"
 jobs:
   createPullRequest:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
         with:
           ssh-key: ${{ secrets.MINIFORGE_AUTOUPDATE_SSH_PRIVATE_KEY }}
-      - uses: conda-incubator/setup-miniconda@v3.0.4
+      - uses: conda-incubator/setup-miniconda@a4260408e20b96e80095f42ff7f1a15b27dd94ca # v3.0.4
         with:
           miniforge-variant: Miniforge3
           environment-file: .github/actions/autoupdate/environment.yml
@@ -17,7 +17,7 @@ jobs:
       - name: Create Pull Request
         id: cpr
         # This is the v3 tag but for security purposes we pin to the exact commit.
-        uses: peter-evans/create-pull-request@6d6857d36972b65feb161a90e484f2984215f83e
+        uses: peter-evans/create-pull-request@6d6857d36972b65feb161a90e484f2984215f83e # 6d6857d36972b65feb161a90e484f2984215f83e
         with:
           commit-message: "Update mamba version"
           title: "Update mamba version"
