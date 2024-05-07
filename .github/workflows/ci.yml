@@ -1,5 +1,5 @@
 name: Build miniforge
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   build:
@@ -186,64 +186,64 @@ jobs:
             TEST_IMAGE_NAMES: "centos:7"
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
 
-    - uses: conda-incubator/setup-miniconda@v3.0.4
-      with:
-        miniforge-version: "latest"
-        miniforge-variant: Mambaforge
-        use-mamba: true
-      if: ${{ ! contains(matrix.OS_NAME, 'Linux') }}
+      - uses: conda-incubator/setup-miniconda@a4260408e20b96e80095f42ff7f1a15b27dd94ca # v3.0.4
+        with:
+          miniforge-version: "latest"
+          miniforge-variant: Mambaforge
+          use-mamba: true
+        if: ${{ ! contains(matrix.OS_NAME, 'Linux') }}
 
-    - name: Build and test miniforge
-      env:
-        ARCH: ${{ matrix.ARCH }}
-        MINIFORGE_NAME: ${{ matrix.MINIFORGE_NAME }}
-        OS_NAME: ${{ matrix.OS_NAME }}
-        DOCKERIMAGE: ${{ matrix.DOCKERIMAGE }}
-        DOCKER_ARCH: ${{ matrix.DOCKER_ARCH }}
-        TARGET_PLATFORM: ${{ matrix.TARGET_PLATFORM }}
-        TEST_IMAGE_NAMES: ${{ matrix.TEST_IMAGE_NAMES }}
-      run: |
-        if [[ "$GITHUB_REF" == refs/tags/* ]]; then
-          export MINIFORGE_VERSION=${GITHUB_REF##*/};
-        fi
-        if [[ "$OS_NAME" == "Linux" ]]; then
-          export EXT=sh
-          bash build_miniforge.sh;
-        fi
-        if [[ "$OS_NAME" == "MacOSX" ]]; then
-          export EXT=sh
-          bash build_miniforge_osx.sh;
-        fi
-        if [[ "$OS_NAME" == "Windows" ]]; then
-          export EXT=exe
-          echo "WINDIR:$WINDIR"
-          source "${CONDA}"/Scripts/activate;
-          source build_miniforge_win.sh;
-        fi
-        # Copy for latest release
-        cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.$EXT build/$MINIFORGE_NAME-$OS_NAME-$ARCH.$EXT
-        if [[ "$OS_NAME" == "MacOSX" ]]; then
-          cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.$EXT build/$MINIFORGE_NAME-Darwin-$ARCH.$EXT
-        fi
-        ls -alh build
-      shell: bash
+      - name: Build and test miniforge
+        env:
+          ARCH: ${{ matrix.ARCH }}
+          MINIFORGE_NAME: ${{ matrix.MINIFORGE_NAME }}
+          OS_NAME: ${{ matrix.OS_NAME }}
+          DOCKERIMAGE: ${{ matrix.DOCKERIMAGE }}
+          DOCKER_ARCH: ${{ matrix.DOCKER_ARCH }}
+          TARGET_PLATFORM: ${{ matrix.TARGET_PLATFORM }}
+          TEST_IMAGE_NAMES: ${{ matrix.TEST_IMAGE_NAMES }}
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            export MINIFORGE_VERSION=${GITHUB_REF##*/};
+          fi
+          if [[ "$OS_NAME" == "Linux" ]]; then
+            export EXT=sh
+            bash build_miniforge.sh;
+          fi
+          if [[ "$OS_NAME" == "MacOSX" ]]; then
+            export EXT=sh
+            bash build_miniforge_osx.sh;
+          fi
+          if [[ "$OS_NAME" == "Windows" ]]; then
+            export EXT=exe
+            echo "WINDIR:$WINDIR"
+            source "${CONDA}"/Scripts/activate;
+            source build_miniforge_win.sh;
+          fi
+          # Copy for latest release
+          cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.$EXT build/$MINIFORGE_NAME-$OS_NAME-$ARCH.$EXT
+          if [[ "$OS_NAME" == "MacOSX" ]]; then
+            cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.$EXT build/$MINIFORGE_NAME-Darwin-$ARCH.$EXT
+          fi
+          ls -alh build
+        shell: bash
 
-    - name: Upload miniforge to Github artifact
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        path: build/${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}*
-        name: ${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
+      - name: Upload miniforge to Github artifact
+        if: always()
+        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4
+        with:
+          path: build/${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}*
+          name: ${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
 
-    - name: Upload miniforge to release
-      uses: svenstaro/upload-release-action@v2
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: build/M*forge*
-        tag: ${{ github.ref }}
-        overwrite: true
-        file_glob: true
-      if: startsWith(github.ref, 'refs/tags/')
+      - name: Upload miniforge to release
+        uses: svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd # v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/M*forge*
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
+        if: startsWith(github.ref, 'refs/tags/')
