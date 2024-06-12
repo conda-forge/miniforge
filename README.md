@@ -274,7 +274,7 @@ since conda-libmamba-solver depends on libmambapy, the only difference between
 Miniforge and Mambaforge was the presence of the mamba Python package. To
 minimize surprises, we decided to add mamba to Miniforge too.
 
-### Should I choose one or another going forward at the risk of one of them gettting deprecated?
+### Should I choose one or another going forward at the risk of one of them getting deprecated?
 
 Given its wide usage, there are no plans to deprecate Mambaforge. If at some
 point we decide to deprecate Mambaforge, it will be appropriately announced and
