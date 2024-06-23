@@ -15,7 +15,7 @@ Miniforge installers are available here: https://github.com/conda-forge/miniforg
 
 #### Miniforge3
 
-Latest installers with Python 3.10 `(*)` in the base environment:
+Latest installers with Python 3.12 `(*)` in the base environment:
 
 | OS      | Architecture          | Download  |
 | --------|-----------------------|-----------|
