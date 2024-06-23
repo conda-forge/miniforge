@@ -240,8 +240,8 @@ after installation so the software may be used more conveniently from any comman
 After construction on the CI, the installer is tested against a range of distribution that match the installer architecture (`$ARCH`). For example when architecture is `aarch64`, the constructed installer is tested against:
 
 - Centos 7
-- Debian Buster (10)
 - Debian Bullseye (11)
+- Debian Bookworm (12)
 - Ubuntu 16.04 ([LTS](https://ubuntu.com/about/release-cycle))
 - Ubuntu 18.04 ([LTS](https://ubuntu.com/about/release-cycle))
 - Ubuntu 20.04 ([LTS](https://ubuntu.com/about/release-cycle))

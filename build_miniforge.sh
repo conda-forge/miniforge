@@ -17,7 +17,7 @@ DOCKERIMAGE=${DOCKERIMAGE:-condaforge/linux-anvil-aarch64}
 export MINIFORGE_NAME=${MINIFORGE_NAME:-Miniforge3}
 OS_NAME=${OS_NAME:-Linux}
 EXT=${EXT:-sh}
-TEST_IMAGE_NAMES=${TEST_IMAGE_NAMES:-ubuntu:24.04 ubuntu:22.04 ubuntu:20.04 ubuntu:18.04 ubuntu:16.04 centos:7 debian:bullseye debian:buster}
+TEST_IMAGE_NAMES=${TEST_IMAGE_NAMES:-ubuntu:24.04 ubuntu:22.04 ubuntu:20.04 ubuntu:18.04 ubuntu:16.04 centos:7 debian:bookworm debian:bullseye}
 export CONSTRUCT_ROOT=/construct
 
 echo "============= Create build directory ============="
