@@ -259,6 +259,19 @@ export DOCKERIMAGE=condaforge/linux-anvil-aarch64
 bash build_miniforge.sh
 ```
 
+## Support for older operating systems
+
+### Support for macOS 10.9-10.12
+If you require support for macOS 10.9 through 10.12 you may download version
+24.3.0-0 of miniforge available at 
+https://github.com/conda-forge/miniforge/releases/tag/24.3.0-0
+
+### Support for glibc 2.12-2.16
+
+If you require support for glibc 2.12 through 2.16 you may download version
+24.3.0-0 of miniforge available at 
+https://github.com/conda-forge/miniforge/releases/tag/24.3.0-0
+
 ## FAQ
 
 ### What's the difference between Mambaforge and Miniforge?
