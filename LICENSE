@@ -6,7 +6,7 @@ packages as well. They include different OSI-approved licenses including
 the GNU General Public License and can be found in pkgs/<pkg-name>/info/licenses
 folders.
 
-Miniforge installer comes with a boostrapping executable that is used
+Miniforge installer comes with a bootstrapping executable that is used
 when installing miniforge and is deleted after miniforge is installed.
 The bootstrapping executable uses micromamba, cli11, cpp-filesystem,
 curl, c-ares, krb5, libarchive, libev, lz4, nghttp2, openssl, libsolv,
