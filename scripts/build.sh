@@ -53,6 +53,13 @@ if [[ "${TARGET_PLATFORM}" != win-* ]]; then
     EXTRA_CONSTRUCTOR_ARGS="${EXTRA_CONSTRUCTOR_ARGS} --conda-exe ${MICROMAMBA_FILE} --platform ${TARGET_PLATFORM}"
 fi
 
+echo "***** Set virtual package versions *****"
+if [[ "${TARGET_PLATFORM}" == linux-* ]]; then
+    export CONDA_OVERRIDE_GLIBC=2.12
+elif [[ "${TARGET_PLATFORM}" == linux-* ]]; then
+    export CONDA_OVERRIDE_OSX=10.9
+fi
+
 echo "***** Construct the installer *****"
 # Transmutation requires the current directory is writable
 cd "${TEMP_DIR}"
