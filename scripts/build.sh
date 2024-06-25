@@ -55,7 +55,7 @@ fi
 
 echo "***** Set virtual package versions *****"
 if [[ "${TARGET_PLATFORM}" == linux-* ]]; then
-    export CONDA_OVERRIDE_GLIBC=2.12
+    export CONDA_OVERRIDE_GLIBC=2.17
 elif [[ "${TARGET_PLATFORM}" == osx-64 ]]; then
     export CONDA_OVERRIDE_OSX=10.13
 elif [[ "${TARGET_PLATFORM}" == osx-arm64 ]]; then
