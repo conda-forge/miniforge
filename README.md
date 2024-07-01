@@ -15,16 +15,16 @@ Miniforge installers are available here: https://github.com/conda-forge/miniforg
 
 #### Miniforge3
 
-Latest installers with Python 3.10 `(*)` in the base environment:
+Latest installers with Python 3.12 `(*)` in the base environment:
 
-| OS      | Architecture          | Download  |
-| --------|-----------------------|-----------|
-| Linux   | x86_64 (amd64)        | [Miniforge3-Linux-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh) |
-| Linux   | aarch64 (arm64) `(**)` | [Miniforge3-Linux-aarch64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh) |
-| Linux   | ppc64le (POWER8/9)    | [Miniforge3-Linux-ppc64le](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-ppc64le.sh) |
-| OS X    | x86_64                | [Miniforge3-MacOSX-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-x86_64.sh) |
-| OS X    | arm64 (Apple Silicon) `(***)` | [Miniforge3-MacOSX-arm64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh) |
-| Windows | x86_64                | [Miniforge3-Windows-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe) |
+| OS      | Architecture                  | Minimum Version  | Download  |
+| --------|-------------------------------|------------------|-----------|
+| Linux   | x86_64 (amd64)                | glibc >= 2.17    | [Miniforge3-Linux-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh) |
+| Linux   | aarch64 (arm64) `(**)`        | glibc >= 2.17    | [Miniforge3-Linux-aarch64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh) |
+| Linux   | ppc64le (POWER8/9)            | glibc >= 2.17    | [Miniforge3-Linux-ppc64le](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-ppc64le.sh) |
+| OS X    | x86_64                        | macOS >= 10.13   | [Miniforge3-MacOSX-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-x86_64.sh) |
+| OS X    | arm64 (Apple Silicon) `(***)` | macOS >= 11.0    | [Miniforge3-MacOSX-arm64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh) |
+| Windows | x86_64                        | Windows >= 7     | [Miniforge3-Windows-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe) |
 
 `(*)` The Python version is specific only to the base environment. Conda can create new environments with different Python versions and implementations.
 
@@ -41,13 +41,13 @@ The versions listed as "System: 32-bit" are not compatible with the installers o
 
 Latest installers with PyPy 3.9 in the base environment:
 
-| OS      | Architecture          | Download  |
-| --------|-----------------------|-----------|
-| Linux   | x86_64 (amd64)        | [Miniforge-pypy3-Linux-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-x86_64.sh) |
-| Linux   | aarch64 (arm64)       | [Miniforge-pypy3-Linux-aarch64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-aarch64.sh) |
-| Linux   | ppc64le (POWER8/9)    | [Miniforge-pypy3-Linux-ppc64le](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-ppc64le.sh) |
-| OS X    | x86_64                | [Miniforge-pypy3-MacOSX-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-MacOSX-x86_64.sh) |
-| Windows | x86_64                | [Miniforge-pypy3-Windows-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Windows-x86_64.exe) |
+| OS      | Architecture       | Minimum Version  | Download  |
+| --------|--------------------|------------------|-----------|
+| Linux   | x86_64 (amd64)     | glibc >= 2.17    | [Miniforge-pypy3-Linux-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-x86_64.sh) |
+| Linux   | aarch64 (arm64)    | glibc >= 2.17    | [Miniforge-pypy3-Linux-aarch64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-aarch64.sh) |
+| Linux   | ppc64le (POWER8/9) | glibc >= 2.17    | [Miniforge-pypy3-Linux-ppc64le](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-ppc64le.sh) |
+| OS X    | x86_64             | macOS >= 10.13   | [Miniforge-pypy3-MacOSX-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-MacOSX-x86_64.sh) |
+| Windows | x86_64             | Windows >= 7     | [Miniforge-pypy3-Windows-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Windows-x86_64.exe) |
 
 <details><summary>Mambaforge (Discouraged as of September 2023)</summary>
 
@@ -240,8 +240,8 @@ after installation so the software may be used more conveniently from any comman
 After construction on the CI, the installer is tested against a range of distribution that match the installer architecture (`$ARCH`). For example when architecture is `aarch64`, the constructed installer is tested against:
 
 - Centos 7
-- Debian Buster (10)
 - Debian Bullseye (11)
+- Debian Bookworm (12)
 - Ubuntu 16.04 ([LTS](https://ubuntu.com/about/release-cycle))
 - Ubuntu 18.04 ([LTS](https://ubuntu.com/about/release-cycle))
 - Ubuntu 20.04 ([LTS](https://ubuntu.com/about/release-cycle))
@@ -258,6 +258,19 @@ export DOCKERIMAGE=condaforge/linux-anvil-aarch64
 
 bash build_miniforge.sh
 ```
+
+## Support for older operating systems
+
+### Support for macOS 10.9-10.12
+If you require support for macOS 10.9 through 10.12 you may download version
+24.3.0-0 of miniforge available at 
+https://github.com/conda-forge/miniforge/releases/tag/24.3.0-0
+
+### Support for glibc 2.12-2.16
+
+If you require support for glibc 2.12 through 2.16 you may download version
+24.3.0-0 of miniforge available at 
+https://github.com/conda-forge/miniforge/releases/tag/24.3.0-0
 
 ## FAQ
 
