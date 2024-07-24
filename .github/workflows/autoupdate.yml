@@ -6,12 +6,12 @@ jobs:
   createPullRequest:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
           ssh-key: ${{ secrets.MINIFORGE_AUTOUPDATE_SSH_PRIVATE_KEY }}
       - uses: conda-incubator/setup-miniconda@a4260408e20b96e80095f42ff7f1a15b27dd94ca # v3.0.4
         with:
-          miniforge-variant: Miniforge3
+          miniforge-version: latest
           environment-file: .github/actions/autoupdate/environment.yml
       - run: python .github/actions/autoupdate/update.py
       - name: Create Pull Request
