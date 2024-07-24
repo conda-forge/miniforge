@@ -38,7 +38,7 @@ cp LICENSE "${TEMP_DIR}/"
 ls -al "${TEMP_DIR}"
 
 if [[ "${TARGET_PLATFORM}" != win-* ]]; then
-    MICROMAMBA_VERSION=1.5.7
+    MICROMAMBA_VERSION=1.5.8
     MICROMAMBA_BUILD=0
     mkdir "${TEMP_DIR}/micromamba"
     pushd "${TEMP_DIR}/micromamba"
@@ -51,6 +51,15 @@ if [[ "${TARGET_PLATFORM}" != win-* ]]; then
     fi
     popd
     EXTRA_CONSTRUCTOR_ARGS="${EXTRA_CONSTRUCTOR_ARGS} --conda-exe ${MICROMAMBA_FILE} --platform ${TARGET_PLATFORM}"
+fi
+
+echo "***** Set virtual package versions *****"
+if [[ "${TARGET_PLATFORM}" == linux-* ]]; then
+    export CONDA_OVERRIDE_GLIBC=2.17
+elif [[ "${TARGET_PLATFORM}" == osx-64 ]]; then
+    export CONDA_OVERRIDE_OSX=10.13
+elif [[ "${TARGET_PLATFORM}" == osx-arm64 ]]; then
+    export CONDA_OVERRIDE_OSX=11.0
 fi
 
 echo "***** Construct the installer *****"

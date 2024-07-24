@@ -1,5 +1,5 @@
 {% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
-{% set version = os.environ.get("MINIFORGE_VERSION", "24.3.0-0") %}
+{% set version = os.environ.get("MINIFORGE_VERSION", "24.5.0-0") %}
 {% set conda_libmamba_solver_version = "24.1.0"%}
 {% set mamba_version = "1.5.8"%}
 
@@ -28,7 +28,7 @@ user_requested_specs:
 {% if name.endswith("pypy3") %}
   - python 3.9.* *_pypy
 {% else %}
-  - python 3.10.*
+  - python 3.12.*
 {% endif %}
   - pip
   - conda >={{ version.split("-")[0] }}
@@ -40,7 +40,7 @@ specs:
 {% if name.endswith("pypy3") %}
   - python 3.9.* *_pypy
 {% else %}
-  - python 3.10.*
+  - python 3.12.*
 {% endif %}
   - conda {{ version.split("-")[0] }}
   - conda-libmamba-solver {{ conda_libmamba_solver_version }}
