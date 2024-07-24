@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ "$GITHUB_ACTIONS" == "1" ]];
+if [[ "$GITHUB_ACTIONS" == "1" ]]; then
     echo "::warning title=Mambaforge is now deprecated!::Future Miniforge releases will NOT build Mambaforge installers. We advise you switch to Miniforge at your earliest convenience."
 else
     echo "!!!!!! Mambaforge is now deprecated !!!!!"
