@@ -49,7 +49,9 @@ Latest installers with PyPy 3.9 in the base environment:
 | OS X    | x86_64             | macOS >= 10.13   | [Miniforge-pypy3-MacOSX-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-MacOSX-x86_64.sh) |
 | Windows | x86_64             | Windows >= 7     | [Miniforge-pypy3-Windows-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Windows-x86_64.exe) |
 
-<details><summary>Mambaforge (Discouraged as of September 2023)</summary>
+<details>
+
+<summary>🚨 Mambaforge (<b>Deprecated</b> as of July 2024) 🚨</summary>
 
 With the [release](https://github.com/conda-forge/miniforge/releases/tag/23.3.1-0) of
 `Miniforge3-23.3.1-0`, that incorporated the changes in
@@ -58,12 +60,8 @@ configuration of `Mambaforge` and `Miniforge3` are now **identical**. The
 only difference between the two is the name of the installer and, subsequently,
 the default installation directory.
 
-Given its wide usage, there are no plans to deprecate Mambaforge. If at some
-point we decide to deprecate Mambaforge, it will be appropriately announced and
-communicated with sufficient time in advance.
-
-As of September 2023, the new usage of Mambaforge is thus discouraged. Bug
-reports specific to Mambaforge will be closed as won't fix.
+We recommend switching to `Miniforge3` immediately. These installers will be 
+eventually removed.
 
 #### Mambaforge
 

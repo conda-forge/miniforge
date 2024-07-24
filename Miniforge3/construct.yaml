@@ -17,7 +17,7 @@ write_condarc: True
 # keep pkgs for space-saving implications for hardlinks when create new environments
 # and keep the same with Miniconda
 keep_pkgs: True
-license_file: ../LICENSE
+license_file: {{ os.environ.get("MINIFORGE_LICENSE_OVERRIDE", "../LICENSE") }}
 
 # During the interactive installation, these variables are checked.
 # During batch installation, conda is never initialized
@@ -48,3 +48,6 @@ specs:
 
   - pip
   - miniforge_console_shortcut 1.*  # [win]
+
+pre_install: mambaforge_deprecation.sh  # [unix]
+pre_install: mambaforge_deprecation.bat  # [win]
