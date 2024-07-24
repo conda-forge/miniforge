@@ -198,7 +198,7 @@ jobs:
       
       - name: Patch license for Mambaforge deprecation
         if: matrix.MINIFORGE_NAME == 'Mambaforge'
-        run:
+        run: |
           echo "!!!!!! Mambaforge is now deprecated !!!!!" > MAMBAFORGE_LICENSE.txt
           echo "Future Miniforge releases will NOT build Mambaforge installers." >> MAMBAFORGE_LICENSE.txt
           echo "We advise you switch to Miniforge at your earliest convenience." >> MAMBAFORGE_LICENSE.txt
