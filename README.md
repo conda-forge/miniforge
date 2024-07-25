@@ -61,7 +61,13 @@ only difference between the two is the name of the installer and, subsequently,
 the default installation directory.
 
 We recommend switching to `Miniforge3` immediately. These installers will be 
-retired in January 2025.
+retired in January 2025. To assist in the migration to Miniforge3 for CI users, we've stopped
+the latest Mambaforge (24.5+) installer from proceeding with following schedule
+
+* Every two weeks in October
+* Every ten days in November
+* Every five days in December
+* Never in 2025
 
 #### Mambaforge
 
