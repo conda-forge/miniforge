@@ -61,7 +61,7 @@ only difference between the two is the name of the installer and, subsequently,
 the default installation directory.
 
 We recommend switching to `Miniforge3` immediately. These installers will be 
-eventually removed.
+retired in January 2025.
 
 #### Mambaforge
 
