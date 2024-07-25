@@ -197,7 +197,7 @@ jobs:
         if: ${{ ! contains(matrix.OS_NAME, 'Linux') }}
       
       - name: Patch license for Mambaforge deprecation
-        if: matrix.MINIFORGE_NAME == 'Mambaforge'
+        if: matrix.MINIFORGE_NAME == 'Mambaforge' || matrix.MINIFORGE_NAME == 'Mambaforge-pypy3'
         run: |
           echo "!!!!!! Mambaforge is now deprecated !!!!!" > MAMBAFORGE_LICENSE.txt
           echo "Future Miniforge releases will NOT build Mambaforge installers." >> MAMBAFORGE_LICENSE.txt
