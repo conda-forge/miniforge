@@ -195,6 +195,17 @@ jobs:
           miniforge-variant: Mambaforge
           use-mamba: true
         if: ${{ ! contains(matrix.OS_NAME, 'Linux') }}
+      
+      - name: Patch license for Mambaforge deprecation
+        if: matrix.MINIFORGE_NAME == 'Mambaforge' || matrix.MINIFORGE_NAME == 'Mambaforge-pypy3'
+        run: |
+          echo "!!!!!! Mambaforge is now deprecated !!!!!" > Miniforge3/MAMBAFORGE_LICENSE.txt
+          echo "Future Miniforge releases will NOT build Mambaforge installers." >> Miniforge3/MAMBAFORGE_LICENSE.txt
+          echo "We advise you switch to Miniforge at your earliest convenience." >> Miniforge3/MAMBAFORGE_LICENSE.txt
+          echo "More details at https://conda-forge.org/news/2024/07/29/sunsetting-mambaforge/." >> Miniforge3/MAMBAFORGE_LICENSE.txt
+          echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" >> Miniforge3/MAMBAFORGE_LICENSE.txt
+          cat LICENSE >> Miniforge3/MAMBAFORGE_LICENSE.txt
+          echo "MINIFORGE_LICENSE_OVERRIDE=MAMBAFORGE_LICENSE.txt" >> $GITHUB_ENV
 
       - name: Build and test miniforge
         env:
