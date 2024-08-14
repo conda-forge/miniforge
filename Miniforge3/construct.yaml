@@ -49,8 +49,10 @@ specs:
   - pip
   - miniforge_console_shortcut 1.*  # [win]
 
+{% if name.startswith("Mambaforge") %}
 pre_install: mambaforge_deprecation.sh  # [unix]
 pre_install: mambaforge_deprecation.bat  # [win]
+{% endif %}
 
 virtual_specs:
   - __glibc >=2.17 # [linux]
