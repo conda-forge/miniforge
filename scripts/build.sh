@@ -22,6 +22,9 @@ if [[ "$(uname)" == "Darwin" ]]; then
         coreutils
 fi
 
+# TEMPORARY; remove before merge once target PR is merged
+python -mpip install https://github.com/jaimergp/constructor/archive/fix-virtual-specs-ok.tar.gz --no-deps
+
 mamba list
 
 echo "***** Make temp directory *****"
