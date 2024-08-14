@@ -23,7 +23,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
 fi
 
 # TEMPORARY; remove before merge once target PR is merged
-python -mpip install https://github.com/jaimergp/constructor/archive/fix-virtual-specs-ok.tar.gz --no-deps
+SETUPTOOLS_SCM_PRETEND_VERSION=3.9.3 python -mpip install https://github.com/jaimergp/constructor/archive/fix-virtual-specs-ok.tar.gz --no-deps
 
 mamba list
 
