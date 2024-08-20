@@ -14,16 +14,13 @@ echo "***** Install constructor *****"
 mamba install --yes \
     --channel conda-forge --override-channels \
     jinja2 curl libarchive \
-    "constructor>=3.4.5"
+    "constructor>=3.9.3"
 
 if [[ "$(uname)" == "Darwin" ]]; then
     mamba install --yes \
         --channel conda-forge --override-channels \
         coreutils
 fi
-
-# TEMPORARY; remove before merge once target PR is merged
-SETUPTOOLS_SCM_PRETEND_VERSION=3.9.3 python -mpip install https://github.com/jaimergp/constructor/archive/fix-virtual-specs-ok.tar.gz --no-deps
 
 mamba list
 
