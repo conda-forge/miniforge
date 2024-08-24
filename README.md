@@ -53,6 +53,22 @@ Latest installers with PyPy 3.9 in the base environment:
 
 <summary>🚨 Mambaforge (<b>Deprecated</b> as of July 2024) 🚨</summary>
 
+Update for July 2024:
+
+As of July 2024, `Mambaforge` is deprecated. We suggest users switch to
+`Miniforge3` immediately. These installers will be retired from new releases
+after January 2025. To assist in the migration, we will be introducing rollowing
+brownouts to the latest Mambaforge installer. Installers up to version 24.5.0-1
+will not have any brownouts. 24.5.0-1 will include a warning message.
+Installers 2024.5.0-2 and later will have the following brownout schedule:
+
+* The installer will refuse to proceed every two weeks in October
+* The installer will refuse to proceed every ten days in November
+* The installer will refuse to proceed every five days in December
+* The installer will refuse to proceed in 2025+
+
+Previous information:
+
 With the [release](https://github.com/conda-forge/miniforge/releases/tag/23.3.1-0) of
 `Miniforge3-23.3.1-0`, that incorporated the changes in
 [#277](https://github.com/conda-forge/miniforge/pull/277), the packages and
