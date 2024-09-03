@@ -1,7 +1,9 @@
 {% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
-{% set version = os.environ.get("MINIFORGE_VERSION", "24.5.0-0") %}
-{% set conda_libmamba_solver_version = "24.1.0"%}
-{% set mamba_version = "1.5.8"%}
+{% set version = os.environ.get("MINIFORGE_VERSION", "24.7.1-0") %}
+{% set conda_libmamba_solver_version = "24.7.0"%}
+# when mamba_version is updated here, also update MICROMAMBA_VERSION
+# in scripts/build.sh
+{% set mamba_version = "1.5.9"%}
 
 name: {{ name }}
 version: {{ version }}
@@ -49,5 +51,11 @@ specs:
   - pip
   - miniforge_console_shortcut 1.*  # [win]
 
+{% if name.startswith("Mambaforge") %}
 pre_install: mambaforge_deprecation.sh  # [unix]
 pre_install: mambaforge_deprecation.bat  # [win]
+{% endif %}
+
+virtual_specs:
+  - __glibc >=2.17 # [linux]
+  - __osx >=10.13 # [osx]
