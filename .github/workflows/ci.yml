@@ -94,7 +94,7 @@ jobs:
             ARCH: x86_64
             TARGET_PLATFORM: linux-64
             DOCKER_ARCH: amd64
-            DOCKERIMAGE: condaforge/linux-anvil-comp7
+            DOCKERIMAGE: condaforge/linux-anvil-cos7-x86_64
             MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "Linux"
 
@@ -102,7 +102,7 @@ jobs:
             ARCH: x86_64
             TARGET_PLATFORM: linux-64
             DOCKER_ARCH: amd64
-            DOCKERIMAGE: condaforge/linux-anvil-comp7
+            DOCKERIMAGE: condaforge/linux-anvil-cos7-x86_64
             MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "Linux"
 
@@ -152,7 +152,7 @@ jobs:
             ARCH: x86_64
             TARGET_PLATFORM: linux-64
             DOCKER_ARCH: amd64
-            DOCKERIMAGE: condaforge/linux-anvil-comp7
+            DOCKERIMAGE: condaforge/linux-anvil-cos7-x86_64
             MINIFORGE_NAME: "Miniforge-pypy3"
             OS_NAME: "Linux"
 
@@ -160,7 +160,7 @@ jobs:
             ARCH: x86_64
             TARGET_PLATFORM: linux-64
             DOCKER_ARCH: amd64
-            DOCKERIMAGE: condaforge/linux-anvil-comp7
+            DOCKERIMAGE: condaforge/linux-anvil-cos7-x86_64
             MINIFORGE_NAME: "Mambaforge-pypy3"
             OS_NAME: "Linux"
 
