@@ -1,8 +1,10 @@
+@ECHO OFF
+set "title=Mambaforge is now deprecated!"
+set "message=Mambaforge is now deprecated! Future Miniforge releases will NOT build Mambaforge installers. We advise you switch to Miniforge at your earliest convenience. More details at https://conda-forge.org/news/2024/07/29/sunsetting-mambaforge/. If you require Mambaforge, you may pin your installer to one found in https://github.com/conda-forge/miniforge/releases/tag/24.7.1-0"
 if "%GITHUB_ACTIONS%"=="true" (
-    echo ::warning title=Mambaforge is now deprecated!::Future Miniforge releases will NOT build Mambaforge installers. We advise you switch to Miniforge at your earliest convenience. More details at https://conda-forge.org/news/2024/07/29/sunsetting-mambaforge/. If you require mambaforge, you may pin your installer to one found from https://github.com/conda-forge/miniforge/releases/tag/24.7.1-0
-)
-else (
-    msg "%sessionname%" Mambaforge is now deprecated! Future Miniforge releases will NOT build Mambaforge installers. We advise you switch to Miniforge at your earliest convenience. More details at https://conda-forge.org/news/2024/07/29/sunsetting-mambaforge/. If you require mambaforge, you may pin your installer to one found from https://github.com/conda-forge/miniforge/releases/tag/24.7.1-0
+    echo ::warning title=%title%::%message%
+) else (
+    powershell "(New-Object -ComObject Wscript.Shell).Popup('%message%',0,'%title%',0x30)" >NUL
 )
 
 for /f "delims=" %%# in ('powershell get-date -format "{yyyy-MM-dd}"') do @set _date=%%#
@@ -22,4 +24,4 @@ if "%_date%"=="2024-12-31" exit 1
 if "%_date:~0,4%"=="2025"  exit 1
 
 echo Sleeping for 30s...
-powershell -nop -c "& {sleep 30}"
+powershell -c "& {sleep 30}"
