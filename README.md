@@ -202,7 +202,7 @@ For Linux, any architecture, use the following command
     wget -O Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
 
 
-For Mac OS X, any architecture, use the following command
+For macOS, any architecture, use the following command
 
     curl -fsSLo Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-$(uname -m).sh"
 
@@ -234,7 +234,7 @@ On macOS, you can install miniforge with [Homebrew](https://brew.sh/) by running
 
 ## Usage
 
-If Miniforge is on the system path (default on Mac and Linux), its versions of the
+If Miniforge is on the system path (default on macOS and Linux), its versions of the
 [`conda`](https://conda.io/projects/conda/en/latest/user-guide/getting-started.html#managing-environments) and
 [`mamba`](https://mamba.readthedocs.io/en/latest/user_guide/mamba.html#mamba-user-guide) programs can be used
 at any command prompt. The most notable difference is that the default channel for packages will be conda-forge.
