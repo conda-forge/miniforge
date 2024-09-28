@@ -115,7 +115,7 @@ Latest installers with Mamba and PyPy in the base environment:
 
 ## Install
 
-### Unix-like platforms (Mac OS & Linux)
+### Unix-like platforms (macOS & Linux)
 
 Download the installer using curl or wget or your favorite program and run the script.
 For eg:
@@ -202,7 +202,7 @@ For Linux, any architecture, use the following command
     wget -O Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
 
 
-For MacOSX, any architecture, use the following command
+For Mac OS X, any architecture, use the following command
 
     curl -fsSLo Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-$(uname -m).sh"
 
