@@ -265,7 +265,8 @@ After construction on the CI, the installer is tested against a range of distrib
 - Ubuntu 16.04 ([LTS](https://ubuntu.com/about/release-cycle))
 - Ubuntu 18.04 ([LTS](https://ubuntu.com/about/release-cycle))
 - Ubuntu 20.04 ([LTS](https://ubuntu.com/about/release-cycle))
-- Ubuntu 22.04 (Latest release -- also happens to be LTS)
+- Ubuntu 22.04 ([LTS](https://ubuntu.com/about/release-cycle))
+- Ubuntu 24.04 (Latest release -- also happens to be LTS)
 
 ## Building a Miniforge Installer
 
@@ -309,13 +310,9 @@ minimize surprises, we decided to add mamba to Miniforge too.
 
 ### Should I choose one or another going forward at the risk of one of them getting deprecated?
 
-Given its wide usage, there are no plans to deprecate Mambaforge. If at some
-point we decide to deprecate Mambaforge, it will be appropriately announced and
-communicated with sufficient time in advance.
-
-That said, if you had to start using one today, we recommend to stick to
-Miniforge.
-
+As of June 2024, Mambaforge is deprecated and will be retired in January 2025.
+We recommend users switch to Miniforge3 immediately. For more details, please
+see the note above.
 
 ## Release
 
