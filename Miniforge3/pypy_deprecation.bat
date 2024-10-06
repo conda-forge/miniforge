@@ -1,6 +1,6 @@
 @ECHO OFF
 set "title=PyPy support is now deprecated!"
-set "message=PyPy support is now deprecated! Future Miniforge releases will NOT build installers with PyPy in their base envonrment. We advise you switch to Miniforge at your earliest convenience. More details at https://conda-forge.org/news/2024/08/14/sunsetting-pypy/ If you require Mambaforge, you may pin your installer to one found in https://github.com/conda-forge/miniforge/releases/tag/24.7.1-0"
+set "message=PyPy support is now deprecated! Future Miniforge releases will NOT build installers with PyPy in their base environment. We advise you switch to Miniforge at your earliest convenience. More details at https://conda-forge.org/news/2024/08/14/sunsetting-pypy/. If you require PyPy, you may pin your installer to one found in https://github.com/conda-forge/miniforge/releases/tag/24.7.1-0"
 if "%GITHUB_ACTIONS%"=="true" (
     echo ::warning title=%title%::%message%
 ) else (
