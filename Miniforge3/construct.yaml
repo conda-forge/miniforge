@@ -29,25 +29,29 @@ initialize_by_default: False
 user_requested_specs:
 {% if name.endswith("pypy3") %}
   - python 3.9.* *_pypy
+  - conda >=24.7.1
+  - mamba >=1.5.9
 {% else %}
   - python 3.12.*
+  - conda >={{ version.split("-")[0] }}
+  - mamba >={{ mamba_version }}
 {% endif %}
   - pip
-  - conda >={{ version.split("-")[0] }}
   # Omit conda-libmamba-solver so that conda is free to remove it later
-  - mamba >={{ mamba_version }}
   - miniforge_console_shortcut 1.*  # [win]
 
 specs:
 {% if name.endswith("pypy3") %}
   - python 3.9.* *_pypy
+  - conda 24.7.1
+  - mamba 1.5.9
+  - conda-libmamba-solver 24.7.0
 {% else %}
   - python 3.12.*
-{% endif %}
   - conda {{ version.split("-")[0] }}
-  - conda-libmamba-solver {{ conda_libmamba_solver_version }}
   - mamba {{ mamba_version }}
-
+  - conda-libmamba-solver {{ conda_libmamba_solver_version }}
+{% endif %}
   - pip
   - miniforge_console_shortcut 1.*  # [win]
 
