@@ -54,6 +54,9 @@ specs:
 {% if name.startswith("Mambaforge") %}
 pre_install: mambaforge_deprecation.sh  # [unix]
 pre_install: mambaforge_deprecation.bat  # [win]
+{% elif name.endswith("pypy3") %}
+pre_install: pypy_deprecation.sh  # [unix]
+pre_install: pypy_deprecation.bat  # [win]
 {% endif %}
 
 virtual_specs:

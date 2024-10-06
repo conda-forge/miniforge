@@ -37,6 +37,22 @@ The versions listed as "System: 32-bit" are not compatible with the installers o
 
 `(***)` Apple silicon builds are experimental and haven't had testing like the other platforms.
 
+<details>
+
+<summary>🚨 PyPy support is deprecated (<b>Deprecated</b> as of August 2024) 🚨</summary>
+
+TL;DR: We are planning to remove PyPy from conda-forge feedstock recipes in a
+few weeks (and thus to stop building new releases of packages for PyPy), unless
+there is substantial enough interest to justify the continued maintenance
+effort.
+
+To help with this transition, the latest installers will:
+
+* The installer will refuse to proceed every two weeks in October
+* The installer will refuse to proceed every ten days in November
+* The installer will refuse to proceed every five days in December
+* The installer will refuse to proceed in 2025+
+
 #### Miniforge-pypy3
 
 Latest installers with PyPy 3.9 in the base environment:
@@ -48,6 +64,23 @@ Latest installers with PyPy 3.9 in the base environment:
 | Linux   | ppc64le (POWER8/9) | glibc >= 2.17    | [Miniforge-pypy3-Linux-ppc64le](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Linux-ppc64le.sh) |
 | macOS   | x86_64             | macOS >= 10.13   | [Miniforge-pypy3-MacOSX-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-MacOSX-x86_64.sh) |
 | Windows | x86_64             | Windows >= 7     | [Miniforge-pypy3-Windows-x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge-pypy3-Windows-x86_64.exe) |
+
+However, the latest installers will cease to work and will stop being made available in 2025. You should therefore pin to 24.7.0 if you require PyPy3.
+
+https://github.com/conda-forge/miniforge/releases/download/24.7.1-0/Mambaforge-24.7.1-0-Linux-aarch64.sh
+| OS      | Architecture       | Minimum Version  | Miniforge Version | Download  |
+| --------|--------------------|------------------|-------------------|-----------|
+| Linux   | x86_64 (amd64)     | glibc >= 2.17    | 24.7.1-0 | [Miniforge-pypy3-24.7.1-0-Linux-x86_64](https://github.com/conda-forge/miniforge/releases/download/24.7.1-0/Miniforge-pypy3-24.7.1-0-Linux-x86_64.sh) |
+| Linux   | x86_64 (amd64)     | glibc >= 2.12    | 24.3.0-0 | [Miniforge-pypy3-24.3.0-0-Linux-x86_64](https://github.com/conda-forge/miniforge/releases/download/24.3.0-0/Miniforge-pypy3-24.3.0-0-Linux-x86_64.sh) |
+| Linux   | aarch64 (arm64)    | glibc >= 2.17    | 24.7.1-0 | [Miniforge-pypy3-24.7.1-0-Linux-aarch64](https://github.com/conda-forge/miniforge/releases/download/24.7.1-0/Miniforge-pypy3-24.7.1-0-Linux-aarch64.sh) |
+| Linux   | aarch64 (arm64)    | glibc >= 2.12    | 24.3.0-0 | [Miniforge-pypy3-24.3.0-0-Linux-aarch64](https://github.com/conda-forge/miniforge/releases/download/24.3.0-0/Miniforge-pypy3-24.3.0-0-Linux-aarch64.sh) |
+| Linux   | ppc64le (POWER8/9) | glibc >= 2.17    | 24.7.1-0 | [Miniforge-pypy3-24.7.1-0-Linux-ppc64le](https://github.com/conda-forge/miniforge/releases/download/24.7.1-0/Miniforge-pypy3-24.7.1-0-Linux-ppc64le.sh) |
+| Linux   | ppc64le (POWER8/9) | glibc >= 2.12    | 24.3.0-0 | [Miniforge-pypy3-24.3.0-0-Linux-ppc64le](https://github.com/conda-forge/miniforge/releases/download/24.3.0-0/Miniforge-pypy3-24.3.0-0-Linux-ppc64le.sh) |
+| macOS   | x86_64             | macOS >= 10.13   | 24.7.1-0 | [Miniforge-pypy3-24.7.1-0-MacOSX-x86_64](https://github.com/conda-forge/miniforge/releases/download/24.7.1-0/Miniforge-pypy3-24.7.1-0-MacOSX-x86_64.sh) |
+| macOS   | x86_64             | macOS >= 10.9    | 24.3.0-0 | [Miniforge-pypy3-24.3.0-0-MacOSX-x86_64](https://github.com/conda-forge/miniforge/releases/download/24.3.0-0/Miniforge-pypy3-24.3.0-0-MacOSX-x86_64.sh) |
+| Windows | x86_64             | Windows >= 7     | 24.7.1-0 | [Miniforge-pypy3-24.7.1-0-Windows-x86_64](https://github.com/conda-forge/miniforge/releases/download/24.7.1-0/Miniforge-pypy3-24.7.1-0-Windows-x86_64.exe) |
+
+</summary>
 
 <details>
 
