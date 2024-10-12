@@ -40,7 +40,7 @@ The versions listed as "System: 32-bit" are not compatible with the installers o
 <details>
 
 <summary>🚨 PyPy support is deprecated (<b>Deprecated</b> as of August 2024) 🚨</summary>
-
+          installer-url: https://github.com/conda-forge/miniforge/releases/download/4.8.3-2/Miniforge-pypy3-4.8.3-2-Linux-x86_64.sh
 TL;DR: We are planning to remove PyPy from conda-forge feedstock recipes in a
 few weeks (and thus to stop building new releases of packages for PyPy), unless
 there is substantial enough interest to justify the continued maintenance
@@ -80,7 +80,7 @@ https://github.com/conda-forge/miniforge/releases/download/24.7.1-0/Mambaforge-2
 | macOS   | x86_64             | macOS >= 10.9    | 24.3.0-0 | [Miniforge-pypy3-24.3.0-0-MacOSX-x86_64](https://github.com/conda-forge/miniforge/releases/download/24.3.0-0/Miniforge-pypy3-24.3.0-0-MacOSX-x86_64.sh) |
 | Windows | x86_64             | Windows >= 7     | 24.7.1-0 | [Miniforge-pypy3-24.7.1-0-Windows-x86_64](https://github.com/conda-forge/miniforge/releases/download/24.7.1-0/Miniforge-pypy3-24.7.1-0-Windows-x86_64.exe) |
 
-</summary>
+</details>
 
 <details>
 
