@@ -12,7 +12,7 @@ set -ex
 # Check parameters
 ARCH=${ARCH:-aarch64}
 export TARGET_PLATFORM=${TARGET_PLATFORM:-linux-aarch64}
-DOCKER_ARCH=${DOCKER_ARCH:-arm64v8}
+DOCKER_ARCH=${DOCKER_ARCH:-arm64/v8}
 DOCKERIMAGE=${DOCKERIMAGE:-condaforge/linux-anvil-aarch64}
 export MINIFORGE_NAME=${MINIFORGE_NAME:-Miniforge3}
 OS_NAME=${OS_NAME:-Linux}
@@ -38,5 +38,5 @@ for TEST_IMAGE_NAME in ${TEST_IMAGE_NAMES}; do
   echo "============= Test installer on ${TEST_IMAGE_NAME} ============="
   docker run --rm \
     -v "$(pwd):${CONSTRUCT_ROOT}" -e CONSTRUCT_ROOT \
-     --platform "linux/{DOCKER_ARCH}" "${TEST_IMAGE_NAME}" /construct/scripts/test.sh
+     --platform "linux/${DOCKER_ARCH}" "${TEST_IMAGE_NAME}" /construct/scripts/test.sh
 done

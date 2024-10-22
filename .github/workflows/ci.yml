@@ -72,7 +72,7 @@ jobs:
           - os: ubuntu-latest
             ARCH: aarch64
             TARGET_PLATFORM: linux-aarch64
-            DOCKER_ARCH: arm64v8
+            DOCKER_ARCH: arm64/v8
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
             MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "Linux"
@@ -80,7 +80,7 @@ jobs:
           - os: ubuntu-latest
             ARCH: aarch64
             TARGET_PLATFORM: linux-aarch64
-            DOCKER_ARCH: arm64v8
+            DOCKER_ARCH: arm64/v8
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
             MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "Linux"
@@ -130,7 +130,7 @@ jobs:
           - os: ubuntu-latest
             ARCH: aarch64
             TARGET_PLATFORM: linux-aarch64
-            DOCKER_ARCH: arm64v8
+            DOCKER_ARCH: arm64/v8
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
             MINIFORGE_NAME: "Miniforge-pypy3"
             OS_NAME: "Linux"
@@ -138,7 +138,7 @@ jobs:
           - os: ubuntu-latest
             ARCH: aarch64
             TARGET_PLATFORM: linux-aarch64
-            DOCKER_ARCH: arm64v8
+            DOCKER_ARCH: arm64/v8
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
             MINIFORGE_NAME: "Mambaforge-pypy3"
             OS_NAME: "Linux"
