@@ -38,5 +38,5 @@ for TEST_IMAGE_NAME in ${TEST_IMAGE_NAMES}; do
   echo "============= Test installer on ${TEST_IMAGE_NAME} ============="
   docker run --rm \
     -v "$(pwd):${CONSTRUCT_ROOT}" -e CONSTRUCT_ROOT \
-     --platform "linux/${DOCKER_ARCH}" "${TEST_IMAGE_NAME}" /construct/scripts/test.sh
+     --platform "linux/${DOCKER_ARCH}" "${DOCKER_ARCH/\//}/${TEST_IMAGE_NAME}" /construct/scripts/test.sh
 done
