@@ -1,8 +1,7 @@
 {% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
-{% set version = os.environ.get("MINIFORGE_VERSION", "24.7.1-1") %}
-{% set conda_libmamba_solver_version = "24.7.0"%}
-# when mamba_version is updated here, also update MICROMAMBA_VERSION
-# in scripts/build.sh
+{% set version = os.environ.get("MINIFORGE_VERSION", "24.9.1-1") %}
+{% set conda_libmamba_solver_version = "24.9.0"%}
+# when mamba_version is updated here, also update MICROMAMBA_VERSION in scripts/build.sh
 {% set mamba_version = "1.5.9"%}
 
 name: {{ name }}

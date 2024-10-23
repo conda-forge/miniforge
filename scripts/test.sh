@@ -56,7 +56,7 @@ if [[ "$(uname)" == MINGW* ]]; then
 else
   # Test one of our installers in batch mode
   if [[ "${INSTALLER_NAME}" == "Mambaforge" ]]; then
-    bash "${INSTALLER_PATH}" -b -p "${CONDA_PATH}"
+    sh "${INSTALLER_PATH}" -b -p "${CONDA_PATH}"
   # And the other in interactive mode
   else
     # Test interactive install. The install will ask the user to
@@ -64,7 +64,7 @@ else
     # - yes -- then accept
     # - ${CONDA_PATH} -- Then specify the path
     # - no -- Then whether or not they want to initialize conda
-    cat <<EOF | bash "${INSTALLER_PATH}"
+    cat <<EOF | sh "${INSTALLER_PATH}"
 
 yes
 ${CONDA_PATH}

@@ -72,15 +72,20 @@ jobs:
           - os: ubuntu-latest
             ARCH: aarch64
             TARGET_PLATFORM: linux-aarch64
-            DOCKER_ARCH: arm64v8
+            DOCKER_ARCH: arm64/v8
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
             MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "Linux"
+            # Reduce the test matrix because the builds timeouts on emulated architectures
+            # The time consuming operation is an attempt a full solve of conda/mamba/boa
+            # for as a compatibility
+            # xref https://github.com/conda-forge/miniforge/pull/361
+            TEST_IMAGE_NAMES: "ubuntu:24.04"
 
           - os: ubuntu-latest
             ARCH: aarch64
             TARGET_PLATFORM: linux-aarch64
-            DOCKER_ARCH: arm64v8
+            DOCKER_ARCH: arm64/v8
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
             MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "Linux"
@@ -113,6 +118,11 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-ppc64le
             MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "Linux"
+            # Reduce the test matrix because the builds timeouts on emulated architectures
+            # The time consuming operation is an attempt a full solve of conda/mamba/boa
+            # for as a compatibility
+            # xref https://github.com/conda-forge/miniforge/pull/361
+            TEST_IMAGE_NAMES: "ubuntu:24.04"
 
           - os: ubuntu-latest
             ARCH: ppc64le
@@ -130,15 +140,20 @@ jobs:
           - os: ubuntu-latest
             ARCH: aarch64
             TARGET_PLATFORM: linux-aarch64
-            DOCKER_ARCH: arm64v8
+            DOCKER_ARCH: arm64/v8
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
             MINIFORGE_NAME: "Miniforge-pypy3"
             OS_NAME: "Linux"
+            # Reduce the test matrix because the builds timeouts on emulated architectures
+            # The time consuming operation is an attempt a full solve of conda/mamba/boa
+            # for as a compatibility
+            # xref https://github.com/conda-forge/miniforge/pull/361
+            TEST_IMAGE_NAMES: "ubuntu:24.04"
 
           - os: ubuntu-latest
             ARCH: aarch64
             TARGET_PLATFORM: linux-aarch64
-            DOCKER_ARCH: arm64v8
+            DOCKER_ARCH: arm64/v8
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
             MINIFORGE_NAME: "Mambaforge-pypy3"
             OS_NAME: "Linux"
@@ -171,6 +186,11 @@ jobs:
             DOCKERIMAGE: condaforge/linux-anvil-ppc64le
             MINIFORGE_NAME: "Miniforge-pypy3"
             OS_NAME: "Linux"
+            # Reduce the test matrix because the builds timeouts on emulated architectures
+            # The time consuming operation is an attempt a full solve of conda/mamba/boa
+            # for as a compatibility
+            # xref https://github.com/conda-forge/miniforge/pull/361
+            TEST_IMAGE_NAMES: "ubuntu:24.04"
 
           - os: ubuntu-latest
             ARCH: ppc64le
