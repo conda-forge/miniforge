@@ -1,8 +1,8 @@
 {% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
-{% set version = os.environ.get("MINIFORGE_VERSION", "24.9.0-0") %}
-{% set conda_libmamba_solver_version = "24.9.0"%}
+{% set version = os.environ.get("MINIFORGE_VERSION", "24.9.2-0") %}
+{% set conda_libmamba_solver_version = "24.9.2"%}
 # when mamba_version is updated here, also update MICROMAMBA_VERSION in scripts/build.sh
-{% set mamba_version = "1.5.9"%}
+{% set mamba_version = "2.0.3"%}
 
 name: {{ name }}
 version: {{ version }}
@@ -43,7 +43,7 @@ specs:
 {% if name.endswith("pypy3") %}
   - python 3.9.* *_pypy
   - conda 24.7.1
-  - mamba 2.0.3
+  - mamba 1.5.9
   - conda-libmamba-solver 24.7.0
 {% else %}
   - python 3.12.*
