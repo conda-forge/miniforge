@@ -8,35 +8,7 @@ This repository holds the minimal installers for [Conda](https://conda.io/) and 
 * Packages in the base environment are obtained from the [conda-forge channel](https://anaconda.org/conda-forge).
 * The [conda-forge](https://conda-forge.org/) channel is set as the default (and only) channel.
 
-We put an emphasis on supporting various CPU architectures (x86_64, ppc64le, and aarch64 including Apple Silicon). Optional support for PyPy in place of standard Python interpreter (aka "CPython") is provided in the installers with `-pypy3-` in their filename.
-
-## Download
-
-Miniforge installers are available here: https://github.com/conda-forge/miniforge/releases
-
-### Miniforge3
-
-Latest installers with Python 3.12 `(*)` in the base environment:
-
-| OS      | Architecture                  | Minimum Version | Download                                                                                         |
-| ------- | ----------------------------- | --------------- | ------------------------------------------------------------------------------------------------ |
-| Linux   | x86_64 (amd64)                | glibc >= 2.17   | `Miniforge3-Linux-x86_64` @ [latest](https://github.com/conda-forge/miniforge/releases/latest)   |
-| Linux   | aarch64 (arm64) `(**)`        | glibc >= 2.17   | `Miniforge3-Linux-aarch64` @ [latest](https://github.com/conda-forge/miniforge/releases/latest)  |
-| Linux   | ppc64le (POWER8/9)            | glibc >= 2.17   | `Miniforge3-Linux-ppc64le` @ [latest](https://github.com/conda-forge/miniforge/releases/latest)  |
-| macOS   | x86_64                        | macOS >= 10.13  | `Miniforge3-MacOSX-x86_64` @ [latest](https://github.com/conda-forge/miniforge/releases/latest)  |
-| macOS   | arm64 (Apple Silicon) `(***)` | macOS >= 11.0   | `Miniforge3-MacOSX-arm64` @ [latest](https://github.com/conda-forge/miniforge/releases/latest)   |
-| Windows | x86_64                        | Windows >= 7    | `Miniforge3-Windows-x86_64` @ [latest](https://github.com/conda-forge/miniforge/releases/latest) |
-
-`(*)` The Python version is specific only to the base environment. Conda can create new environments with different Python versions and implementations.
-
-`(**)` For Raspberry PI that include a 64 bit processor, you must also use
-a 64-bit operating system such as
-[Raspberry Pi OS 64-bit](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-64-bit)
-or
-[Ubuntu for Raspberry PI](https://ubuntu.com/raspberry-pi).
-The versions listed as "System: 32-bit" are not compatible with the installers on this website.
-
-`(***)` Apple silicon builds are experimental and haven't had testing like the other platforms.
+We put an emphasis on supporting various CPU architectures (x86_64, ppc64le, and aarch64 including Apple Silicon).
 
 <details>
 
@@ -114,96 +86,114 @@ You can still find the latest installers in the [24.9.2 release](https://github.
 
 </details>
 
+
+## Usage
+
+If Miniforge is on the system path (default on macOS and Linux), its versions of the
+[`conda`](https://conda.io/projects/conda/en/latest/user-guide/getting-started.html#managing-environments) and
+[`mamba`](https://mamba.readthedocs.io/en/latest/user_guide/mamba.html#mamba-user-guide) programs can be used
+at any command prompt. The most notable difference is that the default channel for packages will be conda-forge.
+
+
+## Requirements and installers
+
+Latest installers with Python 3.12 `(*)` in the base environment:
+
+| OS      | Architecture                  | Minimum Version | File                            |
+| ------- | ----------------------------- | --------------- | ------------------------------- |
+| Linux   | x86_64 (amd64)                | glibc >= 2.17   | `Miniforge3-Linux-x86_64.sh`    |
+| Linux   | aarch64 (arm64) `(**)`        | glibc >= 2.17   | `Miniforge3-Linux-aarch64.sh`   |
+| Linux   | ppc64le (POWER8/9)            | glibc >= 2.17   | `Miniforge3-Linux-ppc64le.sh`   |
+| macOS   | x86_64                        | macOS >= 10.13  | `Miniforge3-MacOSX-x86_64.sh`   |
+| macOS   | arm64 (Apple Silicon) `(***)` | macOS >= 11.0   | `Miniforge3-MacOSX-arm64.sh`    |
+| Windows | x86_64                        | Windows >= 7    | `Miniforge3-Windows-x86_64.exe` |
+
+`(*)` The Python version is specific only to the base environment. Conda can create new environments with different Python versions and implementations.
+
+`(**)` For Raspberry PI that include a 64 bit processor, you must also use
+a 64-bit operating system such as
+[Raspberry Pi OS 64-bit](https://www.raspberrypi.com/software/operating-systems/#raspberry-pi-os-64-bit)
+or
+[Ubuntu for Raspberry PI](https://ubuntu.com/raspberry-pi).
+The versions listed as "System: 32-bit" are not compatible with the installers on this website.
+
+`(***)` Apple silicon builds are experimental and haven't had testing like the other platforms.
+
+
 ## Install
 
-### Unix-like platforms (macOS & Linux)
-
-Download the installer using curl or wget or your favorite program and run the script.
-For eg:
+On all platforms, the installation should be finalized with commands like
 
 ```sh
-curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
-bash Miniforge3-$(uname)-$(uname -m).sh
+conda init --all
 ```
 
-or
+(see `conda init -h`) and potentially also
 
 ```sh
-wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
-bash Miniforge3-$(uname)-$(uname -m).sh
-```
-
-#### Uninstallation
-
-Uninstalling Miniforge means removing the files that were created during the installation process.
-You will typically want to remove:
-
-1. Any modifications to your shell rc files that were made by Miniforge:
-
-```sh
-# Use this first command to see what rc files will be updated
-conda init --reverse --dry-run
-# Use this next command to take action on the rc files listed above
-conda init --reverse
-# Temporarily IGNORE the shell message
-#       'For changes to take effect, close and re-open your current shell.',
-# and CLOSE THE SHELL ONLY AFTER the 3rd step below is completed.
-```
-
-2. Remove the folder and all subfolders where the base environment for Miniforge was installed:
-
-```sh
-CONDA_BASE_ENVIRONMENT=$(conda info --base)
-echo The next command will delete all files in ${CONDA_BASE_ENVIRONMENT}
-# Warning, the rm command below is irreversible!
-# check the output of the echo command above
-# To make sure you are deleting the correct directory
-rm -rf ${CONDA_BASE_ENVIRONMENT}
-```
-
-3. Any global conda configuration files that are left behind.
-
-```sh
-echo ${HOME}/.condarc will be removed if it exists
-rm -f "${HOME}/.condarc"
-echo ${HOME}/.conda and underlying files will be removed if they exist.
-rm -fr ${HOME}/.conda
+conda config --set auto_activate_base false
 ```
 
 ### Windows
 
-Download and execute the Windows installer. Follow the prompts, taking note of the options to
+Download and execute [the Windows installer](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe).
+Follow the prompts, taking note of the options to
 "Create start menu shortcuts" and "Add Miniforge3 to my PATH environment variable". The latter is
 not selected by default due to potential conflicts with other software. Without Miniforge3 on the
 path, the most convenient way to use the installed software (such as commands `conda` and `mamba`)
 will be via the "Miniforge Prompt" installed to the start menu.
+
+If desired, the
+`C:\Users\myusername\miniforge3\condabin` folder may be added to the path environment variable
+[manually](https://learn.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14)#to-add-a-path-to-the-path-environment-variable)
+after installation so the software may be used more conveniently from any command prompt with limited chance of software conflicts.
 
 There are known issues with the usage of special characters and spaces in
 the installation location, see for example
 https://github.com/conda-forge/miniforge/issues/484.
 We recommend users install in a directory without any such characters in the name.
 
-### Non-interactive install
-
 For non-interactive usage one can use the batch install option:
 
 ```sh
-bash Miniforge3-Linux-x86_64.sh -b  # or similar for other installers for unix platforms
-```
-
-Look at the extra options by running the following:
-
-```sh
-bash Miniforge3-Linux-x86_64.sh -h
-```
-
-or if you are on windows, run:
-
-```
 start /wait "" Miniforge3-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=%UserProfile%\Miniforge3
 ```
 
-### Downloading the installer as part of a CI pipeline
+### Unix-like platforms (macOS & Linux)
+
+Download the installer using curl or wget or your favorite program. For eg:
+
+```sh
+curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+```
+
+or
+
+```sh
+wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+```
+
+Run the script with:
+
+```sh
+bash Miniforge3-$(uname)-$(uname -m).sh
+```
+
+or for non-interactive install (call with `-h` to list the extra options):
+
+```sh
+bash Miniforge3-$(uname)-$(uname -m).sh -b
+```
+
+### macOS with Homebrew
+
+On macOS, you can install miniforge with [Homebrew](https://brew.sh/) by running
+
+```sh
+brew install miniforge
+```
+
+### As part of a CI pipeline
 
 If you wish to download the appropriate installer through the command line in a
 more automated fashion, you may wish to a command similar to
@@ -245,27 +235,46 @@ Finally, you can run the command to activate the base environment
 conda activate
 ```
 
-### Homebrew
 
-On macOS, you can install miniforge with [Homebrew](https://brew.sh/) by running
+## Uninstall
+
+### Unix-like platforms (macOS & Linux)
+
+Uninstalling Miniforge means removing the files that were created during the installation process.
+You will typically want to remove:
+
+1. Any modifications to your shell rc files that were made by Miniforge:
 
 ```sh
-brew install miniforge
+# Use this first command to see what rc files will be updated
+conda init --reverse --dry-run
+# Use this next command to take action on the rc files listed above
+conda init --reverse
+# Temporarily IGNORE the shell message
+#       'For changes to take effect, close and re-open your current shell.',
+# and CLOSE THE SHELL ONLY AFTER the 3rd step below is completed.
 ```
 
-## Usage
+2. Remove the folder and all subfolders where the base environment for Miniforge was installed:
 
-If Miniforge is on the system path (default on macOS and Linux), its versions of the
-[`conda`](https://conda.io/projects/conda/en/latest/user-guide/getting-started.html#managing-environments) and
-[`mamba`](https://mamba.readthedocs.io/en/latest/user_guide/mamba.html#mamba-user-guide) programs can be used
-at any command prompt. The most notable difference is that the default channel for packages will be conda-forge.
+```sh
+CONDA_BASE_ENVIRONMENT=$(conda info --base)
+echo The next command will delete all files in ${CONDA_BASE_ENVIRONMENT}
+# Warning, the rm command below is irreversible!
+# check the output of the echo command above
+# To make sure you are deleting the correct directory
+rm -rf ${CONDA_BASE_ENVIRONMENT}
+```
 
-On Windows, Miniforge is not added to the system path by default. In this case, `conda`/`mamba` cannot be used from
-ordinary command prompts without the full path of the executables, e.g. `C:\Users\myusername\miniforge3\condabin\conda`.
-Instead, it is recommended to use the Miniforge Prompt, available from the Start menu. If desired, the
-`C:\Users\myusername\miniforge3\condabin` folder may be added to the path environment variable
-[manually](https://learn.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14)#to-add-a-path-to-the-path-environment-variable)
-after installation so the software may be used more conveniently from any command prompt with limited chance of software conflicts.
+3. Any global conda configuration files that are left behind.
+
+```sh
+echo ${HOME}/.condarc will be removed if it exists
+rm -f "${HOME}/.condarc"
+echo ${HOME}/.conda and underlying files will be removed if they exist.
+rm -fr ${HOME}/.conda
+```
+
 
 ## Features
 
@@ -275,6 +284,7 @@ after installation so the software may be used more conveniently from any comman
 - [ ] Integration with conda-forge's developer documentation.
 - [ ] Integration with conda-forge's official site.
 - [ ] Upstream to Anaconda ?
+
 
 ## Testing
 
@@ -289,6 +299,7 @@ After construction on the CI, the installer is tested against a range of distrib
 - Ubuntu 22.04 ([LTS](https://ubuntu.com/about/release-cycle))
 - Ubuntu 24.04 (Latest release -- also happens to be LTS)
 
+
 ## Building a Miniforge Installer
 
 Installers are built and uploaded via the CI but if you want to construct your own Miniforge installer, here is how:
@@ -300,6 +311,7 @@ export DOCKERIMAGE=condaforge/linux-anvil-aarch64
 
 bash build_miniforge.sh
 ```
+
 
 ## Support for older operating systems
 
@@ -314,6 +326,7 @@ https://github.com/conda-forge/miniforge/releases/tag/24.3.0-0
 If you require support for glibc 2.12 through 2.16 you may download version
 24.3.0-0 of miniforge available at
 https://github.com/conda-forge/miniforge/releases/tag/24.3.0-0
+
 
 ## FAQ
 
@@ -336,6 +349,7 @@ As of June 2024, Mambaforge is deprecated and will be retired in January 2025.
 We recommend users switch to Miniforge3 immediately. For more details, please
 see the note above.
 
+
 ## Release
 
 To release a new version of Miniforge:
@@ -351,9 +365,11 @@ To release a new version of Miniforge:
 
 NOTE: using a pre-release is important to make sure the latest links work.
 
+
 ## License
 
 [BSD 3-Clause](./LICENSE)
+
 
 ## History
 
