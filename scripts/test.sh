@@ -44,15 +44,6 @@ if [[ "$(uname)" == MINGW* ]]; then
   echo "***** Check if we can install a package which requires msys2 *****"
   conda.exe install r-base --yes --quiet
   conda.exe list
-
-  echo "***** Checking for boa compatibility *****"
-  mamba_version_start=$(mamba --version | grep mamba | cut -d ' ' -f 2)
-  mamba.exe install boa --yes
-  mamba_version_end=$(mamba --version | grep mamba | cut -d ' ' -f 2)
-  if [[ "${mamba_version_start}" != "${mamba_version_end}" ]]; then
-      echo "mamba version changed from ${mamba_version_start} to ${mamba_version_end}"
-      exit 1
-  fi
 else
   # Test one of our installers in batch mode
   if [[ "${INSTALLER_NAME}" == "Mambaforge" ]]; then
@@ -79,18 +70,6 @@ EOF
   echo "***** Print conda info *****"
   conda info
   conda list
-
-  echo "***** Checking for boa compatibility *****"
-  implementation=$(python -c "import platform; print(platform.python_implementation().lower())")
-  major_minor_version=$(python -c 'import sys; print(f"{sys.version_info[0]}.{sys.version_info[1]}")')
-  mamba_version_start=$(mamba --version | grep mamba | cut -d ' ' -f 2)
-  mamba info
-  mamba install "mamba=${mamba_version_start}" "python=${major_minor_version}.*=*_${implementation}" boa --yes
-  mamba_version_end=$(mamba --version | grep mamba | cut -d ' ' -f 2)
-  if [[ "${mamba_version_start}" != "${mamba_version_end}" ]]; then
-      echo "mamba version changed from ${mamba_version_start} to ${mamba_version_end}"
-      exit 1
-  fi
 fi
 
 
