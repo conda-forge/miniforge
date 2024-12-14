@@ -43,7 +43,7 @@ specs:
 {% if name.endswith("pypy3") %}
   - python 3.9.* *_pypy
   - conda 24.7.1
-  - mamba 1.5.9
+  - mamba 2.0.5
   - conda-libmamba-solver 24.7.0
 {% else %}
   - python 3.12.*
