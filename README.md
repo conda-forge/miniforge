@@ -89,11 +89,57 @@ You can still find the latest installers in the [24.9.2 release](https://github.
 
 ## Usage
 
-If Miniforge is on the system path (default on macOS and Linux), its versions of the
-[`conda`](https://conda.io/projects/conda/en/latest/user-guide/getting-started.html#managing-environments) and
-[`mamba`](https://mamba.readthedocs.io/en/latest/user_guide/mamba.html#mamba-user-guide) programs can be used
-at any command prompt. The most notable difference is that the default channel for packages will be conda-forge.
+Miniforge provides installers for the commands [`conda`](https://conda.io/) and
+[`mamba`](https://github.com/mamba-org/mamba).  Once the installer for your OS
+and architecture has been executed, you should be able to use these commands in
+a terminal.
 
+### conda/mamba usable in any terminals
+
+However, with the default choices of the Windows installer, these commands are
+only available in the "Anaconda Prompt". To be able to use these commands in
+other terminals, one needs to initialize conda for your shell by running in
+the Anaconda Prompt
+
+```sh
+conda init
+```
+
+Note that one can also just add the `C:\Users\myusername\miniforge3\condabin` folder
+to the path environment variable
+[manually](https://learn.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14)#to-add-a-path-to-the-path-environment-variable)
+so `conda` and `mamba` may be used more conveniently from any command prompt with limited
+chance of software conflicts.
+
+The same situation arises on Unix if you use the non-interactive install.
+Initialization can be done by calling conda with its full path, with something like
+
+```sh
+~/miniforge3/bin/conda init
+```
+
+### Automatic activation of environments
+
+By default, once conda has been initialized for your shell, the `base` environment is
+activated so that the command `python` corresponds to the base Python provided by
+Miniforge and `conda install` installs packages in the `base` environment. This can
+be convenient for but it is cleaner to deactivate this automatic activation with
+
+```sh
+conda config --set auto_activate_base false
+```
+
+and use `conda` or `mamba` to create and activate other environments, with for example
+(to create an environment called `main`)
+
+```sh
+conda create --name main jupyterlab numpy pandas
+conda activate main
+```
+
+Finally, it is also possible to add to your shell configuration file
+(typically `~/.bashrc` or `~/.zshrc` on Unix;
+on Windows, edit with `notepad $PROFILE`) the activation command.
 
 ## Requirements and installers
 
@@ -119,20 +165,7 @@ The versions listed as "System: 32-bit" are not compatible with the installers o
 
 `(***)` Apple silicon builds are experimental and haven't had testing like the other platforms.
 
-
 ## Install
-
-On all platforms, the installation should be finalized with commands like
-
-```sh
-conda init --all
-```
-
-(see `conda init -h`) and potentially also
-
-```sh
-conda config --set auto_activate_base false
-```
 
 ### Windows
 
@@ -142,11 +175,6 @@ Follow the prompts, taking note of the options to
 not selected by default due to potential conflicts with other software. Without Miniforge3 on the
 path, the most convenient way to use the installed software (such as commands `conda` and `mamba`)
 will be via the "Miniforge Prompt" installed to the start menu.
-
-If desired, the
-`C:\Users\myusername\miniforge3\condabin` folder may be added to the path environment variable
-[manually](https://learn.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14)#to-add-a-path-to-the-path-environment-variable)
-after installation so the software may be used more conveniently from any command prompt with limited chance of software conflicts.
 
 There are known issues with the usage of special characters and spaces in
 the installation location, see for example
@@ -179,19 +207,19 @@ Run the script with:
 bash Miniforge3-$(uname)-$(uname -m).sh
 ```
 
-or for non-interactive install (call with `-h` to list the extra options):
+The interactive installation will prompt you to initialize conda with your shell.
+This is typically with recommended workflow.
+
+For non-interactive install (for example on a CI), the following command can be used
+(call with `-h` to list the extra options):
 
 ```sh
 bash Miniforge3-$(uname)-$(uname -m).sh -b
 ```
 
-### macOS with Homebrew
+In non-interactive installations, the conda initialization commands will not be run by default.
 
-On macOS, you can install miniforge with [Homebrew](https://brew.sh/) by running
-
-```sh
-brew install miniforge
-```
+Note that on macOS, Miniforge can also be installed with [Homebrew](https://brew.sh/).
 
 ### As part of a CI pipeline
 
@@ -218,7 +246,7 @@ mode with the `-b` flash:
 bash Miniforge3.sh -b -p "${HOME}/conda"
 ```
 
-`-p` is prefix option. A directory wil be created on `"${HOME}/conda"`.
+`-p` is prefix option. A directory will be created on `"${HOME}/conda"`.
 
 Then you should create the path to conda and activate conda.
 Run this command:
