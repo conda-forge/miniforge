@@ -1,5 +1,5 @@
 {% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
-{% set version = os.environ.get("MINIFORGE_VERSION", "24.11.0-1") %}
+{% set version = os.environ.get("MINIFORGE_VERSION", "24.11.0-2") %}
 {% set conda_libmamba_solver_version = "24.11.1"%}
 # when mamba_version is updated here, also update MICROMAMBA_VERSION in scripts/build.sh
 {% set mamba_version = "2.0.5"%}
@@ -26,41 +26,20 @@ initialize_conda: True
 initialize_by_default: False
 
 user_requested_specs:
-{% if name.endswith("pypy3") %}
-  - python 3.9.* *_pypy
-  - conda >=24.7.1
-  - mamba >=1.5.9
-{% else %}
   - python 3.12.*
   - conda >={{ version.split("-")[0] }}
   - mamba >={{ mamba_version }}
-{% endif %}
   - pip
   # Omit conda-libmamba-solver so that conda is free to remove it later
   - miniforge_console_shortcut 1.*  # [win]
 
 specs:
-{% if name.endswith("pypy3") %}
-  - python 3.9.* *_pypy
-  - conda 24.7.1
-  - mamba 1.5.9
-  - conda-libmamba-solver 24.7.0
-{% else %}
   - python 3.12.*
   - conda {{ version.split("-")[0] }}
   - mamba {{ mamba_version }}
   - conda-libmamba-solver {{ conda_libmamba_solver_version }}
-{% endif %}
   - pip
   - miniforge_console_shortcut 1.*  # [win]
-
-{% if name.startswith("Mambaforge") %}
-pre_install: mambaforge_deprecation.sh  # [unix]
-pre_install: mambaforge_deprecation.bat  # [win]
-{% elif name.endswith("pypy3") %}
-pre_install: pypy_deprecation.sh  # [unix]
-pre_install: pypy_deprecation.bat  # [win]
-{% endif %}
 
 virtual_specs:
   - __glibc >=2.17 # [linux]
