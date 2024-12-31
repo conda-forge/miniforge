@@ -72,11 +72,6 @@ EOF
   conda list
 fi
 
-
-# 2020/09/15: Running conda update switches from pypy to cpython. Not sure why
-# echo "***** Run conda update *****"
-# conda update --all -y
-
 echo "***** Python path *****"
 python -c "import sys; print(sys.executable)"
 python -c "import sys; assert 'miniforge' in sys.executable"
