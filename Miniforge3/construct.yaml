@@ -1,4 +1,3 @@
-{% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
 {% set version = os.environ.get("MINIFORGE_VERSION", "24.11.2-1") %}
 {% set conda_libmamba_solver_version = "24.9.0"%}
 # when mamba_version is updated here, also update MICROMAMBA_VERSION in scripts/build.sh
@@ -6,7 +5,7 @@
 # https://github.com/conda-forge/miniforge/issues/697
 {% set mamba_version = "1.5.12" %}
 
-name: {{ name }}
+name: Miniforge3
 version: {{ version }}
 company: conda-forge
 
