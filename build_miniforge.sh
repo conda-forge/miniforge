@@ -14,7 +14,6 @@ ARCH=${ARCH:-aarch64}
 export TARGET_PLATFORM=${TARGET_PLATFORM:-linux-aarch64}
 DOCKER_ARCH=${DOCKER_ARCH:-arm64/v8}
 DOCKERIMAGE=${DOCKERIMAGE:-condaforge/linux-anvil-aarch64}
-export MINIFORGE_NAME=${MINIFORGE_NAME:-Miniforge3}
 OS_NAME=${OS_NAME:-Linux}
 EXT=${EXT:-sh}
 TEST_IMAGE_NAMES=${TEST_IMAGE_NAMES:-ubuntu:24.04 ubuntu:22.04 ubuntu:20.04 ubuntu:18.04 ubuntu:16.04 centos:7 debian:bookworm debian:bullseye}
@@ -30,7 +29,7 @@ docker run --privileged --rm tonistiigi/binfmt --install all
 
 echo "============= Build the installer ============="
 docker run --rm -v "$(pwd):/construct" \
-  -e CONSTRUCT_ROOT -e MINIFORGE_VERSION -e MINIFORGE_NAME -e TARGET_PLATFORM -e MINIFORGE_LICENSE_OVERRIDE \
+  -e CONSTRUCT_ROOT -e MINIFORGE_VERSION -e TARGET_PLATFORM -e MINIFORGE_LICENSE_OVERRIDE \
   "${DOCKERIMAGE}" /construct/scripts/build.sh
 
 echo "============= Test the installer ============="

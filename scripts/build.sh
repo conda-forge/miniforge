@@ -91,6 +91,6 @@ echo "***** Done: Building Miniforge installer *****"
 cd "${CONSTRUCT_ROOT}"
 
 # copy the installer for latest
-if [[ "${MINIFORGE_NAME:-}" != "" && "${OS_NAME:-}" != "" && "${ARCH:-}" != "" ]]; then
-  cp "${CONSTRUCT_ROOT}/build/${MINIFORGE_NAME}-"*"-${OS_NAME}-${ARCH}.${EXT}" "${CONSTRUCT_ROOT}/build/${MINIFORGE_NAME}-${OS_NAME}-${ARCH}.${EXT}"
+if [[ "${OS_NAME:-}" != "" && "${ARCH:-}" != "" ]]; then
+  cp "${CONSTRUCT_ROOT}/build/Miniforge3-"*"-${OS_NAME}-${ARCH}.${EXT}" "${CONSTRUCT_ROOT}/build/Miniforge3-${OS_NAME}-${ARCH}.${EXT}"
 fi
