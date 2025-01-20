@@ -109,6 +109,9 @@ echo "***** Done: Testing installer *****"
 
 echo "***** Testing the usage of mamba main command *****"
 
+echo "***** Initialize the current session for mamba *****"
+eval "$(mamba shell hook --shell bash)"
+
 echo "***** Create a new environment *****"
 mamba create -n testenv numpy --yes
 
@@ -132,7 +135,6 @@ mamba remove numpy --yes
 
 echo "***** Check that numpy is not installed with mamba list *****"
 mamba list | grep -v numpy
-
 
 echo "***** Deactivate the environment with conda *****"
 conda deactivate
