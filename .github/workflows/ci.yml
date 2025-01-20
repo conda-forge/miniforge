@@ -3,7 +3,7 @@ on: [ push, pull_request ]
 
 jobs:
   build:
-    name: ${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
+    name: Miniforge3-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -12,19 +12,16 @@ jobs:
           - os: windows-latest
             ARCH: x86_64
             TARGET_PLATFORM: win-64
-            MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "Windows"
 
           - os: macos-latest
             ARCH: arm64
             TARGET_PLATFORM: osx-arm64
-            MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "MacOSX"
 
           - os: macos-latest
             ARCH: x86_64
             TARGET_PLATFORM: osx-64
-            MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "MacOSX"
 
           - os: ubuntu-latest
@@ -32,7 +29,6 @@ jobs:
             TARGET_PLATFORM: linux-aarch64
             DOCKER_ARCH: arm64/v8
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
-            MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "Linux"
             # Reduce the test matrix because the builds timeouts on emulated architectures
             # The time consuming operation is an attempt a full solve of conda/mamba/boa
@@ -45,7 +41,6 @@ jobs:
             TARGET_PLATFORM: linux-64
             DOCKER_ARCH: amd64
             DOCKERIMAGE: condaforge/linux-anvil-cos7-x86_64
-            MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "Linux"
 
           - os: ubuntu-latest
@@ -53,7 +48,6 @@ jobs:
             TARGET_PLATFORM: linux-ppc64le
             DOCKER_ARCH: ppc64le
             DOCKERIMAGE: condaforge/linux-anvil-ppc64le
-            MINIFORGE_NAME: "Miniforge3"
             OS_NAME: "Linux"
             # Reduce the test matrix because the builds timeouts on emulated architectures
             # The time consuming operation is an attempt a full solve of conda/mamba/boa
@@ -74,7 +68,6 @@ jobs:
       - name: Build and test miniforge
         env:
           ARCH: ${{ matrix.ARCH }}
-          MINIFORGE_NAME: ${{ matrix.MINIFORGE_NAME }}
           OS_NAME: ${{ matrix.OS_NAME }}
           DOCKERIMAGE: ${{ matrix.DOCKERIMAGE }}
           DOCKER_ARCH: ${{ matrix.DOCKER_ARCH }}
@@ -99,9 +92,9 @@ jobs:
             source build_miniforge_win.sh;
           fi
           # Copy for latest release
-          cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.$EXT build/$MINIFORGE_NAME-$OS_NAME-$ARCH.$EXT
+          cp build/Miniforge3-*-$OS_NAME-$ARCH.$EXT build/Miniforge3-$OS_NAME-$ARCH.$EXT
           if [[ "$OS_NAME" == "MacOSX" ]]; then
-            cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.$EXT build/$MINIFORGE_NAME-Darwin-$ARCH.$EXT
+            cp build/Miniforge3-*-$OS_NAME-$ARCH.$EXT build/Miniforge3-Darwin-$ARCH.$EXT
           fi
           ls -alh build
         shell: bash
@@ -110,8 +103,8 @@ jobs:
         if: always()
         uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
         with:
-          path: build/${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}*
-          name: ${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
+          path: build/Miniforge3-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}*
+          name: Miniforge3-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
 
       - name: Upload miniforge to release
         uses: svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd # v2.9.0
