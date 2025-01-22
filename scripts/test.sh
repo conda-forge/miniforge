@@ -5,6 +5,7 @@ set -ex
 echo "***** Start: Testing Miniforge installer *****"
 
 export CONDA_PATH="${HOME}/miniforge"
+export MAMBA_VERSION="${MAMBA_VERSION:-2.0.5}"
 
 CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-${PWD}}"
 
@@ -86,8 +87,8 @@ mamba config sources
 echo "+ mamba config list"
 mamba config list
 
-echo "+ Testing mamba 2.0.5 version"
-mamba info --json | python -c "import sys, json; info = json.loads(sys.stdin.read()); assert info['mamba version'] == '2.0.5', info"
+echo "+ Testing mamba version (i.e. ${MAMBA_VERSION})"
+mamba info --json | python -c "import sys, json; info = json.loads(sys.stdin.read()); assert info['mamba version'] == '${MAMBA_VERSION}', info"
 echo "  OK"
 
 echo "+ Testing mamba channels"
@@ -107,7 +108,7 @@ python -c "import platform; print(platform.release())"
 
 echo "***** Done: Testing installer *****"
 
-echo "***** Testing the usage of mamba main command *****"
+echo "***** Testing the usage of mamba main commands *****"
 
 echo "***** Initialize the current session for mamba *****"
 export MAMBA_ROOT_PREFIX="/root/miniforge"
@@ -145,5 +146,5 @@ conda deactivate
 echo "***** Remove the environment *****"
 mamba env remove -p $ENV_PREFIX --yes
 
-echo "***** Done: Testing mamba main command *****"
+echo "***** Done: Testing mamba main commands *****"
 
