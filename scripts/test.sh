@@ -110,13 +110,16 @@ echo "***** Done: Testing installer *****"
 echo "***** Testing the usage of mamba main command *****"
 
 echo "***** Initialize the current session for mamba *****"
+export MAMBA_ROOT_PREFIX="/root/miniforge"
 eval "$(mamba shell hook --shell bash)"
 
 echo "***** Create a new environment *****"
-mamba create -n testenv numpy --yes
+ENV_PREFIX="/tmp/testenv"
+
+mamba create -p $ENV_PREFIX numpy --yes -vvv
 
 echo "***** Activate the environment with mamba *****"
-mamba activate testenv
+mamba activate $ENV_PREFIX
 
 echo "***** Check that numpy is installed with mamba list *****"
 mamba list | grep numpy
@@ -125,7 +128,7 @@ echo "***** Deactivate the environment *****"
 mamba deactivate
 
 echo "***** Activate the environment with conda *****"
-conda activate testenv
+conda activate $ENV_PREFIX
 
 echo "***** Check that numpy is installed with python *****"
 python -c "import numpy; print(numpy.__version__)"
@@ -140,7 +143,7 @@ echo "***** Deactivate the environment with conda *****"
 conda deactivate
 
 echo "***** Remove the environment *****"
-mamba env remove -n testenv --yes
+mamba env remove -p $ENV_PREFIX --yes
 
 echo "***** Done: Testing mamba main command *****"
 
