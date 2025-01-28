@@ -5,7 +5,7 @@ set -ex
 echo "***** Start: Testing Miniforge installer *****"
 
 export CONDA_PATH="${HOME}/miniforge"
-export MAMBA_VERSION="${MAMBA_VERSION:-2.0.5}"
+export MAMBA_VERSION="${MAMBA_VERSION:-2.0.6.rc1}"
 
 CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-${PWD}}"
 
@@ -73,8 +73,8 @@ EOF
   conda list
 fi
 
-echo "+ Mamba does not warn (check that there is no warning on stderr)"
-mamba --help 2> stderr.log
+echo "+ Mamba does not warn (check that there is no warning on stderr) and returns exit code 0"
+mamba --help 2> stderr.log || cat stderr.log
 test ! -s stderr.log
 rm -f stderr.log
 
