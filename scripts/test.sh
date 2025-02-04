@@ -111,7 +111,6 @@ echo "***** Done: Testing installer *****"
 echo "***** Testing the usage of mamba main commands *****"
 
 echo "***** Initialize the current session for mamba *****"
-export MAMBA_ROOT_PREFIX="/root/miniforge"
 eval "$(mamba shell hook --shell bash)"
 
 echo "***** Create a new environment *****"
