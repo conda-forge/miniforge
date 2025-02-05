@@ -14,7 +14,7 @@ echo "***** Install constructor *****"
 mamba install --yes \
     --channel conda-forge --override-channels \
     jinja2 curl libarchive \
-    "constructor>=3.9.3"
+    "constructor>=3.11.1"
 
 if [[ "$(uname)" == "Darwin" ]]; then
     mamba install --yes \
@@ -38,7 +38,7 @@ cp LICENSE "${TEMP_DIR}/"
 ls -al "${TEMP_DIR}"
 
 if [[ "${TARGET_PLATFORM}" != win-* ]]; then
-    MICROMAMBA_VERSION=1.5.11
+    MICROMAMBA_VERSION=2.0.6
     MICROMAMBA_BUILD=0
     mkdir "${TEMP_DIR}/micromamba"
     pushd "${TEMP_DIR}/micromamba"
