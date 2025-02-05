@@ -187,9 +187,10 @@ For non-interactive usage one can use the batch install option:
 start /wait "" Miniforge3-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=%UserProfile%\Miniforge3
 ```
 
-### Unix-like platforms (macOS & Linux)
+### Unix-like platforms (macOS, Linux, WSL)
+From a terminal window, download the installer appropriate for your computer's architecture using curl or wget or your favorite program. (WSL users should download the appropriate Linux installer.)
 
-Download the installer using curl or wget or your favorite program. For eg:
+For example:
 
 ```sh
 curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
