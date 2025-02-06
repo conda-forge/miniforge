@@ -186,10 +186,14 @@ For non-interactive usage one can use the batch install option:
 ```sh
 start /wait "" Miniforge3-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=%UserProfile%\Miniforge3
 ```
+### Windows Subsystem for Linux (WSL)
+The Windows Subsystem for Linux (WSL) lets developers use both Windows and Linux at the same time on a Windows machine. 
+WSL users should make sure they are in a Linux terminal window (not Powershell) and use the Linux installer appropriate for the computer's architecture as described in the instructions in the next section.
 
-### Unix-like platforms (macOS & Linux)
+### Unix-like platforms (macOS, Linux, & WSL)
+From a terminal window, download the installer appropriate for your computer's architecture using curl or wget or your favorite program. 
 
-Download the installer using curl or wget or your favorite program. For eg:
+For example:
 
 ```sh
 curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
