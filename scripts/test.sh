@@ -5,7 +5,8 @@ set -ex
 echo "***** Start: Testing Miniforge installer *****"
 
 export CONDA_PATH="${HOME}/miniforge"
-export MAMBA_VERSION="${MAMBA_VERSION:-2.0.6}"
+MAMBA_VERSION=$(grep "set mamba_version" Miniforge3/construct.yaml | cut -d '=' -f 2 | cut -d '"' -f 2)
+export MAMBA_VERSION
 
 CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-${PWD}}"
 
@@ -73,28 +74,6 @@ EOF
   conda list
 fi
 
-echo "+ Mamba does not warn (check that there is no warning on stderr) and returns exit code 0"
-mamba --help 2> stderr.log || cat stderr.log
-test ! -s stderr.log
-rm -f stderr.log
-
-echo "+ mamba info"
-mamba info
-
-echo "+ mamba config sources"
-mamba config sources
-
-echo "+ mamba config list"
-mamba config list
-
-echo "+ Testing mamba version (i.e. ${MAMBA_VERSION})"
-mamba info --json | python -c "import sys, json; info = json.loads(sys.stdin.read()); assert info['mamba version'] == '${MAMBA_VERSION}', info"
-echo "  OK"
-
-echo "+ Testing mamba channels"
-mamba info --json | python -c "import sys, json; info = json.loads(sys.stdin.read()); assert any('conda-forge' in c for c in info['channels']), info"
-echo "  OK"
-
 echo "***** Python path *****"
 python -c "import sys; print(sys.executable)"
 python -c "import sys; assert 'miniforge' in sys.executable"
@@ -107,43 +86,3 @@ python -c "import platform; print(platform.machine())"
 python -c "import platform; print(platform.release())"
 
 echo "***** Done: Testing installer *****"
-
-echo "***** Testing the usage of mamba main commands *****"
-
-echo "***** Initialize the current session for mamba *****"
-eval "$(mamba shell hook --shell bash)"
-
-echo "***** Create a new environment *****"
-ENV_PREFIX="/tmp/testenv"
-
-mamba create -p $ENV_PREFIX numpy --yes -vvv
-
-echo "***** Activate the environment with mamba *****"
-mamba activate $ENV_PREFIX
-
-echo "***** Check that numpy is installed with mamba list *****"
-mamba list | grep numpy
-
-echo "***** Deactivate the environment *****"
-mamba deactivate
-
-echo "***** Activate the environment with conda *****"
-conda activate $ENV_PREFIX
-
-echo "***** Check that numpy is installed with python *****"
-python -c "import numpy; print(numpy.__version__)"
-
-echo "***** Remove numpy *****"
-mamba remove numpy --yes
-
-echo "***** Check that numpy is not installed with mamba list *****"
-mamba list | grep -v numpy
-
-echo "***** Deactivate the environment with conda *****"
-conda deactivate
-
-echo "***** Remove the environment *****"
-mamba env remove -p $ENV_PREFIX --yes
-
-echo "***** Done: Testing mamba main commands *****"
-
