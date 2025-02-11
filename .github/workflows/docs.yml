@@ -2,7 +2,7 @@ name: Build docs
 on: [ push, pull_request ]
 jobs:
   docs:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash -l {0}
