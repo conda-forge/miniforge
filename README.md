@@ -130,11 +130,13 @@ conda config --set auto_activate_base false
 ```
 
 and use `conda` or `mamba` to create and activate other environments, with for example
-(to create an environment called `main`)
+(to create an environment called `my_project`)
 
 ```sh
-conda create --name main jupyterlab numpy pandas
-conda activate main
+conda create --name my_project jupyterlab numpy pandas
+conda activate my_project
+# Now you can start jupyter lab
+jupyter lab
 ```
 
 Finally, it is also possible to add to your shell configuration file
