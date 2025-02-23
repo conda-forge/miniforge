@@ -172,15 +172,22 @@ The versions listed as "System: 32-bit" are not compatible with the installers o
 ### Windows
 
 Download and execute [the Windows installer](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe).
-Follow the prompts, taking note of the options to
-"Create start menu shortcuts" and "Add Miniforge3 to my PATH environment variable". The latter is
-not selected by default due to potential conflicts with other software. Without Miniforge3 on the
-path, the most convenient way to use the installed software (such as commands `conda` and `mamba`)
-will be via the "Miniforge Prompt" installed to the start menu.
+Follow the prompts, taking note of the option to
+"Create start menu shortcuts".
+The most convenient and tested way to use the installed software
+(such as commands `conda` and `mamba`)
+is via the "Miniforge Prompt" installed to the start menu.
+
+If you require conda to be accessible to other software,
+you may consider the option to "Add Miniforge3 to my PATH environment variable".
+The latter is not selected by default due to the potential of serious conflicts
+with other software. See https://github.com/conda-forge/miniforge/issues/520 and
+https://github.com/conda-forge/miniforge/issues/453 
 
 There are known issues with the usage of special characters and spaces in
 the installation location, see for example
-https://github.com/conda-forge/miniforge/issues/484.
+https://github.com/conda-forge/miniforge/issues/484 and 
+https://github.com/conda-forge/miniforge/issues/593 .
 We recommend users install in a directory without any such characters in the name.
 
 For non-interactive usage one can use the batch install option:
