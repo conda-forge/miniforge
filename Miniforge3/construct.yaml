@@ -1,9 +1,9 @@
-{% set version = os.environ.get("MINIFORGE_VERSION", "24.11.3-1") %}
-{% set conda_libmamba_solver_version = "24.9.0"%}
+{% set version = os.environ.get("MINIFORGE_VERSION", "25.1.1-1") %}
+{% set conda_libmamba_solver_version = "25.1.1" %}
 # This file is parsed by the scripts to define
 #   - `MICROMAMBA_VERSION` in `scripts/build.sh`
 #   - `MAMBA_VERSION` in `scripts/test.sh`
-{% set mamba_version = "1.5.12" %}
+{% set mamba_version = "2.0.7.rc0" %}
 
 name: Miniforge3
 version: {{ version }}
@@ -29,7 +29,7 @@ initialize_by_default: False
 user_requested_specs:
   - python 3.12.*
   - conda >={{ version.split("-")[0] }}
-  - mamba >={{ mamba_version }}
+  - conda-forge/label/mamba_prerelease::mamba==2.0.7.rc0
   - pip
   # Omit conda-libmamba-solver so that conda is free to remove it later
   - miniforge_console_shortcut 1.*  # [win]
@@ -37,7 +37,7 @@ user_requested_specs:
 specs:
   - python 3.12.*
   - conda {{ version.split("-")[0] }}
-  - mamba {{ mamba_version }}
+  - conda-forge/label/mamba_prerelease::mamba==2.0.7.rc0
   - conda-libmamba-solver {{ conda_libmamba_solver_version }}
   - pip
   - miniforge_console_shortcut 1.*  # [win]
