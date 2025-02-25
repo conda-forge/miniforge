@@ -5,7 +5,7 @@ set -ex
 echo "***** Start: Testing Miniforge installer *****"
 
 export CONDA_PATH="${HOME}/miniforge"
-export MAMBA_VERSION=$(grep "set mamba_version" Miniforge3/construct.yaml | cut -d '=' -f 2 | cut -d '"' -f 2)
+export MAMBA_VERSION="2.0.7.rc0"
 
 CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-${PWD}}"
 
