@@ -39,7 +39,7 @@ ls -al "${TEMP_DIR}"
 
 if [[ "${TARGET_PLATFORM}" != win-* ]]; then
     # Assumes specific structure in construct.yaml
-    MICROMAMBA_VERSION="2.0.7.rc0"
+    MICROMAMBA_VERSION="2.0.7.rc1"
     MICROMAMBA_BUILD=0
     mkdir "${TEMP_DIR}/micromamba"
     pushd "${TEMP_DIR}/micromamba"
