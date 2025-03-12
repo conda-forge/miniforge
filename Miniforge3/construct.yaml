@@ -15,7 +15,12 @@ channels:
   # - https://conda.anaconda.org/conda-forge
   - conda-forge
 
-write_condarc: True
+# Note: this needs https://github.com/conda/conda/pull/14666 for 'default_env'
+condarc: |
+  channels:
+    - conda-forge
+  default_env: default
+
 # keep pkgs for space-saving implications for hardlinks when create new environments
 # and keep the same with Miniconda
 keep_pkgs: True
@@ -41,6 +46,12 @@ specs:
   - conda-libmamba-solver {{ conda_libmamba_solver_version }}
   - pip
   - miniforge_console_shortcut 1.*  # [win]
+
+extra_envs:
+  default:
+    specs:
+      - python 3.12.*
+      - pip
 
 virtual_specs:
   - __glibc >=2.17 # [linux]
