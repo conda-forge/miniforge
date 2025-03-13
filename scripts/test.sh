@@ -110,7 +110,7 @@ python -c "import platform; print(platform.release())"
 echo "***** Check default environment *****"
 conda activate default
 echo "$CONDA_PREFIX"
-which python
+type python
 python -V
 conda deactivate
 
