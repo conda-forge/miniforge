@@ -71,6 +71,7 @@ EOF
   echo "***** Print conda info *****"
   conda info
   conda list
+  conda info --envs
 fi
 
 echo "+ Mamba does not warn (check that there is no warning on stderr) and returns exit code 0"
@@ -105,6 +106,13 @@ python -c "import platform; print(platform.architecture())"
 python -c "import platform; print(platform.system())"
 python -c "import platform; print(platform.machine())"
 python -c "import platform; print(platform.release())"
+
+echo "***** Check default environment *****"
+conda activate default
+echo "$CONDA_PREFIX"
+which python
+python -V
+conda deactivate
 
 echo "***** Done: Testing installer *****"
 
