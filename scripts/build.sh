@@ -44,7 +44,8 @@ if [[ "${TARGET_PLATFORM}" != win-* ]]; then
     MICROMAMBA_BUILD=0
     mkdir "${TEMP_DIR}/micromamba"
     pushd "${TEMP_DIR}/micromamba"
-    curl -L -O "https://anaconda.org/conda-forge/micromamba/${MICROMAMBA_VERSION}/download/${TARGET_PLATFORM}/micromamba-${MICROMAMBA_VERSION}-${MICROMAMBA_BUILD}.tar.bz2"
+    MICROMAMBA_SOURCE_URL="${MICROMAMBA_SOURCE_URL:-https://anaconda.org/conda-forge/micromamba/${MICROMAMBA_VERSION}/download/${TARGET_PLATFORM}/micromamba-${MICROMAMBA_VERSION}-${MICROMAMBA_BUILD}.tar.bz2}"
+    curl -L -O "${MICROMAMBA_SOURCE_URL}"
     bsdtar -xf "micromamba-${MICROMAMBA_VERSION}-${MICROMAMBA_BUILD}.tar.bz2"
     if [[ "${TARGET_PLATFORM}" == win-* ]]; then
       MICROMAMBA_FILE="${PWD}/Library/bin/micromamba.exe"
