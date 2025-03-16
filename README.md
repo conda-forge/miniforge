@@ -345,6 +345,7 @@ After construction on the CI, the installer is tested against a range of distrib
 
 Installers are built and uploaded via the CI but if you want to construct your own Miniforge installer, here is how:
 
+### With Docker
 ```sh
 # Configuration
 export ARCH=aarch64
@@ -353,6 +354,25 @@ export DOCKERIMAGE=condaforge/linux-anvil-aarch64
 bash build_miniforge.sh
 ```
 
+### Without Docker (Linux)
+```sh
+# Configuration
+export TARGET_PLATFORM=linux-64
+
+bash scripts/build.sh
+bash scripts/test.sh
+```
+_Be sure to delete the installation directory after `build/test.sh` has run. You will get installation errors if you run subsequent tests._
+
+### Without docker (Windows)
+You mus have Git Bash, or some other MINGW64 shell installed on Windows for this to run successfully.
+```sh
+export TARGET_PLATFORM=win-64
+
+bash scripts/build.sh
+bash scripts/test.sh
+```
+_Be sure to delete the installation directory after `build/test.sh` has run. You will get installation errors if you run subsequent tests._
 
 ## Support for older operating systems
 
