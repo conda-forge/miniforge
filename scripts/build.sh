@@ -13,13 +13,13 @@ echo "***** Install constructor *****"
 
 CF_CHANNEL_NAME="${CF_CHANNEL_NAME:-conda-forge}"
 mamba install --yes \
-    --channel $CF_CHANNEL_NAME --override-channels \
+    --channel "${CF_CHANNEL_NAME}" --override-channels \
     jinja2 curl libarchive \
     "constructor>=3.11.2"
 
 if [[ "$(uname)" == "Darwin" ]]; then
     mamba install --yes \
-        --channel $CF_CHANNEL_NAME --override-channels \
+        --channel "${CF_CHANNEL_NAME}" --override-channels \
         coreutils
 fi
 
@@ -28,7 +28,7 @@ mamba list
 echo "***** Make temp directory *****"
 if [[ "$(uname)" == MINGW* ]]; then
    # LOCALAPPDATA is a reference variable to the user's AppData\Local directory
-   TEMP_DIR=$(mktemp -d --tmpdir=$LOCALAPPDATA/Temp/);
+   TEMP_DIR=$(mktemp -d --tmpdir="$LOCALAPPDATA/Temp/");
 else
    TEMP_DIR=$(mktemp -d);
 fi
