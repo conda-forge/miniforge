@@ -47,7 +47,7 @@ if [[ "$(uname)" == MINGW* ]]; then
   conda.exe list
 else
   # Test one of our installers in batch mode
-  if [[ "${INSTALLER_NAME}" == "Mambaforge" ]]; then
+  if [[ "${INSTALLER_NAME}" == "Miniforge3" ]]; then
     sh "${INSTALLER_PATH}" -b -p "${CONDA_PATH}"
   # And the other in interactive mode
   else
