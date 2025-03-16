@@ -11,14 +11,15 @@ cd "${CONSTRUCT_ROOT}"
 
 echo "***** Install constructor *****"
 
+CF_CHANNEL_NAME="${CF_CHANNEL_NAME:-conda-forge}"
 mamba install --yes \
-    --channel conda-forge --override-channels \
+    --channel $CF_CHANNEL_NAME --override-channels \
     jinja2 curl libarchive \
     "constructor>=3.11.2"
 
 if [[ "$(uname)" == "Darwin" ]]; then
     mamba install --yes \
-        --channel conda-forge --override-channels \
+        --channel $CF_CHANNEL_NAME --override-channels \
         coreutils
 fi
 
