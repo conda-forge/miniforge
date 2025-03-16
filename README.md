@@ -363,6 +363,16 @@ bash scripts/build.sh
 bash scripts/test.sh
 ```
 _Be sure to delete the installation directory after `build/test.sh` has run. You will get installation errors if you run subsequent tests._
+```
+***** Run the installer *****
++ chmod +x build/Miniforge3-25.1.1-2-Linux-x86_64.sh
+++ uname
++ [[ Linux == MINGW* ]]
++ [[ Miniforge3 == \M\i\n\i\f\o\r\g\e\3 ]]
++ sh build/Miniforge3-25.1.1-2-Linux-x86_64.sh -b -p /home/user001/miniforge
+ERROR: File or directory already exists: '/home/user001/miniforge'
+If you want to update an existing installation, use the -u option.
+```
 
 ### Without docker (Windows)
 You mus have Git Bash, or some other MINGW64 shell installed on Windows for this to run successfully.
@@ -372,7 +382,6 @@ export TARGET_PLATFORM=win-64
 bash scripts/build.sh
 bash scripts/test.sh
 ```
-_Be sure to delete the installation directory after `build/test.sh` has run. You will get installation errors if you run subsequent tests._
 
 ## Support for older operating systems
 
