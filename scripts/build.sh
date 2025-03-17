@@ -11,7 +11,7 @@ cd "${CONSTRUCT_ROOT}"
 
 echo "***** Install constructor *****"
 
-CF_CHANNEL_NAME="${CF_CHANNEL_NAME:-conda-forge}"
+MINIFORGE_CHANNEL_NAME="${MINIFORGE_CHANNEL_NAME:-conda-forge}"
 mamba install --yes \
     --channel "${CF_CHANNEL_NAME}" --override-channels \
     jinja2 curl libarchive \
