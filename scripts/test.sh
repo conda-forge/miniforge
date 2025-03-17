@@ -110,9 +110,9 @@ python -c "import platform; print(platform.release())"
 echo "***** Check default environment *****"
 conda activate
 default_prefix_nameless="$CONDA_PREFIX"
-echo "default_prefix=$default_prefix"
+echo "default_prefix_nameless=$default_prefix_nameless"
 default_python_nameless="$(type python)"
-echo "default_python=$default_python"
+echo "default_python_nameless=$default_python_nameless"
 python -V
 conda deactivate
 
@@ -130,6 +130,8 @@ test "$default_python_nameless" = "$default_python"
 echo "***** Done: Testing installer *****"
 
 echo "***** Testing the usage of mamba main commands *****"
+
+conda activate base
 
 echo "***** Initialize the current session for mamba *****"
 eval "$(mamba shell hook --shell bash)"
