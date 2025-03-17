@@ -31,7 +31,7 @@ if [[ "$(uname)" == MINGW* ]]; then
   # Workaround a conda bug where it uses Unix style separators, but MinGW doesn't understand them
   export PATH=$CONDA_PATH/Library/bin:$PATH
   # shellcheck disable=SC1091
-  source "${CONDA_PATH}/Scripts/activate"
+  source "${CONDA_PATH}/Scripts/activate" base
   conda.exe config --set show_channel_urls true
 
   echo "***** Print conda info *****"
@@ -68,7 +68,7 @@ EOF
 
   echo "***** Setup conda *****"
   # shellcheck disable=SC1091
-  source "${CONDA_PATH}/bin/activate"
+  source "${CONDA_PATH}/bin/activate" base
 
   echo "***** Print conda info *****"
   conda info
