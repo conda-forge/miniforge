@@ -32,8 +32,8 @@ if [[ "$(uname)" == MINGW* ]]; then
   # we need condabin in PATH for both conda and mamba
   export PATH=$CONDA_PATH/Library/bin:$PATH
   # shellcheck disable=SC1091
-  eval "$("$CONDA_PATH/bin/python.exe" -m conda shell.posix hook)"
-  eval "$("$CONDA_PATH/bin/mamba.exe" shell hook)"
+  eval "$("$CONDA_PATH/python.exe" -m conda shell.posix hook)"
+  eval "$("$CONDA_PATH/Library/bin/mamba.exe" shell hook)"
   conda.exe config --set show_channel_urls true
 
   echo "***** Print conda info *****"
