@@ -102,6 +102,10 @@ mamba info --json | python -c "import sys, json; info = json.loads(sys.stdin.rea
 echo "  OK"
 
 echo "***** Python path *****"
+# These tests use Python, which does need an active environment
+
+conda activate
+
 python -c "import sys; print(sys.executable)"
 python -c "import sys; assert 'miniforge' in sys.executable"
 
@@ -111,6 +115,8 @@ python -c "import platform; print(platform.architecture())"
 python -c "import platform; print(platform.system())"
 python -c "import platform; print(platform.machine())"
 python -c "import platform; print(platform.release())"
+
+conda deactivate
 
 echo "***** Check default environment *****"
 
