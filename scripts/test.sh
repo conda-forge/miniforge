@@ -114,6 +114,7 @@ python -c "import platform; print(platform.release())"
 echo "***** Check default environment *****"
 
 unset CONDA_DEFAULT_ENV
+conda config --show-sources
 
 conda activate
 default_prefix_nameless="$CONDA_PREFIX"
