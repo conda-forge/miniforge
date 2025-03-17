@@ -42,8 +42,8 @@ user_requested_specs:
 
 specs:
   - python 3.12.*
-  - conda {{ version.split("-")[0] }}
-  - mamba {{ mamba_version }}
+  - conda {{ version.split("-")[0] }}.*
+  - mamba {{ mamba_version }}.*
   - conda-libmamba-solver {{ conda_libmamba_solver_version }}
   - pip
   - miniforge_console_shortcut 1.*  # [win]
