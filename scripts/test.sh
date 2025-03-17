@@ -108,11 +108,24 @@ python -c "import platform; print(platform.machine())"
 python -c "import platform; print(platform.release())"
 
 echo "***** Check default environment *****"
-conda activate default
-echo "$CONDA_PREFIX"
-type python
+conda activate
+default_prefix_nameless="$CONDA_PREFIX"
+echo "default_prefix=$default_prefix"
+default_python_nameless="$(type python)"
+echo "default_python=$default_python"
 python -V
 conda deactivate
+
+conda activate default
+default_prefix="$CONDA_PREFIX"
+echo "default_prefix=$default_prefix"
+default_python="$(type python)"
+echo "default_python=$default_python"
+python -V
+conda deactivate
+
+test "$default_prefix_nameless" = "$default_prefix"
+test "$default_python_nameless" = "$default_python"
 
 echo "***** Done: Testing installer *****"
 
