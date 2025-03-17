@@ -91,9 +91,9 @@ echo "+ Testing mamba version (i.e. ${MAMBA_VERSION})"
 mamba info --json | python -c "import sys, json; info = json.loads(sys.stdin.read()); assert info['mamba version'] == '${MAMBA_VERSION}', info"
 echo "  OK"
 
-CF_CHANNEL_NAME="${CF_CHANNEL_NAME:-conda-forge}"
+MINIFORGE_CHANNEL_NAME="${MINIFORGE_CHANNEL_NAME:-conda-forge}"
 echo "+ Testing mamba channels"
-mamba info --json | python -c "import sys, json; info = json.loads(sys.stdin.read()); assert any('${CF_CHANNEL_NAME}' in c for c in info['channels']), info"
+mamba info --json | python -c "import sys, json; info = json.loads(sys.stdin.read()); assert any('${MINIFORGE_CHANNEL_NAME}' in c for c in info['channels']), info"
 echo "  OK"
 
 echo "***** Python path *****"

@@ -13,13 +13,13 @@ echo "***** Install constructor *****"
 
 MINIFORGE_CHANNEL_NAME="${MINIFORGE_CHANNEL_NAME:-conda-forge}"
 mamba install --yes \
-    --channel "${CF_CHANNEL_NAME}" --override-channels \
+    --channel "${MINIFORGE_CHANNEL_NAME}" --override-channels \
     jinja2 curl libarchive \
     "constructor>=3.11.2"
 
 if [[ "$(uname)" == "Darwin" ]]; then
     mamba install --yes \
-        --channel "${CF_CHANNEL_NAME}" --override-channels \
+        --channel "${MINIFORGE_CHANNEL_NAME}" --override-channels \
         coreutils
 fi
 
