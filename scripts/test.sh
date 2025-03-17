@@ -68,7 +68,8 @@ EOF
 
   echo "***** Setup conda *****"
   # shellcheck disable=SC1091
-  source "${CONDA_PATH}/bin/activate" base
+  eval "$("$CONDA_PATH/bin/python -m conda shell.posix hook)"
+  eval "$("$CONDA_PATH/bin/mamba shell hook)"
 
   echo "***** Print conda info *****"
   conda info
