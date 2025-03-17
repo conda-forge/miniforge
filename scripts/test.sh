@@ -68,8 +68,7 @@ EOF
 
   echo "***** Setup conda *****"
   # shellcheck disable=SC1091
-  eval "$("${CONDA_PATH}/bin/python" -m conda shell.posix hook)"
-  conda activate base
+  source "${CONDA_PATH}/bin/activate"
 
   echo "***** Print conda info *****"
   conda info
@@ -112,9 +111,6 @@ python -c "import platform; print(platform.machine())"
 python -c "import platform; print(platform.release())"
 
 echo "***** Check default environment *****"
-
-unset CONDA_DEFAULT_ENV
-conda config --show-sources
 
 conda activate
 default_prefix_nameless="$CONDA_PREFIX"

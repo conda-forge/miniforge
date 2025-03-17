@@ -16,11 +16,11 @@ channels:
   - conda-canary/label/conda-conda-pr-14678
   - conda-forge
 
-# Note: this needs https://github.com/conda/conda/pull/14666 for 'default_env'
+# Note: this needs https://github.com/conda/conda/pull/14666 for 'default_activation_env'
 condarc: |
   channels:
     - conda-forge
-  default_env: default
+  default_activation_env: default
 
 # keep pkgs for space-saving implications for hardlinks when create new environments
 # and keep the same with Miniconda
