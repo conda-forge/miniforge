@@ -79,9 +79,10 @@ EOF
   conda config --show-sources
 fi
 
+set +x
+
 echo "+ Mamba does not warn (check that there is no warning on stderr) and returns exit code 0"
 mamba --help 2> stderr.log || cat stderr.log
-cat stderr.log
 test ! -s stderr.log
 rm -f stderr.log
 
@@ -101,6 +102,8 @@ echo "  OK"
 echo "+ Testing mamba channels"
 mamba info --json | python -c "import sys, json; info = json.loads(sys.stdin.read()); assert any('conda-forge' in c for c in info['channels']), info"
 echo "  OK"
+
+set -x
 
 echo "***** Python path *****"
 # These tests use Python, which does need an active environment
