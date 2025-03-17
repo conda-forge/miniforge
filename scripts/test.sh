@@ -2,6 +2,8 @@
 
 set -ex
 
+unset CONDA_DEFAULT_ENV
+
 echo "***** Start: Testing Miniforge installer *****"
 
 CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-${PWD}}"
@@ -37,6 +39,8 @@ if [[ "$(uname)" == MINGW* ]]; then
   echo "***** Print conda info *****"
   conda.exe info
   conda.exe list
+  conda.exe info --envs
+  conda.exe config --show-sources
 
   echo "***** Check if we are bundling packages from msys2 or defaults *****"
   conda.exe list | grep defaults && exit 1
