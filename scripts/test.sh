@@ -81,6 +81,7 @@ fi
 
 echo "+ Mamba does not warn (check that there is no warning on stderr) and returns exit code 0"
 mamba --help 2> stderr.log || cat stderr.log
+cat stderr.log
 test ! -s stderr.log
 rm -f stderr.log
 
