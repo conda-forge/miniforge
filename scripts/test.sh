@@ -34,21 +34,21 @@ if [[ "$(uname)" == MINGW* ]]; then
   # shellcheck disable=SC1091
   eval "$("$CONDA_PATH/python.exe" -m conda shell.posix hook)"
   eval "$("$CONDA_PATH/Library/bin/mamba.exe" shell hook)"
-  conda.exe config --set show_channel_urls true
+  conda config --set show_channel_urls true
 
   echo "***** Print conda info *****"
-  conda.exe info
-  conda.exe list
-  conda.exe info --envs
-  conda.exe config --show-sources
+  conda info
+  conda list
+  conda info --envs
+  conda config --show-sources
 
   echo "***** Check if we are bundling packages from msys2 or defaults *****"
-  conda.exe list | grep defaults && exit 1
-  conda.exe list | grep msys2 && exit 1
+  conda list | grep defaults && exit 1
+  conda list | grep msys2 && exit 1
 
   echo "***** Check if we can install a package which requires msys2 *****"
-  conda.exe install r-base --yes --quiet
-  conda.exe list
+  conda install r-base --yes --quiet
+  conda list
 else
   # Test one of our installers in batch mode
   if [[ "${INSTALLER_NAME}" == "Mambaforge" ]]; then
