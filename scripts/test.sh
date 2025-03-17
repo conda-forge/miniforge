@@ -29,9 +29,10 @@ if [[ "$(uname)" == MINGW* ]]; then
 
   echo "***** Setup conda *****"
   # Workaround a conda bug where it uses Unix style separators, but MinGW doesn't understand them
-  export PATH=$CONDA_PATH/Library/bin:$PATH
+  # we need condabin in PATH for both conda and mamba
+  export PATH=$CONDA_PATH/Library/bin:$CONDA_PATH/Library/condabin:$PATH
   # shellcheck disable=SC1091
-  source "${CONDA_PATH}/Scripts/activate" base
+  source "${CONDA_PATH}/Scripts/activate"
   conda.exe config --set show_channel_urls true
 
   echo "***** Print conda info *****"
