@@ -29,7 +29,7 @@ if [[ "$(uname)" == MINGW* ]]; then
 
   echo "***** Setup conda *****"
   # Workaround a conda bug where it uses Unix style separators, but MinGW doesn't understand them
-  export PATH=$CONDA_PATH/Library/bin:$CONDA_PATH/condabin:$PATH
+  export PATH=$CONDA_PATH/Library/bin:$PATH
   # shellcheck disable=SC1091
   source "${CONDA_PATH}/Scripts/activate"
   conda.exe config --set show_channel_urls true
@@ -73,6 +73,7 @@ EOF
   conda info
   conda list
   conda info --envs
+  conda config --show-sources
 fi
 
 echo "+ Mamba does not warn (check that there is no warning on stderr) and returns exit code 0"
