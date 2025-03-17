@@ -2,8 +2,6 @@
 
 set -ex
 
-unset CONDA_DEFAULT_ENV
-
 echo "***** Start: Testing Miniforge installer *****"
 
 CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-${PWD}}"
@@ -114,6 +112,8 @@ python -c "import platform; print(platform.machine())"
 python -c "import platform; print(platform.release())"
 
 echo "***** Check default environment *****"
+conda deactivate
+
 conda activate
 default_prefix_nameless="$CONDA_PREFIX"
 echo "default_prefix_nameless=$default_prefix_nameless"
