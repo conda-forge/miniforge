@@ -13,9 +13,15 @@ channels:
   # specifying the channel with the full URL adds two channels
   # when the end user adds the channel without the full URL
   # - https://conda.anaconda.org/conda-forge
+  - conda-canary/label/conda-conda-pr-14678
   - conda-forge
 
-write_condarc: True
+# Note: this needs https://github.com/conda/conda/pull/14666 for 'default_activation_env'
+condarc: |
+  channels:
+    - conda-forge
+  default_activation_env: default
+
 # keep pkgs for space-saving implications for hardlinks when create new environments
 # and keep the same with Miniconda
 keep_pkgs: True
@@ -36,11 +42,17 @@ user_requested_specs:
 
 specs:
   - python 3.12.*
-  - conda {{ version.split("-")[0] }}
-  - mamba {{ mamba_version }}
+  - conda {{ version.split("-")[0] }}.*
+  - mamba {{ mamba_version }}.*
   - conda-libmamba-solver {{ conda_libmamba_solver_version }}
   - pip
   - miniforge_console_shortcut 1.*  # [win]
+
+extra_envs:
+  default:
+    specs:
+      - python 3.12.*
+      - pip
 
 virtual_specs:
   - __glibc >=2.17 # [linux]
