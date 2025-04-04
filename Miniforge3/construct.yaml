@@ -13,6 +13,7 @@ channels:
   # specifying the channel with the full URL adds two channels
   # when the end user adds the channel without the full URL
   # - https://conda.anaconda.org/conda-forge
+  - conda-canary/label/conda-conda-pr-14683
   - conda-forge
 
 write_condarc: True
