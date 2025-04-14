@@ -97,9 +97,9 @@ a terminal.
 ### conda/mamba usable in any terminals
 
 However, with the default choices of the Windows installer, these commands are
-only available in the "Anaconda Prompt". To be able to use these commands in
+only available in the "Miniforge Prompt". To be able to use these commands in
 other terminals, one needs to initialize conda for your shell by running in
-the Anaconda Prompt
+the Miniforge Prompt.
 
 ```sh
 conda init
