@@ -19,7 +19,7 @@ jobs:
             TARGET_PLATFORM: osx-arm64
             OS_NAME: "MacOSX"
 
-          - os: macos-latest
+          - os: macos-13  # Force Intel
             ARCH: x86_64
             TARGET_PLATFORM: osx-64
             OS_NAME: "MacOSX"

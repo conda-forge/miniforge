@@ -29,22 +29,26 @@ if [[ "$(uname)" == MINGW* ]]; then
 
   echo "***** Setup conda *****"
   # Workaround a conda bug where it uses Unix style separators, but MinGW doesn't understand them
+  # we need condabin in PATH for both conda and mamba
   export PATH=$CONDA_PATH/Library/bin:$PATH
   # shellcheck disable=SC1091
-  source "${CONDA_PATH}/Scripts/activate"
-  conda.exe config --set show_channel_urls true
+  eval "$("$CONDA_PATH/python.exe" -m conda shell.posix hook)"
+  eval "$("$CONDA_PATH/Library/bin/mamba.exe" shell hook)"
+  conda config --set show_channel_urls true
 
   echo "***** Print conda info *****"
-  conda.exe info
-  conda.exe list
+  conda info
+  conda list
+  conda info --envs
+  conda config --show-sources
 
   echo "***** Check if we are bundling packages from msys2 or defaults *****"
-  conda.exe list | grep defaults && exit 1
-  conda.exe list | grep msys2 && exit 1
+  conda list | grep defaults && exit 1
+  conda list | grep msys2 && exit 1
 
   echo "***** Check if we can install a package which requires msys2 *****"
-  conda.exe install r-base --yes --quiet
-  conda.exe list
+  conda install r-base --yes --quiet
+  conda list
 else
   # Test one of our installers in batch mode
   if [[ "${INSTALLER_NAME}" == "Miniforge3" ]]; then
@@ -66,12 +70,17 @@ EOF
 
   echo "***** Setup conda *****"
   # shellcheck disable=SC1091
-  source "${CONDA_PATH}/bin/activate"
+  eval "$("$CONDA_PATH/bin/python" -m conda shell.posix hook)"
+  eval "$("$CONDA_PATH/bin/mamba" shell hook)"
 
   echo "***** Print conda info *****"
   conda info
   conda list
+  conda info --envs
+  conda config --show-sources
 fi
+
+set +x
 
 echo "+ Mamba does not warn (check that there is no warning on stderr) and returns exit code 0"
 mamba --help 2> stderr.log || cat stderr.log
@@ -96,7 +105,13 @@ echo "+ Testing mamba channels"
 mamba info --json | python -c "import sys, json; info = json.loads(sys.stdin.read()); assert any('${MINIFORGE_CHANNEL_NAME}' in c for c in info['channels']), info"
 echo "  OK"
 
+set -x
+
 echo "***** Python path *****"
+# These tests use Python, which does need an active environment
+
+conda activate
+
 python -c "import sys; print(sys.executable)"
 python -c "import sys; assert 'miniforge' in sys.executable"
 
@@ -106,6 +121,29 @@ python -c "import platform; print(platform.architecture())"
 python -c "import platform; print(platform.system())"
 python -c "import platform; print(platform.machine())"
 python -c "import platform; print(platform.release())"
+
+conda deactivate
+
+echo "***** Check default environment *****"
+
+conda activate
+default_prefix_nameless="$CONDA_PREFIX"
+echo "default_prefix_nameless=$default_prefix_nameless"
+default_python_nameless="$(type python)"
+echo "default_python_nameless=$default_python_nameless"
+python -V
+conda deactivate
+
+conda activate default
+default_prefix="$CONDA_PREFIX"
+echo "default_prefix=$default_prefix"
+default_python="$(type python)"
+echo "default_python=$default_python"
+python -V
+conda deactivate
+
+test "$default_prefix_nameless" = "$default_prefix"
+test "$default_python_nameless" = "$default_python"
 
 echo "***** Done: Testing installer *****"
 
