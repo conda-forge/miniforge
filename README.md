@@ -375,7 +375,7 @@ If you want to update an existing installation, use the -u option.
 ```
 
 ### Without docker (Windows)
-You mus have Git Bash, or some other MINGW64 shell installed on Windows for this to run successfully.
+You must have Git Bash, or some other MINGW64 shell installed on Windows for this to run successfully.
 ```sh
 export TARGET_PLATFORM=win-64
 
