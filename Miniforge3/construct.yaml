@@ -1,5 +1,5 @@
-{% set version = os.environ.get("MINIFORGE_VERSION", "25.3.0-3") %}
-{% set conda_libmamba_solver_version = "25.3.0" %}
+{% set version = os.environ.get("MINIFORGE_VERSION", "25.5.0-1") %}
+{% set conda_libmamba_solver_version = "25.4.0" %}
 # This file is parsed by the scripts to define
 #   - `MICROMAMBA_VERSION` in `scripts/build.sh`
 #   - `MAMBA_VERSION` in `scripts/test.sh`
@@ -13,7 +13,6 @@ channels:
   # specifying the channel with the full URL adds two channels
   # when the end user adds the channel without the full URL
   # - https://conda.anaconda.org/conda-forge
-  - conda-canary/label/conda-conda-pr-14678
   - conda-forge
 
 # Note: this needs https://github.com/conda/conda/pull/14666 for 'default_activation_env'
@@ -33,7 +32,7 @@ initialize_conda: True
 initialize_by_default: False
 
 user_requested_specs:
-  - python 3.12.*
+  - python 3.13.*
   - conda >={{ version.split("-")[0] }}
   - mamba >={{ mamba_version }}
   - pip
@@ -41,7 +40,7 @@ user_requested_specs:
   - miniforge_console_shortcut 1.*  # [win]
 
 specs:
-  - python 3.12.*
+  - python 3.13.*
   - conda {{ version.split("-")[0] }}.*
   - mamba {{ mamba_version }}.*
   - conda-libmamba-solver {{ conda_libmamba_solver_version }}
@@ -51,7 +50,7 @@ specs:
 extra_envs:
   default:
     specs:
-      - python 3.12.*
+      - python 3.13.*
       - pip
 
 virtual_specs:
