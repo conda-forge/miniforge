@@ -51,7 +51,7 @@ if [[ "$(uname)" == MINGW* ]]; then
   conda list
 else
   # Test one of our installers in batch mode
-  if [[ "${INSTALLER_NAME}" == "Mambaforge" ]]; then
+  if [[ "${INSTALLER_NAME}" == "Miniforge3" ]]; then
     sh "${INSTALLER_PATH}" -b -p "${CONDA_PATH}"
   # And the other in interactive mode
   else
@@ -100,8 +100,9 @@ echo "+ Testing mamba version (i.e. ${MAMBA_VERSION})"
 mamba info --json | python -c "import sys, json; info = json.loads(sys.stdin.read()); assert info['mamba version'] == '${MAMBA_VERSION}', info"
 echo "  OK"
 
+MINIFORGE_CHANNEL_NAME="${MINIFORGE_CHANNEL_NAME:-conda-forge}"
 echo "+ Testing mamba channels"
-mamba info --json | python -c "import sys, json; info = json.loads(sys.stdin.read()); assert any('conda-forge' in c for c in info['channels']), info"
+mamba info --json | python -c "import sys, json; info = json.loads(sys.stdin.read()); assert any('${MINIFORGE_CHANNEL_NAME}' in c for c in info['channels']), info"
 echo "  OK"
 
 set -x

@@ -97,9 +97,9 @@ a terminal.
 ### conda/mamba usable in any terminals
 
 However, with the default choices of the Windows installer, these commands are
-only available in the "Anaconda Prompt". To be able to use these commands in
+only available in the "Miniforge Prompt". To be able to use these commands in
 other terminals, one needs to initialize conda for your shell by running in
-the Anaconda Prompt
+the Miniforge Prompt.
 
 ```sh
 conda init
@@ -345,6 +345,7 @@ After construction on the CI, the installer is tested against a range of distrib
 
 Installers are built and uploaded via the CI but if you want to construct your own Miniforge installer, here is how:
 
+### With Docker
 ```sh
 # Configuration
 export ARCH=aarch64
@@ -353,6 +354,34 @@ export DOCKERIMAGE=condaforge/linux-anvil-aarch64
 bash build_miniforge.sh
 ```
 
+### Without Docker (Linux)
+```sh
+# Configuration
+export TARGET_PLATFORM=linux-64
+
+bash scripts/build.sh
+bash scripts/test.sh
+```
+_Be sure to delete the installation directory after `build/test.sh` has run. You will get installation errors if you run subsequent tests._
+```
+***** Run the installer *****
++ chmod +x build/Miniforge3-25.1.1-2-Linux-x86_64.sh
+++ uname
++ [[ Linux == MINGW* ]]
++ [[ Miniforge3 == \M\i\n\i\f\o\r\g\e\3 ]]
++ sh build/Miniforge3-25.1.1-2-Linux-x86_64.sh -b -p /home/user001/miniforge
+ERROR: File or directory already exists: '/home/user001/miniforge'
+If you want to update an existing installation, use the -u option.
+```
+
+### Without docker (Windows)
+You must have Git Bash, or some other MINGW64 shell installed on Windows for this to run successfully.
+```sh
+export TARGET_PLATFORM=win-64
+
+bash scripts/build.sh
+bash scripts/test.sh
+```
 
 ## Support for older operating systems
 
