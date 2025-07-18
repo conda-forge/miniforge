@@ -253,7 +253,7 @@ curl -fsSLo Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/lat
 
 This will download the appropriate installer for the present architecture with
 the filename `Miniforge3.sh`. Run the shell script with the command in batch
-mode with the `-b` flash:
+mode with the `-b` flag:
 
 ```sh
 bash Miniforge3.sh -b -p "${HOME}/conda"
