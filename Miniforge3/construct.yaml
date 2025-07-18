@@ -1,5 +1,5 @@
-{% set version = os.environ.get("MINIFORGE_VERSION", "25.3.0-3") %}
-{% set conda_libmamba_solver_version = "25.3.0" %}
+{% set version = os.environ.get("MINIFORGE_VERSION", "25.5.1-1") %}
+{% set conda_libmamba_solver_version = "25.4.0" %}
 # This file is parsed by the scripts to define
 #   - `MICROMAMBA_VERSION` in `scripts/build.sh`
 #   - `MAMBA_VERSION` in `scripts/test.sh`
@@ -16,6 +16,11 @@ channels:
   - conda-forge
 
 write_condarc: True
+condarc: |
+  channels:
+    - conda-forge
+  default_activation_env: default-env
+
 # keep pkgs for space-saving implications for hardlinks when create new environments
 # and keep the same with Miniconda
 keep_pkgs: True
@@ -36,11 +41,17 @@ user_requested_specs:
 
 specs:
   - python 3.12.*
-  - conda {{ version.split("-")[0] }}
-  - mamba {{ mamba_version }}
+  - conda {{ version.split("-")[0] }}.*
+  - mamba {{ mamba_version }}.*
   - conda-libmamba-solver {{ conda_libmamba_solver_version }}
   - pip
   - miniforge_console_shortcut 1.*  # [win]
+
+extra_envs:
+  default-env:
+    specs:
+      - python 3.12.*
+      - pip
 
 virtual_specs:
   - __glibc >=2.17 # [linux]
