@@ -1,4 +1,4 @@
-{% set version = os.environ.get("MINIFORGE_VERSION", "25.5.0-1") %}
+{% set version = os.environ.get("MINIFORGE_VERSION", "25.5.1-1") %}
 {% set conda_libmamba_solver_version = "25.4.0" %}
 # This file is parsed by the scripts to define
 #   - `MICROMAMBA_VERSION` in `scripts/build.sh`
@@ -15,7 +15,7 @@ channels:
   # - https://conda.anaconda.org/conda-forge
   - conda-forge
 
-# Note: this needs https://github.com/conda/conda/pull/14666 for 'default_activation_env'
+write_condarc: True
 condarc: |
   channels:
     - conda-forge
