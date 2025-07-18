@@ -134,7 +134,7 @@ echo "default_python_nameless=$default_python_nameless"
 python -V
 conda deactivate
 
-conda activate default
+conda activate default-env
 default_prefix="$CONDA_PREFIX"
 echo "default_prefix=$default_prefix"
 default_python="$(type python)"
