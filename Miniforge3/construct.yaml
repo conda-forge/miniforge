@@ -19,7 +19,7 @@ channels:
 condarc: |
   channels:
     - conda-forge
-  default_activation_env: default
+  default_activation_env: default-env
 
 # keep pkgs for space-saving implications for hardlinks when create new environments
 # and keep the same with Miniconda
@@ -48,7 +48,7 @@ specs:
   - miniforge_console_shortcut 1.*  # [win]
 
 extra_envs:
-  default:
+  default-env:
     specs:
       - python 3.13.*
       - pip
