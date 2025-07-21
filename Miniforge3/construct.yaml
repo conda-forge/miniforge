@@ -15,6 +15,10 @@ channels:
   # - https://conda.anaconda.org/conda-forge
   - conda-forge
 
+mirrored_channels:
+  conda-forge:
+    - "https://prefix.dev/conda-forge"
+
 write_condarc: True
 # keep pkgs for space-saving implications for hardlinks when create new environments
 # and keep the same with Miniconda
