@@ -107,7 +107,7 @@ jobs:
           name: Miniforge3-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
 
       - name: Upload miniforge to release
-        uses: svenstaro/upload-release-action@5e35e583720436a2cc5f9682b6f55657101c1ea1 # v2.11.1
+        uses: svenstaro/upload-release-action@81c65b7cd4de9b2570615ce3aad67a41de5b1a13 # v2.11.2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: build/M*forge*
