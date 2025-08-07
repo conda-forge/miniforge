@@ -105,7 +105,7 @@ the Miniforge Prompt.
 conda init
 ```
 
-Note that one can also just add the `C:\Users\myusername\miniforge3\condabin` folder
+Note that one can also just add the `C:\Users\myusername\miniforge3\condabin\` folder
 to the path environment variable
 [manually](https://learn.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14)#to-add-a-path-to-the-path-environment-variable)
 so `conda` and `mamba` may be used more conveniently from any command prompt with limited
