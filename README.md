@@ -232,7 +232,7 @@ bash Miniforge3-$(uname)-$(uname -m).sh -b
 
 In non-interactive installations, the conda initialization commands will not be run by default.
 
-Note that on macOS, Miniforge can also be installed with [Homebrew](https://brew.sh/).
+Note that on macOS, Miniforge can also be installed with [Homebrew](https://brew.sh/)(https://formulae.brew.sh/cask/miniforge).
 
 ### As part of a CI pipeline
 
