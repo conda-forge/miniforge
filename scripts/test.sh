@@ -96,6 +96,9 @@ echo "+ Testing mamba channels"
 mamba info --json | python -c "import sys, json; info = json.loads(sys.stdin.read()); assert any('${MINIFORGE_CHANNEL_NAME}' in c for c in info['channels']), info"
 echo "  OK"
 
+echo "+ TODO:Testing mirrored channels"
+mamba config get mirrored_channels
+
 echo "***** Python path *****"
 python -c "import sys; print(sys.executable)"
 python -c "import sys; assert 'miniforge' in sys.executable"
