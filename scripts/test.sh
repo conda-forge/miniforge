@@ -97,7 +97,7 @@ mamba info --json | python -c "import sys, json; info = json.loads(sys.stdin.rea
 echo "  OK"
 
 echo "+ Testing mirrored channels"
-mamba config list --json | python -c "import sys, json; info = json.loads(sys.stdin.read()); assert info['mirrored_channels']['conda-forge'] == ['https://prefix.dev/conda-forge']"
+mamba config list --json | python -c "import sys, json; info = json.loads(sys.stdin.read()); assert info['mirrored_channels']['conda-forge'] == ['https://conda.anaconda.org/conda-forge','https://prefix.dev/conda-forge']"
 
 echo "***** Python path *****"
 python -c "import sys; print(sys.executable)"

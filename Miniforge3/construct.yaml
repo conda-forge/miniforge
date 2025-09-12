@@ -17,6 +17,7 @@ channels:
 
 mirrored_channels:
   conda-forge:
+    - "https://conda.anaconda.org/conda-forge"
     - "https://prefix.dev/conda-forge"
 
 write_condarc: True
