@@ -8,84 +8,19 @@ This repository holds the minimal installers for [Conda](https://conda.io/) and 
 * Packages in the base environment are obtained from the [conda-forge channel](https://anaconda.org/conda-forge).
 * The [conda-forge](https://conda-forge.org/) channel is set as the default (and only) channel.
 
-We put an emphasis on supporting various CPU architectures (x86_64, ppc64le, and aarch64 including Apple Silicon).
+We put an emphasis on supporting various CPU architectures (x86_64, ppc64le,
+and aarch64 including Apple Silicon) as well as the stability of this
+installer.
 
-<details>
+## Goals
 
-<summary>🚨 PyPy support is deprecated (<b>Deprecated</b> as of August 2024) 🚨</summary>
+The goal of this installer is to provide you with an entry point to the
+conda and mamba commands. If these two commands execute correctly, then this
+installer has achieved its goal.
 
-TL;DR: We are planning to remove PyPy from conda-forge feedstock recipes in a
-few weeks (and thus to stop building new releases of packages for PyPy), unless
-there is substantial enough interest to justify the continued maintenance
-effort.
-
-To help with this transition, the latest installers will:
-
-* The installer will refuse to proceed every two weeks in October
-* The installer will refuse to proceed every ten days in November
-* The installer will refuse to proceed every five days in December
-* The installer will refuse to proceed in 2025+
-
-### Miniforge-pypy3
-
-Latest installers with PyPy 3.9 in the base environment are listed below.
-However, the latest installers will cease to work and will stop being made available in 2025.
-You should therefore pin to 24.7.0 if you require PyPy3.
-
-| OS      | Architecture       | Minimum Version | Miniforge Version                                                          |
-| ------- | ------------------ | --------------- | -------------------------------------------------------------------------- |
-| Linux   | x86_64 (amd64)     | glibc >= 2.17   | [24.9.2-0](https://github.com/conda-forge/miniforge/releases/tag/24.9.2-0) |
-| Linux   | x86_64 (amd64)     | glibc >= 2.12   | [24.3.0-0](https://github.com/conda-forge/miniforge/releases/tag/24.3.0-0) |
-| Linux   | aarch64 (arm64)    | glibc >= 2.17   | [24.9.2-0](https://github.com/conda-forge/miniforge/releases/tag/24.9.2-0) |
-| Linux   | aarch64 (arm64)    | glibc >= 2.12   | [24.3.0-0](https://github.com/conda-forge/miniforge/releases/tag/24.3.0-0) |
-| Linux   | ppc64le (POWER8/9) | glibc >= 2.17   | [24.9.2-0](https://github.com/conda-forge/miniforge/releases/tag/24.9.2-0) |
-| Linux   | ppc64le (POWER8/9) | glibc >= 2.12   | [24.3.0-0](https://github.com/conda-forge/miniforge/releases/tag/24.3.0-0) |
-| macOS   | x86_64             | macOS >= 10.13  | [24.9.2-0](https://github.com/conda-forge/miniforge/releases/tag/24.9.2-0) |
-| macOS   | x86_64             | macOS >= 10.9   | [24.3.0-0](https://github.com/conda-forge/miniforge/releases/tag/24.3.0-0) |
-| Windows | x86_64             | Windows >= 7    | [24.9.2-0](https://github.com/conda-forge/miniforge/releases/tag/24.9.2-0) |
-
-</details>
-
-<details>
-
-<summary>🚨 Mambaforge (<b>Deprecated</b> as of July 2024) 🚨</summary>
-
-Update for July 2024:
-
-As of July 2024, `Mambaforge` is deprecated. We suggest users switch to
-`Miniforge3` immediately. These installers will be retired from new releases
-after January 2025. To assist in the migration, we will be introducing rollowing
-brownouts to the latest Mambaforge installer. Installers up to version 24.5.0-1
-will not have any brownouts. 24.5.0-1 will include a warning message.
-Installers 2024.5.0-2 and later will have the following brownout schedule:
-
-* The installer will refuse to proceed every two weeks in October
-* The installer will refuse to proceed every ten days in November
-* The installer will refuse to proceed every five days in December
-* The installer will refuse to proceed in 2025+
-
-Previous information:
-
-With the [release](https://github.com/conda-forge/miniforge/releases/tag/23.3.1-0) of
-`Miniforge3-23.3.1-0`, that incorporated the changes in
-[#277](https://github.com/conda-forge/miniforge/pull/277), the packages and
-configuration of `Mambaforge` and `Miniforge3` are now **identical**. The
-only difference between the two is the name of the installer and, subsequently,
-the default installation directory.
-
-We recommend switching to `Miniforge3` immediately. These installers will be
-retired in January 2025. To assist in the migration to Miniforge3 for CI users, we've stopped
-the latest Mambaforge (24.5+) installer from proceeding with following schedule
-
-* Every two weeks in October
-* Every ten days in November
-* Every five days in December
-* Never in 2025
-
-You can still find the latest installers in the [24.9.2 release](https://github.com/conda-forge/miniforge/releases/tag/24.9.2-0).
-
-</details>
-
+If you have issues with specific packages, please report them to the
+associated feedstock. You may find the feedstock associated with a package using
+our [website](https://conda-forge.org/packages/)
 
 ## Usage
 
@@ -325,8 +260,7 @@ rm -fr ${HOME}/.conda
 - [X] Automatic upload of constructor results.
 - [X] Automatic testing of constructor.
 - [ ] Integration with conda-forge's developer documentation.
-- [ ] Integration with conda-forge's official site.
-- [ ] Upstream to Anaconda ?
+- [x] Integration with conda-forge's official site.
 
 
 ## Testing
@@ -449,3 +383,80 @@ Relevant conversations:
 
 - https://github.com/conda-forge/conda-forge.github.io/issues/871#issue-496677528
 - https://github.com/conda-forge/conda-forge.github.io/pull/922
+
+
+<details>
+
+<summary>🚨 PyPy support is deprecated (<b>Deprecated</b> as of August 2024) 🚨</summary>
+
+TL;DR: We are planning to remove PyPy from conda-forge feedstock recipes in a
+few weeks (and thus to stop building new releases of packages for PyPy), unless
+there is substantial enough interest to justify the continued maintenance
+effort.
+
+To help with this transition, the latest installers will:
+
+* The installer will refuse to proceed every two weeks in October
+* The installer will refuse to proceed every ten days in November
+* The installer will refuse to proceed every five days in December
+* The installer will refuse to proceed in 2025+
+
+### Miniforge-pypy3
+
+Latest installers with PyPy 3.9 in the base environment are listed below.
+However, the latest installers will cease to work and will stop being made available in 2025.
+You should therefore pin to 24.7.0 if you require PyPy3.
+
+| OS      | Architecture       | Minimum Version | Miniforge Version                                                          |
+| ------- | ------------------ | --------------- | -------------------------------------------------------------------------- |
+| Linux   | x86_64 (amd64)     | glibc >= 2.17   | [24.9.2-0](https://github.com/conda-forge/miniforge/releases/tag/24.9.2-0) |
+| Linux   | x86_64 (amd64)     | glibc >= 2.12   | [24.3.0-0](https://github.com/conda-forge/miniforge/releases/tag/24.3.0-0) |
+| Linux   | aarch64 (arm64)    | glibc >= 2.17   | [24.9.2-0](https://github.com/conda-forge/miniforge/releases/tag/24.9.2-0) |
+| Linux   | aarch64 (arm64)    | glibc >= 2.12   | [24.3.0-0](https://github.com/conda-forge/miniforge/releases/tag/24.3.0-0) |
+| Linux   | ppc64le (POWER8/9) | glibc >= 2.17   | [24.9.2-0](https://github.com/conda-forge/miniforge/releases/tag/24.9.2-0) |
+| Linux   | ppc64le (POWER8/9) | glibc >= 2.12   | [24.3.0-0](https://github.com/conda-forge/miniforge/releases/tag/24.3.0-0) |
+| macOS   | x86_64             | macOS >= 10.13  | [24.9.2-0](https://github.com/conda-forge/miniforge/releases/tag/24.9.2-0) |
+| macOS   | x86_64             | macOS >= 10.9   | [24.3.0-0](https://github.com/conda-forge/miniforge/releases/tag/24.3.0-0) |
+| Windows | x86_64             | Windows >= 7    | [24.9.2-0](https://github.com/conda-forge/miniforge/releases/tag/24.9.2-0) |
+
+</details>
+
+<details>
+
+<summary>🚨 Mambaforge (<b>Deprecated</b> as of July 2024) 🚨</summary>
+
+Update for July 2024:
+
+As of July 2024, `Mambaforge` is deprecated. We suggest users switch to
+`Miniforge3` immediately. These installers will be retired from new releases
+after January 2025. To assist in the migration, we will be introducing rollowing
+brownouts to the latest Mambaforge installer. Installers up to version 24.5.0-1
+will not have any brownouts. 24.5.0-1 will include a warning message.
+Installers 2024.5.0-2 and later will have the following brownout schedule:
+
+* The installer will refuse to proceed every two weeks in October
+* The installer will refuse to proceed every ten days in November
+* The installer will refuse to proceed every five days in December
+* The installer will refuse to proceed in 2025+
+
+Previous information:
+
+With the [release](https://github.com/conda-forge/miniforge/releases/tag/23.3.1-0) of
+`Miniforge3-23.3.1-0`, that incorporated the changes in
+[#277](https://github.com/conda-forge/miniforge/pull/277), the packages and
+configuration of `Mambaforge` and `Miniforge3` are now **identical**. The
+only difference between the two is the name of the installer and, subsequently,
+the default installation directory.
+
+We recommend switching to `Miniforge3` immediately. These installers will be
+retired in January 2025. To assist in the migration to Miniforge3 for CI users, we've stopped
+the latest Mambaforge (24.5+) installer from proceeding with following schedule
+
+* Every two weeks in October
+* Every ten days in November
+* Every five days in December
+* Never in 2025
+
+You can still find the latest installers in the [24.9.2 release](https://github.com/conda-forge/miniforge/releases/tag/24.9.2-0).
+
+</details>
