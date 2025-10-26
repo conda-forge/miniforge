@@ -89,7 +89,7 @@ Latest installers with Python 3.12 `(*)` in the base environment:
 | Linux   | ppc64le (POWER8/9)            | glibc >= 2.17   | `Miniforge3-Linux-ppc64le.sh`   |
 | macOS   | x86_64                        | macOS >= 10.13  | `Miniforge3-MacOSX-x86_64.sh`   |
 | macOS   | arm64 (Apple Silicon) `(***)` | macOS >= 11.0   | `Miniforge3-MacOSX-arm64.sh`    |
-| Windows | x86_64                        | Windows >= 7    | `Miniforge3-Windows-x86_64.exe` |
+| Windows | x86_64 `(****)`               | Windows >= 10    | `Miniforge3-Windows-x86_64.exe` |
 
 `(*)` The Python version is specific only to the base environment. Conda can create new environments with different Python versions and implementations.
 
@@ -102,9 +102,14 @@ The versions listed as "System: 32-bit" are not compatible with the installers o
 
 `(***)` Apple silicon builds are experimental and haven't had testing like the other platforms.
 
+`(****)` The Windows installer requires Windows 10 or later. However, we are unsure exactly what version of Windows 10.
+We need [help](https://github.com/conda-forge/miniforge/issues/599) from users to maintain the backlog of windows questions.
+
 ## Install
 
 ### Windows
+
+We [need help](https://github.com/conda-forge/miniforge/issues/599) from activate users and willing maintainers!
 
 Download and execute [the Windows installer](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe).
 Follow the prompts, taking note of the option to
@@ -117,11 +122,11 @@ If you require conda to be accessible to other software,
 you may consider the option to "Add Miniforge3 to my PATH environment variable".
 The latter is not selected by default due to the potential of serious conflicts
 with other software. See https://github.com/conda-forge/miniforge/issues/520 and
-https://github.com/conda-forge/miniforge/issues/453 
+https://github.com/conda-forge/miniforge/issues/453
 
 There are known issues with the usage of special characters and spaces in
 the installation location, see for example
-https://github.com/conda-forge/miniforge/issues/484 and 
+https://github.com/conda-forge/miniforge/issues/484 and
 https://github.com/conda-forge/miniforge/issues/593 .
 We recommend users install in a directory without any such characters in the name.
 
@@ -131,11 +136,11 @@ For non-interactive usage one can use the batch install option:
 start /wait "" Miniforge3-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=%UserProfile%\Miniforge3
 ```
 ### Windows Subsystem for Linux (WSL)
-The Windows Subsystem for Linux (WSL) lets developers use both Windows and Linux at the same time on a Windows machine. 
+The Windows Subsystem for Linux (WSL) lets developers use both Windows and Linux at the same time on a Windows machine.
 WSL users should make sure they are in a Linux terminal window (not Powershell) and use the Linux installer appropriate for the computer's architecture as described in the instructions in the next section.
 
 ### Unix-like platforms (macOS, Linux, & WSL)
-From a terminal window, download the installer appropriate for your computer's architecture using curl or wget or your favorite program. 
+From a terminal window, download the installer appropriate for your computer's architecture using curl or wget or your favorite program.
 
 For example:
 
