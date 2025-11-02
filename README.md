@@ -280,8 +280,6 @@ After construction on the CI, the installer is tested against a range of distrib
 - Ubuntu 20.04 ([LTS](https://ubuntu.com/about/release-cycle))
 - Ubuntu 22.04 ([LTS](https://ubuntu.com/about/release-cycle))
 - Ubuntu 24.04 ([LTS](https://ubuntu.com/about/release-cycle))
-- Ubuntu 25.10 (Latest release)
-
 
 ## Building a Miniforge Installer
 
