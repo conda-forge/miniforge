@@ -275,12 +275,11 @@ After construction on the CI, the installer is tested against a range of distrib
 - Centos 7
 - Debian Bullseye (11)
 - Debian Bookworm (12)
-- Ubuntu 16.04 ([LTS](https://ubuntu.com/about/release-cycle))
+- Debian Trixie (13)
 - Ubuntu 18.04 ([LTS](https://ubuntu.com/about/release-cycle))
 - Ubuntu 20.04 ([LTS](https://ubuntu.com/about/release-cycle))
 - Ubuntu 22.04 ([LTS](https://ubuntu.com/about/release-cycle))
-- Ubuntu 24.04 (Latest release -- also happens to be LTS)
-
+- Ubuntu 24.04 ([LTS](https://ubuntu.com/about/release-cycle))
 
 ## Building a Miniforge Installer
 
