@@ -33,8 +33,8 @@ initialize_by_default: False
 
 user_requested_specs:
   - python 3.12.*
-  - conda =={{ version.split("-")[0] }}
-  - mamba =={{ mamba_version }}
+  - conda >={{ version.split("-")[0] }}
+  - mamba >={{ mamba_version }}
   - pip
   # Omit conda-libmamba-solver so that conda is free to remove it later
   - miniforge_console_shortcut 1.*  # [win]
