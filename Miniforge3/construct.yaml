@@ -1,7 +1,11 @@
-{% set version = os.environ.get("MINIFORGE_VERSION", "23.1.0-2") %}
-{% set name = os.environ.get("MINIFORGE_NAME", "Miniforge3") %}
+{% set version = os.environ.get("MINIFORGE_VERSION", "25.11.0-1") %}
+{% set conda_libmamba_solver_version = "25.11.0" %}
+# This file is parsed by the scripts to define
+#   - `MICROMAMBA_VERSION` in `scripts/build.sh`
+#   - `MAMBA_VERSION` in `scripts/test.sh`
+{% set mamba_version = "2.4.0" %}
 
-name: {{ name }}
+name: Miniforge3
 version: {{ version }}
 company: conda-forge
 
@@ -11,16 +15,41 @@ channels:
   # - https://conda.anaconda.org/conda-forge
   - conda-forge
 
+mirrored_channels:
+  conda-forge:
+    - "https://conda.anaconda.org/conda-forge"
+    - "https://prefix.dev/conda-forge"
+
 write_condarc: True
 # keep pkgs for space-saving implications for hardlinks when create new environments
 # and keep the same with Miniconda
 keep_pkgs: True
-license_file: ../LICENSE
+license_file: {{ os.environ.get("MINIFORGE_LICENSE_OVERRIDE", "../LICENSE") }}
 
 # During the interactive installation, these variables are checked.
 # During batch installation, conda is never initialized
 initialize_conda: True
 initialize_by_default: False
+
+user_requested_specs:
+  - python 3.12.*
+  - conda >={{ version.split("-")[0] }}
+  - mamba >={{ mamba_version }}
+  - pip
+  # Omit conda-libmamba-solver so that conda is free to remove it later
+  - miniforge_console_shortcut 1.*  # [win]
+
+specs:
+  - python 3.12.*
+  - conda {{ version.split("-")[0] }}
+  - mamba {{ mamba_version }}
+  - conda-libmamba-solver {{ conda_libmamba_solver_version }}
+  - pip
+  - miniforge_console_shortcut 1.*  # [win]
+
+virtual_specs:
+  - __glibc >=2.17 # [linux]
+  - __osx >=10.13 # [osx]
 
 # macOS PKG options
 installer_type: all  # [osx]
@@ -30,21 +59,6 @@ welcome_image: osx_pkg_background.png  # [osx]
 welcome_text: ""  # [osx]
 readme_text: ""  # [osx]
 conclusion_text: ""  # [osx]
-
-specs:
-{% if name.endswith("pypy3") %}
-  - python 3.9.* *_pypy
-{% else %}
-  - python 3.10.*
-{% endif %}
-
-{% if name.startswith("Mambaforge") %}
-  - mamba 1.4.2
-{% endif %}
-  - conda {{ version.split("-")[0] }}
-
-  - pip
-  - miniforge_console_shortcut 1.*  # [win]
 
 # Signing settings will be added by CI
 signing_identity_name: {{ os.environ.get("APPLE_SIGNING_IDENTITY", "") }}

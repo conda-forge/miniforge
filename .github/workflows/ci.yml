@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   build:
-    name: ${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
+    name: Miniforge3-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -20,98 +20,35 @@ jobs:
           - os: windows-latest
             ARCH: x86_64
             TARGET_PLATFORM: win-64
-            MINIFORGE_NAME: "Miniforge3"
-            OS_NAME: "Windows"
-
-          - os: windows-latest
-            ARCH: x86_64
-            TARGET_PLATFORM: win-64
-            MINIFORGE_NAME: "Mambaforge"
-            OS_NAME: "Windows"
-
-          - os: windows-latest
-            ARCH: x86_64
-            TARGET_PLATFORM: win-64
-            MINIFORGE_NAME: "Miniforge-pypy3"
-            OS_NAME: "Windows"
-
-          - os: windows-latest
-            ARCH: x86_64
-            TARGET_PLATFORM: win-64
-            MINIFORGE_NAME: "Mambaforge-pypy3"
             OS_NAME: "Windows"
 
           - os: macos-latest
             ARCH: arm64
             TARGET_PLATFORM: osx-arm64
-            MINIFORGE_NAME: "Miniforge3"
-            OS_NAME: "MacOSX"
-
-          - os: macos-latest
-            ARCH: arm64
-            TARGET_PLATFORM: osx-arm64
-            MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "MacOSX"
 
           - os: macos-latest
             ARCH: x86_64
             TARGET_PLATFORM: osx-64
-            MINIFORGE_NAME: "Miniforge-pypy3"
-            OS_NAME: "MacOSX"
-
-          - os: macos-latest
-            ARCH: x86_64
-            TARGET_PLATFORM: osx-64
-            MINIFORGE_NAME: "Mambaforge-pypy3"
-            OS_NAME: "MacOSX"
-
-          - os: macos-latest
-            ARCH: x86_64
-            TARGET_PLATFORM: osx-64
-            MINIFORGE_NAME: "Miniforge3"
-            OS_NAME: "MacOSX"
-
-          - os: macos-latest
-            ARCH: x86_64
-            TARGET_PLATFORM: osx-64
-            MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "MacOSX"
 
           - os: ubuntu-latest
             ARCH: aarch64
             TARGET_PLATFORM: linux-aarch64
-            DOCKER_ARCH: arm64v8
+            DOCKER_ARCH: arm64/v8
             DOCKERIMAGE: condaforge/linux-anvil-aarch64
-            MINIFORGE_NAME: "Miniforge3"
-            OS_NAME: "Linux"
-
-          - os: ubuntu-latest
-            ARCH: aarch64
-            TARGET_PLATFORM: linux-aarch64
-            DOCKER_ARCH: arm64v8
-            DOCKERIMAGE: condaforge/linux-anvil-aarch64
-            MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "Linux"
             # Reduce the test matrix because the builds timeouts on emulated architectures
             # The time consuming operation is an attempt a full solve of conda/mamba/boa
             # for as a compatibility
             # xref https://github.com/conda-forge/miniforge/pull/361
-            TEST_IMAGE_NAMES: "ubuntu:22.04"
+            TEST_IMAGE_NAMES: "ubuntu:24.04"
 
           - os: ubuntu-latest
             ARCH: x86_64
             TARGET_PLATFORM: linux-64
             DOCKER_ARCH: amd64
-            DOCKERIMAGE: condaforge/linux-anvil-comp7
-            MINIFORGE_NAME: "Miniforge3"
-            OS_NAME: "Linux"
-
-          - os: ubuntu-latest
-            ARCH: x86_64
-            TARGET_PLATFORM: linux-64
-            DOCKER_ARCH: amd64
-            DOCKERIMAGE: condaforge/linux-anvil-comp7
-            MINIFORGE_NAME: "Mambaforge"
+            DOCKERIMAGE: condaforge/linux-anvil-cos7-x86_64
             OS_NAME: "Linux"
 
           - os: ubuntu-latest
@@ -119,156 +56,92 @@ jobs:
             TARGET_PLATFORM: linux-ppc64le
             DOCKER_ARCH: ppc64le
             DOCKERIMAGE: condaforge/linux-anvil-ppc64le
-            MINIFORGE_NAME: "Miniforge3"
-            OS_NAME: "Linux"
-
-          - os: ubuntu-latest
-            ARCH: ppc64le
-            TARGET_PLATFORM: linux-ppc64le
-            DOCKER_ARCH: ppc64le
-            DOCKERIMAGE: condaforge/linux-anvil-ppc64le
-            MINIFORGE_NAME: "Mambaforge"
             OS_NAME: "Linux"
             # Reduce the test matrix because the builds timeouts on emulated architectures
             # The time consuming operation is an attempt a full solve of conda/mamba/boa
             # for as a compatibility
             # xref https://github.com/conda-forge/miniforge/pull/361
-            TEST_IMAGE_NAMES: "ubuntu:22.04"
-
-          - os: ubuntu-latest
-            ARCH: aarch64
-            TARGET_PLATFORM: linux-aarch64
-            DOCKER_ARCH: arm64v8
-            DOCKERIMAGE: condaforge/linux-anvil-aarch64
-            MINIFORGE_NAME: "Miniforge-pypy3"
-            OS_NAME: "Linux"
-
-          - os: ubuntu-latest
-            ARCH: aarch64
-            TARGET_PLATFORM: linux-aarch64
-            DOCKER_ARCH: arm64v8
-            DOCKERIMAGE: condaforge/linux-anvil-aarch64
-            MINIFORGE_NAME: "Mambaforge-pypy3"
-            OS_NAME: "Linux"
-            # Reduce the test matrix because the builds timeouts on emulated architectures
-            # The time consuming operation is an attempt a full solve of conda/mamba/boa
-            # for as a compatibility
-            # xref https://github.com/conda-forge/miniforge/pull/361
-            TEST_IMAGE_NAMES: "ubuntu:22.04"
-
-          - os: ubuntu-latest
-            ARCH: x86_64
-            TARGET_PLATFORM: linux-64
-            DOCKER_ARCH: amd64
-            DOCKERIMAGE: condaforge/linux-anvil-comp7
-            MINIFORGE_NAME: "Miniforge-pypy3"
-            OS_NAME: "Linux"
-
-          - os: ubuntu-latest
-            ARCH: x86_64
-            TARGET_PLATFORM: linux-64
-            DOCKER_ARCH: amd64
-            DOCKERIMAGE: condaforge/linux-anvil-comp7
-            MINIFORGE_NAME: "Mambaforge-pypy3"
-            OS_NAME: "Linux"
-
-          - os: ubuntu-latest
-            ARCH: ppc64le
-            TARGET_PLATFORM: linux-ppc64le
-            DOCKER_ARCH: ppc64le
-            DOCKERIMAGE: condaforge/linux-anvil-ppc64le
-            MINIFORGE_NAME: "Miniforge-pypy3"
-            OS_NAME: "Linux"
-
-          - os: ubuntu-latest
-            ARCH: ppc64le
-            TARGET_PLATFORM: linux-ppc64le
-            DOCKER_ARCH: ppc64le
-            DOCKERIMAGE: condaforge/linux-anvil-ppc64le
-            MINIFORGE_NAME: "Mambaforge-pypy3"
-            OS_NAME: "Linux"
-            # Reduce the test matrix because the builds timeouts on emulated architectures
-            # The time consuming operation is an attempt a full solve of conda/mamba/boa
-            # for as a compatibility
-            # xref https://github.com/conda-forge/miniforge/pull/361
-            TEST_IMAGE_NAMES: "centos:7"
+            TEST_IMAGE_NAMES: "ubuntu:24.04"
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
-    - uses: conda-incubator/setup-miniconda@v2.2.0
-      with:
-        miniforge-version: "latest"
-        miniforge-variant: Mambaforge
-        use-mamba: true
-      if: contains(matrix.OS_NAME, 'Windows')
-    
-    - name: Prepare certificates (macOS)
-      if: contains(matrix.OS_NAME, 'MacOSX') && github.event_name != 'pull_request'
-      env:
-        APPLE_INSTALLER_CERTIFICATE_BASE64: ${{ secrets.APPLE_INSTALLER_CERTIFICATE_BASE64 }}
-        APPLE_INSTALLER_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_INSTALLER_CERTIFICATE_PASSWORD }}
-        APPLE_APPLICATION_CERTIFICATE_BASE64: ${{ secrets.APPLE_APPLICATION_CERTIFICATE_BASE64 }}
-        APPLE_APPLICATION_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_APPLICATION_CERTIFICATE_PASSWORD }}
-        TEMP_KEYCHAIN_PASSWORD: ${{ secrets.TEMP_KEYCHAIN_PASSWORD }}
-        APPLE_NOTARIZATION_USERNAME: ${{ secrets.APPLE_NOTARIZATION_USERNAME }}
-        APPLE_NOTARIZATION_PASSWORD: ${{ secrets.APPLE_NOTARIZATION_PASSWORD }}
-        APPLE_NOTARIZATION_TEAM_ID: ${{ secrets.APPLE_NOTARIZATION_TEAM_ID }}
-      run: |
-        # This script will export APPLE_SIGNING_IDENTITY and APPLE_NOTARIZATION_IDENTITY
-        source scripts/osx_prepare_certificates.sh
+      - uses: conda-incubator/setup-miniconda@835234971496cad1653abb28a638a281cf32541f # v3.2.0
+        with:
+          miniforge-version: "latest"
+          use-mamba: true
+        if: ${{ ! contains(matrix.OS_NAME, 'Linux') }}
 
-        # These will be needed by the build.sh script
-        echo "APPLE_SIGNING_IDENTITY=$APPLE_SIGNING_IDENTITY" >> $GITHUB_ENV
-        echo "APPLE_NOTARIZATION_IDENTITY=$APPLE_NOTARIZATION_IDENTITY" >> $GITHUB_ENV
-        echo "APPLE_NOTARIZATION_USERNAME=$APPLE_NOTARIZATION_USERNAME" >> $GITHUB_ENV
-        echo "APPLE_NOTARIZATION_PASSWORD=$APPLE_NOTARIZATION_PASSWORD" >> $GITHUB_ENV
-        echo "APPLE_NOTARIZATION_TEAM_ID=$APPLE_NOTARIZATION_TEAM_ID" >> $GITHUB_ENV
+      - name: Prepare certificates (macOS)
+        if: contains(matrix.OS_NAME, 'MacOSX') && github.event_name != 'pull_request'
+        env:
+          APPLE_INSTALLER_CERTIFICATE_BASE64: ${{ secrets.APPLE_INSTALLER_CERTIFICATE_BASE64 }}
+          APPLE_INSTALLER_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_INSTALLER_CERTIFICATE_PASSWORD }}
+          APPLE_APPLICATION_CERTIFICATE_BASE64: ${{ secrets.APPLE_APPLICATION_CERTIFICATE_BASE64 }}
+          APPLE_APPLICATION_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_APPLICATION_CERTIFICATE_PASSWORD }}
+          TEMP_KEYCHAIN_PASSWORD: ${{ secrets.TEMP_KEYCHAIN_PASSWORD }}
+          APPLE_NOTARIZATION_USERNAME: ${{ secrets.APPLE_NOTARIZATION_USERNAME }}
+          APPLE_NOTARIZATION_PASSWORD: ${{ secrets.APPLE_NOTARIZATION_PASSWORD }}
+          APPLE_NOTARIZATION_TEAM_ID: ${{ secrets.APPLE_NOTARIZATION_TEAM_ID }}
+        run: |
+          # This script will export APPLE_SIGNING_IDENTITY and APPLE_NOTARIZATION_IDENTITY
+          source scripts/osx_prepare_certificates.sh
 
-    - name: Build and test miniforge
-      env:
-        ARCH: ${{ matrix.ARCH }}
-        MINIFORGE_NAME: ${{ matrix.MINIFORGE_NAME }}
-        OS_NAME: ${{ matrix.OS_NAME }}
-        DOCKERIMAGE: ${{ matrix.DOCKERIMAGE }}
-        DOCKER_ARCH: ${{ matrix.DOCKER_ARCH }}
-        TARGET_PLATFORM: ${{ matrix.TARGET_PLATFORM }}
-        TEST_IMAGE_NAMES: ${{ matrix.TEST_IMAGE_NAMES }}
-      run: |
-        if [[ "$GITHUB_REF" == refs/tags/* ]]; then
-          export MINIFORGE_VERSION=${GITHUB_REF##*/};
-        fi
-        if [[ "$OS_NAME" == "Linux" ]]; then
-          bash build_miniforge.sh;
-        fi
-        if [[ "$OS_NAME" == "MacOSX" ]]; then
-          bash build_miniforge_osx.sh;
-          # Provide a Darwin alias
-          cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.sh build/$MINIFORGE_NAME-Darwin-$ARCH.sh;
-          cp build/$MINIFORGE_NAME-*-$OS_NAME-$ARCH.pkg build/$MINIFORGE_NAME-Darwin-$ARCH.pkg;
-        fi
-        if [[ "$OS_NAME" == "Windows" ]]; then
-          echo "WINDIR:$WINDIR"
-          source /c/Miniconda3/Scripts/activate;
-          source build_miniforge_win.sh;
-        fi
-        ls -alh build
-      shell: bash
+          # These will be needed by the build.sh script
+          echo "APPLE_SIGNING_IDENTITY=$APPLE_SIGNING_IDENTITY" >> $GITHUB_ENV
+          echo "APPLE_NOTARIZATION_IDENTITY=$APPLE_NOTARIZATION_IDENTITY" >> $GITHUB_ENV
+          echo "APPLE_NOTARIZATION_USERNAME=$APPLE_NOTARIZATION_USERNAME" >> $GITHUB_ENV
+          echo "APPLE_NOTARIZATION_PASSWORD=$APPLE_NOTARIZATION_PASSWORD" >> $GITHUB_ENV
+          echo "APPLE_NOTARIZATION_TEAM_ID=$APPLE_NOTARIZATION_TEAM_ID" >> $GITHUB_ENV
 
-    - name: Upload miniforge to Github artifact
-      if: always()
-      uses: actions/upload-artifact@v3
-      with:
-        path: build/${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}*
-        name: ${{ matrix.MINIFORGE_NAME }}-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
+      - name: Build and test miniforge
+        env:
+          ARCH: ${{ matrix.ARCH }}
+          OS_NAME: ${{ matrix.OS_NAME }}
+          DOCKERIMAGE: ${{ matrix.DOCKERIMAGE }}
+          DOCKER_ARCH: ${{ matrix.DOCKER_ARCH }}
+          TARGET_PLATFORM: ${{ matrix.TARGET_PLATFORM }}
+          TEST_IMAGE_NAMES: ${{ matrix.TEST_IMAGE_NAMES }}
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            export MINIFORGE_VERSION=${GITHUB_REF##*/};
+          fi
+          if [[ "$OS_NAME" == "Linux" ]]; then
+            export EXT=sh
+            bash build_miniforge.sh;
+          fi
+          if [[ "$OS_NAME" == "MacOSX" ]]; then
+            export EXT=sh
+            bash build_miniforge_osx.sh;
+          fi
+          if [[ "$OS_NAME" == "Windows" ]]; then
+            export EXT=exe
+            echo "WINDIR:$WINDIR"
+            source "${CONDA}"/Scripts/activate;
+            source build_miniforge_win.sh;
+          fi
+          # Copy for latest release
+          cp build/Miniforge3-*-$OS_NAME-$ARCH.$EXT build/Miniforge3-$OS_NAME-$ARCH.$EXT
+          if [[ "$OS_NAME" == "MacOSX" ]]; then
+            cp build/Miniforge3-*-$OS_NAME-$ARCH.$EXT build/Miniforge3-Darwin-$ARCH.$EXT
+          fi
+          ls -alh build
+        shell: bash
 
-    - name: Upload miniforge to release
-      uses: svenstaro/upload-release-action@v2
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: build/M*forge*
-        tag: ${{ github.ref }}
-        overwrite: true
-        file_glob: true
-      if: startsWith(github.ref, 'refs/tags/')
+      - name: Upload miniforge to Github artifact
+        if: always()
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+        with:
+          path: build/Miniforge3-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}*
+          name: Miniforge3-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
+
+      - name: Upload miniforge to release
+        uses: svenstaro/upload-release-action@6b7fa9f267e90b50a19fef07b3596790bb941741 # v2.11.3
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/M*forge*
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
+        if: startsWith(github.ref, 'refs/tags/')

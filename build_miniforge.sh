@@ -12,12 +12,11 @@ set -ex
 # Check parameters
 ARCH=${ARCH:-aarch64}
 export TARGET_PLATFORM=${TARGET_PLATFORM:-linux-aarch64}
-DOCKER_ARCH=${DOCKER_ARCH:-arm64v8}
+DOCKER_ARCH=${DOCKER_ARCH:-arm64/v8}
 DOCKERIMAGE=${DOCKERIMAGE:-condaforge/linux-anvil-aarch64}
-export MINIFORGE_NAME=${MINIFORGE_NAME:-Miniforge3}
 OS_NAME=${OS_NAME:-Linux}
 EXT=${EXT:-sh}
-TEST_IMAGE_NAMES=${TEST_IMAGE_NAMES:-ubuntu:22.04 ubuntu:20.04 ubuntu:18.04 ubuntu:16.04 centos:7 debian:bullseye debian:buster}
+TEST_IMAGE_NAMES=${TEST_IMAGE_NAMES:-ubuntu:24.04 ubuntu:22.04 ubuntu:20.04 ubuntu:18.04 centos:7 debian:trixie debian:bookworm debian:bullseye}
 export CONSTRUCT_ROOT=/construct
 
 echo "============= Create build directory ============="
@@ -30,7 +29,7 @@ docker run --privileged --rm tonistiigi/binfmt --install all
 
 echo "============= Build the installer ============="
 docker run --rm -v "$(pwd):/construct" \
-  -e CONSTRUCT_ROOT -e MINIFORGE_VERSION -e MINIFORGE_NAME -e TARGET_PLATFORM \
+  -e CONSTRUCT_ROOT -e MINIFORGE_VERSION -e TARGET_PLATFORM -e MINIFORGE_LICENSE_OVERRIDE \
   "${DOCKERIMAGE}" /construct/scripts/build.sh
 
 echo "============= Test the installer ============="
@@ -38,5 +37,5 @@ for TEST_IMAGE_NAME in ${TEST_IMAGE_NAMES}; do
   echo "============= Test installer on ${TEST_IMAGE_NAME} ============="
   docker run --rm \
     -v "$(pwd):${CONSTRUCT_ROOT}" -e CONSTRUCT_ROOT \
-    "${DOCKER_ARCH}/${TEST_IMAGE_NAME}" /construct/scripts/test.sh
+     --platform "linux/${DOCKER_ARCH}" "${DOCKER_ARCH/\//}/${TEST_IMAGE_NAME}" /construct/scripts/test.sh
 done
