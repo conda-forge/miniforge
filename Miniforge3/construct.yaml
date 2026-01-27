@@ -1,9 +1,9 @@
-{% set version = os.environ.get("MINIFORGE_VERSION", "25.11.0-1") %}
+{% set version = os.environ.get("MINIFORGE_VERSION", "25.11.0-2") %}
 {% set conda_libmamba_solver_version = "25.11.0" %}
 # This file is parsed by the scripts to define
 #   - `MICROMAMBA_VERSION` in `scripts/build.sh`
 #   - `MAMBA_VERSION` in `scripts/test.sh`
-{% set mamba_version = "2.4.0" %}
+{% set mamba_version = "2.5.0" %}
 
 name: Miniforge3
 version: {{ version }}
