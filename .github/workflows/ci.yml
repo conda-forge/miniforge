@@ -85,6 +85,10 @@ jobs:
           APPLE_NOTARIZATION_KEY_ID: ${{ secrets.MACOS_NOTARIZATION_KEY_ID }}
           APPLE_NOTARIZATION_AUTHKEY_BASE64: ${{ secrets.MACOS_NOTARIZATION_AUTHKEY_BASE64 }}
         run: |
+          if [[ "${APPLE_NOTARIZATION_KEY_ID:-}" == "" ]]; then
+            exit 0  # skip if secrets are not populated
+          fi
+
           # This script will export APPLE_SIGNING_IDENTITY and APPLE_NOTARIZATION_IDENTITY
           source scripts/osx_prepare_certificates.sh
 
@@ -93,6 +97,7 @@ jobs:
           echo "APPLE_NOTARIZATION_IDENTITY=$APPLE_NOTARIZATION_IDENTITY" >> $GITHUB_ENV
           echo "APPLE_NOTARIZATION_ISSUER_ID=$APPLE_NOTARIZATION_ISSUER_ID" >> $GITHUB_ENV
           echo "APPLE_NOTARIZATION_KEY_ID=$APPLE_NOTARIZATION_KEY_ID" >> $GITHUB_ENV
+
       - name: Enable PKGs (macOS)
         if: startsWith(matrix.TARGET_PLATFORM, 'osx-')
         run: |
