@@ -74,7 +74,7 @@ jobs:
         if: ${{ ! contains(matrix.OS_NAME, 'Linux') }}
 
       - name: Prepare certificates (macOS)
-        if: contains(matrix.OS_NAME, 'MacOSX') && github.event_name != 'pull_request'
+        if: startsWith(matrix.TARGET_PLATFORM, 'osx-') && github.event_name != 'pull_request'
         env:
           APPLE_INSTALLER_CERTIFICATE_BASE64: ${{ secrets.MACOS_CERTIFICATE_INSTALLER_BASE64 }}
           APPLE_INSTALLER_CERTIFICATE_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_INSTALLER_PASSWORD }}
