@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
-# This script takes a macOS installer package (.pkg) and notarizes it.
+# This script takes a macOS installer package (.pkg) and notarizes + staples it.
 # It expects the following environment variables to be set:
-# APPLE_NOTARIZATION_USERNAME: Apple ID username
-# APPLE_NOTARIZATION_PASSWORD: Apple ID password
-# APPLE_NOTARIZATION_TEAM_ID: Apple ID team identifier
+# APPLE_NOTARIZATION_ISSUER_ID: Apple App Store Connect team identifier
+# APPLE_NOTARIZATION_KEY_ID: Apple App Store Connect API key identifier
+# APPLE_NOTARIZATION_AUTHKEY_PATH: Apple App Store Connect API AuthKey .p8 file path
+# These can be obtained in https://appstoreconnect.apple.com/access/users > Integrations
 
 set -euxo pipefail
 
@@ -40,18 +41,18 @@ if ! command -v stapler >/dev/null; then
     exit 1
 fi
 
-if [ -z "${APPLE_NOTARIZATION_USERNAME:-}" ]; then
-    echo "Error: APPLE_NOTARIZATION_USERNAME is not set"
+if [ -z "${APPLE_NOTARIZATION_AUTHKEY_PATH:-}" ]; then
+    echo "Error: APPLE_NOTARIZATION_AUTHKEY_PATH is not set"
     exit 1
 fi
 
-if [ -z "${APPLE_NOTARIZATION_PASSWORD:-}" ]; then
-    echo "Error: APPLE_NOTARIZATION_USERNAME is not set"
+if [ -z "${APPLE_NOTARIZATION_KEY_ID:-}" ]; then
+    echo "Error: APPLE_NOTARIZATION_KEY_ID is not set"
     exit 1
 fi
 
-if [ -z "${APPLE_NOTARIZATION_TEAM_ID:-}" ]; then
-    echo "Error: APPLE_NOTARIZATION_USERNAME is not set"
+if [ -z "${APPLE_NOTARIZATION_ISSUER_ID:-}" ]; then
+    echo "Error: APPLE_NOTARIZATION_ISSUER_ID is not set"
     exit 1
 fi
 
@@ -63,9 +64,9 @@ tmp_output_dir=$(mktemp -d)
 json_output_file="${tmp_output_dir}/$(basename "$INSTALLER_PATH").notarization.json"
 set +e
 xcrun notarytool submit "$INSTALLER_PATH" \
-    --apple-id "$APPLE_NOTARIZATION_USERNAME" \
-    --password "$APPLE_NOTARIZATION_PASSWORD" \
-    --team-id "$APPLE_NOTARIZATION_TEAM_ID" \
+    --key "$APPLE_NOTARIZATION_AUTHKEY_PATH" \
+    --key-id "$APPLE_NOTARIZATION_KEY_ID" \
+    --issuer "$APPLE_NOTARIZATION_ISSUER_ID" \
     --output-format json \
     --wait \
     --timeout 30m \
@@ -75,9 +76,9 @@ set -e
 if [[ $notary_exit_code != 0 ]]; then
     submission_id=$(jq -r '.id' "$json_output_file")
     xcrun notarytool log "$submission_id" \
-        --apple-id "$APPLE_NOTARIZATION_USERNAME" \
-        --password "$APPLE_NOTARIZATION_PASSWORD" \
-        --team-id "$APPLE_NOTARIZATION_TEAM_ID"
+        --key "$APPLE_NOTARIZATION_AUTHKEY_PATH" \
+        --key-id "$APPLE_NOTARIZATION_KEY_ID" \
+        --issuer "$APPLE_NOTARIZATION_ISSUER_ID"
     exit $notary_exit_code
 fi
 
