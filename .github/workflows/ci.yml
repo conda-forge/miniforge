@@ -134,6 +134,7 @@ jobs:
           cp build/Miniforge3-*-$OS_NAME-$ARCH.$EXT build/Miniforge3-$OS_NAME-$ARCH.$EXT
           if [[ "$OS_NAME" == "MacOSX" ]]; then
             cp build/Miniforge3-*-$OS_NAME-$ARCH.$EXT build/Miniforge3-Darwin-$ARCH.$EXT
+            cp build/Miniforge3-*-$OS_NAME-$ARCH.pkg build/Miniforge3-Darwin-$ARCH.pkg
           fi
           ls -alh build
         shell: bash
