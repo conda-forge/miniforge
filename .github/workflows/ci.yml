@@ -103,6 +103,7 @@ jobs:
           DOCKER_ARCH: ${{ matrix.DOCKER_ARCH }}
           TARGET_PLATFORM: ${{ matrix.TARGET_PLATFORM }}
           TEST_IMAGE_NAMES: ${{ matrix.TEST_IMAGE_NAMES }}
+          MINIFORGE_INSTALLER_TYPE: ${{ startsWith(matrix.TARGET_PLATFORM, 'osx-') && 'all' }}
         run: |
           if [[ "$GITHUB_REF" == refs/tags/* ]]; then
             export MINIFORGE_VERSION=${GITHUB_REF##*/};

@@ -51,8 +51,8 @@ virtual_specs:
   - __glibc >=2.17 # [linux]
   - __osx >=10.13 # [osx]
 
-installer_type: {{ os.environ.get("MACOS_INSTALLER_TYPE", "sh") }}  # [unix]
-installer_type: {{ os.environ.get("MACOS_INSTALLER_TYPE", "exe") }}  # [win]
+installer_type: {{ os.environ.get("MINIFORGE_INSTALLER_TYPE", "sh") }}  # [unix]
+installer_type: {{ os.environ.get("MINIFORGE_INSTALLER_TYPE", "exe") }}  # [win]
 
 # macOS PKG options
 welcome_image: osx_pkg_background.png  # [osx]

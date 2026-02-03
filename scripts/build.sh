@@ -79,7 +79,11 @@ ls -alh
 if [[ "$(uname)" == MINGW* ]]; then
    EXTS=("exe");
 elif [[ "$(uname)" == Darwin ]]; then
-   EXTS=("sh" "pkg");
+   if [[ "$MINIFORGE_INSTALLER_TYPE" == "all" ]]; then
+      EXTS=("sh" "pkg");
+   else
+      EXTS=("${MINIFORGE_INSTALLER_TYPE:-sh}")
+   fi
 else
    EXTS=("sh");
 fi
