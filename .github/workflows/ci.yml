@@ -93,7 +93,9 @@ jobs:
           echo "APPLE_NOTARIZATION_IDENTITY=$APPLE_NOTARIZATION_IDENTITY" >> $GITHUB_ENV
           echo "APPLE_NOTARIZATION_ISSUER_ID=$APPLE_NOTARIZATION_ISSUER_ID" >> $GITHUB_ENV
           echo "APPLE_NOTARIZATION_KEY_ID=$APPLE_NOTARIZATION_KEY_ID" >> $GITHUB_ENV
-          
+      - name: Enable PKGs (macOS)
+        if: startsWith(matrix.TARGET_PLATFORM, 'osx-')
+        run: |
           # This env var is read in construct.yaml; we need 'all' to build both SH and PKG
           echo "MINIFORGE_INSTALLER_TYPE=all" >> $GITHUB_ENV
 
