@@ -6,6 +6,7 @@ env | sort
 
 echo "***** Start: Building Miniforge installer(s) *****"
 CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-${PWD}}"
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 cd "${CONSTRUCT_ROOT}"
 
@@ -95,7 +96,7 @@ for EXT in "${EXTS[@]}"; do
    if [[ "${EXT}" == "pkg" && -n "${APPLE_NOTARIZATION_KEY_ID:-}" ]]; then
       # notarize the PKG installer
       echo ""***** Notarizing the PKG installer "*****"
-      scripts/notarize_osx_pkg.sh "${INSTALLER_PATH}"
+      "$SCRIPT_DIR/notarize_osx_pkg.sh" "${INSTALLER_PATH}"
    fi
    
    HASH_PATH="${INSTALLER_PATH}.sha256"
