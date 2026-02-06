@@ -63,5 +63,9 @@ readme_text: ""  # [osx]
 conclusion_text: ""  # [osx]
 
 # Signing settings will be added by CI
-signing_identity_name: "{{ os.environ.get("APPLE_SIGNING_IDENTITY", "") }}"
-notarization_identity_name: "{{ os.environ.get("APPLE_NOTARIZATION_IDENTITY", "") }}"
+{%- if os.environ.get("APPLE_SIGNING_IDENTITY") %}
+signing_identity_name: "{{ os.environ["APPLE_SIGNING_IDENTITY"] }}"
+{%- endif %}
+{%- if os.environ.get("APPLE_NOTARIZATION_IDENTITY") %}
+notarization_identity_name: "{{ os.environ["APPLE_NOTARIZATION_IDENTITY"] }}"
+{%- endif %}
