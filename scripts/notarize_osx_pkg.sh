@@ -9,7 +9,7 @@
 
 set -euxo pipefail
 
-if [ -n "$1" ]; then
+if [ -z "${1:-}" ]; then
     echo "Usage: $0 <installer.pkg>"
     exit 1
 else
