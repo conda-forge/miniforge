@@ -96,7 +96,7 @@ for EXT in "${EXTS[@]}"; do
    if [[ "${EXT}" == "pkg" && -n "${APPLE_NOTARIZATION_KEY_ID:-}" ]]; then
       # notarize the PKG installer
       echo ""***** Notarizing the PKG installer "*****"
-      "$SCRIPT_DIR/notarize_osx_pkg.sh" "${INSTALLER_PATH}"
+      bash "$SCRIPT_DIR/notarize_osx_pkg.sh" "${INSTALLER_PATH}"
    fi
    
    HASH_PATH="${INSTALLER_PATH}.sha256"
