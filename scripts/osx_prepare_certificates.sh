@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euxo pipefail
+
 # Import AppleID certificates on macOS
 # This script is used to import the AppleID certificates into the keychain
 # It expects the following environment variables to be set:
