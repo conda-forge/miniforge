@@ -74,8 +74,7 @@ jobs:
         if: ${{ ! contains(matrix.OS_NAME, 'Linux') }}
 
       - name: Prepare certificates (macOS)
-        if: startsWith(matrix.TARGET_PLATFORM, 'osx-')
-        # && github.event_name != 'pull_request'
+        if: startsWith(matrix.TARGET_PLATFORM, 'osx-') && github.event_name != 'pull_request'
         env:
           APPLE_INSTALLER_CERTIFICATE_BASE64: ${{ secrets.MACOS_CERTIFICATE_INSTALLER_BASE64 }}
           APPLE_INSTALLER_CERTIFICATE_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_INSTALLER_PASSWORD }}
@@ -98,6 +97,7 @@ jobs:
           echo "APPLE_NOTARIZATION_IDENTITY=$APPLE_NOTARIZATION_IDENTITY" >> $GITHUB_ENV
           echo "APPLE_NOTARIZATION_ISSUER_ID=$APPLE_NOTARIZATION_ISSUER_ID" >> $GITHUB_ENV
           echo "APPLE_NOTARIZATION_KEY_ID=$APPLE_NOTARIZATION_KEY_ID" >> $GITHUB_ENV
+          echo "APPLE_NOTARIZATION_AUTHKEY_PATH=$APPLE_NOTARIZATION_AUTHKEY_PATH" >> $GITHUB_ENV
 
       - name: Enable PKGs (macOS)
         if: startsWith(matrix.TARGET_PLATFORM, 'osx-')
