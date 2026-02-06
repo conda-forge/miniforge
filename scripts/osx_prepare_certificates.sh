@@ -8,7 +8,7 @@ set -euxo pipefail
 # - APPLE_INSTALLER_CERTIFICATE_BASE64: base64 encoded certificate
 # - APPLE_INSTALLER_CERTIFICATE_PASSWORD: password for the certificate
 # - APPLE_APPLICATION_CERTIFICATE_BASE64: base64 encoded certificate
-# - APPLE_APPLIATION_CERTIFICATE_PASSWORD: password for the certificate
+# - APPLE_APPLICATION_CERTIFICATE_PASSWORD: password for the certificate
 # - APPLE_NOTARIZATION_AUTHKEY_BASE64: base64 encoded AppStore Connect API authkey (.p8)
 # - APPLE_TEMP_KEYCHAIN_PASSWORD: user-generated password for the temporary keychain
 # Certificates can be generated at https://developer.apple.com/account/resources/certificates/list
@@ -32,7 +32,7 @@ security unlock-keychain -p "${APPLE_TEMP_KEYCHAIN_PASSWORD}" "$KEYCHAIN_PATH"
 
 # import certificate to keychain
 security import "$INSTALLER_CERTIFICATE_PATH" -P "${APPLE_INSTALLER_CERTIFICATE_PASSWORD}" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
-security import "$APPLICATION_CERTIFICATE_PATH" -P "${APPLE_INSTALLER_CERTIFICATE_PASSWORD}" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
+security import "$APPLICATION_CERTIFICATE_PATH" -P "${APPLE_APPLICATION_CERTIFICATE_PASSWORD}" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
 security list-keychain -d user -s "$KEYCHAIN_PATH"
 
 # export identity name to construct.yaml
