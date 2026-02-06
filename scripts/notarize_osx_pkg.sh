@@ -21,7 +21,7 @@ if [ ! -f "$INSTALLER_PATH" ]; then
     exit 1
 fi
 
-if [ "$(basename "$INSTALLER_PATH")" != "*.pkg" ]; then
+if [[ "$(basename "$INSTALLER_PATH")" != *.pkg ]]; then
     echo "Error: $INSTALLER_PATH is not a .pkg file"
     exit 1
 fi
