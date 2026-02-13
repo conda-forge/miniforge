@@ -50,3 +50,22 @@ specs:
 virtual_specs:
   - __glibc >=2.17 # [linux]
   - __osx >=10.13 # [osx]
+
+installer_type: {{ os.environ.get("MINIFORGE_INSTALLER_TYPE", "sh") }}  # [unix]
+installer_type: {{ os.environ.get("MINIFORGE_INSTALLER_TYPE", "exe") }}  # [win]
+
+# macOS PKG options
+welcome_image: osx_pkg_background.png  # [osx]
+# Reset everything to system default (no Anaconda stuff)
+# We can customize it if needed
+welcome_text: ""  # [osx]
+readme_text: ""  # [osx]
+conclusion_text: ""  # [osx]
+
+# Signing settings will be added by CI
+{%- if os.environ.get("APPLE_SIGNING_IDENTITY") %}
+signing_identity_name: "{{ os.environ["APPLE_SIGNING_IDENTITY"] }}"
+{%- endif %}
+{%- if os.environ.get("APPLE_NOTARIZATION_IDENTITY") %}
+notarization_identity_name: "{{ os.environ["APPLE_NOTARIZATION_IDENTITY"] }}"
+{%- endif %}

@@ -1,5 +1,13 @@
 name: Build miniforge
-on: [ push, pull_request ]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -65,6 +73,38 @@ jobs:
           use-mamba: true
         if: ${{ ! contains(matrix.OS_NAME, 'Linux') }}
 
+      - name: Prepare certificates (macOS)
+        if: startsWith(matrix.TARGET_PLATFORM, 'osx-') && github.event_name != 'pull_request'
+        env:
+          APPLE_INSTALLER_CERTIFICATE_BASE64: ${{ secrets.MACOS_CERTIFICATE_INSTALLER_BASE64 }}
+          APPLE_INSTALLER_CERTIFICATE_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_INSTALLER_PASSWORD }}
+          APPLE_APPLICATION_CERTIFICATE_BASE64: ${{ secrets.MACOS_CERTIFICATE_APPLICATION_BASE64 }}
+          APPLE_APPLICATION_CERTIFICATE_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_APPLICATION_PASSWORD }}
+          APPLE_TEMP_KEYCHAIN_PASSWORD: ${{ secrets.MACOS_TEMP_KEYCHAIN_PASSWORD }}
+          APPLE_NOTARIZATION_ISSUER_ID: ${{ secrets.MACOS_NOTARIZATION_ISSUER_ID }}
+          APPLE_NOTARIZATION_KEY_ID: ${{ secrets.MACOS_NOTARIZATION_KEY_ID }}
+          APPLE_NOTARIZATION_AUTHKEY_BASE64: ${{ secrets.MACOS_NOTARIZATION_AUTHKEY_BASE64 }}
+        run: |
+          if [[ "${APPLE_NOTARIZATION_KEY_ID:-}" == "" ]]; then
+            exit 0  # skip if secrets are not populated
+          fi
+
+          # This script will export APPLE_SIGNING_IDENTITY and APPLE_NOTARIZATION_IDENTITY
+          source scripts/osx_prepare_certificates.sh
+
+          # These will be needed by the build.sh script
+          echo "APPLE_SIGNING_IDENTITY=$APPLE_SIGNING_IDENTITY" >> $GITHUB_ENV
+          echo "APPLE_NOTARIZATION_IDENTITY=$APPLE_NOTARIZATION_IDENTITY" >> $GITHUB_ENV
+          echo "APPLE_NOTARIZATION_ISSUER_ID=$APPLE_NOTARIZATION_ISSUER_ID" >> $GITHUB_ENV
+          echo "APPLE_NOTARIZATION_KEY_ID=$APPLE_NOTARIZATION_KEY_ID" >> $GITHUB_ENV
+          echo "APPLE_NOTARIZATION_AUTHKEY_PATH=$APPLE_NOTARIZATION_AUTHKEY_PATH" >> $GITHUB_ENV
+
+      - name: Enable PKGs (macOS)
+        if: startsWith(matrix.TARGET_PLATFORM, 'osx-')
+        run: |
+          # This env var is read in construct.yaml; we need 'all' to build both SH and PKG
+          echo "MINIFORGE_INSTALLER_TYPE=all" >> $GITHUB_ENV
+
       - name: Build and test miniforge
         env:
           ARCH: ${{ matrix.ARCH }}
@@ -94,7 +134,10 @@ jobs:
           # Copy for latest release
           cp build/Miniforge3-*-$OS_NAME-$ARCH.$EXT build/Miniforge3-$OS_NAME-$ARCH.$EXT
           if [[ "$OS_NAME" == "MacOSX" ]]; then
+            # Copy PKGs too, and alias -MacOSX- to -Darwin-
             cp build/Miniforge3-*-$OS_NAME-$ARCH.$EXT build/Miniforge3-Darwin-$ARCH.$EXT
+            cp build/Miniforge3-*-$OS_NAME-$ARCH.pkg build/Miniforge3-$OS_NAME-$ARCH.pkg
+            cp build/Miniforge3-*-$OS_NAME-$ARCH.pkg build/Miniforge3-Darwin-$ARCH.pkg
           fi
           ls -alh build
         shell: bash

@@ -82,14 +82,14 @@ on Windows, edit with `notepad $PROFILE`) the activation command.
 
 Latest installers with Python 3.12 `(*)` in the base environment:
 
-| OS      | Architecture                  | Minimum Version | File                            |
-| ------- | ----------------------------- | --------------- | ------------------------------- |
-| Linux   | x86_64 (amd64)                | glibc >= 2.17   | `Miniforge3-Linux-x86_64.sh`    |
-| Linux   | aarch64 (arm64) `(**)`        | glibc >= 2.17   | `Miniforge3-Linux-aarch64.sh`   |
-| Linux   | ppc64le (POWER8/9)            | glibc >= 2.17   | `Miniforge3-Linux-ppc64le.sh`   |
-| macOS   | x86_64                        | macOS >= 10.13  | `Miniforge3-MacOSX-x86_64.sh`   |
-| macOS   | arm64 (Apple Silicon) `(***)` | macOS >= 11.0   | `Miniforge3-MacOSX-arm64.sh`    |
-| Windows | x86_64 `(****)`               | Windows >= 10    | `Miniforge3-Windows-x86_64.exe` |
+| OS      | Architecture                  | Minimum Version | File                                |
+| ------- | ----------------------------- | --------------- | ----------------------------------- |
+| Linux   | x86_64 (amd64)                | glibc >= 2.17   | `Miniforge3-Linux-x86_64.sh`        |
+| Linux   | aarch64 (arm64) `(**)`        | glibc >= 2.17   | `Miniforge3-Linux-aarch64.sh`       |
+| Linux   | ppc64le (POWER8/9)            | glibc >= 2.17   | `Miniforge3-Linux-ppc64le.sh`       |
+| macOS   | x86_64                        | macOS >= 10.13  | `Miniforge3-MacOSX-x86_64.{sh,pkg}` |
+| macOS   | arm64 (Apple Silicon) `(***)` | macOS >= 11.0   | `Miniforge3-MacOSX-arm64.{sh,pkg}`  |
+| Windows | x86_64 `(****)`               | Windows >= 10   | `Miniforge3-Windows-x86_64.exe`     |
 
 `(*)` The Python version is specific only to the base environment. Conda can create new environments with different Python versions and implementations.
 
@@ -122,12 +122,12 @@ If you require conda to be accessible to other software,
 you may consider the option to "Add Miniforge3 to my PATH environment variable".
 The latter is not selected by default due to the potential of serious conflicts
 with other software. See https://github.com/conda-forge/miniforge/issues/520 and
-https://github.com/conda-forge/miniforge/issues/453
+https://github.com/conda-forge/miniforge/issues/453.
 
 There are known issues with the usage of special characters and spaces in
 the installation location, see for example
 https://github.com/conda-forge/miniforge/issues/484 and
-https://github.com/conda-forge/miniforge/issues/593 .
+https://github.com/conda-forge/miniforge/issues/593.
 We recommend users install in a directory without any such characters in the name.
 
 For non-interactive usage one can use the batch install option:
@@ -175,6 +175,20 @@ In non-interactive installations, the conda initialization commands will not be 
 
 Note that Miniforge has been repacked by other package managers such as [Homebrew](https://brew.sh/)(https://formulae.brew.sh/cask/miniforge).
 However this can lead to many incompatibilities that we do not test for. As such, we do not recommend using Homebrew to install Miniforge.
+
+### macOS (PKG installers)
+
+PKG installers are available for macOS as of 2026. They are signed and notarized with NumFOCUS certificates.
+Download and execute [the PKG installer for Apple Silicon](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.exe).
+or [Intel](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-x86_64.exe),
+and follow the steps on screen by pressing Continue.
+
+By the 4th screen, you can choose a different installation path by clicking on "Change Install Location".
+Other options may be available behind the "Customise" button.
+
+Once ready, click on Install. If everything went according to plan, the Summary page will report success.
+
+For unattended installs, please use the SH installers mentioned in the section above.
 
 ### As part of a CI pipeline
 
@@ -241,12 +255,12 @@ conda init --reverse
 2. Remove the folder and all subfolders where the base environment for Miniforge was installed:
 
 ```sh
-CONDA_BASE_ENVIRONMENT=$(conda info --base)
-echo The next command will delete all files in ${CONDA_BASE_ENVIRONMENT}
+CONDA_BASE_ENVIRONMENT="$(conda info --base)"
+echo The next command will delete all files in "${CONDA_BASE_ENVIRONMENT}"
 # Warning, the rm command below is irreversible!
 # check the output of the echo command above
 # To make sure you are deleting the correct directory
-rm -rf ${CONDA_BASE_ENVIRONMENT}
+rm -rf "${CONDA_BASE_ENVIRONMENT}"
 ```
 
 3. Any global conda configuration files that are left behind.
@@ -255,7 +269,7 @@ rm -rf ${CONDA_BASE_ENVIRONMENT}
 echo ${HOME}/.condarc will be removed if it exists
 rm -f "${HOME}/.condarc"
 echo ${HOME}/.conda and underlying files will be removed if they exist.
-rm -fr ${HOME}/.conda
+rm -fr "${HOME}/.conda"
 ```
 
 
