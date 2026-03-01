@@ -101,13 +101,13 @@ jobs:
 
       - name: Upload miniforge to Github artifact
         if: always()
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
           path: build/Miniforge3-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}*
           name: Miniforge3-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
 
       - name: Upload miniforge to release
-        uses: svenstaro/upload-release-action@6b7fa9f267e90b50a19fef07b3596790bb941741 # v2.11.3
+        uses: svenstaro/upload-release-action@b98a3b12e86552593f3e4e577ca8a62aa2f3f22b # v2.11.4
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: build/M*forge*
