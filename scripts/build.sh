@@ -4,8 +4,9 @@ set -xe
 
 env | sort
 
-echo "***** Start: Building Miniforge installer *****"
+echo "***** Start: Building Miniforge installer(s) *****"
 CONSTRUCT_ROOT="${CONSTRUCT_ROOT:-${PWD}}"
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 cd "${CONSTRUCT_ROOT}"
 
@@ -66,7 +67,7 @@ elif [[ "${TARGET_PLATFORM}" == osx-arm64 ]]; then
     export CONDA_OVERRIDE_OSX=11.0
 fi
 
-echo "***** Construct the installer *****"
+echo "***** Construct the installer(s) *****"
 # Transmutation requires the current directory is writable
 cd "${TEMP_DIR}"
 # shellcheck disable=SC2086
@@ -77,24 +78,41 @@ echo "***** Generate installer hash *****"
 cd "${TEMP_DIR}"
 ls -alh
 if [[ "$(uname)" == MINGW* ]]; then
-   EXT="exe";
+   EXTS=("exe");
+elif [[ "$(uname)" == Darwin ]]; then
+   if [[ "$MINIFORGE_INSTALLER_TYPE" == "all" ]]; then
+      EXTS=("sh" "pkg");
+   else
+      EXTS=("${MINIFORGE_INSTALLER_TYPE:-sh}")
+   fi
 else
-   EXT="sh";
+   EXTS=("sh");
 fi
-# This line will break if there is more than one installer in the folder.
-INSTALLER_PATH=$(find . -name "M*forge*.${EXT}" | head -n 1)
-HASH_PATH="${INSTALLER_PATH}.sha256"
-sha256sum "${INSTALLER_PATH}" > "${HASH_PATH}"
 
-echo "***** Move installer and hash to build folder *****"
-mkdir -p "${CONSTRUCT_ROOT}/build"
-mv "${INSTALLER_PATH}" "${CONSTRUCT_ROOT}/build/"
-mv "${HASH_PATH}" "${CONSTRUCT_ROOT}/build/"
+for EXT in "${EXTS[@]}"; do
+   # This line will break if there is more than one installer with extension $EXT in the folder.
+   INSTALLER_PATH=$(find . -name "M*forge*.${EXT}" | head -n 1)
 
-echo "***** Done: Building Miniforge installer *****"
+   if [[ "${EXT}" == "pkg" && -n "${APPLE_NOTARIZATION_KEY_ID:-}" ]]; then
+      # notarize the PKG installer
+      echo "***** Notarizing the PKG installer *****"
+      bash "$SCRIPT_DIR/notarize_osx_pkg.sh" "${INSTALLER_PATH}"
+   fi
+   
+   HASH_PATH="${INSTALLER_PATH}.sha256"
+   sha256sum "${INSTALLER_PATH}" > "${HASH_PATH}"
+
+   echo "***** Move .$EXT installer and hash to build folder *****"
+   mkdir -p "${CONSTRUCT_ROOT}/build"
+   mv "${INSTALLER_PATH}" "${CONSTRUCT_ROOT}/build/"
+   mv "${HASH_PATH}" "${CONSTRUCT_ROOT}/build/"
+
+   # copy the installer for latest
+   if [[ "${MINIFORGE_NAME:-}" != "" && "${OS_NAME:-}" != "" && "${ARCH:-}" != "" ]]; then
+      cp "${CONSTRUCT_ROOT}/build/${MINIFORGE_NAME}-"*"-${OS_NAME}-${ARCH}.${EXT}" "${CONSTRUCT_ROOT}/build/${MINIFORGE_NAME}-${OS_NAME}-${ARCH}.${EXT}"
+   fi
+done
+
 cd "${CONSTRUCT_ROOT}"
 
-# copy the installer for latest
-if [[ "${OS_NAME:-}" != "" && "${ARCH:-}" != "" ]]; then
-  cp "${CONSTRUCT_ROOT}/build/Miniforge3-"*"-${OS_NAME}-${ARCH}.${EXT}" "${CONSTRUCT_ROOT}/build/Miniforge3-${OS_NAME}-${ARCH}.${EXT}"
-fi
+echo "***** Done: Building Miniforge installer(s) *****"
