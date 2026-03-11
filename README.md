@@ -179,8 +179,8 @@ However this can lead to many incompatibilities that we do not test for. As such
 ### macOS (PKG installers)
 
 PKG installers are available for macOS as of 2026. They are signed and notarized with NumFOCUS certificates.
-Download and execute [the PKG installer for Apple Silicon](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.exe).
-or [Intel](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-x86_64.exe),
+Download and execute [the PKG installer for Apple Silicon](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.pkg).
+or [Intel](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-x86_64.pkg),
 and follow the steps on screen by pressing Continue.
 
 By the 4th screen, you can choose a different installation path by clicking on "Change Install Location".
