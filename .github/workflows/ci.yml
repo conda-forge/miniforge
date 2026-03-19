@@ -1,9 +1,5 @@
 name: Build miniforge
-on:
-  push:
-    branches:
-      - main
-  pull_request:
+on: [ push, pull_request ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
