@@ -16,7 +16,7 @@ MINIFORGE_CHANNEL_NAME="${MINIFORGE_CHANNEL_NAME:-conda-forge}"
 mamba install --yes \
     --channel "${MINIFORGE_CHANNEL_NAME}" --override-channels \
     jinja2 curl libarchive \
-    "constructor>=3.14.0"
+    "constructor>=3.15.0"
 
 if [[ "$(uname)" == "Darwin" ]]; then
     mamba install --yes \
@@ -98,7 +98,7 @@ for EXT in "${EXTS[@]}"; do
       echo "***** Notarizing the PKG installer *****"
       bash "$SCRIPT_DIR/notarize_osx_pkg.sh" "${INSTALLER_PATH}"
    fi
-   
+
    HASH_PATH="${INSTALLER_PATH}.sha256"
    sha256sum "${INSTALLER_PATH}" > "${HASH_PATH}"
 
