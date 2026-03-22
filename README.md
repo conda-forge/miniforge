@@ -384,7 +384,8 @@ To release a new version of Miniforge:
     1. One installer with the version name
     2. One installer without the version name
     3. The SHA256
-  - At the time of writing, the is a sum of 72 artifacts, and with the two sources, we expect a grand total of 74 artifacts.
+  - For OSX we also have one pkg installer for each architecture, with the 2 OSX names.
+  - At the time of writing, the is a sum of 28 artifacts, and with the two sources, we expect a grand total of 30 artifacts.
 - Mark the pre-release as a release
 
 NOTE: using a pre-release is important to make sure the latest links work.
