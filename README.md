@@ -80,7 +80,7 @@ on Windows, edit with `notepad $PROFILE`) the activation command.
 
 ## Requirements and installers
 
-Latest installers with Python 3.12 `(*)` in the base environment:
+Latest installers with Python 3.13 `(*)` in the base environment:
 
 | OS      | Architecture                  | Minimum Version | File                                |
 | ------- | ----------------------------- | --------------- | ----------------------------------- |
