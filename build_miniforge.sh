@@ -29,7 +29,7 @@ docker run --privileged --rm tonistiigi/binfmt --install all
 
 echo "============= Build the installer ============="
 docker run --rm -v "$(pwd):/construct" \
-  -e CONSTRUCT_ROOT -e MINIFORGE_VERSION -e TARGET_PLATFORM -e MINIFORGE_LICENSE_OVERRIDE \
+  -e CONSTRUCT_ROOT -e MINIFORGE_VERSION -e TARGET_PLATFORM -e MINIFORGE_LICENSE_OVERRIDE -e MICROMAMBA_SOURCE_URL \
   "${DOCKERIMAGE}" /construct/scripts/build.sh
 
 echo "============= Test the installer ============="
