@@ -103,7 +103,7 @@ echo "***** Python path *****"
 python -c "import sys; print(sys.executable)"
 python -c "import sys; assert 'miniforge' in sys.executable"
 
-echo "***** Print system informations from Python *****"
+echo "***** Print system information from Python *****"
 python -c "print('Hello Miniforge !')"
 python -c "import platform; print(platform.architecture())"
 python -c "import platform; print(platform.system())"
