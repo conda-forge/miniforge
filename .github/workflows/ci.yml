@@ -41,6 +41,19 @@ jobs:
             TEST_IMAGE_NAMES: "ubuntu:24.04"
 
           - os: ubuntu-latest
+            ARCH: riscv64
+            TARGET_PLATFORM: linux-riscv64
+            DOCKER_ARCH: amd64
+            DOCKERIMAGE: condaforge/linux-anvil-x86_64:alma10
+            OS_NAME: "Linux"
+            # Reduce the test matrix because the builds timeouts on emulated architectures
+            # The time consuming operation is an attempt a full solve of conda/mamba/boa
+            # for as a compatibility
+            # xref https://github.com/conda-forge/miniforge/pull/361
+            TEST_IMAGE_NAMES: "ubuntu:24.04"
+            MICROMAMBA_SOURCE_URL: "https://github.com/riseproject-dev/micromamba-releases-mirror/releases/download/2.3.3-1/micromamba-2.3.3-1.tar.bz2"
+
+          - os: ubuntu-latest
             ARCH: x86_64
             TARGET_PLATFORM: linux-64
             DOCKER_ARCH: amd64
@@ -109,6 +122,7 @@ jobs:
           DOCKER_ARCH: ${{ matrix.DOCKER_ARCH }}
           TARGET_PLATFORM: ${{ matrix.TARGET_PLATFORM }}
           TEST_IMAGE_NAMES: ${{ matrix.TEST_IMAGE_NAMES }}
+          MICROMAMBA_SOURCE_URL: ${{ matrix.MICROMAMBA_SOURCE_URL || '' }}
         run: |
           if [[ "$GITHUB_REF" == refs/tags/* ]]; then
             export MINIFORGE_VERSION=${GITHUB_REF##*/};

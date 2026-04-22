@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Build miniforge installers for Linux
-# on various architectures (aarch64, x86_64, ppc64le)
+# on various architectures (aarch64, x86_64, ppc64le, riscv64)
 # Notes:
 # It uses the qemu emulator (see [1] or [2]) to enable
 # the use of containers images with different architectures than the host
@@ -29,7 +29,7 @@ docker run --privileged --rm tonistiigi/binfmt --install all
 
 echo "============= Build the installer ============="
 docker run --rm -v "$(pwd):/construct" \
-  -e CONSTRUCT_ROOT -e MINIFORGE_VERSION -e TARGET_PLATFORM -e MINIFORGE_LICENSE_OVERRIDE \
+  -e CONSTRUCT_ROOT -e MINIFORGE_VERSION -e TARGET_PLATFORM -e MINIFORGE_LICENSE_OVERRIDE -e MICROMAMBA_SOURCE_URL \
   "${DOCKERIMAGE}" /construct/scripts/build.sh
 
 echo "============= Test the installer ============="
