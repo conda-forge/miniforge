@@ -145,7 +145,7 @@ jobs:
         shell: bash
 
       - name: Azure login (Windows)
-        if: startsWith(matrix.TARGET_PLATFORM, 'win-') 
+        if: startsWith(matrix.TARGET_PLATFORM, 'win-')
           # && github.event_name != 'pull_request'
           # && startsWith(github.ref, 'refs/tags/')
         uses: azure/login@532459ea530d8321f2fb9bb10d1e0bcf23869a43 # v3.0.0
@@ -159,7 +159,7 @@ jobs:
             }
 
       - name: Sign files with Artifact Signing (Windows)
-        if: startsWith(matrix.TARGET_PLATFORM, 'win-') 
+        if: startsWith(matrix.TARGET_PLATFORM, 'win-')
           # && github.event_name != 'pull_request'
           # && startsWith(github.ref, 'refs/tags/')
         uses: azure/artifact-signing-action@b443cf8ea4124818d2ea9f043cba29fc3ec47b16 # v1.2.0
@@ -173,37 +173,12 @@ jobs:
           timestamp-rfc3161: http://timestamp.acs.microsoft.com
           timestamp-digest: SHA256
 
-      - name: Verify signatures (Windows)
-        if: startsWith(matrix.TARGET_PLATFORM, 'win-') 
+      - name: Verify signatures and checksums (Windows)
+        if: startsWith(matrix.TARGET_PLATFORM, 'win-')
           # && github.event_name != 'pull_request'
           # && startsWith(github.ref, 'refs/tags/')
         shell: pwsh
-        run: |
-          $exitCode = 0
-          foreach ($executable in (Get-ChildItem "build/*.exe")) {
-            Write-Host "******************************************"
-            Write-Host $executable.Name
-            Write-Host "******************************************"
-            $sig = Get-AuthenticodeSignature -FilePath $executable.FullName
-            $sig | Format-List * | Out-String | Write-Host
-            if ($sig.Status -ne 'Valid') {
-              Write-Error "CRITICAL: Signature verification failed for $($executable.Name)!"
-              $exitCode = 1
-            }
-          }
-          exit $exitCode
-
-      - name: Regenerate SHA256 files after signing (Windows)
-        if: startsWith(matrix.TARGET_PLATFORM, 'win-') 
-          # && github.event_name != 'pull_request'
-          # && startsWith(github.ref, 'refs/tags/')
-        shell: pwsh
-        run: |
-          foreach ($executable in (Get-ChildItem "build/*.exe")) {
-            $hashObject = Get-FileHash $executable.FullName
-            "$($hashObject.Hash.ToLower())  $($executable.Name)" | Out-File -FilePath "$($executable.FullName).sha256"
-            Write-Host "SHA256($($executable.Name)): $($hashObject.Hash.ToLower())"
-          }
+        run: ./scripts/verify_signatures_and_checksums.ps1
 
       - name: Upload miniforge to Github artifact
         if: always()
