@@ -157,7 +157,11 @@ jobs:
               "subscriptionId": "${{ secrets.WINDOWS_SIGNING_AZURE_SUBSCRIPTION_ID }}",
               "tenantId": "${{ secrets.WINDOWS_SIGNING_AZURE_TENANT_ID }}"
             }
-
+      
+      # NOTE: Azure Code Signing has a monthly quota. Every time a given file
+      # is signed, it counts as a signature. These certificates are shared with
+      # other NumFOCUS projects, so we only sign final releases. We don't want to
+      # sign on regular PRs CI or upon merges to main. Only releases!
       - name: Sign files with Artifact Signing (Windows)
         if: startsWith(matrix.TARGET_PLATFORM, 'win-')
           # && github.event_name != 'pull_request'
