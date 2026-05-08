@@ -1,5 +1,13 @@
 name: Build docs
-on: [ push, pull_request ]
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '**'
+  pull_request:
+
 jobs:
   docs:
     runs-on: ubuntu-latest
