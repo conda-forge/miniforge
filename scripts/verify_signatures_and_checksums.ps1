@@ -1,12 +1,12 @@
+param (
+    [string]$BuildDir = "build"
+)
+# NOTE: 'param' block MUST always be the first thing on file.
 
 $ErrorActionPreference = "Stop"  # Exit immediately on most errors
 
-param (
-    [string]$buildDir = "build"
-)
-
 $exitCode = 0
-$exeFiles = Get-ChildItem "$buildDir/*.exe"
+$exeFiles = Get-ChildItem "$BuildDir/*.exe"
 
 # Verifies signatures for previously signed EXE files in the build/ directory
 
