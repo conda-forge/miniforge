@@ -144,6 +144,49 @@ jobs:
           ls -alh build
         shell: bash
 
+      - name: Azure login (Windows)
+        if: >-
+          startsWith(matrix.TARGET_PLATFORM, 'win-')
+          && github.event_name != 'pull_request'
+          && startsWith(github.ref, 'refs/tags/')
+        uses: azure/login@532459ea530d8321f2fb9bb10d1e0bcf23869a43 # v3.0.0
+        with:
+          creds: >-
+            {
+              "clientId": "${{ secrets.WINDOWS_SIGNING_AZURE_CLIENT_ID }}",
+              "clientSecret": "${{ secrets.WINDOWS_SIGNING_AZURE_CLIENT_SECRET_VALUE }}",
+              "subscriptionId": "${{ secrets.WINDOWS_SIGNING_AZURE_SUBSCRIPTION_ID }}",
+              "tenantId": "${{ secrets.WINDOWS_SIGNING_AZURE_TENANT_ID }}"
+            }
+      
+      # NOTE: Azure Code Signing has a monthly quota. Every time a given file
+      # is signed, it counts as a signature. These certificates are shared with
+      # other NumFOCUS projects, so we only sign final releases. We don't want to
+      # sign on regular PRs CI or upon merges to main. Only releases!
+      - name: Sign files with Artifact Signing (Windows)
+        if: >- 
+          startsWith(matrix.TARGET_PLATFORM, 'win-')
+          && github.event_name != 'pull_request'
+          && startsWith(github.ref, 'refs/tags/')
+        uses: azure/artifact-signing-action@b443cf8ea4124818d2ea9f043cba29fc3ec47b16 # v1.2.0
+        with:
+          endpoint: ${{ secrets.WINDOWS_SIGNING_ENDPOINT }}
+          signing-account-name: ${{ secrets.WINDOWS_SIGNING_ACCOUNT_NAME }}
+          certificate-profile-name: ${{ secrets.WINDOWS_SIGNING_PROFILE_NAME }}
+          files-folder: ${{ github.workspace }}\build
+          files-folder-filter: exe
+          file-digest: SHA256
+          timestamp-rfc3161: http://timestamp.acs.microsoft.com
+          timestamp-digest: SHA256
+
+      - name: Verify signatures and checksums (Windows)
+        if: >- 
+          startsWith(matrix.TARGET_PLATFORM, 'win-')
+          && github.event_name != 'pull_request'
+          && startsWith(github.ref, 'refs/tags/')
+        shell: pwsh
+        run: ./scripts/verify_signatures_and_checksums.ps1
+
       - name: Upload miniforge to Github artifact
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -159,4 +202,4 @@ jobs:
           tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
-        if: startsWith(github.ref, 'refs/tags/')
+        if: github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/')
