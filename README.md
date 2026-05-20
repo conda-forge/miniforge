@@ -130,7 +130,7 @@ https://github.com/conda-forge/miniforge/issues/484 and
 https://github.com/conda-forge/miniforge/issues/593.
 We recommend users install in a directory without any such characters in the name.
 
-For non-interactive usage one can use the batch install option:
+For non-interactive usage one can use the batch install option[^1]:
 
 ```sh
 start /wait "" Miniforge3-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=%UserProfile%\Miniforge3
@@ -485,3 +485,5 @@ the latest Mambaforge (24.5+) installer from proceeding with following schedule
 You can still find the latest installers in the [24.9.2 release](https://github.com/conda-forge/miniforge/releases/tag/24.9.2-0).
 
 </details>
+
+[^1]: [CLI parameter docs](https://docs.conda.io/projects/conda/en/4.6.1/user-guide/install/windows.html)
