@@ -486,4 +486,4 @@ You can still find the latest installers in the [24.9.2 release](https://github.
 
 </details>
 
-[^1]: [CLI parameter docs](https://docs.conda.io/projects/conda/en/4.6.1/user-guide/install/windows.html)
+[^1]: [CLI parameter docs](https://docs.conda.io/projects/conda/en/latest/user-guide/install/windows.html)
