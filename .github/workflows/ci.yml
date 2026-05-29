@@ -120,28 +120,14 @@ jobs:
             export MINIFORGE_VERSION=${GITHUB_REF##*/};
           fi
           if [[ "$OS_NAME" == "Linux" ]]; then
-            export EXT=sh
             bash build_miniforge.sh;
-          fi
-          if [[ "$OS_NAME" == "MacOSX" ]]; then
-            export EXT=sh
+          elif [[ "$OS_NAME" == "MacOSX" ]]; then
             bash build_miniforge_osx.sh;
-          fi
-          if [[ "$OS_NAME" == "Windows" ]]; then
-            export EXT=exe
+          elif [[ "$OS_NAME" == "Windows" ]]; then
             echo "WINDIR:$WINDIR"
             source "${CONDA}"/Scripts/activate;
             source build_miniforge_win.sh;
           fi
-          # Copy for latest release
-          cp build/Miniforge3-*-$OS_NAME-$ARCH.$EXT build/Miniforge3-$OS_NAME-$ARCH.$EXT
-          if [[ "$OS_NAME" == "MacOSX" ]]; then
-            # Copy PKGs too, and alias -MacOSX- to -Darwin-
-            cp build/Miniforge3-*-$OS_NAME-$ARCH.$EXT build/Miniforge3-Darwin-$ARCH.$EXT
-            cp build/Miniforge3-*-$OS_NAME-$ARCH.pkg build/Miniforge3-$OS_NAME-$ARCH.pkg
-            cp build/Miniforge3-*-$OS_NAME-$ARCH.pkg build/Miniforge3-Darwin-$ARCH.pkg
-          fi
-          ls -alh build
         shell: bash
 
       - name: Azure login (Windows)
@@ -186,6 +172,23 @@ jobs:
           && startsWith(github.ref, 'refs/tags/')
         shell: pwsh
         run: ./scripts/verify_signatures_and_checksums.ps1
+
+      - name: Copy for latest release
+        env:
+          ARCH: ${{ matrix.ARCH }}
+          OS_NAME: ${{ matrix.OS_NAME }}
+          EXT: ${{ matrix.OS_NAME == 'Windows' && 'exe' || 'sh' }}
+        run: |
+          # Copy for latest release
+          cp build/Miniforge3-*-$OS_NAME-$ARCH.$EXT build/Miniforge3-$OS_NAME-$ARCH.$EXT
+          if [[ "$OS_NAME" == "MacOSX" ]]; then
+            # Copy PKGs too, and alias -MacOSX- to -Darwin-
+            cp build/Miniforge3-*-$OS_NAME-$ARCH.$EXT build/Miniforge3-Darwin-$ARCH.$EXT
+            cp build/Miniforge3-*-$OS_NAME-$ARCH.pkg build/Miniforge3-$OS_NAME-$ARCH.pkg
+            cp build/Miniforge3-*-$OS_NAME-$ARCH.pkg build/Miniforge3-Darwin-$ARCH.pkg
+          fi
+          ls -alh build
+        shell: bash
 
       - name: Upload miniforge to Github artifact
         if: always()
