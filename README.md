@@ -184,7 +184,8 @@ or [Intel](https://github.com/conda-forge/miniforge/releases/latest/download/Min
 and follow the steps on screen by pressing Continue.
 
 By the 4th screen, you can choose a different installation path by clicking on "Change Install Location".
-Other options may be available behind the "Customise" button.
+Other options may be available behind the "Customise" button. Importantly, you can choose to have the installer
+perform conda initialization for your shell.
 
 Once ready, click on Install. If everything went according to plan, the Summary page will report success.
 
