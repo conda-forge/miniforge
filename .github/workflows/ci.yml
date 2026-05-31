@@ -206,3 +206,86 @@ jobs:
           overwrite: true
           file_glob: true
         if: github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/')
+
+  # Independent job that proves the *installer itself* provisions the base
+  # environment with no network access. This consumes the artifact built above
+  # (it does not rebuild) and runs the installer with outbound network disabled,
+  # so it would catch regressions like
+  #   https://github.com/conda-forge/miniforge/issues/883
+  # where the bundled mamba/micromamba downloaded the embedded packages instead
+  # of unpacking the embedded payload.
+  test-offline:
+    name: Offline-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
+    needs: build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            ARCH: x86_64
+            OS_NAME: "Linux"
+            DOCKER_ARCH: amd64
+            TEST_IMAGE: "ubuntu:24.04"
+
+          - os: macos-latest
+            ARCH: arm64
+            OS_NAME: "MacOSX"
+
+          - os: windows-latest
+            ARCH: x86_64
+            OS_NAME: "Windows"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Download the built installer
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: Miniforge3-${{ matrix.OS_NAME }}-${{ matrix.ARCH }}
+          path: build
+
+      # Linux: hard network isolation -- the container has only a loopback
+      # interface, so any attempt to reach conda.anaconda.org fails immediately.
+      - name: Run installer with the network fully disabled (Linux)
+        if: matrix.OS_NAME == 'Linux'
+        run: |
+          # Pull the test image while we still have network; `--network none`
+          # below can run a cached image but cannot pull one.
+          docker pull --platform "linux/${{ matrix.DOCKER_ARCH }}" "${{ matrix.TEST_IMAGE }}"
+          docker run --rm --network none \
+            -v "$PWD:/construct" -e CONSTRUCT_ROOT=/construct \
+            --platform "linux/${{ matrix.DOCKER_ARCH }}" "${{ matrix.TEST_IMAGE }}" \
+            /construct/scripts/test_offline.sh
+
+      # macOS has no Docker on the runner, so block the package hosts at the
+      # resolver instead. The runner VM is ephemeral, so there is no need to
+      # restore /etc/hosts afterwards.
+      - name: Block conda package hosts (macOS)
+        if: matrix.OS_NAME == 'MacOSX'
+        run: |
+          for h in conda.anaconda.org repo.anaconda.com anaconda.org prefix.dev repo.prefix.dev; do
+            echo "0.0.0.0 $h" | sudo tee -a /etc/hosts >/dev/null
+          done
+
+      - name: Run installer offline (macOS)
+        if: matrix.OS_NAME == 'MacOSX'
+        run: bash scripts/test_offline.sh
+
+      # Windows has no Docker on the runner either; the runner is admin, so
+      # null-route the package hosts via the hosts file and flush the DNS cache.
+      - name: Block conda package hosts (Windows)
+        if: matrix.OS_NAME == 'Windows'
+        shell: pwsh
+        run: |
+          $hostsFile = "$env:WINDIR\System32\drivers\etc\hosts"
+          foreach ($h in "conda.anaconda.org","repo.anaconda.com","anaconda.org","prefix.dev","repo.prefix.dev") {
+            Add-Content -Path $hostsFile -Value "0.0.0.0 $h"
+          }
+          ipconfig /flushdns
+
+      - name: Run installer offline (Windows)
+        if: matrix.OS_NAME == 'Windows'
+        shell: bash
+        run: bash scripts/test_offline.sh
