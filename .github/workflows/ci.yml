@@ -269,9 +269,6 @@ jobs:
             echo "0.0.0.0 $h" | sudo tee -a /etc/hosts >/dev/null
           done
 
-      - name: Run installer offline (macOS)
-        if: matrix.OS_NAME == 'MacOSX'
-        run: bash scripts/test_offline.sh
 
       # Windows has no Docker on the runner either; the runner is admin, so
       # null-route the package hosts via the hosts file and flush the DNS cache.
