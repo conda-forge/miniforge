@@ -285,7 +285,7 @@ jobs:
           }
           ipconfig /flushdns
 
-      - name: Run installer offline (Windows)
-        if: matrix.OS_NAME == 'Windows'
+      - name: Run installer offline (Windows, macOS)
+        if: matrix.OS_NAME == 'Windows' || matrix.OS_NAME == 'MacOSX'
         shell: bash
         run: bash scripts/test_offline.sh
