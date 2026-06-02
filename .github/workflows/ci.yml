@@ -154,7 +154,7 @@ jobs:
           startsWith(matrix.TARGET_PLATFORM, 'win-')
           && github.event_name != 'pull_request'
           && startsWith(github.ref, 'refs/tags/')
-        uses: azure/artifact-signing-action@b443cf8ea4124818d2ea9f043cba29fc3ec47b16 # v1.2.0
+        uses: azure/artifact-signing-action@c7ab2a863ab5f9a846ddb8265964877ef296ee82 # v2.0.0
         with:
           endpoint: ${{ secrets.WINDOWS_SIGNING_ENDPOINT }}
           signing-account-name: ${{ secrets.WINDOWS_SIGNING_ACCOUNT_NAME }}
