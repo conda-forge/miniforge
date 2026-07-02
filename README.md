@@ -233,6 +233,41 @@ Finally, you can run the command to activate the base environment
 conda activate
 ```
 
+### Troubleshooting installer downloads and shell initialization
+
+If the installer does not download, does not start, or leaves `conda` and
+`mamba` unavailable in a new terminal, check the following before opening a
+bug report:
+
+1. **Confirm that the downloaded file matches your platform.** On Unix-like
+   systems, `uname` and `uname -m` should select one of the file names listed
+   in the installer table above. On Apple Silicon, use the `MacOSX-arm64`
+   installer unless you specifically need an Intel/Rosetta installation.
+2. **Use a fresh release URL and follow redirects.** With `curl`, include
+   `-L` so the `releases/latest/download/...` link follows the redirect to the
+   current release asset. With `wget`, keep the quoted URL intact so the shell
+   does not expand or split it unexpectedly.
+3. **Retry through a stable network path.** Interrupted downloads can produce
+   a shell script or executable that exists locally but fails immediately. If
+   you are behind a proxy, VPN, or corporate TLS inspection, configure those
+   settings for `curl`, `wget`, or your browser and then download the installer
+   again.
+4. **Check the file before running it.** A Unix installer should be a shell
+   script for the expected architecture, and a Windows installer should be the
+   `.exe` from the Miniforge release. If GitHub provides checksum files for the
+   release you are using, compare the local checksum with that published value
+   before rerunning an installer that failed unexpectedly.
+5. **Remember that batch installs do not initialize your shell.** After
+   `bash Miniforge3.sh -b`, either source
+   `"${PREFIX}/etc/profile.d/conda.sh"` in the current shell or run
+   `"${PREFIX}/bin/conda" init` and then open a new terminal. Replace
+   `${PREFIX}` with the directory passed to `-p`, or with the default install
+   location if no prefix was supplied.
+6. **Do not add the whole installation to `PATH` unless you need to.** On
+   Windows, prefer the Miniforge Prompt or add only the `condabin` directory as
+   described above. On Unix-like systems, use `conda init` or source the shell
+   hook instead of prepending every Miniforge binary directory manually.
+
 
 ## Uninstall
 
