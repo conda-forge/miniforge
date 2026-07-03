@@ -273,6 +273,42 @@ echo ${HOME}/.conda and underlying files will be removed if they exist.
 rm -fr "${HOME}/.conda"
 ```
 
+### Windows and other Powershell-compatible platforms
+
+Uninstalling Miniforge means removing the files that were created during the installation process.
+You will typically want to remove:
+
+1. Any modifications to your shell rc files that were made by Miniforge:
+
+```pwsh
+# Use this first command to see what rc files will be updated
+conda init --reverse --dry-run
+# Use this next command to take action on the rc files listed above
+conda init --reverse
+# Temporarily IGNORE the shell message
+#       'For changes to take effect, close and re-open your current shell.',
+# and CLOSE THE SHELL ONLY AFTER the 3rd step below is completed.
+```
+
+2. Remove the folder and all subfolders where the base environment for Miniforge was installed:
+
+```pwsh
+$CONDA_BASE_ENVIRONMENT=(conda info --base)
+Write-Output "The next command will delete all files in ${CONDA_BASE_ENVIRONMENT}"
+# Warning, the Remove-Item command below is irreversible!
+# check the output of the Write-Output command above
+# To make sure you are deleting the correct directory
+Remove-Item $CONDA_BASE_ENVIRONMENT -Recurse -Force
+```
+
+3. Any global conda configuration files that are left behind.
+
+```pwsh
+Write-Output "${HOME}\.condarc will be removed if it exists"
+Remove-Item $HOME\.condarc -Force
+Write-Output "${HOME}\.conda and underlying files will be removed if they exist."
+Remove-Item $HOME\.conda -Recurse -Force
+```
 
 ## Features
 
