@@ -129,10 +129,21 @@ try {
     $child = Join-Path $env:RUNNER_TEMP "Miniforge-$Architecture-child"
     & $conda create -y -p $child --override-channels -c conda-forge python=3.14 zlib
     Require-Success 'Conda create'
-    & $mamba install -y -p $child --override-channels -c conda-forge six
+    & $mamba install -y -p $child --override-channels -c conda-forge six numpy
     Require-Success 'Mamba install'
     & "$child/python.exe" -c "import platform,six,zlib; assert platform.machine().lower()=='$machine'; s=b'installer acceptance'*100; assert zlib.decompress(zlib.compress(s))==s; print(six.__version__)"
     Require-Success 'Native child execution'
+    & "$child/python.exe" -c "import numpy as np; from numpy._core import _multiarray_umath; a=np.array([[3.,1.],[1.,2.]]); b=np.array([9.,8.]); np.testing.assert_allclose(a @ np.linalg.solve(a,b),b); print(np.__version__); print(_multiarray_umath.__file__)"
+    Require-Success 'NumPy import and linear algebra'
+    $numpyExtension = & "$child/python.exe" -c "from numpy._core import _multiarray_umath; print(_multiarray_umath.__file__)"
+    Require-Success 'NumPy extension path'
+    Assert-PE $numpyExtension
+    foreach ($record in Get-ChildItem "$child/conda-meta/*.json") {
+        $package = Get-Content $record -Raw | ConvertFrom-Json
+        if ($package.subdir -notin @($subdir, 'noarch')) { throw "Foreign child package: $($package.name) $($package.subdir)" }
+    }
+    & $conda list -p $child --explicit | Set-Content "$results/child-explicit.txt"
+    Require-Success 'Child inventory'
     $cmdTest = Join-Path $env:RUNNER_TEMP 'miniforge-activation.cmd'
     @"
 @echo off
@@ -162,9 +173,9 @@ conda deactivate
     Require-Success 'PowerShell activation'
     & $mamba update -y -p $child --override-channels -c conda-forge zlib
     Require-Success 'Mamba update'
-    & $mamba remove -y -p $child six
+    & $mamba remove -y -p $child six numpy
     Require-Success 'Mamba remove'
-    & "$child/python.exe" -c "import importlib.util; assert importlib.util.find_spec('six') is None"
+    & "$child/python.exe" -c "import importlib.util; assert importlib.util.find_spec('six') is None; assert importlib.util.find_spec('numpy') is None"
     Require-Success 'Removal verification'
     & $conda env remove -y -p $child
     Require-Success 'Conda environment removal'
