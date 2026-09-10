@@ -13,10 +13,14 @@ cd "${CONSTRUCT_ROOT}"
 echo "***** Install constructor *****"
 
 MINIFORGE_CHANNEL_NAME="${MINIFORGE_CHANNEL_NAME:-conda-forge}"
+CONSTRUCTOR_SPEC="constructor>=3.15.0"
+if [[ "${TARGET_PLATFORM}" == win-arm64 ]]; then
+    CONSTRUCTOR_SPEC="constructor>=3.17.1"
+fi
 mamba install --yes \
     --channel "${MINIFORGE_CHANNEL_NAME}" --override-channels \
     jinja2 curl libarchive \
-    "constructor>=3.15.0"
+    "${CONSTRUCTOR_SPEC}"
 
 if [[ "$(uname)" == "Darwin" ]]; then
     mamba install --yes \
@@ -55,7 +59,7 @@ if [[ "${TARGET_PLATFORM}" != win-* ]]; then
       MICROMAMBA_FILE="${PWD}/bin/micromamba"
     fi
     popd
-    EXTRA_CONSTRUCTOR_ARGS="${EXTRA_CONSTRUCTOR_ARGS} --conda-exe ${MICROMAMBA_FILE} --platform ${TARGET_PLATFORM}"
+    EXTRA_CONSTRUCTOR_ARGS="${EXTRA_CONSTRUCTOR_ARGS} --conda-exe ${MICROMAMBA_FILE}"
 fi
 
 echo "***** Set virtual package versions *****"
@@ -69,11 +73,18 @@ elif [[ "${TARGET_PLATFORM}" == osx-arm64 ]]; then
     export CONDA_OVERRIDE_OSX=11.0
 fi
 
+# Constructor requires an explicit bootstrap when targeting a different architecture.
+PLATFORM_ARGS=(--platform "${TARGET_PLATFORM}")
+if [[ "${TARGET_PLATFORM}" == win-arm64 ]]; then
+    CONSTRUCTOR_CONDA_EXE=$(python -c 'import sys; from pathlib import Path; print(Path(sys.prefix, "standalone_conda", "conda.exe").as_posix())')
+    PLATFORM_ARGS+=(--conda-exe "${CONSTRUCTOR_CONDA_EXE}")
+fi
+
 echo "***** Construct the installer(s) *****"
 # Transmutation requires the current directory is writable
 cd "${TEMP_DIR}"
 # shellcheck disable=SC2086
-constructor "${TEMP_DIR}/Miniforge3/" --output-dir "${TEMP_DIR}" ${EXTRA_CONSTRUCTOR_ARGS}
+constructor "${TEMP_DIR}/Miniforge3/" "${PLATFORM_ARGS[@]}" --output-dir "${TEMP_DIR}" ${EXTRA_CONSTRUCTOR_ARGS}
 cd -
 
 echo "***** Generate installer hash *****"
