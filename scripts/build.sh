@@ -44,7 +44,6 @@ cp LICENSE "${TEMP_DIR}/"
 
 ls -al "${TEMP_DIR}"
 
-PLATFORM_ARGS=(--platform "${TARGET_PLATFORM}")
 if [[ "${TARGET_PLATFORM}" != win-* ]]; then
     # Assumes specific structure in construct.yaml
     MICROMAMBA_VERSION=$(grep "set mamba_version" Miniforge3/construct.yaml | cut -d '=' -f 2 | cut -d '"' -f 2)
@@ -64,7 +63,7 @@ if [[ "${TARGET_PLATFORM}" != win-* ]]; then
 elif [[ "${TARGET_PLATFORM}" == win-arm64 ]]; then
     # Constructor requires an explicit bootstrap when targeting a different architecture.
     CONSTRUCTOR_CONDA_EXE=$(python -c 'import sys; from pathlib import Path; print(Path(sys.prefix, "standalone_conda", "conda.exe").as_posix())')
-    PLATFORM_ARGS+=(--conda-exe "${CONSTRUCTOR_CONDA_EXE}")
+    EXTRA_CONSTRUCTOR_ARGS="${EXTRA_CONSTRUCTOR_ARGS} --conda-exe ${CONSTRUCTOR_CONDA_EXE}"
 fi
 
 echo "***** Set virtual package versions *****"
@@ -82,7 +81,7 @@ echo "***** Construct the installer(s) *****"
 # Transmutation requires the current directory is writable
 cd "${TEMP_DIR}"
 # shellcheck disable=SC2086
-constructor "${TEMP_DIR}/Miniforge3/" "${PLATFORM_ARGS[@]}" --output-dir "${TEMP_DIR}" ${EXTRA_CONSTRUCTOR_ARGS}
+constructor "${TEMP_DIR}/Miniforge3/" --platform "${TARGET_PLATFORM}" --output-dir "${TEMP_DIR}" ${EXTRA_CONSTRUCTOR_ARGS}
 cd -
 
 echo "***** Generate installer hash *****"
