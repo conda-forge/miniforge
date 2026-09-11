@@ -290,12 +290,19 @@ jobs:
           done
 
 
-      - name: Run installer with outbound traffic blocked (Windows)
+      # Windows has no Docker on the runner either; the runner is admin, so
+      # null-route the package hosts via the hosts file and flush the DNS cache.
+      - name: Block conda package hosts (Windows)
         if: matrix.OS_NAME == 'Windows'
         shell: pwsh
-        run: ./scripts/test_windows.ps1 -Architecture '${{ matrix.ARCH }}' -Offline
+        run: |
+          $hostsFile = "$env:WINDIR\System32\drivers\etc\hosts"
+          foreach ($h in "conda.anaconda.org","repo.anaconda.com","anaconda.org","prefix.dev","repo.prefix.dev") {
+            Add-Content -Path $hostsFile -Value "0.0.0.0 $h"
+          }
+          ipconfig /flushdns
 
-      - name: Run installer offline (macOS)
-        if: matrix.OS_NAME == 'MacOSX'
+      - name: Run installer offline (Windows, macOS)
+        if: matrix.OS_NAME == 'Windows' || matrix.OS_NAME == 'MacOSX'
         shell: bash
         run: bash scripts/test_offline.sh
