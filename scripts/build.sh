@@ -44,6 +44,7 @@ cp LICENSE "${TEMP_DIR}/"
 
 ls -al "${TEMP_DIR}"
 
+PLATFORM_ARGS=(--platform "${TARGET_PLATFORM}")
 if [[ "${TARGET_PLATFORM}" != win-* ]]; then
     # Assumes specific structure in construct.yaml
     MICROMAMBA_VERSION=$(grep "set mamba_version" Miniforge3/construct.yaml | cut -d '=' -f 2 | cut -d '"' -f 2)
@@ -60,6 +61,10 @@ if [[ "${TARGET_PLATFORM}" != win-* ]]; then
     fi
     popd
     EXTRA_CONSTRUCTOR_ARGS="${EXTRA_CONSTRUCTOR_ARGS} --conda-exe ${MICROMAMBA_FILE}"
+elif [[ "${TARGET_PLATFORM}" == win-arm64 ]]; then
+    # Constructor requires an explicit bootstrap when targeting a different architecture.
+    CONSTRUCTOR_CONDA_EXE=$(python -c 'import sys; from pathlib import Path; print(Path(sys.prefix, "standalone_conda", "conda.exe").as_posix())')
+    PLATFORM_ARGS+=(--conda-exe "${CONSTRUCTOR_CONDA_EXE}")
 fi
 
 echo "***** Set virtual package versions *****"
@@ -71,13 +76,6 @@ elif [[ "${TARGET_PLATFORM}" == osx-64 ]]; then
     export CONDA_OVERRIDE_OSX=11.0
 elif [[ "${TARGET_PLATFORM}" == osx-arm64 ]]; then
     export CONDA_OVERRIDE_OSX=11.0
-fi
-
-# Constructor requires an explicit bootstrap when targeting a different architecture.
-PLATFORM_ARGS=(--platform "${TARGET_PLATFORM}")
-if [[ "${TARGET_PLATFORM}" == win-arm64 ]]; then
-    CONSTRUCTOR_CONDA_EXE=$(python -c 'import sys; from pathlib import Path; print(Path(sys.prefix, "standalone_conda", "conda.exe").as_posix())')
-    PLATFORM_ARGS+=(--conda-exe "${CONSTRUCTOR_CONDA_EXE}")
 fi
 
 echo "***** Construct the installer(s) *****"
