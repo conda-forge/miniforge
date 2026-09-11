@@ -38,7 +38,7 @@ user_requested_specs:
   - mamba >={{ mamba_version }}
   - pip
   # Omit conda-libmamba-solver so that conda is free to remove it later
-  - miniforge_console_shortcut 1.*  # [win]
+  - miniforge_console_shortcut 3.*  # [win]
 
 specs:
   - python 3.14.*
@@ -46,7 +46,7 @@ specs:
   - mamba {{ mamba_version }}
   - conda-libmamba-solver {{ conda_libmamba_solver_version }}
   - pip
-  - miniforge_console_shortcut 1.*  # [win]
+  - miniforge_console_shortcut 3.*  # [win]
 
 virtual_specs:
   - __glibc >=2.17 # [linux]

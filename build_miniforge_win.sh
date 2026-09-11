@@ -2,6 +2,6 @@
 
 set -ex
 
-conda install posix --yes
+conda install m2-base --yes
 source scripts/build.sh
 source scripts/test.sh

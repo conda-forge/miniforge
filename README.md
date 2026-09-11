@@ -313,6 +313,10 @@ After construction on the CI, the installer is tested against a range of distrib
 - Ubuntu 22.04 ([LTS](https://ubuntu.com/about/release-cycle))
 - Ubuntu 24.04 ([LTS](https://ubuntu.com/about/release-cycle))
 
+Windows ARM64 builds and tests run on Windows 11 ARM64. The build tools and
+installer bootstrap use Windows emulation; the installed Python and Mamba
+executables are native ARM64. Constructor 3.17.1 or newer is required.
+
 ## Building a Miniforge Installer
 
 Installers are built and uploaded via the CI but if you want to construct your own Miniforge installer, here is how:
