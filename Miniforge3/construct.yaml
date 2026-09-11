@@ -49,7 +49,8 @@ specs:
   - miniforge_console_shortcut 1.*  # [win]
 
 virtual_specs:
-  - __glibc >=2.17 # [linux]
+  - __glibc >=2.17 # [linux and not riscv64]
+  - __glibc >=2.39 # [linux and riscv64]
   - __osx >=11.0 # [osx]
 
 installer_type: {{ os.environ.get("MINIFORGE_INSTALLER_TYPE", "sh") }}  # [unix]
