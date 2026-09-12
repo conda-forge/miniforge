@@ -61,7 +61,7 @@ Miniforge and `conda install` installs packages in the `base` environment. This 
 be convenient for but it is cleaner to deactivate this automatic activation with
 
 ```sh
-conda config --set auto_activate_base false
+conda config --set auto_activate false
 ```
 
 and use `conda` or `mamba` to create and activate other environments, with for example
