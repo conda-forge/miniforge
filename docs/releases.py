@@ -1,8 +1,13 @@
-"""render a miniforge releases page"""
-import jinja2
-from pathlib import Path
+"""Render a Miniforge releases page."""
+
+from __future__ import annotations
+
 import datetime
 import sys
+from pathlib import Path
+from typing import Any
+
+import jinja2
 import requests_cache
 
 HERE = Path(__file__).parent
@@ -17,8 +22,8 @@ BASE_URL = "https://api.github.com/repos/conda-forge/miniforge/releases?per_page
 ENV = jinja2.Environment(loader=jinja2.FileSystemLoader([HERE / "templates"]))
 
 
-def get_releases():
-    """use the GitHub API to fetch release information"""
+def get_releases() -> list[dict[str, Any]]:
+    """Use the GitHub API to fetch release information."""
     s = requests_cache.CachedSession(str(BUILD / "cache"))
     releases = s.get(BASE_URL).json()
 
@@ -51,23 +56,24 @@ def get_releases():
     return releases
 
 
-def render(releases):
-    """render the release page HTML"""
-    context = dict(
-        title="Miniforge Releases", releases=releases, year=datetime.datetime.now().year
-    )
+def render(releases: list[dict[str, Any]]) -> None:
+    """Render the release page HTML."""
+    context = {
+        "title": "Miniforge Releases",
+        "releases": releases,
+        "year": datetime.datetime.now(tz=datetime.UTC).year,
+    }
     html = ENV.get_template("all-releases.html").render(**context)
 
     release_html = DOCS / "all-releases" / "index.html"
 
-    if not release_html.parent.exists():
-        release_html.parent.mkdir(parents=True)
+    release_html.parent.mkdir(parents=True, exist_ok=True)
 
     release_html.write_text(html, encoding="utf-8")
 
 
-def main():
-    """main entrypoint"""
+def main() -> int:
+    """Fetch the data and render the HTML."""
     releases = get_releases()
     render(releases)
     return 0
