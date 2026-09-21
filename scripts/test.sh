@@ -43,7 +43,7 @@ if [[ "$(uname)" == MINGW* ]]; then
   conda.exe list | grep msys2 && exit 1
 
   echo "***** Check if we can install a package which requires msys2 *****"
-  conda.exe install r-base --yes --quiet
+  conda.exe install r-base --yes --quiet --override-frozen
   conda.exe list
 else
   # Test one of our installers in batch mode
