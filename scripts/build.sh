@@ -59,13 +59,12 @@ if [[ "${TARGET_PLATFORM}" != win-* ]]; then
 fi
 
 echo "***** Set virtual package versions *****"
+# If these are updated, update Miniforge/construct.yaml too
 if [[ "${TARGET_PLATFORM}" == linux-riscv64 ]]; then
     export CONDA_OVERRIDE_GLIBC=2.39
 elif [[ "${TARGET_PLATFORM}" == linux-* ]]; then
     export CONDA_OVERRIDE_GLIBC=2.17
-elif [[ "${TARGET_PLATFORM}" == osx-64 ]]; then
-    export CONDA_OVERRIDE_OSX=11.0
-elif [[ "${TARGET_PLATFORM}" == osx-arm64 ]]; then
+elif [[ "${TARGET_PLATFORM}" == osx-* ]]; then
     export CONDA_OVERRIDE_OSX=11.0
 fi
 
