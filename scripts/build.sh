@@ -13,14 +13,10 @@ cd "${CONSTRUCT_ROOT}"
 echo "***** Install constructor *****"
 
 MINIFORGE_CHANNEL_NAME="${MINIFORGE_CHANNEL_NAME:-conda-forge}"
-CONSTRUCTOR_SPEC="constructor>=3.15.0"
-if [[ "${TARGET_PLATFORM}" == win-arm64 ]]; then
-    CONSTRUCTOR_SPEC="constructor>=3.17.1"
-fi
 mamba install --yes \
     --channel "${MINIFORGE_CHANNEL_NAME}" --override-channels \
     jinja2 curl libarchive \
-    "${CONSTRUCTOR_SPEC}"
+    "constructor>=3.17.1"
 
 if [[ "$(uname)" == "Darwin" ]]; then
     mamba install --yes \
