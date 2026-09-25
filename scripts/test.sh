@@ -42,9 +42,12 @@ if [[ "$(uname)" == MINGW* ]]; then
   conda.exe list | grep defaults && exit 1
   conda.exe list | grep msys2 && exit 1
 
-  echo "***** Check if we can install a package which requires msys2 *****"
-  conda.exe install r-base --yes --quiet
-  conda.exe list
+  # r-base is not available for Windows ARM64.
+  if [[ "${TARGET_PLATFORM:-}" != win-arm64 ]]; then
+    echo "***** Check if we can install a package which requires msys2 *****"
+    conda.exe install r-base --yes --quiet
+    conda.exe list
+  fi
 else
   # Test one of our installers in batch mode
   if [[ "${INSTALLER_NAME}" == "Miniforge3" ]]; then
