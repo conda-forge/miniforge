@@ -72,6 +72,10 @@
       padding: var(--cf-padding);
       background-color: rgba(255,255,255,0.05);
     }
+    a {
+      display: inline-block;
+      padding: 0.5em;
+    }
     a, a code {
       text-decoration: none;
       color: var(--cf-link-color);
@@ -138,14 +142,18 @@
       <article id="{{ release.tag_name }}">
         <h3>
           Miniforge {{ release.tag_name }}
-          <a title="Link to {{ release.tag_name }}" href="#{{ release.tag_name }}">#</a>
+          <a title="Link to {{ release.tag_name }}" href="#{{ release.tag_name }}">
+            #
+          </a>
         </h3>
-        {%- if loop.index0 %}<details><summary>{% endif -%}
-        <label>
+        <a href="{{ release.html_url }}"
+          title="{{ release.published_at }}"
+          aria-label="view Miniforge {{ release.tag_name }} on GitHub">
+          released <span title="{{ release.published_at }}">{{ release.published_at.split("T")[0] }}</span>
+        </a>
+        {%- if loop.index0 -%}<details><summary>{% endif -%}
           {{ release.assets | count }} artifact{% if release.assets | count > 1 %}s{% endif %}
-          <a href="{{ release.html_url }}">released</a>
-          <span title="{{ release.published_at }}">{{ release.published_at.split("T")[0] }}</span>
-        </label>
+
         {%- if loop.index0 %}</summary>{% endif %}
         <table>
           <thead>
@@ -159,25 +167,22 @@
             </tr>
           </thead>
           <tbody>
-            {%- for variant, vassets in release.assets | groupby("_variant") %}
-            {%- set vloop = loop -%}
-            {%- for os, oassets in vassets | groupby("_os") -%}
-            {%- set oloop = loop -%}
-            {%- for arch, aassets in oassets | groupby("_arch") -%}
-            {%- set aloop = loop -%}
-            {% for asset in aassets %}
-              {%- if oloop.index0 + aloop.index0 == 0 %}
+            {%- for variant, vassets in release.assets | groupby("_variant") %}{% set vloop = loop -%}
+            {%- for os, oassets in vassets | groupby("_os") %}{% set oloop = loop -%}
+            {%- for arch, aassets in oassets | groupby("_arch") %}{% set aloop = loop -%}
+            {%- for asset in aassets %}
+              {%- if (oloop.index0 + aloop.index0 + loop.index0) == 0 %}
             <tr class="variant-row">
               <th rowspan="{{ vassets | count }}">{{ variant }}</th>
               {%- else -%}
             <tr>
               {%- endif -%}
-              {%- if aloop.index0 == 0%}
+              {%- if (aloop.index0 + loop.index0) == 0 %}
               <th rowspan="{{ oassets | count }}">{{ os }}</th>
-              {% endif -%}
-              <th>
-                <code>{{ arch }}</code>
-              </th>
+              {%- endif -%}
+              {% if loop.index0 == 0 %}
+              <th rowspan="{{ aassets | count }}"><code>{{ arch }}</code></th>
+              {%- endif %}
               <td>
                 <a href="{{ asset.browser_download_url }}"
                    title="Download {{ variant }} {{ release.tag_name }} for {{ os }} on {{ arch }}">
@@ -190,9 +195,9 @@
               </td>
             </tr>
             {% endfor -%}
-            {% endfor -%}
-            {% endfor -%}
-            {% endfor -%}
+            {%- endfor -%}
+            {%- endfor -%}
+            {%- endfor %}
           </tbody>
         </table>
         {% if loop.index0 %}</summary>{% endif -%}
