@@ -91,6 +91,7 @@ Latest installers with Python 3.14 `(*)` in the base environment:
 | macOS   | x86_64                        | macOS >= 11.0   | `Miniforge3-MacOSX-x86_64.{sh,pkg}` |
 | macOS   | arm64 (Apple Silicon) `(***)` | macOS >= 11.0   | `Miniforge3-MacOSX-arm64.{sh,pkg}`  |
 | Windows | x86_64 `(****)`               | Windows >= 10   | `Miniforge3-Windows-x86_64.exe`     |
+| Windows | arm64 (WoA) `(***) `          | Windows >= 11   | `Miniforge3-Windows-arm64.exe`      |
 
 `(*)` The Python version is specific only to the base environment. Conda can create new environments with different Python versions and implementations.
 
@@ -101,7 +102,7 @@ or
 [Ubuntu for Raspberry PI](https://ubuntu.com/raspberry-pi).
 The versions listed as "System: 32-bit" are not compatible with the installers on this website.
 
-`(***)` Apple silicon and Linux RISC-V builds are experimental and haven't had testing like the other platforms.
+`(***)` Apple silicon, Linux RISC-V , WoA builds are experimental and haven't had testing like the other platforms.
 
 `(****)` The Windows installer requires Windows 10 or later. However, we are unsure exactly what version of Windows 10.
 We need [help](https://github.com/conda-forge/miniforge/issues/599) from users to maintain the backlog of windows questions.
