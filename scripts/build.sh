@@ -79,7 +79,7 @@ cd -
 echo "***** Generate installer hash *****"
 cd "${TEMP_DIR}"
 ls -alh
-if [[ "$(uname)" == MINGW* ]]; then
+if [[ "$(uname)" == MINGW* || "$(uname)" == UCRT* ]]; then
    EXTS=("exe");
 elif [[ "$(uname)" == Darwin ]]; then
    if [[ "$MINIFORGE_INSTALLER_TYPE" == "all" ]]; then
