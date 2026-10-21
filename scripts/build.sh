@@ -27,7 +27,7 @@ fi
 mamba list
 
 echo "***** Make temp directory *****"
-if [[ "$(uname)" == MINGW* ]]; then
+if [[ "$(uname)" == MINGW* || "${uname}" == UCRT* ]]; then
    # LOCALAPPDATA is a reference variable to the user's AppData\Local directory
    TEMP_DIR=$(mktemp -d --tmpdir="$LOCALAPPDATA/Temp/");
 else
