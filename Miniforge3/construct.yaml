@@ -49,6 +49,8 @@ specs:
   - conda-libmamba-solver {{ conda_libmamba_solver_version }}
   - pip
   - miniforge_console_shortcut 1.*  # [win]
+  - certifi >=2026.10.19
+  - ca-certificates >=2026.10.19
 
 virtual_specs:
   - __glibc >=2.17 # [linux]
