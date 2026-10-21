@@ -32,7 +32,7 @@ export CONDA_NUMBER_CHANNEL_NOTICES=0
 
 echo "***** Locate the installer *****"
 ls build/
-if [[ "$(uname)" == MINGW* ]]; then
+if [[ "$(uname)" == MINGW* || "$(uname)" == UCRT* ]]; then
   EXT="exe"
 else
   EXT="sh"
@@ -43,7 +43,7 @@ echo "Installer: ${INSTALLER_PATH}"
 echo "***** Run the installer with the network blocked *****"
 # If the embedded payload is not used, the installer will try to reach
 # conda.anaconda.org and fail because there is no network.
-if [[ "$(uname)" == MINGW* ]]; then
+if [[ "$(uname)" == MINGW* || "$(uname)" == UCRT* ]]; then
   echo "start /wait \"\" $(cygpath -w "${INSTALLER_PATH}") /InstallationType=JustMe /RegisterPython=0 /S /D=$(cygpath -w "${CONDA_PATH}")" > install_offline.bat
   cmd.exe //c install_offline.bat
   # Workaround a conda bug where it uses Unix style separators (mirrors test.sh)
