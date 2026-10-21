@@ -38,7 +38,7 @@ user_requested_specs:
   - mamba >={{ mamba_version }}
   - certifi >=2026.10.19
   - ca-certificates >=2026.10.19
-  - pip
+  - pip >=26.2.2
   # Omit conda-libmamba-solver so that conda is free to remove it later
   - miniforge_console_shortcut 1.*  # [win]
 
@@ -47,7 +47,7 @@ specs:
   - conda {{ version.split("-")[0] }}
   - mamba {{ mamba_version }}
   - conda-libmamba-solver {{ conda_libmamba_solver_version }}
-  - pip
+  - pip >=26.2.2
   - miniforge_console_shortcut 1.*  # [win]
   - certifi >=2026.10.19
   - ca-certificates >=2026.10.19
