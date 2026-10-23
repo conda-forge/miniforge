@@ -13,7 +13,7 @@ export MAMBA_VERSION
 
 echo "***** Get the installer *****"
 ls build/
-if [[ "$(uname)" == MINGW* ]]; then
+if [[ "$(uname)" == MINGW* || "$(uname)" == UCRT* ]]; then
    EXT="exe";
 else
    EXT="sh";
@@ -23,7 +23,7 @@ INSTALLER_NAME=$(basename "${INSTALLER_PATH}" | cut -d "-" -f 1)
 
 echo "***** Run the installer *****"
 chmod +x "${INSTALLER_PATH}"
-if [[ "$(uname)" == MINGW* ]]; then
+if [[ "$(uname)" == MINGW* || "$(uname)" == UCRT* ]]; then
   echo "start /wait \"\" ${INSTALLER_PATH} /InstallationType=JustMe /RegisterPython=0 /S /D=$(cygpath -w "${CONDA_PATH}")" > install.bat
   cmd.exe //c install.bat
 
