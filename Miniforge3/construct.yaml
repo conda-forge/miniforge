@@ -1,4 +1,4 @@
-{% set version = os.environ.get("MINIFORGE_VERSION", "26.9.4-0") %}
+{% set version = os.environ.get("MINIFORGE_VERSION", "26.9.4-1") %}
 {% set conda_libmamba_solver_version = "26.10.0" %}
 # This file is parsed by the scripts to define
 #   - `MICROMAMBA_VERSION` in `scripts/build.sh`
@@ -31,6 +31,8 @@ license_file: {{ os.environ.get("MINIFORGE_LICENSE_OVERRIDE", "../LICENSE") }}
 # During batch installation, conda is never initialized
 initialize_conda: True
 initialize_by_default: False
+
+post_install: post_install_win.bat  # [win]
 
 user_requested_specs:
   - python 3.14.*
