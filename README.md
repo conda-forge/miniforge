@@ -403,14 +403,15 @@ see the note above.
 To release a new version of Miniforge:
 
 - Make a new pre-release on GitHub with name `$CONDA_VERSION-$BUILD_NUMBER`
-- Wait until all artifacts are uploaded by CI
+- CI builds and uploads all artifacts to the pre-release
   - For each build, we upload 3 artifacts
     1. One installer with the version name
     2. One installer without the version name
     3. The SHA256
   - For OSX we also have one pkg installer for each architecture, with the 2 OSX names.
-  - At the time of writing, the is a sum of 28 artifacts, and with the two sources, we expect a grand total of 30 artifacts.
-- Mark the pre-release as a release
+  - At the time of writing, the is a sum of 31 artifacts, and with the two sources, we expect a grand total of 33 artifacts.
+- Once all builds succeed, CI marks the pre-release as the latest release
+  (the `mark-latest` job in `.github/workflows/ci.yml`)
 
 NOTE: using a pre-release is important to make sure the latest links work.
 
