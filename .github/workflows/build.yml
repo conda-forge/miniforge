@@ -1,0 +1,240 @@
+name: Build and test miniforge (single platform)
+on:
+  workflow_call:
+    inputs:
+      os:
+        type: string
+        required: true
+      ARCH:
+        type: string
+        required: true
+      TARGET_PLATFORM:
+        type: string
+        required: true
+      OS_NAME:
+        type: string
+        required: true
+      DOCKER_ARCH:
+        type: string
+        default: ""
+      DOCKERIMAGE:
+        type: string
+        default: ""
+      TEST_IMAGE_NAMES:
+        type: string
+        default: ""
+      TEST_OFFLINE:
+        type: boolean
+        default: false
+      OFFLINE_TEST_IMAGE:
+        type: string
+        default: "ubuntu:24.04"
+
+jobs:
+  build:
+    name: Build
+    runs-on: ${{ inputs.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb # v4.1.0
+        with:
+          miniforge-version: "26.7.2-1"
+          use-mamba: true
+        if: ${{ ! contains(inputs.OS_NAME, 'Linux') }}
+
+      - name: Prepare certificates (macOS)
+        if: startsWith(inputs.TARGET_PLATFORM, 'osx-') && github.event_name != 'pull_request'
+        env:
+          APPLE_INSTALLER_CERTIFICATE_BASE64: ${{ secrets.MACOS_CERTIFICATE_INSTALLER_BASE64 }}
+          APPLE_INSTALLER_CERTIFICATE_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_INSTALLER_PASSWORD }}
+          APPLE_APPLICATION_CERTIFICATE_BASE64: ${{ secrets.MACOS_CERTIFICATE_APPLICATION_BASE64 }}
+          APPLE_APPLICATION_CERTIFICATE_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_APPLICATION_PASSWORD }}
+          APPLE_TEMP_KEYCHAIN_PASSWORD: ${{ secrets.MACOS_TEMP_KEYCHAIN_PASSWORD }}
+          APPLE_NOTARIZATION_ISSUER_ID: ${{ secrets.MACOS_NOTARIZATION_ISSUER_ID }}
+          APPLE_NOTARIZATION_KEY_ID: ${{ secrets.MACOS_NOTARIZATION_KEY_ID }}
+          APPLE_NOTARIZATION_AUTHKEY_BASE64: ${{ secrets.MACOS_NOTARIZATION_AUTHKEY_BASE64 }}
+        run: |
+          if [[ "${APPLE_NOTARIZATION_KEY_ID:-}" == "" ]]; then
+            exit 0  # skip if secrets are not populated
+          fi
+
+          # This script will export APPLE_SIGNING_IDENTITY and APPLE_NOTARIZATION_IDENTITY
+          source scripts/osx_prepare_certificates.sh
+
+          # These will be needed by the build.sh script
+          echo "APPLE_SIGNING_IDENTITY=$APPLE_SIGNING_IDENTITY" >> $GITHUB_ENV
+          echo "APPLE_NOTARIZATION_IDENTITY=$APPLE_NOTARIZATION_IDENTITY" >> $GITHUB_ENV
+          echo "APPLE_NOTARIZATION_ISSUER_ID=$APPLE_NOTARIZATION_ISSUER_ID" >> $GITHUB_ENV
+          echo "APPLE_NOTARIZATION_KEY_ID=$APPLE_NOTARIZATION_KEY_ID" >> $GITHUB_ENV
+          echo "APPLE_NOTARIZATION_AUTHKEY_PATH=$APPLE_NOTARIZATION_AUTHKEY_PATH" >> $GITHUB_ENV
+
+      - name: Enable PKGs (macOS)
+        if: startsWith(inputs.TARGET_PLATFORM, 'osx-')
+        run: |
+          # This env var is read in construct.yaml; we need 'all' to build both SH and PKG
+          echo "MINIFORGE_INSTALLER_TYPE=all" >> $GITHUB_ENV
+
+      - name: Build and test miniforge
+        env:
+          ARCH: ${{ inputs.ARCH }}
+          OS_NAME: ${{ inputs.OS_NAME }}
+          DOCKERIMAGE: ${{ inputs.DOCKERIMAGE }}
+          DOCKER_ARCH: ${{ inputs.DOCKER_ARCH }}
+          TARGET_PLATFORM: ${{ inputs.TARGET_PLATFORM }}
+          TEST_IMAGE_NAMES: ${{ inputs.TEST_IMAGE_NAMES }}
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            export MINIFORGE_VERSION=${GITHUB_REF##*/};
+          fi
+          if [[ "$OS_NAME" == "Linux" ]]; then
+            bash build_miniforge.sh;
+          elif [[ "$OS_NAME" == "MacOSX" ]]; then
+            bash build_miniforge_osx.sh;
+          elif [[ "$OS_NAME" == "Windows" ]]; then
+            echo "WINDIR:$WINDIR"
+            source "${CONDA}"/Scripts/activate;
+            source build_miniforge_win.sh;
+          fi
+        shell: bash
+
+      - name: Azure login (Windows)
+        if: >-
+          startsWith(inputs.TARGET_PLATFORM, 'win-')
+          && github.event_name != 'pull_request'
+          && startsWith(github.ref, 'refs/tags/')
+        uses: azure/login@a641126d1b8aa4d1fa005f4f92df94a3a4c4c906 # v3.1.0
+        with:
+          creds: >-
+            {
+              "clientId": "${{ secrets.WINDOWS_SIGNING_AZURE_CLIENT_ID }}",
+              "clientSecret": "${{ secrets.WINDOWS_SIGNING_AZURE_CLIENT_SECRET_VALUE }}",
+              "subscriptionId": "${{ secrets.WINDOWS_SIGNING_AZURE_SUBSCRIPTION_ID }}",
+              "tenantId": "${{ secrets.WINDOWS_SIGNING_AZURE_TENANT_ID }}"
+            }
+      
+      # NOTE: Azure Code Signing has a monthly quota. Every time a given file
+      # is signed, it counts as a signature. These certificates are shared with
+      # other NumFOCUS projects, so we only sign final releases. We don't want to
+      # sign on regular PRs CI or upon merges to main. Only releases!
+      - name: Sign files with Artifact Signing (Windows)
+        if: >- 
+          startsWith(inputs.TARGET_PLATFORM, 'win-')
+          && github.event_name != 'pull_request'
+          && startsWith(github.ref, 'refs/tags/')
+        uses: azure/artifact-signing-action@c7ab2a863ab5f9a846ddb8265964877ef296ee82 # v2.0.0
+        with:
+          endpoint: ${{ secrets.WINDOWS_SIGNING_ENDPOINT }}
+          signing-account-name: ${{ secrets.WINDOWS_SIGNING_ACCOUNT_NAME }}
+          certificate-profile-name: ${{ secrets.WINDOWS_SIGNING_PROFILE_NAME }}
+          files-folder: ${{ github.workspace }}\build
+          files-folder-filter: exe
+          file-digest: SHA256
+          timestamp-rfc3161: http://timestamp.acs.microsoft.com
+          timestamp-digest: SHA256
+
+      - name: Verify signatures and checksums (Windows)
+        if: >- 
+          startsWith(inputs.TARGET_PLATFORM, 'win-')
+          && github.event_name != 'pull_request'
+          && startsWith(github.ref, 'refs/tags/')
+        shell: pwsh
+        run: ./scripts/verify_signatures_and_checksums.ps1
+
+      - name: Copy for latest release
+        env:
+          ARCH: ${{ inputs.ARCH }}
+          OS_NAME: ${{ inputs.OS_NAME }}
+          EXT: ${{ inputs.OS_NAME == 'Windows' && 'exe' || 'sh' }}
+        run: |
+          # Copy for latest release
+          cp build/Miniforge3-*-$OS_NAME-$ARCH.$EXT build/Miniforge3-$OS_NAME-$ARCH.$EXT
+          if [[ "$OS_NAME" == "MacOSX" ]]; then
+            # Copy PKGs too, and alias -MacOSX- to -Darwin-
+            cp build/Miniforge3-*-$OS_NAME-$ARCH.$EXT build/Miniforge3-Darwin-$ARCH.$EXT
+            cp build/Miniforge3-*-$OS_NAME-$ARCH.pkg build/Miniforge3-$OS_NAME-$ARCH.pkg
+            cp build/Miniforge3-*-$OS_NAME-$ARCH.pkg build/Miniforge3-Darwin-$ARCH.pkg
+          fi
+          ls -alh build
+        shell: bash
+
+      - name: Upload miniforge to Github artifact
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          path: build/Miniforge3-${{ inputs.OS_NAME }}-${{ inputs.ARCH }}*
+          name: Miniforge3-${{ inputs.OS_NAME }}-${{ inputs.ARCH }}
+
+      - name: Upload miniforge to release
+        uses: svenstaro/upload-release-action@29e53e917877a24fad85510ded594ab3c9ca12de # v2.11.5
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/M*forge*
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
+        if: github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/')
+
+  # Independent job that proves the *installer itself* provisions the base
+  # environment with no network access. This consumes the artifact built above
+  # (it does not rebuild) and runs the installer with outbound network disabled,
+  # so it would catch regressions like
+  #   https://github.com/conda-forge/miniforge/issues/883
+  # where the bundled mamba/micromamba downloaded the embedded packages instead
+  # of unpacking the embedded payload.
+  test-offline:
+    name: Offline test
+    needs: build
+    if: inputs.TEST_OFFLINE
+    runs-on: ${{ inputs.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Download the built installer
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: Miniforge3-${{ inputs.OS_NAME }}-${{ inputs.ARCH }}
+          path: build
+
+      # Linux: hard network isolation -- the container has only a loopback
+      # interface, so any attempt to reach conda.anaconda.org fails immediately.
+      - name: Run installer with the network fully disabled (Linux)
+        if: inputs.OS_NAME == 'Linux'
+        run: |
+          # Pull the test image while we still have network; `--network none`
+          # below can run a cached image but cannot pull one.
+          docker pull --platform "linux/${{ inputs.DOCKER_ARCH }}" "${{ inputs.OFFLINE_TEST_IMAGE }}"
+          docker run --rm --network none \
+            -v "$PWD:/construct" -e CONSTRUCT_ROOT=/construct \
+            --platform "linux/${{ inputs.DOCKER_ARCH }}" "${{ inputs.OFFLINE_TEST_IMAGE }}" \
+            /construct/scripts/test_offline.sh
+
+      # macOS has no Docker on the runner, so block the package hosts at the
+      # resolver instead. The runner VM is ephemeral, so there is no need to
+      # restore /etc/hosts afterwards.
+      - name: Block conda package hosts (macOS)
+        if: inputs.OS_NAME == 'MacOSX'
+        run: |
+          for h in conda.anaconda.org repo.anaconda.com anaconda.org prefix.dev repo.prefix.dev; do
+            echo "0.0.0.0 $h" | sudo tee -a /etc/hosts >/dev/null
+          done
+
+
+      # Windows has no Docker on the runner either; the runner is admin, so
+      # null-route the package hosts via the hosts file and flush the DNS cache.
+      - name: Block conda package hosts (Windows)
+        if: inputs.OS_NAME == 'Windows'
+        shell: pwsh
+        run: |
+          $hostsFile = "$env:WINDIR\System32\drivers\etc\hosts"
+          foreach ($h in "conda.anaconda.org","repo.anaconda.com","anaconda.org","prefix.dev","repo.prefix.dev") {
+            Add-Content -Path $hostsFile -Value "0.0.0.0 $h"
+          }
+          ipconfig /flushdns
+
+      - name: Run installer offline (Windows, macOS)
+        if: inputs.OS_NAME == 'Windows' || inputs.OS_NAME == 'MacOSX'
+        shell: bash
+        run: bash scripts/test_offline.sh
