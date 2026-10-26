@@ -87,3 +87,29 @@ jobs:
       DOCKERIMAGE: ${{ matrix.DOCKERIMAGE }}
       TEST_IMAGE_NAMES: ${{ matrix.TEST_IMAGE_NAMES }}
       TEST_OFFLINE: ${{ matrix.TEST_OFFLINE || false }}
+
+  # Releases are tagged as a GitHub pre-release so that the "latest" download
+  # links keep pointing at the previous release while the installers upload.
+  # Once every build (and offline test) has succeeded, promote the pre-release
+  # to the latest release.
+  mark-latest:
+    name: Mark release as latest
+    needs: build
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-slim
+    permissions:
+      contents: write
+    steps:
+      - name: Promote pre-release to latest
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          is_prerelease=$(gh release view "$TAG" --json isPrerelease --jq .isPrerelease)
+          if [[ "$is_prerelease" != "true" ]]; then
+            echo "Release $TAG is not a pre-release; leaving it untouched."
+            exit 0
+          fi
+          gh release view "$TAG" --json assets --jq '.assets[].name'
+          gh release edit "$TAG" --prerelease=false --latest
