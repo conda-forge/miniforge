@@ -38,6 +38,9 @@ if [[ "$(uname)" == MINGW* || "$(uname)" == UCRT* ]]; then
   conda.exe info
   conda.exe list
 
+  echo "***** Check that conda can find the conda-launchers entry point stub *****"
+  conda.exe init --all --dry-run
+
   echo "***** Check if we are bundling packages from msys2 or defaults *****"
   conda.exe list | grep defaults && exit 1
   conda.exe list | grep msys2 && exit 1
