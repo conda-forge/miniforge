@@ -57,10 +57,6 @@ if [[ "${TARGET_PLATFORM}" != win-* ]]; then
     fi
     popd
     EXTRA_CONSTRUCTOR_ARGS="${EXTRA_CONSTRUCTOR_ARGS} --conda-exe ${MICROMAMBA_FILE}"
-elif [[ "${TARGET_PLATFORM}" == win-arm64 ]]; then
-    # Constructor requires an explicit bootstrap when targeting a different architecture.
-    CONSTRUCTOR_CONDA_EXE=$(python -c 'import sys; from pathlib import Path; print(Path(sys.prefix, "standalone_conda", "conda.exe").as_posix())')
-    EXTRA_CONSTRUCTOR_ARGS="${EXTRA_CONSTRUCTOR_ARGS} --conda-exe ${CONSTRUCTOR_CONDA_EXE}"
 fi
 
 echo "***** Set virtual package versions *****"
