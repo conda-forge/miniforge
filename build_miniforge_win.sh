@@ -7,7 +7,7 @@ if [[ "${TARGET_PLATFORM}" == win-arm64 ]]; then
     # win-arm64 environment from the x64 one and build from there.
     mamba create --yes --name bootstrap --platform win-arm64 \
         --channel "${MINIFORGE_CHANNEL_NAME:-conda-forge}" --override-channels \
-        python m2-base mamba
+        python=3.14 m2-base mamba
     conda activate bootstrap
 else
     conda install m2-base --yes
