@@ -41,6 +41,9 @@ jobs:
       - uses: conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb # v4.1.0
         with:
           miniforge-version: "latest"
+          # There is no win-arm64 Miniforge release yet; build_miniforge_win.sh
+          # creates a native win-arm64 environment from this x64 one.
+          architecture: ${{ inputs.OS_NAME == 'Windows' && 'x64' || '' }}
           use-mamba: true
         if: ${{ ! contains(inputs.OS_NAME, 'Linux') }}
 

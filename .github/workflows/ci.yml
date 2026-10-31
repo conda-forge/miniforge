@@ -24,6 +24,12 @@ jobs:
             OS_NAME: "Windows"
             TEST_OFFLINE: true
 
+          - os: windows-11-arm
+            ARCH: arm64
+            TARGET_PLATFORM: win-arm64
+            OS_NAME: "Windows"
+            TEST_OFFLINE: true
+
           - os: macos-latest
             ARCH: arm64
             TARGET_PLATFORM: osx-arm64
