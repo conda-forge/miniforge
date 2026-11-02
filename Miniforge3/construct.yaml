@@ -1,6 +1,5 @@
 {% set version = os.environ.get("MINIFORGE_VERSION", "26.9.4-0") %}
 {% set conda_libmamba_solver_version = "26.10.0" %}
-{% set conda_auth_version = "0.2.2" %}
 # This file is parsed by the scripts to define
 #   - `MICROMAMBA_VERSION` in `scripts/build.sh`
 #   - `MAMBA_VERSION` in `scripts/test.sh`
@@ -48,7 +47,7 @@ specs:
   - conda {{ version.split("-")[0] }}
   - mamba {{ mamba_version }}
   - conda-libmamba-solver {{ conda_libmamba_solver_version }}
-  - conda-auth {{ conda_auth_version }}
+  - conda-auth
   - pip >=26.2.2
   - miniforge_console_shortcut 1.*  # [win]
   - certifi >=2026.10.19
