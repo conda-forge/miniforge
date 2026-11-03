@@ -113,3 +113,11 @@ jobs:
           fi
           gh release view "$TAG" --json assets --jq '.assets[].name'
           gh release edit "$TAG" --prerelease=false --latest
+
+  docs:
+    name: Publish release docs
+    needs: mark-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+    permissions:
+      contents: write
+    uses: ./.github/workflows/docs.yml
