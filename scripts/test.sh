@@ -102,6 +102,13 @@ echo "  OK"
 echo "+ Testing mirrored channels"
 mamba config list --json | python -c "import sys, json; info = json.loads(sys.stdin.read()); assert info['mirrored_channels']['conda-forge'] == ['https://conda.anaconda.org/conda-forge','https://prefix.dev/conda-forge']"
 
+echo "+ Testing that the conda-auth plugin is installed and registered"
+python -c "import conda_auth"
+python -m conda auth --help
+python -m conda auth login --help
+python -m conda auth logout --help
+echo "  OK"
+
 echo "***** Python path *****"
 python -c "import sys; print(sys.executable)"
 python -c "import sys; assert 'miniforge' in sys.executable"
