@@ -17,7 +17,7 @@ INSTALLER_PACKAGES=(
     jinja2
     curl
     libarchive
-    "constructor>=3.15.0"
+    "constructor>=3.17.1"
     "conda-standalone>=26.9.3"
 )
 
@@ -60,7 +60,7 @@ if [[ "${TARGET_PLATFORM}" != win-* ]]; then
       MICROMAMBA_FILE="${PWD}/bin/micromamba"
     fi
     popd
-    EXTRA_CONSTRUCTOR_ARGS="${EXTRA_CONSTRUCTOR_ARGS} --conda-exe ${MICROMAMBA_FILE} --platform ${TARGET_PLATFORM}"
+    EXTRA_CONSTRUCTOR_ARGS="${EXTRA_CONSTRUCTOR_ARGS} --conda-exe ${MICROMAMBA_FILE}"
 fi
 
 echo "***** Set virtual package versions *****"
@@ -78,7 +78,7 @@ echo "***** Construct the installer(s) *****"
 # Transmutation requires the current directory is writable
 cd "${TEMP_DIR}"
 # shellcheck disable=SC2086
-constructor "${TEMP_DIR}/Miniforge3/" --output-dir "${TEMP_DIR}" ${EXTRA_CONSTRUCTOR_ARGS}
+constructor "${TEMP_DIR}/Miniforge3/" --platform "${TARGET_PLATFORM}" --output-dir "${TEMP_DIR}" ${EXTRA_CONSTRUCTOR_ARGS}
 cd -
 
 echo "***** Generate installer hash *****"
