@@ -17,7 +17,6 @@ DOCS = BUILD / "docs"
 if not DOCS.exists():
     DOCS.mkdir(parents=True)
 
-# TODO: handle pagination
 BASE_URL = "https://api.github.com/repos/conda-forge/miniforge/releases?per_page=100"
 ENV = jinja2.Environment(loader=jinja2.FileSystemLoader([HERE / "templates"]))
 
@@ -25,7 +24,12 @@ ENV = jinja2.Environment(loader=jinja2.FileSystemLoader([HERE / "templates"]))
 def get_releases() -> list[dict[str, Any]]:
     """Use the GitHub API to fetch release information."""
     s = requests_cache.CachedSession(str(BUILD / "cache"))
-    releases = s.get(BASE_URL).json()
+    releases = []
+    url = BASE_URL
+    while url:
+        response = s.get(url)
+        releases += response.json()
+        url = response.links.get("next", {}).get("url")
 
     new_releases = []
 
