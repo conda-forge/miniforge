@@ -13,17 +13,21 @@ cd "${CONSTRUCT_ROOT}"
 echo "***** Install constructor *****"
 
 MINIFORGE_CHANNEL_NAME="${MINIFORGE_CHANNEL_NAME:-conda-forge}"
-mamba install --yes \
-    --channel "${MINIFORGE_CHANNEL_NAME}" --override-channels \
-    jinja2 curl libarchive \
-    "constructor>=3.17.1" \
-    "conda-standalone>=26.9.3" \
+INSTALLER_PACKAGES=(
+    jinja2
+    curl
+    libarchive
+    "constructor>=3.17.1"
+    "conda-standalone>=26.9.3"
+)
 
 if [[ "$(uname)" == "Darwin" ]]; then
-    mamba install --yes \
-        --channel "${MINIFORGE_CHANNEL_NAME}" --override-channels \
-        coreutils
+    INSTALLER_PACKAGES+=(coreutils)
 fi
+
+mamba install --yes \
+    --channel "${MINIFORGE_CHANNEL_NAME}" --override-channels \
+    "${INSTALLER_PACKAGES[@]}"
 
 mamba list
 
