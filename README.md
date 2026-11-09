@@ -129,7 +129,11 @@ conda create --name my_project python=3.13
 
 We [need help](https://github.com/conda-forge/miniforge/issues/599) from activate users and willing maintainers!
 
-Download and execute [the Windows installer](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe).
+Download and execute the installer for your Windows architecture:
+
+- [Windows x86_64](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-x86_64.exe)
+- [Windows ARM64 (Windows on ARM)](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Windows-arm64.exe) (experimental; Windows 11 or later)
+
 Follow the prompts, taking note of the option to
 "Create start menu shortcuts".
 The most convenient and tested way to use the installed software
@@ -153,6 +157,8 @@ For non-interactive usage one can use the batch install option[^1]:
 ```sh
 start /wait "" Miniforge3-Windows-x86_64.exe /InstallationType=JustMe /RegisterPython=0 /S /D=%UserProfile%\Miniforge3
 ```
+
+On Windows ARM64, use `Miniforge3-Windows-arm64.exe` in the command above.
 ### Windows Subsystem for Linux (WSL)
 The Windows Subsystem for Linux (WSL) lets developers use both Windows and Linux at the same time on a Windows machine.
 WSL users should make sure they are in a Linux terminal window (not Powershell) and use the Linux installer appropriate for the computer's architecture as described in the instructions in the next section.
